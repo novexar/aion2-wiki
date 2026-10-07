@@ -1,10 +1,10 @@
 import { parseMiniMarkdown, type Inline } from '../../lib/mini-markdown';
-import type { ArticleMeta } from '../../lib/types';
+import type { NavArticle } from '../../lib/types';
 import { articleByTitle } from '../wiki/data';
 
 /** 本文中で解決できた引用記事を、初出順に重複なしで返す（未解決の `[…]` は含めない） */
-export function citedArticles(text: string): ArticleMeta[] {
-  const found = new Map<string, ArticleMeta>();
+export function citedArticles(text: string): NavArticle[] {
+  const found = new Map<string, NavArticle>();
   const visit = (inlines: readonly Inline[]): void => {
     for (const inline of inlines) {
       if (inline.type !== 'cite') continue;

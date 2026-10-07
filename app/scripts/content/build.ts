@@ -4,7 +4,15 @@ import MiniSearch from 'minisearch';
 import { CATEGORIES, isCategoryId } from '../../src/lib/categories';
 import { normalizeBase } from '../../src/lib/paths';
 import { chunkIndexOptions, pageIndexOptions } from '../../src/lib/search-options';
-import type { Article, ArticleMeta, Chunk, ChunksData, NavData } from '../../src/lib/types';
+import type {
+  Article,
+  ArticleMeta,
+  Chunk,
+  ChunkRef,
+  ChunksData,
+  NavArticle,
+  NavJson,
+} from '../../src/lib/types';
 import { chunkArticle } from './chunker';
 import { ContentBuildError, ContentError } from './errors';
 import { ORDER_MISSING, parseArticleFile, type Frontmatter } from './frontmatter';
@@ -157,17 +165,41 @@ export const byReadingOrder = (a: ArticleMeta, b: ArticleMeta): number =>
 const byUpdatedDesc = (a: ArticleMeta, b: ArticleMeta): number =>
   (b.updatedAt ?? b.updated).localeCompare(a.updatedAt ?? a.updated) || byTitle(a, b);
 
-export function buildNav(metas: readonly ArticleMeta[], now: Date): NavData {
+/** 初期バンドル用: 一覧・ナビに要る項目だけを残す */
+export function toNavArticle(src: ArticleMeta): NavArticle {
+  return {
+    id: src.id,
+    title: src.title,
+    category: src.category,
+    confidence: src.confidence,
+    updated: src.updated,
+    ...(src.updatedAt ? { updatedAt: src.updatedAt } : {}),
+    order: src.order,
+  };
+}
+
+export function buildNav(metas: readonly ArticleMeta[], now: Date): NavJson {
   return {
     generatedAt: now.toISOString(),
     categories: CATEGORIES.map((c) => ({
       id: c.id,
-      label: c.label,
-      description: c.description,
-      articles: metas.filter((m) => m.category === c.id).sort(byReadingOrder),
+      articles: metas
+        .filter((m) => m.category === c.id)
+        .sort(byReadingOrder)
+        .map((m) => m.id),
     })),
-    articles: [...metas].sort(byUpdatedDesc),
+    articles: [...metas].sort(byUpdatedDesc).map(toNavArticle),
   };
+}
+
+/** タイトルがこの文字数を超えたら警告する（規約は 18 文字以内。SCHEMA.md） */
+export const TITLE_WARN_LENGTH = 24;
+
+export function titleLengthWarning(relPath: string, title: string): string | null {
+  const length = Array.from(title).length;
+  return length > TITLE_WARN_LENGTH
+    ? `${relPath}: title が ${length} 文字です（${TITLE_WARN_LENGTH} 文字超。規約は 18 文字以内）`
+    : null;
 }
 
 /** 関連記事を閲覧順（カテゴリ → order → 読み）に並べ替えた記事配列を返す */
@@ -227,6 +259,8 @@ async function renderArticle(
   gitDates: ReadonlyMap<string, string>,
 ): Promise<{ article: Article; chunks: Chunk[] }> {
   const { fm, file } = item;
+  const longTitle = titleLengthWarning(file.relPath, fm.title);
+  if (longTitle) warn(longTitle);
   if (fm.order === undefined)
     warn(`${file.relPath}: order が未設定です（末尾 ${ORDER_MISSING} として扱います）`);
   const { body, relatedIds } = extractRelatedSection(item.body);
@@ -263,10 +297,8 @@ async function renderArticle(
   return { article, chunks };
 }
 
-function buildPageIndex(
-  articles: readonly Article[],
-  pageTexts: Readonly<Record<string, string>>,
-): unknown {
+/** 記事検索インデックス。本文は索引に入れず、ブラウザで search-text.json を部分一致で照合する */
+function buildPageIndex(articles: readonly Article[]): unknown {
   const index = new MiniSearch(pageIndexOptions);
   index.addAll(
     articles.map((a) => ({
@@ -278,13 +310,12 @@ function buildPageIndex(
       aliases: a.aliases.join(' / '),
       tags: a.tags.join(' '),
       headings: a.headings.map((h) => h.text).join(' '),
-      body: pageTexts[a.id] ?? '',
     })),
   );
   return index.toJSON();
 }
 
-/** 検索結果のスニペット用に、記事ごとの本文先頭 2,000 文字を返す（インデックスには含めない） */
+/** 記事ごとの本文先頭 2,000 文字。検索の本文一致（部分一致）とスニペットに使う（インデックスには含めない） */
 export const SEARCH_TEXT_LIMIT = 2000;
 
 function buildPageTexts(
@@ -376,17 +407,32 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
   const allChunks = [...chunksById.values()].flat();
   const pageTexts = buildPageTexts(articles, chunksById);
   const nav = buildNav(articles.map(toMeta), options.now ?? new Date());
-  const chunksData: ChunksData = { chunks: allChunks, index: buildChunkIndex(allChunks) };
+  const chunkRefs: ChunkRef[] = allChunks.map(({ id, articleId, heading, anchor }) => ({
+    id,
+    articleId,
+    heading,
+    anchor,
+  }));
+  const chunksData: ChunksData = { chunks: chunkRefs, index: buildChunkIndex(allChunks) };
 
   const pagesDir = path.join(options.outDir, 'pages');
   await rm(pagesDir, { recursive: true, force: true });
   await mkdir(pagesDir, { recursive: true });
   await Promise.all(articles.map((a) => writeJson(path.join(pagesDir, `${a.id}.json`), a)));
-  await writeJson(path.join(options.outDir, 'pages.json'), articles);
-  await writeJson(
-    path.join(options.outDir, 'search-index.json'),
-    buildPageIndex(articles, pageTexts),
+  const chunkTextDir = path.join(options.outDir, 'chunk-text');
+  await rm(chunkTextDir, { recursive: true, force: true });
+  await mkdir(chunkTextDir, { recursive: true });
+  await Promise.all(
+    [...chunksById].map(([id, chunks]) =>
+      writeJson(
+        path.join(chunkTextDir, `${id}.json`),
+        chunks.map((c) => c.text),
+      ),
+    ),
   );
+  await writeJson(path.join(options.outDir, 'pages.json'), articles);
+  await writeJson(path.join(options.outDir, 'meta.json'), articles.map(toMeta));
+  await writeJson(path.join(options.outDir, 'search-index.json'), buildPageIndex(articles));
   await writeJson(path.join(options.outDir, 'search-text.json'), pageTexts);
   await writeJson(path.join(options.outDir, 'chunks.json'), chunksData);
   await writeJson(path.join(options.outDir, 'nav.json'), nav);

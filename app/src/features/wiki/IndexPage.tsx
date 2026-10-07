@@ -1,14 +1,38 @@
-import { useMemo, useState, type KeyboardEvent } from 'react';
+import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
 import { categoryLabel } from '../../lib/categories';
 import { LIST_COLUMNS, PAGE_CONTAINER } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
 import { Breadcrumb } from './Breadcrumb';
-import { nav } from './data';
+import { PageLoading } from '../../components/PageLoading';
+import type { ArticleMeta } from '../../lib/types';
+import { loadAllMeta, nav } from './data';
 import { groupArticles, INDEX_VIEWS, isIndexView, tagCounts, type IndexView } from './index-groups';
 
 const MIN_TAG_COUNT = 3;
+
+type MetaState = readonly ArticleMeta[] | 'loading' | 'error';
+
+/** 索引用の全メタデータ（別名・タグ・読み）を遅延読込する */
+function useAllMeta(): MetaState {
+  const [state, setState] = useState<MetaState>('loading');
+  useEffect(() => {
+    let active = true;
+    loadAllMeta()
+      .then((articles) => {
+        if (active) setState(articles);
+      })
+      .catch((error: unknown) => {
+        console.error('索引データの読み込みに失敗しました', error);
+        if (active) setState('error');
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+  return state;
+}
 
 export default function IndexPage() {
   useDocumentMeta('索引', '全記事の索引（五十音・A–Z・カテゴリ・タグ）');
@@ -27,11 +51,13 @@ export default function IndexPage() {
     setParams(next, { replace: true });
   };
 
+  const meta = useAllMeta();
+  const articles = useMemo(() => (typeof meta === 'string' ? [] : meta), [meta]);
   const groups = useMemo(
-    () => groupArticles(nav.articles, view, { filter, tag }),
-    [view, filter, tag],
+    () => groupArticles(articles, view, { filter, tag }),
+    [articles, view, filter, tag],
   );
-  const tags = useMemo(() => tagCounts(nav.articles), []);
+  const tags = useMemo(() => tagCounts(articles), [articles]);
   const [showAllTags, setShowAllTags] = useState(false);
   const visibleTags = tags.filter((t) => showAllTags || t.count >= MIN_TAG_COUNT || t.tag === tag);
   const hiddenTagCount = tags.length - tags.filter((t) => t.count >= MIN_TAG_COUNT).length;
@@ -139,7 +165,13 @@ export default function IndexPage() {
           </nav>
         )}
 
-        {total === 0 ? (
+        {meta === 'loading' ? (
+          <PageLoading bare />
+        ) : meta === 'error' ? (
+          <p role="alert" className="text-sm text-danger">
+            索引を読み込めませんでした。ページを再読み込みしてください。
+          </p>
+        ) : total === 0 ? (
           <p className="text-sm text-fg-muted">該当する記事はありません。</p>
         ) : (
           <div className="space-y-10">

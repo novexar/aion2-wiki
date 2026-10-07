@@ -10,7 +10,7 @@ import {
   toTurns,
   type ChatMessage,
 } from './chat-history';
-import { loadChunkStore } from './chunk-loader';
+import { loadChunkStore, resolveChunks } from './chunk-loader';
 
 export interface UseChatOptions {
   readonly apiKey: string | null;
@@ -61,12 +61,14 @@ export function useChat({ apiKey, model }: UseChatOptions): UseChatResult {
       try {
         const store = await loadChunkStore();
         if (controller.signal.aborted) throw new DOMException('Aborted', 'AbortError');
-        const chunks = searchChunks(
+        const refs = searchChunks(
           store.index,
           store.byId,
           retrievalQuery(history, question),
           TOP_K,
         );
+        const chunks = await resolveChunks(refs);
+        if (controller.signal.aborted) throw new DOMException('Aborted', 'AbortError');
         if (chunks.length === 0) {
           // 根拠になる抜粋がなければ API を呼ばずに返す
           patch(replyId, {

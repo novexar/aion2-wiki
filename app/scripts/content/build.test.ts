@@ -6,9 +6,9 @@ import MiniSearch from 'minisearch';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { chunkIndexOptions, pageIndexOptions } from '../../src/lib/search-options';
 import { searchChunks, searchPages } from '../../src/lib/search';
-import type { Article, Chunk, ChunksData, NavData } from '../../src/lib/types';
+import type { Article, ArticleMeta, ChunksData, NavJson } from '../../src/lib/types';
 import type { CategoryId } from '../../src/lib/categories';
-import { buildContent, buildNav, byReadingOrder } from './build';
+import { buildContent, buildNav, byReadingOrder, titleLengthWarning } from './build';
 import { ContentBuildError } from './errors';
 import { articleMarkdown } from './test-fixtures';
 
@@ -56,7 +56,7 @@ describe('buildContent', () => {
     await writeFile(path.join(contentDir, 'SCHEMA.md'), '# schema', 'utf8');
     const result = await run(true);
     expect(result.articles).toBe(0);
-    const nav = await readOut<NavData>('nav.json');
+    const nav = await readOut<NavJson>('nav.json');
     expect(nav.articles).toEqual([]);
     expect(nav.categories.length).toBeGreaterThan(5);
     const index = MiniSearch.loadJS(await readOut('search-index.json'), pageIndexOptions);
@@ -137,9 +137,14 @@ describe('buildContent', () => {
     const pages = await readOut<Article[]>('pages.json');
     expect(pages.map((p) => p.id).sort()).toEqual(['kinah', 'odyle']);
 
-    const nav = await readOut<NavData>('nav.json');
+    const nav = await readOut<NavJson>('nav.json');
     expect(nav.articles.map((a) => a.id)).toEqual(['odyle', 'kinah']); // updated 降順
-    expect(nav.categories.find((c) => c.id === 'economy')?.articles[0]).not.toHaveProperty('html');
+    expect(nav.categories.find((c) => c.id === 'economy')?.articles).toEqual(['kinah']);
+    expect(nav.articles[0]).not.toHaveProperty('summary');
+    expect(nav.articles[0]).not.toHaveProperty('tags');
+
+    const meta = await readOut<ArticleMeta[]>('meta.json');
+    expect(meta.find((m) => m.id === 'kinah')).toMatchObject({ aliases: ['Kinah'], order: 999 });
 
     const pageIndex = MiniSearch.loadJS(await readOut('search-index.json'), pageIndexOptions);
     expect(searchPages(pageIndex, 'kinah')[0]?.id).toBe('kinah');
@@ -153,12 +158,13 @@ describe('buildContent', () => {
       chunks.index as Parameters<typeof MiniSearch.loadJS>[0],
       chunkIndexOptions,
     );
-    const byId = new Map<string, Chunk>(chunks.chunks.map((c) => [c.id, c]));
+    const byId = new Map(chunks.chunks.map((c) => [c.id, c]));
     const hits = searchChunks(chunkIndex, byId, '日課', 8);
     expect(hits[0]).toMatchObject({ articleId: 'kinah', heading: '入手方法' });
-    expect(chunks.chunks.find((c) => c.articleId === 'kinah')?.text).toContain(
-      'オードエネルギー でも稼げる',
-    );
+    expect(chunks.chunks[0]).not.toHaveProperty('text');
+    const kinahTexts = await readOut<string[]>('chunk-text/kinah.json');
+    expect(kinahTexts[0]).toContain('オードエネルギー でも稼げる');
+    expect(kinahTexts).toHaveLength(chunks.chunks.filter((c) => c.articleId === 'kinah').length);
   });
 
   it('collects every invalid file into one error with file names', async () => {
@@ -204,10 +210,7 @@ const meta = (id: string, title: string, reading?: string, order = 1, category =
 describe('buildNav', () => {
   it('falls back to reading when order ties', () => {
     const nav = buildNav([meta('b', '漢字', 'あ'), meta('a', 'か')], new Date(0));
-    expect(nav.categories.find((c) => c.id === 'basics')?.articles.map((a) => a.id)).toEqual([
-      'b',
-      'a',
-    ]);
+    expect(nav.categories.find((c) => c.id === 'basics')?.articles).toEqual(['b', 'a']);
     expect(nav.generatedAt).toBe('1970-01-01T00:00:00.000Z');
   });
 
@@ -216,11 +219,7 @@ describe('buildNav', () => {
       [meta('a', 'あ', 'あ', 3), meta('c', 'さ', 'さ', 1), meta('b', 'か', 'か', 2)],
       new Date(0),
     );
-    expect(nav.categories.find((c) => c.id === 'basics')?.articles.map((a) => a.id)).toEqual([
-      'c',
-      'b',
-      'a',
-    ]);
+    expect(nav.categories.find((c) => c.id === 'basics')?.articles).toEqual(['c', 'b', 'a']);
   });
 
   it('lists categories in reading order', () => {
@@ -250,5 +249,12 @@ describe('byReadingOrder', () => {
       meta('g', 'g', 'g', 9, 'guide'),
     ];
     expect([...items].sort(byReadingOrder).map((a) => a.id)).toEqual(['g', 'z', 'y', 'x']);
+  });
+});
+
+describe('titleLengthWarning', () => {
+  it('warns only for titles longer than 24 characters', () => {
+    expect(titleLengthWarning('a.md', 'あ'.repeat(24))).toBeNull();
+    expect(titleLengthWarning('a.md', 'あ'.repeat(25))).toContain('25 文字');
   });
 });

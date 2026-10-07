@@ -1,7 +1,7 @@
 import type MiniSearch from 'minisearch';
 import type { SearchResult } from 'minisearch';
-import { tokenizeQuery } from './tokenizer';
-import type { Chunk, Confidence, PageSearchStored } from './types';
+import { normalizeText, tokenizeQuery } from './tokenizer';
+import type { Confidence, PageSearchStored } from './types';
 import type { CategoryId } from './categories';
 
 export interface PageHit {
@@ -35,31 +35,85 @@ export function searchWithFallback(index: MiniSearch, query: string): SearchResu
     .filter((r) => r.queryTerms.length / total >= OR_FALLBACK_MIN_RATIO);
 }
 
-function toPageHit(result: SearchResult): PageHit {
-  const stored = result as unknown as PageSearchStored & { score: number };
+function toPageHit(id: string, stored: PageSearchStored, score: number): PageHit {
   return {
-    id: String(result.id),
+    id,
     title: stored.title,
     category: stored.category,
     summary: stored.summary,
     confidence: stored.confidence,
     aliases: stored.aliases ?? '',
-    score: result.score,
+    score,
   };
 }
 
-export function searchPages(index: MiniSearch, query: string, limit = 20): PageHit[] {
-  return searchWithFallback(index, query).slice(0, limit).map(toPageHit);
+const fromResult = (result: SearchResult): PageHit =>
+  toPageHit(String(result.id), result as unknown as PageSearchStored, result.score);
+
+/** 記事 ID → 正規化済み本文（normalizeText 済み）。本文一致の照合に使う */
+export type NormalizedTexts = ReadonlyMap<string, string>;
+
+export function normalizeTexts(texts: ReadonlyMap<string, string>): NormalizedTexts {
+  return new Map([...texts].map(([id, text]) => [id, normalizeText(text)]));
 }
 
-/** RAG 用: 上位 limit 件のチャンクを返す */
-export function searchChunks(
+function countOccurrences(haystack: string, needle: string): number {
+  let count = 0;
+  for (
+    let i = haystack.indexOf(needle);
+    i !== -1;
+    i = haystack.indexOf(needle, i + needle.length)
+  ) {
+    count += 1;
+  }
+  return count;
+}
+
+/** 空白区切りの語がすべて本文に含まれる記事を、出現回数の多い順に返す */
+export function searchBody(texts: NormalizedTexts, query: string): string[] {
+  const words = normalizeText(query).split(/\s+/).filter(Boolean);
+  if (words.length === 0) return [];
+  const hits: { id: string; count: number }[] = [];
+  for (const [id, text] of texts) {
+    const counts = words.map((w) => countOccurrences(text, w));
+    if (counts.every((c) => c > 0)) hits.push({ id, count: counts.reduce((a, b) => a + b, 0) });
+  }
+  return hits.sort((a, b) => b.count - a.count).map((h) => h.id);
+}
+
+/**
+ * 記事検索。題名・別名・タグ・概要・見出しの索引（AND）に本文の部分一致を後ろに足す。
+ * どちらも 0 件なら索引の OR 検索に緩める。
+ */
+export function searchPages(
   index: MiniSearch,
-  chunksById: ReadonlyMap<string, Chunk>,
+  query: string,
+  limit = 20,
+  texts?: NormalizedTexts,
+): PageHit[] {
+  const q = query.trim();
+  if (!q) return [];
+  const strict = index.search(q, { combineWith: 'AND' }).map(fromResult);
+  const seen = new Set(strict.map((h) => h.id));
+  const body = texts
+    ? searchBody(texts, q).flatMap((id) => {
+        const stored = seen.has(id) ? undefined : index.getStoredFields(id);
+        return stored ? [toPageHit(id, stored as unknown as PageSearchStored, 0)] : [];
+      })
+    : [];
+  const hits = [...strict, ...body];
+  if (hits.length > 0) return hits.slice(0, limit);
+  return searchWithFallback(index, q).slice(0, limit).map(fromResult);
+}
+
+/** RAG 用: 上位 limit 件のチャンク（位置情報など ID を持つ値）を返す */
+export function searchChunks<T extends { readonly id: string }>(
+  index: MiniSearch,
+  chunksById: ReadonlyMap<string, T>,
   query: string,
   limit = 8,
-): Chunk[] {
-  const out: Chunk[] = [];
+): T[] {
+  const out: T[] = [];
   for (const result of searchWithFallback(index, query)) {
     const chunk = chunksById.get(String(result.id));
     if (chunk) out.push(chunk);

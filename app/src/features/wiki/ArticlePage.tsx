@@ -6,7 +6,7 @@ import { useDocumentMeta } from '../../components/useDocumentMeta';
 import { categoryLabel, isCategoryId } from '../../lib/categories';
 import { articlePath, categoryPath } from '../../lib/paths';
 import { ISSUES_URL } from '../../lib/site';
-import type { Article, ArticleMeta } from '../../lib/types';
+import type { Article, NavArticle } from '../../lib/types';
 import NotFoundPage from '../../routes/NotFoundPage';
 import { ArticleBody } from './ArticleBody';
 import { ArticleLinkGrid } from './ArticleList';
@@ -69,7 +69,7 @@ function ArticleView({ article }: { readonly article: Article }) {
 
   const related = article.related
     .map((id) => articleById.get(id))
-    .filter((a): a is ArticleMeta => a !== undefined);
+    .filter((a): a is NavArticle => a !== undefined);
 
   return (
     <WikiShell aside={<Toc headings={article.headings} activeId={activeId} />}>

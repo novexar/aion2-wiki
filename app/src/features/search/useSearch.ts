@@ -1,6 +1,6 @@
 import type MiniSearch from 'minisearch';
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
-import { searchPages, type PageHit } from '../../lib/search';
+import { normalizeTexts, searchPages, type PageHit } from '../../lib/search';
 import { loadPageIndex, loadPageTexts } from './index-loader';
 
 export type SearchStatus = 'loading' | 'ready' | 'error';
@@ -48,15 +48,16 @@ export function useSearch(query: string, options: UseSearchOptions = {}): UseSea
     };
   }, [loadIndex, loadTexts]);
 
+  const normalized = useMemo(() => (texts ? normalizeTexts(texts) : undefined), [texts]);
   const results = useMemo(
     () =>
       index
-        ? searchPages(index, deferredQuery, limit).map((hit) => {
+        ? searchPages(index, deferredQuery, limit, normalized).map((hit) => {
             const text = texts?.get(hit.id);
             return text ? { ...hit, text } : hit;
           })
         : [],
-    [index, texts, deferredQuery, limit],
+    [index, texts, normalized, deferredQuery, limit],
   );
 
   const status: SearchStatus = failed ? 'error' : index ? 'ready' : 'loading';

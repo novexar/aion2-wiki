@@ -10,7 +10,7 @@ import { categoryLabel } from '../lib/categories';
 import { PAGE_CONTAINER } from '../lib/layout';
 import { articlePath, categoryPath } from '../lib/paths';
 import { modKeyLabel } from '../lib/platform';
-import type { ArticleMeta, NavCategory } from '../lib/types';
+import type { NavArticle, NavCategory } from '../lib/types';
 
 /** ホームのカテゴリ行に並べる先頭記事の数（order 順） */
 const LEAD_ARTICLES = 3;
@@ -67,7 +67,7 @@ function CategoryRow({ category: c }: { readonly category: NavCategory }) {
   );
 }
 
-function DailyLinks({ articles }: { readonly articles: readonly ArticleMeta[] }) {
+function DailyLinks({ articles }: { readonly articles: readonly NavArticle[] }) {
   return (
     <section
       className="mt-8 sm:mt-12 sm:flex sm:items-baseline sm:gap-6"
@@ -100,7 +100,7 @@ function DailyLinks({ articles }: { readonly articles: readonly ArticleMeta[] })
   );
 }
 
-function RecentUpdates({ articles }: { readonly articles: readonly ArticleMeta[] }) {
+function RecentUpdates({ articles }: { readonly articles: readonly NavArticle[] }) {
   return (
     <section className="mt-8 sm:mt-12" aria-labelledby="updates-title">
       <h2 id="updates-title" className={SECTION_TITLE}>

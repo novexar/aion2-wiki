@@ -3,10 +3,10 @@ import { ConfidenceBadge } from '../../components/ConfidenceBadge';
 import { categoryLabel } from '../../lib/categories';
 import { LIST_COLUMNS } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
-import type { ArticleMeta } from '../../lib/types';
+import type { NavArticle } from '../../lib/types';
 
 /** 関連記事の箇条書きリンク「タイトル · カテゴリ」 */
-export function ArticleLinkGrid({ articles }: { readonly articles: readonly ArticleMeta[] }) {
+export function ArticleLinkGrid({ articles }: { readonly articles: readonly NavArticle[] }) {
   return (
     <ul className="list-disc space-y-1 pl-5 text-sm marker:text-fg-subtle">
       {articles.map((a) => (
@@ -28,7 +28,7 @@ export function ArticleRows({
   showDate = false,
   columns = false,
 }: {
-  readonly articles: readonly ArticleMeta[];
+  readonly articles: readonly NavArticle[];
   readonly showCategory?: boolean;
   readonly showDate?: boolean;
   /** true なら 2 列（lg）／3 列（2xl）に段組みする */

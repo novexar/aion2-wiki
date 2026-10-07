@@ -1,7 +1,13 @@
 import MiniSearch from 'minisearch';
 import { describe, expect, it } from 'vitest';
 import { highlight, makeSnippet } from './highlight';
-import { searchChunks, searchPages, searchWithFallback } from './search';
+import {
+  normalizeTexts,
+  searchBody,
+  searchChunks,
+  searchPages,
+  searchWithFallback,
+} from './search';
 import { chunkIndexOptions, isLatinTerm, pageIndexOptions } from './search-options';
 import type { Chunk } from './types';
 
@@ -34,6 +40,29 @@ function pageIndex(): MiniSearch {
   return index;
 }
 
+const TEXTS = normalizeTexts(
+  new Map([
+    ['odyle', '3時間に15回復する。'],
+    ['kinah', '取引所で売却して稼ぐ。遠征でも手に入る。遠征の報酬。'],
+  ]),
+);
+
+describe('searchBody', () => {
+  it('matches every whitespace-separated word as a substring, most occurrences first', () => {
+    expect(searchBody(TEXTS, '遠征')).toEqual(['kinah']);
+    expect(searchBody(TEXTS, '取引所 遠征')).toEqual(['kinah']);
+    expect(searchBody(TEXTS, '取引所 回復')).toEqual([]);
+    expect(searchBody(TEXTS, '回復')).toEqual(['odyle']);
+    expect(searchBody(TEXTS, '  ')).toEqual([]);
+  });
+
+  it('normalizes width and case', () => {
+    expect(searchBody(normalizeTexts(new Map([['a', 'ＩＬ１０００まで']])), 'il1000')).toEqual([
+      'a',
+    ]);
+  });
+});
+
 describe('searchPages', () => {
   const index = pageIndex();
 
@@ -52,7 +81,14 @@ describe('searchPages', () => {
   });
 
   it('ranks title/tag matches above body matches', () => {
-    expect(searchPages(index, '遠征').map((h) => h.id)).toEqual(['odyle', 'kinah']);
+    expect(searchPages(index, '遠征', 20, TEXTS).map((h) => h.id)).toEqual(['odyle', 'kinah']);
+    expect(searchPages(index, '遠征').map((h) => h.id)).toEqual(['odyle']);
+  });
+
+  it('finds articles by body text that is not in the index', () => {
+    expect(searchPages(index, '売却', 20, TEXTS)).toMatchObject([
+      { id: 'kinah', title: 'ギーナ', category: 'economy' },
+    ]);
   });
 
   it('falls back to OR when AND finds nothing, filtering weak matches', () => {

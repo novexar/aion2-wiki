@@ -44,18 +44,43 @@ export interface Article extends ArticleMeta {
   readonly headings: readonly Heading[];
 }
 
+/** 初期バンドルに含めるナビ用の最小メタデータ（summary・tags・aliases は索引ページで遅延取得） */
+export type NavArticle = Pick<
+  ArticleMeta,
+  'id' | 'title' | 'category' | 'confidence' | 'updated' | 'updatedAt' | 'order'
+>;
+
 export interface NavCategory {
   readonly id: CategoryId;
   readonly label: string;
   readonly description: string;
-  readonly articles: readonly ArticleMeta[];
+  /** 閲覧順（order 昇順 → 読み） */
+  readonly articles: readonly NavArticle[];
 }
 
 export interface NavData {
   readonly generatedAt: string;
   readonly categories: readonly NavCategory[];
   /** updated 降順 */
-  readonly articles: readonly ArticleMeta[];
+  readonly articles: readonly NavArticle[];
+}
+
+/** nav.json の形式。カテゴリは記事 ID の配列だけを持ち、data.ts で解決する */
+export interface NavJson {
+  readonly generatedAt: string;
+  readonly categories: readonly { readonly id: CategoryId; readonly articles: readonly string[] }[];
+  /** updated 降順 */
+  readonly articles: readonly NavArticle[];
+}
+
+/** chunks.json に入れるチャンクの位置情報（本文は chunk-text/<articleId>.json から遅延取得） */
+export interface ChunkRef {
+  readonly id: string;
+  readonly articleId: string;
+  /** 見出しのパス（例: "報酬 > 週間上限"）。冒頭部分は空文字 */
+  readonly heading: string;
+  /** 見出しのアンカー ID（冒頭部分は空文字） */
+  readonly anchor: string;
 }
 
 export interface Chunk {
@@ -71,7 +96,7 @@ export interface Chunk {
 }
 
 export interface ChunksData {
-  readonly chunks: readonly Chunk[];
+  readonly chunks: readonly ChunkRef[];
   /** MiniSearch.toJSON() の結果（MiniSearch.loadJS で復元） */
   readonly index: unknown;
 }
