@@ -1,4 +1,4 @@
-import { Eye, EyeOff, ExternalLink, KeyRound, ShieldCheck } from 'lucide-react';
+import { Eye, EyeOff, KeyRound } from 'lucide-react';
 import { useId, useState, type FormEvent } from 'react';
 import { Button } from '../../components/Button';
 import { API_KEY_URL } from '../../lib/gemini-config';
@@ -25,13 +25,11 @@ export function ApiKeyForm({ onSaved, submitLabel = '保存' }: ApiKeyFormProps)
       return;
     }
     if (/\s/.test(key) || key.length < 20) {
-      setError('API キーの形式が正しくないようです。コピーし直してください。');
+      setError('API キーの形式が正しくありません。');
       return;
     }
     if (!saveApiKey(key)) {
-      setError(
-        'ブラウザに保存できませんでした。プライベートモードやストレージ設定を確認してください。',
-      );
+      setError('このブラウザには保存できません（プライベートモードなど）。');
       return;
     }
     setValue('');
@@ -89,23 +87,17 @@ export function ApiKeyForm({ onSaved, submitLabel = '保存' }: ApiKeyFormProps)
         </p>
       )}
       <div id={helpId} className="space-y-1.5 text-[13px] leading-relaxed text-fg-muted">
-        <p className="flex gap-1.5">
-          <ShieldCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-ok" />
-          このキーはあなたのブラウザ（localStorage）にしか保存されません。サーバーには送信されず、Google
-          の API に直接使われます。
-        </p>
+        <p>キーはこのブラウザにだけ保存され、Google API の呼び出しにのみ使われます。</p>
         <p>
-          キーは{' '}
+          キーの発行:{' '}
           <a
             href={API_KEY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-0.5 text-accent-strong underline underline-offset-4"
+            className="text-accent-strong underline underline-offset-4"
           >
-            Google AI Studio
-            <ExternalLink aria-hidden="true" className="size-3" />
-          </a>{' '}
-          で無料発行できます（Google アカウントでログイン →「Create API key」）。
+            Google AI Studio ↗
+          </a>
         </p>
       </div>
     </form>

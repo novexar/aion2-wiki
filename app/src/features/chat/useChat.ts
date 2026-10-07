@@ -1,12 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { streamGemini, toChatError } from '../../lib/gemini';
-import {
-  buildRagRequest,
-  NO_INFO_MESSAGE,
-  pickReferences,
-  retrievalQuery,
-  TOP_K,
-} from '../../lib/rag';
+import { buildRagRequest, pickReferences, retrievalQuery, TOP_K } from '../../lib/rag';
 import { searchChunks } from '../../lib/search';
 import {
   clearHistory,
@@ -76,7 +70,7 @@ export function useChat({ apiKey, model }: UseChatOptions): UseChatResult {
         if (chunks.length === 0) {
           // 根拠になる抜粋がなければ API を呼ばずに返す
           patch(replyId, {
-            text: `${NO_INFO_MESSAGE}。索引や検索で別の言い方もお試しください。`,
+            text: 'この Wiki に該当する記事がありません。',
             status: 'done',
             refs: [],
           });

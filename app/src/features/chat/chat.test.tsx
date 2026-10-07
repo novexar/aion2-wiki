@@ -22,9 +22,7 @@ describe('ApiKeyForm', () => {
     const onSaved = vi.fn();
     render(<ApiKeyForm onSaved={onSaved} />);
     const user = userEvent.setup();
-    expect(
-      screen.getByText(/あなたのブラウザ（localStorage）にしか保存されません/),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/このブラウザにだけ保存され/)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Google AI Studio/ })).toHaveAttribute(
       'rel',
       'noopener noreferrer',

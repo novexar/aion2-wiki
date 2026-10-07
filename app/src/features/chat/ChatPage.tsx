@@ -1,8 +1,9 @@
-import { AlertCircle, ArrowUp, BookOpen, RotateCcw, Square } from 'lucide-react';
+import { ArrowUp, Square } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { Link } from 'react-router';
 import { Button } from '../../components/Button';
+import { Kbd } from '../../components/Kbd';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
 import { articlePath } from '../../lib/paths';
 import { useApiKey, useModel } from '../../lib/settings';
@@ -11,20 +12,14 @@ import type { ChatMessage } from './chat-history';
 import { MessageContent } from './MessageContent';
 import { useChat } from './useChat';
 
-const SUGGESTIONS = [
-  '始めたばかりで毎日やることは？',
-  'ギーナの効率的な稼ぎ方は？',
-  'ダンジョン報酬の受け取りに必要なものは？',
-];
+const SUGGESTIONS = ['毎日やること', 'ギーナの稼ぎ方', '報酬キューブを開けるのに必要なもの'];
 
 function MessageView({ message }: { readonly message: ChatMessage }) {
   if (message.role === 'user') {
     return (
-      <div className="flex justify-end">
-        <p className="max-w-[85%] rounded-lg bg-muted px-4 py-2.5 text-[15px] leading-relaxed whitespace-pre-wrap text-fg">
-          {message.text}
-        </p>
-      </div>
+      <p className="text-[15px] leading-relaxed font-bold whitespace-pre-wrap text-fg">
+        {message.text}
+      </p>
     );
   }
   return (
@@ -33,7 +28,6 @@ function MessageView({ message }: { readonly message: ChatMessage }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.18 }}
     >
-      <div className="mb-1.5 text-xs font-medium text-fg-subtle">Wiki アシスタント</div>
       {message.text ? (
         <MessageContent text={message.text} />
       ) : message.status === 'streaming' ? (
@@ -43,15 +37,14 @@ function MessageView({ message }: { readonly message: ChatMessage }) {
             <span className="size-1.5 animate-pulse rounded-full bg-fg-subtle [animation-delay:150ms]" />
             <span className="size-1.5 animate-pulse rounded-full bg-fg-subtle [animation-delay:300ms]" />
           </span>
-          Wiki を調べています…
+          検索中
         </p>
       ) : null}
       {message.status === 'error' && message.error && (
         <p
           role="alert"
-          className="mt-2 flex gap-2 rounded-md border border-danger-line bg-danger-bg px-3 py-2 text-sm text-danger"
+          className="mt-2 rounded-md border border-danger-line px-3 py-2 text-sm text-danger"
         >
-          <AlertCircle aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
           <span>
             {message.error}
             {/API キー|モデル名/.test(message.error) && (
@@ -67,14 +60,13 @@ function MessageView({ message }: { readonly message: ChatMessage }) {
       )}
       {message.refs && message.refs.length > 0 && (
         <div className="mt-3 flex flex-wrap items-center gap-1.5">
-          <span className="text-xs text-fg-subtle">参照記事:</span>
+          <span className="text-xs text-fg-subtle">出典</span>
           {message.refs.map((ref) => (
             <Link
               key={ref.id}
               to={articlePath(ref.category, ref.id, ref.anchor || undefined)}
-              className="inline-flex items-center gap-1 rounded-md border border-line px-2 py-1 text-xs text-fg-muted transition-colors hover:border-accent hover:text-fg"
+              className="text-xs text-fg-muted underline underline-offset-4 hover:text-fg"
             >
-              <BookOpen aria-hidden="true" className="size-3" />
               {ref.title}
             </Link>
           ))}
@@ -124,7 +116,7 @@ function Composer({
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-xl border border-line bg-canvas p-2 shadow-sm focus-within:border-line-strong"
+      className="rounded-md border border-line-strong bg-canvas p-2 focus-within:border-fg-subtle"
     >
       <label htmlFor="chat-input" className="sr-only">
         質問を入力
@@ -137,11 +129,13 @@ function Composer({
         onKeyDown={onKeyDown}
         rows={1}
         disabled={disabled}
-        placeholder="AION2 について質問する（Enter で送信、Shift+Enter で改行）"
+        placeholder="質問を入力"
         className="block max-h-[200px] w-full resize-none bg-transparent px-2 py-1.5 text-[15px] leading-relaxed placeholder:text-fg-subtle focus:outline-none disabled:cursor-not-allowed"
       />
       <div className="flex items-center justify-between gap-2 px-1 pt-1">
-        <span className="text-[11px] text-fg-subtle">回答は Wiki の記事のみを根拠にします</span>
+        <span className="hidden items-center gap-1 text-[11px] text-fg-subtle sm:flex">
+          <Kbd>Enter</Kbd> 送信 / <Kbd>Shift+Enter</Kbd> 改行
+        </span>
         {isStreaming ? (
           <Button size="sm" onClick={onStop} aria-label="回答の生成を停止">
             <Square aria-hidden="true" className="size-3.5 fill-current" />
@@ -167,7 +161,7 @@ function Composer({
 export default function ChatPage() {
   useDocumentMeta(
     'チャット',
-    'Wiki の記事だけを根拠に答える相談チャット（Gemini API・ご自身のキーを使用）。',
+    'AION2 非公式Wiki の記事を根拠に答えるチャット。Gemini API キーが必要。',
   );
   const apiKey = useApiKey();
   const model = useModel();
@@ -192,13 +186,12 @@ export default function ChatPage() {
   if (!apiKey) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-10 sm:px-8">
-        <h1 className="text-[1.75rem] font-bold tracking-tight">Wiki に相談する</h1>
+        <h1 className="text-[1.75rem] font-bold">チャット</h1>
         <p className="mt-3 leading-relaxed text-fg-muted">
-          質問に関係する Wiki の記事を探し、その内容だけを根拠に Google の Gemini
-          が日本語で回答します。 利用には、ご自身の Gemini API キーが必要です。
+          この Wiki の記事を根拠に Gemini が回答します。Gemini API キーが必要です。
         </p>
-        <div className="mt-8 rounded-lg border border-line p-5">
-          <ApiKeyForm submitLabel="保存して始める" />
+        <div className="mt-8">
+          <ApiKeyForm submitLabel="保存" />
         </div>
       </div>
     );
@@ -207,18 +200,9 @@ export default function ChatPage() {
   return (
     <div className="mx-auto flex min-h-[calc(100dvh-var(--header-h))] max-w-3xl flex-col px-4 sm:px-8">
       <div className="flex items-center justify-between gap-3 border-b border-line py-4">
-        <div className="min-w-0">
-          <h1 className="text-lg font-semibold tracking-tight">Wiki に相談する</h1>
-          <p className="truncate text-xs text-fg-subtle">
-            モデル: <span className="font-mono">{model}</span> ·{' '}
-            <Link to="/settings" className="underline underline-offset-2 hover:text-fg">
-              変更
-            </Link>
-          </p>
-        </div>
+        <h1 className="text-lg font-semibold">チャット</h1>
         <Button size="sm" variant="ghost" onClick={clear} disabled={messages.length === 0}>
-          <RotateCcw aria-hidden="true" className="size-3.5" />
-          新しい会話
+          履歴を消す
         </Button>
       </div>
 
@@ -227,21 +211,22 @@ export default function ChatPage() {
       </p>
       <div role="log" aria-live="off" aria-label="会話" className="flex-1 space-y-8 py-6">
         {messages.length === 0 && (
-          <div className="py-8">
-            <p className="text-fg-muted">質問の例:</p>
-            <ul className="mt-3 flex flex-col gap-2">
-              {SUGGESTIONS.map((s) => (
-                <li key={s}>
+          <div className="py-8 text-sm text-fg-muted">
+            <h2 className="text-fg">例</h2>
+            <p className="mt-2">
+              {SUGGESTIONS.map((q, i) => (
+                <span key={q}>
+                  {i > 0 && '、'}
                   <button
                     type="button"
-                    onClick={() => void send(s)}
-                    className="w-full rounded-md border border-line px-3.5 py-2.5 text-left text-sm text-fg-muted transition-colors hover:border-line-strong hover:bg-surface hover:text-fg"
+                    onClick={() => void send(q)}
+                    className="underline underline-offset-4 hover:text-fg"
                   >
-                    {s}
+                    {q}
                   </button>
-                </li>
+                </span>
               ))}
-            </ul>
+            </p>
           </div>
         )}
         {messages.map((m) => (
@@ -250,7 +235,7 @@ export default function ChatPage() {
         <div ref={endRef} />
       </div>
 
-      <div className="sticky bottom-0 bg-canvas pt-2 pb-4">
+      <div className="sticky bottom-0 bg-canvas pt-2 pb-[max(1rem,env(safe-area-inset-bottom))]">
         <Composer
           disabled={false}
           isStreaming={isStreaming}
