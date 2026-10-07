@@ -1,13 +1,14 @@
 ---
 id: faq-economy
-title: FAQ：お金・アイテム（刻印・受け渡し・取引所）
+title: FAQ 経済
+reading: FAQけいざい
 category: faq
 tags: [FAQ, ギーナ, キューナ, 取引所, 刻印, 受け渡し]
 summary: (刻印)付きアイテムの意味、キャラクター間の受け渡し、プレイヤー同士の直接取引が使えない理由、取引所とメンバーシップの関係、ギーナとキューナの違いに短く答える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [お金 FAQ, 取引所 FAQ, 刻印 とは, ギーナ FAQ, アイテム受け渡し]
+aliases: [お金 FAQ, 取引所 FAQ, 刻印 とは, ギーナ FAQ, アイテム受け渡し, アイテム, 受け渡し, 取引所]
 related: [kina-and-bound-kina, quna, market-and-exchange, trading-rules, membership, whats-bound, storage-and-cube, soul-binding]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: faq-dungeons
-title: FAQ：ダンジョン（オード・探険／征服・貢献度・超越・バス）
+title: FAQ ダンジョン
+reading: FAQだんじょん
 category: faq
 tags: [FAQ, ダンジョン, 遠征, 超越, オードエネルギー, 貢献度]
 summary: オードエネルギーの使い方、探険と征服の違い、貢献度、超越に入る時期、聖域とバス、パーティ人数など、Lv45前後で多いダンジョンの疑問に短く答える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [ダンジョン FAQ, 遠征 FAQ, 超越 いつから, バス とは, 貢献度 とは]
+aliases: [ダンジョン FAQ, 遠征 FAQ, 超越 いつから, バス とは, 貢献度 とは, オード, 貢献度]
 related: [dungeons-overview, expeditions-and-odyle, odyle-energy, transcendence-overview, sanctuary-raids-overview, party-and-matchmaking, daily-and-weekly-checklist, expedition-reward-selection, ludra-raid-suspension]
 sources:
   - id: S01

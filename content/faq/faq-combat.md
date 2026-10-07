@@ -1,13 +1,14 @@
 ---
 id: faq-combat
-title: FAQ：戦闘・ステータス（強打・完璧・クリティカル・前後方増幅）
+title: FAQ 戦闘
+reading: FAQせんとう
 category: faq
 tags: [FAQ, 戦闘, ステータス, 強打, クリティカル, ダメージ計算]
 summary: 強打・完璧・クリティカルの違い、前方・後方ダメージ増幅の価値、足し算と掛け算の違い、アルカナ、クラス選びなど、戦闘とステータスの疑問に短く答える。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [戦闘 FAQ, ステータス FAQ, 強打 とは, 完璧 とは, 前方ダメージ増幅]
+aliases: [戦闘 FAQ, ステータス FAQ, 強打 とは, 完璧 とは, 前方ダメージ増幅, ステータス, 前後方増幅]
 related: [stats-explained, how-damage-works, combat-basics, arcana, classes-overview, class-tier-and-recommendation, status-effects-and-cc, pvp-stats-and-gear]
 sources:
   - id: S01

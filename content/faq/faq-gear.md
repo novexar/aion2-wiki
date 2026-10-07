@@ -1,13 +1,14 @@
 ---
 id: faq-gear
-title: FAQ：装備（継承・ガーダー・外形・翼・失敗・ルーン）
+title: FAQ 装備
+reading: FAQそうび
 category: faq
 tags: [FAQ, 装備, 強化, 継承, 翼, ルーン]
 summary: 唯一装備の育て方、継承の時期、ガーダーの扱い、外形の仕様、翼、強化の失敗、ルーンの注意点など、装備まわりの疑問に短く答える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [装備 FAQ, 強化 失敗, 継承 いつ, ガーダー とは, ルーン 強化]
+aliases: [装備 FAQ, 強化 失敗, 継承 いつ, ガーダー とは, ルーン 強化, ガーダー]
 related: [enhancement, transfer-inheritance, equipment-slots-and-grades, closet-and-skins, wings, runes, stat-lines-and-refining, soul-binding, upgrading-gear-priority]
 sources:
   - id: S01

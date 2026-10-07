@@ -1,13 +1,14 @@
 ---
 id: faq-account-and-platform
-title: FAQ：アカウント・プラットフォーム（連携・言語・PS5・スマホ）
+title: FAQ アカウント
+reading: FAQあかうんと
 category: faq
 tags: [FAQ, アカウント, プラットフォーム, Steam, PURPLE, 言語]
 summary: グローバル版はPC専用（Steam／PURPLE）。アカウント連携の注意点、日本語対応、PS5・スマホ・コントローラー、韓国・台湾版からの引き継ぎ、サーバー移動など、始める前の疑問に短く答える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [よくある質問 アカウント, プラットフォーム FAQ, PS5, スマホ, 引き継ぎ]
+aliases: [よくある質問 アカウント, プラットフォーム FAQ, PS5, スマホ, 引き継ぎ, プラットフォーム]
 related: [platforms-and-requirements, steam-vs-purple, nc-account-and-purple-setup, languages-and-voice, regions-and-servers, server-transfer, official-launch-faq, controller-and-steam-deck]
 sources:
   - id: S01

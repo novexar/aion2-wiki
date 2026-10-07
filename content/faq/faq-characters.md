@@ -1,6 +1,7 @@
 ---
 id: faq-characters
-title: FAQ：キャラクター（枠・削除・外見・クラス変更）
+title: FAQ キャラクター
+reading: FAQきゃらくたー
 category: faq
 tags: [FAQ, キャラクター, 削除, 外見変更, スロット]
 summary: キャラクター枠は初期4・最大8、削除は24時間待機でLv1から可能。外見は外見変更券で直せるが、クラスと陣営は変えられない。キャラ作りの疑問に短く答える。

@@ -1,13 +1,14 @@
 ---
 id: faq-pvp-and-social
-title: FAQ：PvP・社交（アビスポイント・レギオン・チャット）
+title: FAQ 対人と社交
+reading: FAQたいじんとしゃこう
 category: faq
 tags: [FAQ, PvP, アビス, レギオン, チャット, 社交]
 summary: PvEだけでもアビスポイントが必要な理由、PvPの解放と切替、アビスと亀裂の違い、レギオンの陣営制限、チャットの不具合など、対人と社交の疑問に短く答える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [PvP FAQ, アビスポイント FAQ, レギオン FAQ, チャット FAQ]
+aliases: [PvP FAQ, アビスポイント FAQ, レギオン FAQ, チャット FAQ, PvP, アビスポイント, チャット]
 related: [pvp-overview, abyss-overview, abyss-points-and-shop, abyss-points-for-pve, spacetime-rift, duels-and-pvp-mode-rules, legion, chat-and-social, arena-of-tactics-10v10]
 sources:
   - id: S01

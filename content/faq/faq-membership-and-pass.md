@@ -1,13 +1,14 @@
 ---
 id: faq-membership-and-pass
-title: FAQ：課金（メンバーシップ・パス・何を買うべきか）
+title: FAQ 課金
+reading: FAQかきん
 category: faq
 tags: [FAQ, メンバーシップ, ディーヴァパス, 課金, キューナ]
 summary: 基本無料で、有料はクァイリン特級メンバーシップ、ディーヴァパス、キューナ、外形ショップ。メンバーシップの特典、サーバー単位の効果、パスの買い方、最初に買うべきものに短く答える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [課金 FAQ, メンバーシップ FAQ, ディーヴァパス FAQ, 無課金, 月額]
+aliases: [課金 FAQ, メンバーシップ FAQ, ディーヴァパス FAQ, 無課金, 月額, メンバーシップ, 何を買うべきか]
 related: [membership, daeva-pass, founders-packs, free-to-play-and-p2w, quna, payment-methods, market-and-exchange, cash-shop-and-cosmetics, whats-bound]
 sources:
   - id: S01
