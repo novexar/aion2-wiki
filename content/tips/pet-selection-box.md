@@ -1,13 +1,14 @@
 ---
 id: pet-selection-box
 title: ペット選択箱のおすすめ
+reading: ぺっとせんたくばこのおすすめ
 category: tips
 tags: [ペット, ローンチ報酬, 選択箱, 乗り物]
 summary: ローンチ報酬のペット箱はパガティと、パピス・銀色の刃ロータン・コヌティ作業員・黒煙モルトの4択から1体。後から手に入りにくいロータンかモルトを選ぶ案が多いが、移動を優先するならパピスも有力。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Pet Selection Box", "Pet Chest", "Advance Pet Chest", "ペット箱 どれ", "パピス", "ロータン", "モルト"]
+aliases: [Pet Selection Box, Pet Chest, Advance Pet Chest, ペット箱 どれ, パピス, ロータン, モルト]
 related: [pets-and-mounts, pet-genus, launch-rewards-and-codes, flight-and-glide, travel-and-teleport]
 sources:
   - id: S01

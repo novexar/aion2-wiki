@@ -1,13 +1,14 @@
 ---
 id: enhancement-tips
 title: 強化は「次の入場条件まで」
+reading: きょうかはつぎのにゅうじょうじょうけんまで
 category: tips
 tags: [強化, 強化石, 装備更新, 資源管理, 序盤]
 summary: 強化石とギーナは「次の入場条件に届くまで」だけ使う。希少は必要時のみ、伝承は+5前後から様子を見て、唯一は+10まで。ベルトとアミュレットは別枠で育てる、という判断基準をまとめる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Enhancement Tips", "強化の止めどき", "強化石の節約", "装備強化のコツ"]
+aliases: [Enhancement Tips, 強化の止めどき, 強化石の節約, 装備強化のコツ]
 related: [enhancement, enhance-stones, extraction, upgrading-gear-priority, belt-and-amulet, item-level-and-combat-power, what-to-do-at-45, kina-saving-tips]
 sources:
   - id: S01

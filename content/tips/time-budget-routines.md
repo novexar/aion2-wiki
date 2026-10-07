@@ -1,13 +1,14 @@
 ---
 id: time-budget-routines
-title: 30分・60分・2時間の遊び方
+title: 時間別の遊び方
+reading: じかんべつのあそびかた
 category: tips
 tags: [日課, 週課, 時短, ルーティン, エンドゲーム]
 summary: Lv45以降の日課・週課を、使える時間別に優先順位で並べる。毎日の中心は使命5件、あとは週単位の上限を週のうちに消化すれば足りる。時間は目安で、順番が要点。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Time Budget", "短時間プレイ", "社会人向け日課", "時間別ルーティン", "30分で遊ぶ"]
+aliases: [Time Budget, 短時間プレイ, 社会人向け日課, 時間別ルーティン, 30分で遊ぶ]
 related: [daily-and-weekly-checklist, reset-times, odyle-energy-tips, duty-quests, daily-dungeon, nightmare, shugo-festa, ascension-trial]
 sources:
   - id: S01

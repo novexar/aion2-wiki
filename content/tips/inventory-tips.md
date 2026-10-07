@@ -1,13 +1,14 @@
 ---
 id: inventory-tips
-title: 所持品・倉庫整理のコツ
+title: 所持品と倉庫整理のコツ
+reading: しょじひんとそうこせいりのこつ
 category: tips
 tags: [倉庫, キューブ, 所持品, 整理, 拡張]
 summary: キューブ（所持品）とサーバー倉庫・キャラクター倉庫の使い分け、拡張費用の目安、遠隔倉庫、誤売却や誤抽出を戻すアイテム回収の回数制限、ペットの拾得フィルタまで、所持品整理の小技をまとめる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Inventory Tips", "倉庫整理", "キューブ拡張", "アイテム回収"]
+aliases: [Inventory Tips, 倉庫整理, キューブ拡張, アイテム回収]
 related: [storage-and-cube, whats-bound, extraction, pets-and-mounts, membership, server-shared-limits-and-alts, kina-and-bound-kina]
 sources:
   - id: S01

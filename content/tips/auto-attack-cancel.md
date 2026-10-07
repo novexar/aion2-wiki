@@ -1,13 +1,14 @@
 ---
 id: auto-attack-cancel
 title: 通常攻撃キャンセル
+reading: つうじょうこうげききゃんせる
 category: tips
 tags: [戦闘, マクロ, 通常攻撃, ダメージ, 操作]
 summary: 通常攻撃（左クリック）でスキルの後隙を切ると次のスキルが早く出る。マクロキーに1〜2個のホットキーを入れ、左クリックと一緒に押し続けるのが基本。バフや移動スキルは手動にする。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Auto-Attack Cancel", "AAキャンセル", "基本攻撃キャンセル", "アニメーションキャンセル", "マクロ入門"]
+aliases: [Auto-Attack Cancel, AAキャンセル, 基本攻撃キャンセル, アニメーションキャンセル, マクロ入門]
 related: [macros, rotation-and-skill-macros, combat-basics, controls-and-keybinds, how-damage-works, rules-and-policies]
 sources:
   - id: S01

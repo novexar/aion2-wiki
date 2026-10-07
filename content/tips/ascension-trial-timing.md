@@ -1,13 +1,14 @@
 ---
 id: ascension-trial-timing
 title: 覚醒戦は週の最終日に
+reading: かくせいせんはしゅうのさいしゅうびに
 category: tips
 tags: [覚醒戦, 昇天の試練, 週課, 装備レベル, 難易度]
 summary: 覚醒戦（昇天の試練）は週3回までで、入場時の装備レベルで選べる難易度が決まる。週のリセット直前に入れば、その週に到達した最高の難易度で挑める。間に合わないときは簡単でも使い切る。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Ascension Trial Timing", "昇天の試練 タイミング", "覚醒戦 最終日", "Forgotten Repository", "覚醒戦 難易度"]
+aliases: [Ascension Trial Timing, 昇天の試練 タイミング, 覚醒戦 最終日, Forgotten Repository, 覚醒戦 難易度]
 related: [ascension-trial, reset-times, daily-and-weekly-checklist, time-budget-routines, item-level-and-combat-power, beginner-mistakes]
 sources:
   - id: S01

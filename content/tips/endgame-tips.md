@@ -1,13 +1,14 @@
 ---
 id: endgame-tips
 title: エンドゲームの14のコツ
+reading: えんどげーむのじゅうよんのこつ
 category: tips
 tags: [エンドゲーム, Lv45, 装備更新, 日課, 週課]
 summary: Lv45到達後の14のコツ。使命と指令を毎週こなす、ベルトとアミュレットを育てる、封印ダンジョンを回収する、高い遠征を選ぶ、超越でアルカナを集める、アビスをPvEで使う、サブは22まで上げる、回線を整える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Endgame Tips", "エンドゲーム入門", "Lv45以降のコツ", "14 Tips"]
+aliases: [Endgame Tips, エンドゲーム入門, Lv45以降のコツ, 14 Tips]
 related: [what-to-do-at-45, daily-and-weekly-checklist, odyle-energy-tips, enhancement-tips, transcendence-overview, abyss-points-for-pve, time-budget-routines, progression-path-700-to-2800]
 sources:
   - id: S01

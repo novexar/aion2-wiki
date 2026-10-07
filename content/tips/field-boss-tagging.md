@@ -1,13 +1,14 @@
 ---
 id: field-boss-tagging
 title: フィールドボスは一撃で報酬
+reading: ふぃーるどぼすはいちげきでほうしゅう
 category: tips
 tags: [フィールドボス, 戦利品箱, 補給依頼, 探索]
 summary: 通りがかりのフィールドボスには一撃だけでも当てておく。戦利品箱が手に入る。出現状況はワールドマップの探索一覧で見られ、取引できないドロップは補給依頼でアビスポイントに変えられる。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: ["Field Boss Tagging", "フィールドボス 一撃", "ボスタッチ", "戦利品箱", "Loot Chest"]
+aliases: [Field Boss Tagging, フィールドボス 一撃, ボスタッチ, 戦利品箱, Loot Chest]
 related: [field-bosses, supply-requests, abyss-field-bosses, abyss-points-for-pve, travel-and-teleport, time-budget-routines]
 sources:
   - id: S01

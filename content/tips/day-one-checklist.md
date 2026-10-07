@@ -1,13 +1,14 @@
 ---
 id: day-one-checklist
 title: 初日チェックリスト
+reading: しょにちちぇっくりすと
 category: tips
 tags: [初心者, 初日, チェックリスト, 設定]
 summary: プラットフォームと動作確認、リージョン・陣営・サーバーの決定、キャラクター作成、設定の確認、特典とメールの受け取りまで、始めた日にやることを順番に並べたチェックリスト。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Day One Checklist", "初日にやること", "開始時チェック", "始め方チェックリスト"]
+aliases: [Day One Checklist, 初日にやること, 開始時チェック, 始め方チェックリスト]
 related: [irreversible-choices, beginner-mistakes, platforms-and-requirements, steam-vs-purple, regions-and-servers, recommended-settings, launch-rewards-and-codes, first-week-progression-plan]
 sources:
   - id: S01

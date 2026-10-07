@@ -1,13 +1,14 @@
 ---
 id: solo-play-tips
 title: ソロで遊ぶコツ
+reading: そろであそぶこつ
 category: tips
 tags: [ソロ, カジュアル, 週課, 探険, 初心者]
 summary: ソロで進められる内容は、探険、覚醒戦、悪夢、封印ダンジョン、駐屯地、アビスのPvE。週単位の上限を週内に消化する設計なので、短い時間でも進められる。募集に頼らず進める組み立て方をまとめる。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: ["Solo Play", "ソロプレイ", "ソロ攻略", "ぼっちプレイ", "カジュアル向け"]
+aliases: [Solo Play, ソロプレイ, ソロ攻略, ぼっちプレイ, カジュアル向け]
 related: [time-budget-routines, expeditions-and-odyle, ascension-trial, nightmare, sealed-dungeons, strongholds, abyss-points-for-pve, legion]
 sources:
   - id: S01

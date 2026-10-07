@@ -1,13 +1,14 @@
 ---
 id: duty-reroll-tips
 title: 使命の再抽選戦略
+reading: しめいのさいちゅうせんせんりゃく
 category: tips
 tags: [使命, 再抽選, ギーナ, 日課, 指令]
 summary: 使命と指令は5枠の報酬が左ほど高確率。欲しい報酬が確定枠（左端）に来るまで再抽選するが、費用は回数で上がり、85,000で止めるのが目安。選ぶ報酬の優先順位もまとめる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Duty Reroll", "使命リフレッシュ", "任務の再抽選", "Duty Quest Refresh"]
+aliases: [Duty Reroll, 使命リフレッシュ, 任務の再抽選, Duty Quest Refresh]
 related: [duty-quests, commands-and-command-scrolls, hidden-cubes, daily-and-weekly-checklist, beginner-mistakes, time-budget-routines]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: odyle-energy-tips
 title: オードエネルギーを無駄にしない
+reading: おーどえねるぎーをむだにしない
 category: tips
 tags: [オードエネルギー, 遠征, 超越, 資源管理, 時短]
 summary: オードエネルギーは3時間に15回復し、上限（560、メンバーシップ840）で止まる。Lv45まで温存しつつ、上限からあふれさせない配分と、刻印・物質変換・サブキャラの使い方をまとめる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Odyle Energy Tips", "オード気力の使い方", "オード節約", "オードエネルギー管理"]
+aliases: [Odyle Energy Tips, オード気力の使い方, オード節約, オードエネルギー管理]
 related: [odyle-energy, expeditions-and-odyle, transcendence-overview, odyle-energy-crafting-economics, server-shared-limits-and-alts, membership, beginner-mistakes]
 sources:
   - id: S01

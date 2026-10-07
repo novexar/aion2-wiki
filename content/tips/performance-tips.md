@@ -1,13 +1,14 @@
 ---
 id: performance-tips
-title: 軽量化・カクつき対策
+title: 軽量化とカクつき対策
+reading: けいりょうかとかくつきたいさく
 category: tips
 tags: [FPS, 軽量化, グラフィック, DLSS, 動作環境]
 summary: まずDLSSかFSRを有効にし、解像度スケール、大規模戦闘品質、エフェクト、影の順に下げる。街や大人数戦だけ重いなら他プレイヤーの表示を減らす。FPSが高いのにカクつくときはフレーム生成を一度切る。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Performance Tips", "軽量化", "FPS向上", "カクつき対策", "DLSS FSR 設定", "ラグ 対策"]
+aliases: [Performance Tips, 軽量化, FPS向上, カクつき対策, DLSS FSR 設定, ラグ 対策]
 related: [recommended-settings, platforms-and-requirements, steam-vs-purple, controller-and-steam-deck, ui-and-menus]
 sources:
   - id: S01

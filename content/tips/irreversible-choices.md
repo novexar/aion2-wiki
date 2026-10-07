@@ -1,13 +1,14 @@
 ---
 id: irreversible-choices
 title: 取り返しのつかない要素
+reading: とりかえしのつかないようそ
 category: tips
 tags: [初心者, 陣営, サーバー, 削除, 注意]
 summary: 陣営とクラス、サーバー、名前、ファウンダーズパックの受け取り先、強化の失敗など、やり直せない要素とやり直せる要素を一覧にし、始める前に決めておくことを整理する。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Irreversible Choices", "やり直しできない", "変更できないもの", "後戻りできない選択"]
+aliases: [Irreversible Choices, やり直しできない, 変更できないもの, 後戻りできない選択]
 related: [character-creation, character-deletion-and-redo, server-transfer, regions-and-servers, races-elyos-asmodian, founders-packs, enhancement]
 sources:
   - id: S01

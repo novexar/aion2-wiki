@@ -1,13 +1,14 @@
 ---
 id: quest-tracker-teleport
 title: クエストトラッカーのテレポート活用
+reading: くえすととらっかーのてれぽーとかつよう
 category: tips
 tags: [クエスト, 自動移動, テレポート, トラッカー, 序盤]
 summary: クエストトラッカー（追跡中のクエスト欄）のショートカットで目的地まで自動移動でき、遠いときは近くのキベリスクへ先に飛ぶと早い。10月5日の更新で、英雄クエストにベルテロン／アルトガルドへ飛ぶボタンも加わった。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: ["Quest Tracker Teleport", "クエスト 自動移動", "Auto Move", "Alt+1 移動", "英雄クエスト テレポート"]
+aliases: [Quest Tracker Teleport, クエスト 自動移動, Auto Move, Alt+1 移動, 英雄クエスト テレポート]
 related: [travel-and-teleport, ui-and-menus, navigator-and-journal, main-story-episodes, regional-quests, controls-and-keybinds]
 sources:
   - id: S01

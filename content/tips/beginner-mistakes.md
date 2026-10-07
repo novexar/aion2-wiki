@@ -1,13 +1,14 @@
 ---
 id: beginner-mistakes
 title: 初心者がやりがちな失敗
+reading: しょしんしゃがやりがちなしっぱい
 category: tips
 tags: [初心者, 失敗, 落とし穴, 序盤]
 summary: 友人とサーバーがずれる、強化素材を序盤装備に使い切る、シューゴフェスタに早く行きすぎる、スキル特化の枠を埋め忘れるなど、始めて数日で起きやすい失敗と回避策を12項目にまとめる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Beginner Mistakes", "初心者の失敗", "やってはいけないこと", "序盤の落とし穴"]
+aliases: [Beginner Mistakes, 初心者の失敗, やってはいけないこと, 序盤の落とし穴]
 related: [irreversible-choices, day-one-checklist, enhancement-tips, odyle-energy-tips, duty-quests, ascension-trial]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: twitch-linking-pitfalls
-title: Twitch連携の落とし穴（再連携禁止）
+title: Twitch連携の落とし穴
+reading: Twitchれんけいのおとしあな
 category: tips
 tags: [Twitch, Drops, アカウント連携, 注意, ローンチ報酬]
 summary: Twitch Dropsは実際に遊ぶアカウント（Steamなら Steam、PURPLEならNCアカウント）に連携する。受け取れないときにNCのサイトで別に連携し直すと、既存の連携が外れてキャラクターに入れなくなる恐れがある。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Twitch Drops Pitfalls", "Twitch連携", "Drops 受け取れない", "アカウント連携 再連携禁止"]
+aliases: [Twitch Drops Pitfalls, Twitch連携, Drops 受け取れない, アカウント連携 再連携禁止, 再連携禁止]
 related: [launch-rewards-and-codes, nc-account-and-purple-setup, steam-vs-purple, mail-and-coupon, day-one-checklist]
 sources:
   - id: S01

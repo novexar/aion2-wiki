@@ -1,13 +1,14 @@
 ---
 id: server-choice-for-japanese
 title: 日本人向けサーバー選び
+reading: にほんじんむけさーばーえらび
 category: tips
 tags: [サーバー, 日本, ASIA, 陣営, 初心者]
 summary: 公式の日本人向けサーバーはない。ASIAリージョンで、友人やレギオンと陣営・サーバーを揃え、迷うなら「推奨」表示や新規追加サーバーを選ぶ。アーリーアクセス側と移動の制限も整理する。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Server Choice", "おすすめサーバー", "日本人サーバー", "ASIAサーバー一覧", "サーバー選び"]
+aliases: [Server Choice, おすすめサーバー, 日本人サーバー, ASIAサーバー一覧, サーバー選び]
 related: [regions-and-servers, server-transfer, races-elyos-asmodian, legion, party-and-matchmaking, irreversible-choices, day-one-checklist]
 sources:
   - id: S01
