@@ -1,13 +1,14 @@
 ---
 id: founders-packs
-title: ファウンダーズパック（3種の中身と特典のアカウント共通化）
+title: ファウンダーズパック
+reading: ふぁうんだーずぱっく
 category: economy
 tags: [ファウンダーズパック, 課金, アーリーアクセス, 外形, メンバーシップ]
 summary: 先行販売のスタンダード$24.99／デラックス$49.99／アルティメット$99.99。5日間のアーリーアクセスと30日メンバーシップが全種共通で、上位は見た目が増える。10月7日から外形は全キャラ共通で受け取れる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Founder's Pack, Founders Pack, Standard Pack, Deluxe Pack, Ultimate Pack, 先行購入パック, Advanced Access]
+aliases: ["Founder's Pack", Founders Pack, Standard Pack, Deluxe Pack, Ultimate Pack, 先行購入パック, Advanced Access]
 related: [membership, closet-and-skins, cash-shop-and-cosmetics, free-to-play-and-p2w, global-launch-timeline, pets-and-mounts]
 sources:
   - id: S01

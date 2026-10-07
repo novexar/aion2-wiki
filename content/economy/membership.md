@@ -1,13 +1,14 @@
 ---
 id: membership
-title: クァイリン特級メンバーシップ（30日2,350円・特典と買い方）
+title: クァイリン特級メンバーシップ
+reading: くぁいりんとっきゅうめんばーしっぷ
 category: economy
 tags: [メンバーシップ, 課金, 取引所, オードエネルギー, 遠隔倉庫]
 summary: 月額任意の「クァイリン特級メンバーシップ」は30日2,350円（米国$14.99）、サーバー単位。取引所の購入、ギーナ↔キューナ交換所、遠隔倉庫、オードエネルギー上限増などが特典。個人取引は付かない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Special Quai Membership, Quai Membership, 特級メンバーシップ, サブスク, 月額課金, subscription]
+aliases: [Special Quai Membership, Quai Membership, 特級メンバーシップ, サブスク, 月額課金, subscription, 特典と買い方]
 related: [market-and-exchange, quna, trading-rules, odyle-energy, founders-packs, free-to-play-and-p2w, wind-breeze-merchants, daeva-pass]
 sources:
   - id: S01

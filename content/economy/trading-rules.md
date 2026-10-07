@@ -1,13 +1,14 @@
 ---
 id: trading-rules
-title: 取引ルール（直接取引の無効化・サーバー倉庫・RMT）
+title: 取引ルール
+reading: とりひきるーる
 category: economy
 tags: [取引, 直接取引, RMT, BOT, サーバー倉庫, 信頼ステータス]
 summary: グローバル版ではプレイヤー間の直接取引が BOT 対策で無効化されている。他人と物をやり取りする手段、自分のキャラ間の移動（サーバー倉庫）、RMT や代行の罰則、信頼ステータス。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Personal Trade, Direct Trade, 個人取引, RMT, Trust Status, 信頼ステータス, 業者]
+aliases: [Personal Trade, Direct Trade, 個人取引, RMT, Trust Status, 信頼ステータス, 業者, 直接取引の無効化]
 related: [market-and-exchange, kina-and-bound-kina, storage-and-cube, whats-bound, rules-and-policies, membership]
 sources:
   - id: S01

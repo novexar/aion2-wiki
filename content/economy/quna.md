@@ -1,13 +1,14 @@
 ---
 id: quna
-title: キューナ（有償通貨）の価格・用途・キャラ枠拡張
+title: キューナ
+reading: きゅーな
 category: economy
 tags: [キューナ, 課金, ショップ, 交換所, キャラクター枠]
 summary: 現金で買う通貨キューナの価格（400＝$5.99〜4,000＝$59.99）、使い道（ショップ・ディーヴァパス・交換所でギーナ購入）、キャラクター枠拡張 1,000 キューナなど。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Quna, 有償通貨, プレミアム通貨, A2マイレージ]
+aliases: [Quna, 有償通貨, プレミアム通貨, A2マイレージ, キャラ枠拡張]
 related: [currencies-overview, cash-shop-and-cosmetics, daeva-pass, market-and-exchange, payment-methods, membership]
 sources:
   - id: S01

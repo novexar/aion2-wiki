@@ -1,13 +1,14 @@
 ---
 id: odyle-energy-crafting-economics
-title: オードエネルギー製作の損益（物質変換5万ギーナ・週20枠）
+title: オードエネルギー製作の損益
+reading: おーどえねるぎーせいさくのそんえき
 category: economy
 tags: [オードエネルギー, 物質変換, 損益, そよ風商会, 金策]
 summary: 物質変換でオードエネルギー40を作る費用は、オード25＋高純度5＋純粋1＋5万ギーナ。週の枠は共有16＋キャラ4で1キャラ最大20回。会員専用商店の10万ギーナ購入と比べ、素材が5万ギーナ未満なら製作が得。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Odyle Energy crafting, Substance Morph, 物質変換, オードエネルギー製作, 物質変換レシピ, Odyle Energy recipe]
+aliases: [Odyle Energy crafting, Substance Morph, オードエネルギー製作, 物質変換レシピ, Odyle Energy recipe, 物質変換5万ギーナ, 週20枠]
 related: [odyle-energy, substance-morph, wind-breeze-merchants, membership, kina-farming, expeditions-and-odyle, gathering]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: free-to-play-and-p2w
-title: 無課金で遊べるか・P2W要素（何が有料で、何が差になるか）
+title: 無課金とP2W
+reading: むかきんとぴーつーうぃん
 category: economy
 tags: [無課金, P2W, 基本無料, メンバーシップ, 課金]
 summary: AION2は基本プレイ無料で、ガチャ型の装備販売はない。有料はメンバーシップ、キューナ、ディーヴァパス、外形ショップ。公式は外形と消耗品に優位性なしと説明するが、パスの育成素材と取引所への入り口は差になりうる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Free to Play, F2P, P2W, Pay to Win, 無課金, 課金要素, 基本無料, 課金額]
+aliases: [Free to Play, F2P, P2W, Pay to Win, 無課金, 課金要素, 基本無料, 課金額, 無課金で遊べるか, P2W要素, 何が有料で, 何が差になるか]
 related: [membership, quna, daeva-pass, cash-shop-and-cosmetics, founders-packs, market-and-exchange, payment-methods, official-launch-faq]
 sources:
   - id: S01

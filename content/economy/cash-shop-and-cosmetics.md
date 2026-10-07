@@ -1,13 +1,14 @@
 ---
 id: cash-shop-and-cosmetics
-title: ショップと外形（キューナで買える物・ステータスなし）
+title: ショップと外形
+reading: しょっぷとがいけい
 category: economy
 tags: [ショップ, 外形, キューナ, チェンガルン商会, A2マイレージ]
 summary: 有料ショップの外形（衣装・武器スキン・ペット・翼）は見た目専用で能力値なし。ゲーム内商店はキューナショップ、チェンガルン商会、A2マイレージ、イベントの4つ。ほとんどの衣装はプレイで入手できる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Cash Shop, Shop, ショップ, 外形, スキン, Cosmetics, チェンガルン商会, A2 Mileage, A2マイレージ]
+aliases: [Cash Shop, Shop, ショップ, 外形, スキン, Cosmetics, チェンガルン商会, A2 Mileage, A2マイレージ, キューナで買える物, ステータスなし]
 related: [quna, daeva-pass, founders-packs, closet-and-skins, pets-and-mounts, free-to-play-and-p2w, membership, currencies-overview]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: kina-farming
-title: 金策（ギーナの稼ぎ方：征服キューブ・サブキャラ・減額ライン）
+title: 金策
+reading: きんさく
 category: economy
 tags: [金策, ギーナ, 征服, サブキャラ, 取引所]
 summary: Lv45以降の金策の軸は、オードエネルギーで受け取る遠征「征服」の報酬キューブ（取引できる通常ギーナ20/30/40万）。サーバー単位の回数で減額され、取引可能ギーナは1日100万が上限。サブは通常ギーナだけがメインの資金になる。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Kinah farming, Kina farming, ギーナ稼ぎ, 金策, お金稼ぎ, gold farming]
+aliases: [Kinah farming, Kina farming, ギーナ稼ぎ, お金稼ぎ, gold farming, ギーナの稼ぎ方, 征服キューブ, 減額ライン]
 related: [kina-and-bound-kina, market-and-exchange, server-shared-limits-and-alts, expeditions-and-odyle, odyle-energy, membership, substance-morph, odyle-energy-crafting-economics]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: wind-breeze-merchants
-title: そよ風商会（会員専用商店・魂の結晶500ギーナ・オード10万）
+title: そよ風商会
+reading: そよかぜしょうかい
 category: economy
 tags: [そよ風商会, メンバーシップ, 会員専用, 商店, ギーナ]
 summary: メンバーシップ会員だけが使える商店。ギーナ払いで魂の結晶、オードエネルギー、日課即完チケット、ペットのオート拾得券などを週・月の上限付きで買える。価格は10月の更新で一部下がった。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Wind Breeze Merchants, Wind Breeze Merchant, そよ風商店, そよ風メンバーシップ, 風の商人, 会員専用商店]
+aliases: [Wind Breeze Merchants, Wind Breeze Merchant, そよ風商店, そよ風メンバーシップ, 風の商人, 会員専用商店, 魂の結晶500ギーナ, オード10万]
 related: [membership, odyle-energy-crafting-economics, soul-crystals, pet-genus, kina-and-bound-kina, odyle-energy, daily-dungeon, cash-shop-and-cosmetics]
 sources:
   - id: S01

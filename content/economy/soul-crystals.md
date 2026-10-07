@@ -1,13 +1,14 @@
 ---
 id: soul-crystals
-title: 魂の結晶（ペット・ジーナス用の素材と入手先）
+title: 魂の結晶
+reading: たましいのけっしょう
 category: economy
 tags: [魂の結晶, ペット, ジーナス, 素材, 商店]
 summary: ペットのジーナス分析（種族理解度）に使う素材。分析1回に4個とギーナ1,000。そよ風商会500ギーナ、フェスタ商店、ヒドゥンキューブの鍵、上限まで育てたペットの魂などから入手する。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Soul Crystal, Soul Crystals, 魂結晶, 魂の結晶(統合), Cogni Soul Crystal, Fera Soul Crystal, Natura Soul Crystal, Varian Soul Crystal, Special Soul Crystal]
+aliases: [Soul Crystal, Soul Crystals, 魂結晶, 魂の結晶(統合), Cogni Soul Crystal, Fera Soul Crystal, Natura Soul Crystal, Varian Soul Crystal, Special Soul Crystal, ペット, ジーナス用の素材と入手先]
 related: [pet-genus, pets-and-mounts, wind-breeze-merchants, centuryroot-tokens-festa-shop, phantasmal-fragments-nightmare-shop, hidden-cubes, currencies-overview]
 sources:
   - id: S01

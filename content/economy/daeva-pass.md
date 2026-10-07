@@ -1,13 +1,14 @@
 ---
 id: daeva-pass
-title: ディーヴァパス（シーズン1の2種・週5万EXP上限・1,500キューナ）
+title: ディーヴァパス
+reading: でぃーゔぁぱす
 category: economy
 tags: [ディーヴァパス, バトルパス, キューナ, 報酬, シーズン]
 summary: キャラクターごとに買う期間限定のパス。無料の基本パスとキューナで買うプレミアムがあり、シーズン1は「暁のレギオン／イスハルゲンの傭兵」（1,500キューナ、週5万EXP上限）と「世界の呼びかけ」（1,000キューナ）。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Daeva Pass, Battle Pass, バトルパス, Dawn Legion, Ishalgen Mercenary, Planet's Call, 暁のレギオン, 世界の呼びかけ, パス商店]
+aliases: [Daeva Pass, Battle Pass, バトルパス, Dawn Legion, Ishalgen Mercenary, "Planet's Call", 暁のレギオン, 世界の呼びかけ, パス商店, シーズン1の2種, 週5万EXP上限]
 related: [quna, membership, cash-shop-and-cosmetics, free-to-play-and-p2w, odyle-energy, kina-and-bound-kina, season-missions]
 sources:
   - id: S01
