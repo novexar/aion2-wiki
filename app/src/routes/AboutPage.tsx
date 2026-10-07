@@ -34,13 +34,10 @@ export default function AboutPage() {
   );
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-8">
-      <h1 className="text-[1.75rem] font-bold tracking-tight">このサイトについて</h1>
+      <h1 className="text-[1.75rem] font-bold">このサイトについて</h1>
       <div className="prose-wiki mt-6">
         <p>
-          AION2 非公式Wiki
-          は、AION2（グローバル版）を始めたばかりの人向けに情報を整理するファンサイトです。
-          <strong>NCSOFT および公式とは一切関係ありません。</strong>
-          ゲーム内の表示や公式告知と内容が異なる場合は、そちらを優先してください。
+          AION2（グローバル版）の非公式ファンサイトです。NC（NCSOFT）とは関係ありません。ゲーム内の表示や公式告知と異なる場合はそちらが正しいものとします。
         </p>
 
         <h2 id="confidence">情報の信頼度</h2>
@@ -81,15 +78,13 @@ export default function AboutPage() {
           <li>韓国版・台湾版の仕様は、グローバル版と区別して記載します。</li>
         </ul>
 
-        <h2 id="chat">相談チャットについて</h2>
+        <h2 id="chat">チャットについて</h2>
         <p>
-          チャットは、質問に関係する記事の抜粋を検索し、その抜粋だけを根拠に Google の Gemini
-          が回答します。 API
-          キーはあなたのブラウザにのみ保存され、このサイトのサーバーには送信されません（サーバー自体がありません）。
-          回答は誤ることがあるため、参照記事で必ず確認してください。
+          質問に関係する記事を検索し、その抜粋だけを根拠に Gemini が回答します。API
+          キーはブラウザにだけ保存されます。回答は誤ることがあります。
         </p>
 
-        <h2 id="contribute">ソースと誤りの報告</h2>
+        <h2 id="contribute">ソースコードと誤りの報告</h2>
         <p>
           サイトのソースコードと記事の Markdown は{' '}
           <ExtLink href={REPO_URL}>GitHub リポジトリ</ExtLink> で公開しています。

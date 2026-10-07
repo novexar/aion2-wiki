@@ -7,10 +7,12 @@ import { saveApiKey } from '../../lib/settings';
 interface ApiKeyFormProps {
   readonly onSaved?: () => void;
   readonly submitLabel?: string;
+  /** 1 画面 1 primary のため、設定画面などでは false にする */
+  readonly primary?: boolean;
 }
 
 /** Gemini API キーの入力フォーム（チャット初回・設定画面で共用） */
-export function ApiKeyForm({ onSaved, submitLabel = '保存' }: ApiKeyFormProps) {
+export function ApiKeyForm({ onSaved, submitLabel = '保存', primary = true }: ApiKeyFormProps) {
   const [value, setValue] = useState('');
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +41,7 @@ export function ApiKeyForm({ onSaved, submitLabel = '保存' }: ApiKeyFormProps)
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-3">
-      <label htmlFor={inputId} className="block text-sm font-medium text-fg">
+      <label htmlFor={inputId} className="sr-only">
         Gemini API キー
       </label>
       <div className="flex flex-col gap-2 sm:flex-row">
@@ -77,7 +79,7 @@ export function ApiKeyForm({ onSaved, submitLabel = '保存' }: ApiKeyFormProps)
             )}
           </button>
         </div>
-        <Button type="submit" variant="primary" className="h-10">
+        <Button type="submit" variant={primary ? 'primary' : 'secondary'} className="h-10">
           {submitLabel}
         </Button>
       </div>
