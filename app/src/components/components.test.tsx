@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { ArticleBody } from '../features/wiki/ArticleBody';
 import { SearchProvider } from '../features/search/SearchProvider';
 import { useSearchPalette } from '../features/search/search-context';
-import { Toc } from '../features/wiki/Toc';
+import { MobileToc, Toc } from '../features/wiki/Toc';
 import { ConfidenceBadge } from './ConfidenceBadge';
 
 vi.mock('../features/search/CommandPalette', () => ({
@@ -129,5 +129,40 @@ describe('SearchProvider', () => {
     );
     fireEvent.keyDown(screen.getByLabelText('field'), { key: '/' });
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+});
+
+describe('Toc / MobileToc exclusivity', () => {
+  const headings = [{ id: 'a', text: 'A', depth: 2 as const }];
+
+  it('renders only one landmark depending on viewport width', () => {
+    const original = window.matchMedia;
+    const stub = (matches: boolean) =>
+      (() => ({
+        matches,
+        addEventListener: () => undefined,
+        removeEventListener: () => undefined,
+      })) as unknown as typeof window.matchMedia;
+    try {
+      window.matchMedia = stub(true);
+      const wide = render(
+        <>
+          <Toc headings={headings} activeId={null} />
+          <MobileToc headings={headings} activeId={null} />
+        </>,
+      );
+      expect(screen.getAllByRole('navigation', { name: '目次' })).toHaveLength(1);
+      wide.unmount();
+      window.matchMedia = stub(false);
+      render(
+        <>
+          <Toc headings={headings} activeId={null} />
+          <MobileToc headings={headings} activeId={null} />
+        </>,
+      );
+      expect(screen.getAllByRole('navigation', { name: '目次', hidden: true })).toHaveLength(1);
+    } finally {
+      window.matchMedia = original;
+    }
   });
 });

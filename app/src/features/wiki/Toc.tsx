@@ -1,5 +1,6 @@
 import { ChevronDown } from 'lucide-react';
 import type { Heading } from '../../lib/types';
+import { useMediaQuery, WIDE_QUERY } from '../../lib/useMediaQuery';
 
 interface TocProps {
   readonly headings: readonly Heading[];
@@ -33,7 +34,8 @@ function TocList({ headings, activeId }: TocProps) {
 
 /** 右カラムの目次（デスクトップ） */
 export function Toc({ headings, activeId }: TocProps) {
-  if (headings.length === 0) return null;
+  const wide = useMediaQuery(WIDE_QUERY, true);
+  if (headings.length === 0 || !wide) return null;
   return (
     <nav aria-label="目次">
       <p className="mb-3 text-xs font-semibold text-fg">目次</p>
@@ -42,9 +44,10 @@ export function Toc({ headings, activeId }: TocProps) {
   );
 }
 
-/** 折りたたみ式の目次（xl 未満） */
+/** 折りたたみ式の目次（80rem 未満）。Toc とはどちらか一方だけが描画される */
 export function MobileToc({ headings, activeId }: TocProps) {
-  if (headings.length === 0) return null;
+  const wide = useMediaQuery(WIDE_QUERY, true);
+  if (headings.length === 0 || wide) return null;
   return (
     <details className="group mb-8 border-b border-line xl:hidden">
       <summary className="flex cursor-pointer list-none items-center justify-between py-2.5 text-sm font-medium text-fg [&::-webkit-details-marker]:hidden">
