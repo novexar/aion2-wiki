@@ -1,13 +1,14 @@
 ---
 id: pets-and-mounts
-title: ペット・乗り物（魂を集めてテイム、所持効果、Lv上限3）
+title: ペットと乗り物
+reading: ぺっととのりもの
 category: systems
 tags: [ペット, 乗り物, マウント, 魂, 収集]
 summary: AION2ではペットがそのまま乗り物。モンスターを倒して落ちる「魂」を5個集めるとペットを登録でき、累計105個でLv3（グローバル版の上限）。所持しているだけで能力値が上がるので、種類を増やすことが育成になる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Pets, Mounts, テイム, ペットの魂, 乗り物]
+aliases: [Pets, Mounts, テイム, ペットの魂, 乗り物, 魂を集めてテイム, 所持効果, Lv上限3]
 related: [pet-genus, attendance-and-growth-rewards, membership, hidden-cubes, shugo-festa]
 sources:
   - id: S01

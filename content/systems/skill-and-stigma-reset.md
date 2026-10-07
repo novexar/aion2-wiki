@@ -1,13 +1,14 @@
 ---
 id: skill-and-stigma-reset
-title: スキル・スティグマ・ディーヴァニオンのリセット（振り直し）
+title: スキルのリセット
+reading: すきるのりせっと
 category: systems
 tags: [リセット, 振り直し, スキル, スティグマ, ディーヴァニオン]
 summary: グローバル版ではスキルポイントとスティグマのリセットは無料で、使ったポイント・欠片が全額戻る。ディーヴァニオンはノード1つ500ギーナで結晶が全額戻る。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Reset, Respec, 初期化, ノード返還]
+aliases: [Reset, Respec, 初期化, ノード返還, ディーヴァニオンのリセット, 振り直し]
 related: [skills-and-specialties, stigma, daevanion-boards]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: combat-analysis-dps-meter
-title: 戦闘分析（ゲーム内DPSメーター）
+title: DPSメーター
+reading: DPSめーたー
 category: systems
 tags: [戦闘分析, DPSメーター, ローテーション, 検証, Ctrl+X]
 summary: ゲーム内蔵のダメージメーター「戦闘分析」はCtrl+Xで開き、最初のストーリークエストで解放される。総ダメージ、DPS、スキル別の割合、背面攻撃・パーフェクト・スマイトの割合、履歴を見られ、ローテーションの調整に使える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Combat Analysis, DPS Meter, DPSメーター, ダメージメーター, 戦闘分析, Ctrl+X]
+aliases: [Combat Analysis, DPS Meter, ダメージメーター, 戦闘分析, Ctrl+X, ゲーム内DPSメーター]
 related: [how-damage-works, stats-explained, rotation-and-skill-macros, class-tier-and-recommendation, rules-and-policies, useful-sites-and-tools]
 sources:
   - id: S01

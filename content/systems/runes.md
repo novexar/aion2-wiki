@@ -1,13 +1,14 @@
 ---
 id: runes
-title: ルーン（激突のルーン：入手・強化・消滅リスク）
+title: ルーン
+reading: るーん
 category: systems
 tags: [ルーン, 激突のルーン, 強化, 特殊枠, 地域クエスト]
 summary: ルーン枠は2つで、入るのは激突のルーンだけ。地域クエストで最大4個もらえる。+1は必ず成功だが、+2以降は失敗するとルーンが消え、救済もない。最初は2個とも+1で止めるのが安全。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Rune, Clash Rune, 激突のルーン, ルーン強化スクロール]
+aliases: [Rune, Clash Rune, 激突のルーン, ルーン強化スクロール, 消滅リスク]
 related: [enhancement, belt-and-amulet, regional-quests, phantasmal-fragments-nightmare-shop, equipment-slots-and-grades, upgrading-gear-priority, oath-coins-season-shop]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: essence-extraction
-title: 精気抽出（採集の熟練度・光るルビー・専門昇級）
+title: 精気抽出
+reading: せいきちゅうしゅつ
 category: systems
 tags: [精気抽出, 採集, 熟練度, 光るルビー, 専門昇級]
 summary: 採集（精気抽出）の熟練度は入門50で止まり、専門へ昇級するクエストで光るルビーを1個採集する必要がある。入門50を超えれば100まで上げられる。スキルポイントは採集全般と素材ごとのパッシブに振る。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Essence Extraction, 精気抽出専門技術, 光るルビー, Splendent Ruby, 精気抽出達人, 精気抽出昇級]
+aliases: [Essence Extraction, 精気抽出専門技術, 光るルビー, Splendent Ruby, 精気抽出達人, 精気抽出昇級, 採集の熟練度, 専門昇級]
 related: [gathering, crafting-overview, substance-morph, odyle-energy, crafted-gear]
 sources:
   - id: S01

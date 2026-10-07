@@ -1,13 +1,14 @@
 ---
 id: skills-and-specialties
-title: スキルと特化（スキルレベルの仕組み）
+title: スキルと特化
+reading: すきるととっか
 category: systems
 tags: [スキル, 特化, スキルポイント, 育成, ビルド]
 summary: 通常スキル（マスタリー）はスキルポイントでLv10まで。11以降は装備・ディーヴァニオン・アルカナで積み上げ、Lv8/12/16/20で特化（Specialty）が開く。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Skills, Specialty, Mastery, マスタリー, スキルレベル, 特化スキル, 203ポイント]
+aliases: [Skills, Specialty, Mastery, マスタリー, スキルレベル, 特化スキル, 203ポイント, スキルレベルの仕組み]
 related: [stigma, skill-and-stigma-reset, daevanion-boards, arcana, wisdom-stones, equipment-slots-and-grades]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: crafting-armorsmithing
-title: 防具製作（Armorsmithing）
+title: 防具製作
+reading: ぼうぐせいさく
 category: systems
 tags: [防具製作, 製作, 防具, 革素材, 熟練度]
 summary: 防具7部位（ヘルム・ショルダー・胸・ズボン・グローブ・ブーツ・マント）を作る製作。全クラス共通で、武器は作れない。熟練度1はインゴットと丈夫な革から始め、50で昇級する。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Armorsmithing, 防具製作, Armorsmith, 防具職人, Strong Leather]
+aliases: [Armorsmithing, Armorsmith, 防具職人, Strong Leather]
 related: [crafting-overview, crafted-gear, gathering, crafting-blacksmithing, substance-morph]
 sources:
   - id: S01

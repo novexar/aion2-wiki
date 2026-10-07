@@ -1,13 +1,14 @@
 ---
 id: theostones-godstones
-title: 神石（テオストーン）
+title: 神石
+reading: しんせき
 category: systems
 tags: [神石, テオストーン, ゴッドストーン, 武器, 特殊効果]
 summary: 武器とガーダーに1つだけ付けられる、一定確率で発動する特殊効果の石。クライアントには51種（希少・伝承・唯一が各17）ある。同じ石を複数の装備に付けても効果は1つ分で、継承では移らない。ダメージへの寄与は小さい。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Theostone, Godstone, 神石, テオストーン, ゴッドストーン]
+aliases: [Theostone, Godstone, テオストーン, ゴッドストーン]
 related: [manastones-and-soulstones, transfer-inheritance, enhancement, abyss-points-and-shop, upgrading-gear-priority, equipment-slots-and-grades]
 sources:
   - id: S01

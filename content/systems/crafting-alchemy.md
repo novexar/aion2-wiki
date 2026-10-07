@@ -1,13 +1,14 @@
 ---
 id: crafting-alchemy
-title: 錬金（Alchemy）
+title: 錬金
+reading: れんきん
 category: systems
 tags: [錬金, 製作, ポーション, 魔石, 魔導書]
 summary: 魔導書・オーブ、ポーション、スクロール、魔石・霊石を作る製作。スピリットマスターとソーサラーの武器を自作できる。中級以上の魔石は錬金でしか手に入らない。熟練度1は魔法の結晶作りから始める。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Alchemy, 錬金, Alchemist, 魔法の結晶, Magic Crystal]
+aliases: [Alchemy, Alchemist, 魔法の結晶, Magic Crystal]
 related: [crafting-overview, crafted-gear, gathering, manastones-and-soulstones, consumables-and-scrolls, substance-morph, spiritmaster, sorcerer]
 sources:
   - id: S01

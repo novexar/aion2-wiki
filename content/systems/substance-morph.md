@@ -1,13 +1,14 @@
 ---
 id: substance-morph
-title: 物質変換（素材と特殊装備の変換）
+title: 物質変換
+reading: ぶっしつへんかん
 category: systems
 tags: [物質変換, 継承石, 突破石, オードエネルギー, 特殊装備]
 summary: Lv10で解放される素材変換。唯一装備を継承石に、欠片を突破石に、オードを各素材に、ベルト・アミュレットを次の等級に、オードを週4回までオードエネルギーに変える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Substance Morph, 物質変換, Material Conversion, 素材変換]
+aliases: [Substance Morph, Material Conversion, 素材変換, 素材と特殊装備の変換]
 related: [transfer-inheritance, amp-breakthrough, belt-and-amulet, gathering, essence-extraction, odyle-energy, enhance-stones, extraction, crafting-overview]
 sources:
   - id: S01

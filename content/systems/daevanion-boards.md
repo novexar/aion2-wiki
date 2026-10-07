@@ -1,13 +1,14 @@
 ---
 id: daevanion-boards
-title: ディーヴァニオンボード（Daevanion Boards）
+title: ディーヴァニオンボード
+reading: でぃーゔぁにおんぼーど
 category: systems
 tags: [ディーヴァニオン, ボード, ノード, 結晶, 育成, スキルレベル]
 summary: 中央から隣接ノードを買い進める成長盤面。グローバル版は5枚（ネザカン134／ジケル134／バイゼル134／トリニエル168／PvP用アスフェル232）。結晶1個＝IL+1。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Daevanion Board, ディーヴァニオン, ノード, ネザカン, ジケル, バイゼル, トリニエル, アスフェル, Azphel]
+aliases: [Daevanion Board, ディーヴァニオン, ノード, ネザカン, ジケル, バイゼル, トリニエル, アスフェル, Azphel, Daevanion Boards]
 related: [daevanion-crystals, skills-and-specialties, skill-and-stigma-reset, item-level-and-combat-power, nightmare, shugo-festa, abyss-points-and-shop]
 sources:
   - id: S01

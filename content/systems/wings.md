@@ -1,13 +1,14 @@
 ---
 id: wings
-title: 翼（装備効果と所持効果、封印された翼の入手）
+title: 翼
+reading: つばさ
 category: systems
 tags: [翼, 飛行, 征服, 収集, 物質変換]
 summary: 翼には「装備効果」（着けている間だけ）と「所持効果」（持っているだけで常時）がある。征服ダンジョンでは封印された翼が低確率でドロップし、光るオード×10の物質変換で完成する。グローバル版では翼の強化はできない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Wings, 羽, 封印された翼, Sealed Wing]
+aliases: [Wings, 羽, 封印された翼, Sealed Wing, 装備効果と所持効果, 封印された翼の入手]
 related: [flight-and-glide, expeditions-and-odyle, substance-morph, closet-and-skins, titles, essence-extraction]
 sources:
   - id: S01

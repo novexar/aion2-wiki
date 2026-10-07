@@ -1,13 +1,14 @@
 ---
 id: consumables-and-scrolls
-title: 消耗品（ポーション・戦闘強化巻物・状態異常抵抗）
+title: 消耗品と巻物
+reading: しょうもうひんとまきもの
 category: systems
 tags: [消耗品, ポーション, スクロール, 戦闘強化, 錬金]
 summary: ポーション、強化系スクロール、料理など5分間効果の消耗品。白は一般商人（約1,000ギーナ）、青は錬金や報酬で入手する。種類と入手先は確認できたが、効果の数値は未確認のためゲーム内の説明を参照。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Consumables, 戦闘強化スクロール, 状態異常抵抗スクロール, ポーション, Potion, Scroll]
+aliases: [Consumables, 戦闘強化スクロール, 状態異常抵抗スクロール, ポーション, Potion, Scroll, 戦闘強化巻物, 状態異常抵抗]
 related: [crafting-alchemy, crafting-cooking, crafting-overview, status-effects-and-cc, attendance-and-growth-rewards, upgrading-gear-priority]
 sources:
   - id: S01

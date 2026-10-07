@@ -1,13 +1,14 @@
 ---
 id: enhancement
-title: 装備の強化（+5／+10／+15、確率と費用）
+title: 装備の強化
+reading: そうびのきょうか
 category: systems
 tags: [強化, 装備, 強化石, ギーナ, 確率]
 summary: 装備を+1、+2…と上げて能力値とアイテムレベルを伸ばす基本の育成。+10までは必ず成功し、+11〜+15は65/50/35/25/20%。失敗しても段階は下がらない（ルーンだけ例外）。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Enhancement, 成長, 強化, Enhance, 統合強化, Enhancement Hub]
+aliases: [Enhancement, 成長, 強化, Enhance, 統合強化, Enhancement Hub, +10, +15, 確率と費用]
 related: [equipment-slots-and-grades, enhance-stones, amp-breakthrough, transfer-inheritance, extraction, runes, upgrading-gear-priority, kina-and-bound-kina]
 sources:
   - id: S01

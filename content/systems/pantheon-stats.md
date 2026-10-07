@@ -1,13 +1,14 @@
 ---
 id: pantheon-stats
-title: 主神ステータスとパンテオン（Pantheon stats）
+title: 主神ステータス
+reading: しゅしんすてーたす
 category: systems
 tags: [主神ステータス, パンテオン, 神像, 芸術品, ブレスレット, アルカナ]
 summary: 10種の「主神ステータス」はそれぞれ2つの効果を持ち、グローバル版は1ポイント0.1%。ブレスレット・アルカナ・パンテオンの神像／芸術品・モノリスから得る。火力なら知恵（強打）・時間（戦闘速度）・破壊（攻撃力増加）。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Pantheon, 主神ステータス, 神ステ, Deity stats, Smite, 強打, 神像, コロッサス, 芸術品]
+aliases: [Pantheon, 神ステ, Deity stats, Smite, 強打, 神像, コロッサス, 芸術品, 主神ステータスとパンテオン, Pantheon stats]
 related: [arcana, bracelets, monoliths-and-empyrean-traces, nightmare, shugo-festa, stats-explained]
 sources:
   - id: S01

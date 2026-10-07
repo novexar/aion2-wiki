@@ -1,13 +1,14 @@
 ---
 id: crafting-handicrafting
-title: 細工（Handicrafting）
+title: 細工
+reading: さいく
 category: systems
 tags: [細工, 製作, 装身具, 弓, 杖]
 summary: 弓・杖・ネックレス・イヤリング・リング・ブレスレットを作る製作。レンジャーとチャンターの武器を自作でき、装身具の更新にも使える。熟練度1は宝石の装飾作りから始め、50で昇級する。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Handicrafting, 細工, Handicrafter, 装身具, Sapphire Decoration]
+aliases: [Handicrafting, Handicrafter, 装身具, Sapphire Decoration]
 related: [crafting-overview, crafted-gear, gathering, ranger, chanter, substance-morph]
 sources:
   - id: S01

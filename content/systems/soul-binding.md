@@ -1,13 +1,14 @@
 ---
 id: soul-binding
-title: 魂刻印（Soul Binding）：束縛・調律・初期化・魂融合
+title: 魂刻印
+reading: たましいこくいん
 category: systems
 tags: [魂刻印, ステータスライン, 魂の書, 調律, 厳選]
 summary: 装備を初めて装着したときに付くステータスライン（追加効果）を育てる仕組み。値を上げる「束縛」、1本を引き直す「調律」、全部引き直す「初期化」、1本足す「魂融合」の4つ。取引不可になり、魂融合のラインだけは継承で移らない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Soul Binding, Soul Bind, Soul Imprint, 魂の書, Soul Codex, Sync, 調律, Soul Fuse, 魂融合, 魂刻印]
+aliases: [Soul Binding, Soul Bind, Soul Imprint, 魂の書, Soul Codex, Sync, 調律, Soul Fuse, 魂融合]
 related: [stat-lines-and-refining, transfer-inheritance, substance-morph, crafted-gear, upgrading-gear-priority, enhancement, manastones-and-soulstones]
 sources:
   - id: S01

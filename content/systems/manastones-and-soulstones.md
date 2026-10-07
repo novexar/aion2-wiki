@@ -1,13 +1,14 @@
 ---
 id: manastones-and-soulstones
-title: 魔石・霊石（装着・等級・入手先は終盤コンテンツ）
+title: 魔石と霊石
+reading: ませきとれいせき
 category: systems
 tags: [魔石, 霊石, 刻印, 厳選, 錬金]
 summary: 魔石は武器と防具、霊石は装身具に刻印して追加の能力値を付ける石。等級は灰→緑→青→黄で、黄が最高。入手先は終盤コンテンツ中心で、継承では移らないため、長く使う装備にだけ使う。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Manastone, Soulstone, 魔石, 霊石, 刻印石, 自動刻印, Engraving]
+aliases: [Manastone, Soulstone, 魔石, 霊石, 刻印石, 自動刻印, Engraving, 入手先は終盤コンテンツ]
 related: [enhancement, transfer-inheritance, theostones-godstones, stat-lines-and-refining, crafting-alchemy, upgrading-gear-priority, abyss-points-and-shop, transcendence-overview]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: crafting-blacksmithing
-title: 鍛冶（Blacksmithing）
+title: 鍛冶
+reading: かじ
 category: systems
 tags: [鍛冶, 製作, 武器, ガーダー, 熟練度]
 summary: 剣・大剣・短剣・メイスとガーダー、金属素材を作る製作。グラディエーター、テンプラー、アサシン、クレリックの武器を自作できる。熟練度1はオリハルコンのインゴット作りから始め、50で昇級する。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Blacksmithing, 鍛冶, Blacksmith, オリハルコンのインゴット, Orichalcum Ingot]
+aliases: [Blacksmithing, Blacksmith, オリハルコンのインゴット, Orichalcum Ingot]
 related: [crafting-overview, crafted-gear, gathering, essence-extraction, substance-morph, gladiator, templar, assassin, cleric]
 sources:
   - id: S01

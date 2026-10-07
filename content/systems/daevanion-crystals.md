@@ -1,13 +1,14 @@
 ---
 id: daevanion-crystals
-title: ディーヴァニオン結晶の入手先
+title: ディーヴァニオン結晶
+reading: でぃーゔぁにおんけっしょう
 category: systems
 tags: [ディーヴァニオン, 結晶, 入手先, 地域クエスト, 封印ダンジョン, 商店]
 summary: ボード用ポイントの元。レベルアップで136、自陣営の地域クエスト58、自陣営の封印ダンジョン61か所×2、悪夢商店50、フェスタ商店50。クライアント上の入手先はこれで全部。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Daevanion Crystal, ディーヴァニオン結晶(刻印), ディーヴァニオンポイント, 結晶]
+aliases: [Daevanion Crystal, ディーヴァニオン結晶(刻印), ディーヴァニオンポイント, 結晶, ディーヴァニオン結晶の入手先]
 related: [daevanion-boards, regional-quests, sealed-dungeons, nightmare, shugo-festa, wisdom-stones]
 sources:
   - id: S01

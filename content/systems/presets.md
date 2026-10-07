@@ -1,13 +1,14 @@
 ---
 id: presets
-title: プリセット（装備・スキル・翼・称号など）
+title: プリセット
+reading: ぷりせっと
 category: systems
 tags: [プリセット, 切り替え, アルカナ, 装備, 韓国版との差]
 summary: 装備・翼・称号・パンテオン・ジーナスの洞察・スキル・アルカナの構成を保存して切り替える機能。韓国版は2026年10月7日に3枠から5枠へ増えた（クローゼットは6枠）。グローバル版の現在の枠数は未確認で、アルカナは3枠と案内されている。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Presets, プリセット, ビルド保存, 構成の保存, Preset slots]
+aliases: [Presets, ビルド保存, 構成の保存, Preset slots, スキル, 称号など]
 related: [arcana, skills-and-specialties, skill-and-stigma-reset, pantheon-stats, pet-genus, titles, wings, closet-and-skins, global-vs-korea]
 sources:
   - id: S01

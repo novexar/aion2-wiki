@@ -1,13 +1,14 @@
 ---
 id: equipment-slots-and-grades
-title: 装備枠（20）と等級・装備ILの目安
+title: 装備枠と等級
+reading: そうびわくととうきゅう
 category: systems
 tags: [装備, 装備枠, 等級, アイテムレベル, ガーダー]
 summary: 装備枠は全20（武器・ガーダー・防具7・装身具5・ブレスレット2・ベルト・アミュレット・ルーン2）。グローバル版の最上位は唯一で、唯一装備の基礎ILは36〜102。英雄や神話はない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Equipment slots, Gear slots, 装備スロット, 等級, Grade, Unique, 唯一, 伝承, 希少]
+aliases: [Equipment slots, Gear slots, 装備スロット, 等級, Grade, Unique, 唯一, 伝承, 希少, 装備ILの目安]
 related: [enhancement, belt-and-amulet, bracelets, runes, wings, stat-lines-and-refining, item-level-and-combat-power, crafted-gear, pantheon-stats]
 sources:
   - id: S01

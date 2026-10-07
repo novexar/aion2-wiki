@@ -1,13 +1,14 @@
 ---
 id: crafted-gear
-title: 製作装備（ドラゴンロード系・IL上限102）
+title: 製作装備
+reading: せいさくそうび
 category: systems
 tags: [製作装備, ドラゴンロード, アップクラフト, COMBO, IL102]
 summary: グローバル版のシーズン1で最上位のPvE装備は製作で作るドラゴンロード系。直接作れるのは62のトゥルー・ドラゴンロードだけで、以降は1段階ずつ作り替えて102まで上げる。強化・突破・魂刻印は引き継がれる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Crafted gear, Dragon Lord, ドラゴンロード, Upcraft, アップクラフト, スプレンディッド, Splendent]
+aliases: [Crafted gear, Dragon Lord, ドラゴンロード, Upcraft, アップクラフト, スプレンディッド, Splendent, ドラゴンロード系, IL上限102]
 related: [crafting-overview, enhancement, amp-breakthrough, transfer-inheritance, soul-binding, stat-lines-and-refining, gathering, equipment-slots-and-grades, upgrading-gear-priority]
 sources:
   - id: S01

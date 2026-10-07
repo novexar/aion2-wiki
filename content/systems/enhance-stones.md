@@ -1,13 +1,14 @@
 ---
 id: enhance-stones
-title: 強化石の集め方と使い道
+title: 強化石
+reading: きょうかせき
 category: systems
 tags: [強化石, 素材, デイリーダンジョン, 抽出, 強化]
 summary: 強化石は強化・突破の燃料。Lv30のデイリーダンジョン、遠征・征服の報酬、不要装備の抽出、アビス補給依頼、物質変換から集める。抽出で使った分が戻るので、装備を替えても無駄にならない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Enhance Stone, Enhancement Stone, 強化石, エンハンスストーン]
+aliases: [Enhance Stone, Enhancement Stone, エンハンスストーン, 強化石の集め方と使い道]
 related: [enhancement, extraction, substance-morph, daily-dungeon, expeditions-and-odyle, amp-breakthrough, upgrading-gear-priority]
 sources:
   - id: S01

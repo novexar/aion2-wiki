@@ -1,13 +1,14 @@
 ---
 id: stat-lines-and-refining
-title: ステータスライン（オプション）と厳選
+title: ステータスラインと厳選
+reading: すてーたすらいんとげんせん
 category: systems
 tags: [ステータスライン, オプション, 厳選, 魂刻印, ライン確率]
 summary: 唯一装備に付く追加効果（ライン）の仕組みと確率。ラインの80%は一般ステータス、20%は自分のクラスのスキル。武器の最レアはダメージ増幅1.6%。厳選は長く使う装備だけに行い、ラインは継承で移せる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Stat Lines, Options, オプションライン, ライン厳選, 精錬石, Refining Stone]
+aliases: [Stat Lines, Options, オプションライン, ライン厳選, 精錬石, Refining Stone, オプション]
 related: [soul-binding, transfer-inheritance, manastones-and-soulstones, equipment-slots-and-grades, crafted-gear, upgrading-gear-priority, bracelets, pantheon-stats]
 sources:
   - id: S01

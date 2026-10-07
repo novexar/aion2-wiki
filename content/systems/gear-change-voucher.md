@@ -1,13 +1,14 @@
 ---
 id: gear-change-voucher
-title: 装備変更券（天井報酬と武器・ガーダーの選択箱）
+title: 装備変更券
+reading: そうびへんこうけん
 category: systems
 tags: [装備変更券, 天井, 征服, 選択箱, 武器]
 summary: 征服ダンジョンの天井（確定報酬）で選べる券。同じダンジョンの武器と組み合わせ、ギーナを払うと好きな武器・ガーダーの選択箱になる。取引不可で、サーバー倉庫にも入れられない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Gear Change Voucher, 装備変更券, 武器選択箱, 天井, Pity pick, 確定報酬]
+aliases: [Gear Change Voucher, 武器選択箱, 天井, Pity pick, 確定報酬, 天井報酬と武器, ガーダーの選択箱]
 related: [expedition-reward-selection, urugugu-canyon, vakron-sky-island, fire-temple, ferocious-horn-den, krao-cave, upgrading-gear-priority, server-shared-limits-and-alts, storage-and-cube]
 sources:
   - id: S01

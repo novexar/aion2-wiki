@@ -1,13 +1,14 @@
 ---
 id: arcana
-title: アルカナ（カード5種・2セット・錬成）
+title: アルカナ
+reading: あるかな
 category: systems
 tags: [アルカナ, カード, 超越, スキルレベル, 主神ステータス]
 summary: Lv45で解放されるカード型の装備枠。聖杯・羊皮紙・コンパス・鐘・鏡の5種を2セット（活力／魔力）から集め、スキルレベルと主神ステータスを上げる。主な入手先は超越。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Arcana, アルカナカード, 聖杯, Chalice, Grail, 羊皮紙, Parchment, コンパス, Compass, 鐘, Bell, 鏡, Mirror, 錬成, Transmute]
+aliases: [Arcana, アルカナカード, 聖杯, Chalice, Grail, 羊皮紙, Parchment, コンパス, Compass, 鐘, Bell, 鏡, Mirror, 錬成, Transmute, カード5種]
 related: [transcendence-overview, pantheon-stats, skills-and-specialties, daevanion-boards, presets, upgrading-gear-priority, deus-research-base, shattered-arkanis]
 sources:
   - id: S01

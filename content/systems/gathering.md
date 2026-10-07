@@ -1,13 +1,14 @@
 ---
 id: gathering
-title: 採集（精気抽出）：素材の種類と場所
+title: 採集
+reading: さいしゅう
 category: systems
 tags: [採集, 精気抽出, オード, 鉱石, 製作素材]
 summary: 採集はゲーム内で「精気抽出」と呼ばれ、Lv10で解放される。鉱石・宝石・木材・薬草・食材・オードの6系統があり、1つのノードで3回まで試せる。費用も1日の上限もない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Gathering, Essence Extraction, 精気抽出, 採集, Odyle Extraction, オード抽出]
+aliases: [Gathering, Essence Extraction, Odyle Extraction, オード抽出, 素材の種類と場所]
 related: [essence-extraction, crafting-overview, substance-morph, odyle-energy, crafted-gear, flight-and-glide]
 sources:
   - id: S01

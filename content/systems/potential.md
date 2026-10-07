@@ -1,13 +1,14 @@
 ---
 id: potential
-title: 潜在能力（PvPライン）
+title: 潜在能力
+reading: せんざいのうりょく
 category: systems
 tags: [潜在能力, Potential, PvP, アビス, 強化]
 summary: 唯一装備に付くPvP専用の強化ライン。武器・装身具はPvPダメージ増幅、防具・ブレスレットはPvPダメージ耐性が最大2%。4段階で必ず成功し、アビスポイントと専用の石を使う。継承では移らない。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Potential, 潜在能力, Potential Stone, 潜在能力石, PvP Damage Boost]
+aliases: [Potential, Potential Stone, 潜在能力石, PvP Damage Boost, PvPライン]
 related: [enhancement, transfer-inheritance, abyss-points-and-shop, abyss-overview, crafted-gear, upgrading-gear-priority, stat-lines-and-refining]
 sources:
   - id: S01

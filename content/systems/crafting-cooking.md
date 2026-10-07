@@ -1,13 +1,14 @@
 ---
 id: crafting-cooking
-title: 料理（Cooking）
+title: 料理
+reading: りょうり
 category: systems
 tags: [料理, 製作, バフ, 食材, 熟練度]
 summary: 戦闘で使うバフ系の料理・飲み物を作る製作。全クラス共通で、武器は作れない。素材が安く、5つの製作の中で最も始めやすい。熟練度1〜30は果物のサラダやカレー炒めで上げる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Cooking, 料理, Chef, 料理人, Fruit Salad, 調味料]
+aliases: [Cooking, Chef, 料理人, Fruit Salad, 調味料]
 related: [crafting-overview, gathering, consumables-and-scrolls, essence-extraction]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: belt-and-amulet
-title: ベルト・アミュレット（専用スクロールで強化し、物質変換で等級を上げる）
+title: ベルトとアミュレット
+reading: べるとあみゅれっと
 category: systems
 tags: [装備, ベルト, アミュレット, 特殊枠, 強化]
 summary: 高潔のベルト（防御）と啓示／激戦のアミュレット（攻撃）は買い替えない「育てる装備」。+1〜+10は専用スクロール付きで成功率100%、+10で物質変換すると次の等級（希少→伝承→唯一、IL13→36→65）になる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Noble Belt, Revelation Amulet, Fierce Battle Amulet, 高潔のベルト, 啓示のアミュレット, 激戦のアミュレット, 特殊装備]
+aliases: [Noble Belt, Revelation Amulet, Fierce Battle Amulet, 高潔のベルト, 啓示のアミュレット, 激戦のアミュレット, 特殊装備, 専用スクロールで強化し, 物質変換で等級を上げる]
 related: [strongholds, monoliths-and-empyrean-traces, substance-morph, enhancement, runes, bracelets, abyss-points-and-shop]
 sources:
   - id: S01

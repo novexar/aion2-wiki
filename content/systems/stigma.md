@@ -1,6 +1,7 @@
 ---
 id: stigma
-title: スティグマ（Stigma）
+title: スティグマ
+reading: すてぃぐま
 category: systems
 tags: [スティグマ, スキル, スティグマの欠片, 覚醒, 育成]
 summary: Lv22の覚醒クエストで解放される追加スキル。4枠（Lv22/27/32/37で開く）、各クラス13種、上限Lv20。レベルはスティグマポイントと欠片で上げる。

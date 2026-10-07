@@ -1,6 +1,7 @@
 ---
 id: collections-and-achievements
-title: 収集・実績（実績ポイント、称号、アビス補給依頼）
+title: 収集と実績
+reading: しゅうしゅうとじっせき
 category: systems
 tags: [実績, 収集, 称号, 補給依頼, アビスポイント]
 summary: 実績（Achievement）はLv9で解放され、達成するとギーナ・素材・称号がもらえる。グローバル版のクライアントには2,550件の実績が登録されている。「収集」の代表はアビス補給依頼で、製作品や採集物を納めてアビスポイントを得る。
