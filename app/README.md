@@ -27,7 +27,7 @@ npm run dev           # 本番と同じく _ 始まりのディレクトリを�
 | `npm run content:samples`                 | 上記に `content/_sample` などを含める（`INCLUDE_SAMPLES=1`）                 |
 | `npm run dev` / `npm run dev:samples`     | コンテンツ生成 → 開発サーバー                                                |
 | `npm run build` / `npm run build:samples` | コンテンツ生成 → `vite build`（出力: `dist/`、`404.html`・`.nojekyll` 付き） |
-| `npm run preview`                         | ビルド結果の確認（`http://localhost:4173/aion2-wiki/`）                           |
+| `npm run preview`                         | ビルド結果の確認（`http://localhost:4173/aion2-wiki/`）                      |
 | `npm run typecheck`                       | コンテンツ生成 → `tsc -b`                                                    |
 | `npm run lint`                            | ESLint + Prettier のチェック                                                 |
 | `npm run format`                          | Prettier で整形                                                              |
@@ -35,11 +35,11 @@ npm run dev           # 本番と同じく _ 始まりのディレクトリを�
 
 ### 環境変数
 
-| 変数              | 既定値       | 用途                                 |
-| ----------------- | ------------ | ------------------------------------ |
-| `BASE_PATH`       | `/aion2-wiki/`    | 公開パス。ルート直下に置く場合は `/` |
-| `INCLUDE_SAMPLES` | なし         | `1` で `content/_*` を含める         |
-| `CONTENT_DIR`     | `../content` | 記事ディレクトリ（app からの相対）   |
+| 変数              | 既定値         | 用途                                 |
+| ----------------- | -------------- | ------------------------------------ |
+| `BASE_PATH`       | `/aion2-wiki/` | 公開パス。ルート直下に置く場合は `/` |
+| `INCLUDE_SAMPLES` | なし           | `1` で `content/_*` を含める         |
+| `CONTENT_DIR`     | `../content`   | 記事ディレクトリ（app からの相対）   |
 
 API キーや `.env` は不要です。リポジトリにキーを置かないでください。
 
