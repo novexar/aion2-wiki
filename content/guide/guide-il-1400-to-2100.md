@@ -1,13 +1,14 @@
 ---
 id: guide-il-1400-to-2100
-title: "IL1400→2100ガイド：遠征・製作・アルカナの段階別ロードマップ"
+title: IL1400→2100ガイド
+reading: IL1400から2100がいど
 category: guide
 tags: [アイテムレベル, 遠征, 超越, アルカナ, 製作]
 summary: IL1,400で開くバクロン空中島とウルググ峡谷、1,500のブレスレットと覚醒戦、1,600と1,900の超越とアルカナ、製作装備の作り替えを、IL2,100で炎の神殿と獰猛な角岩窟が開くまでの順に並べた。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["IL1400 to 2100", "IL1400以降", "IL2100まで", "征服の進め方", "超越の始め方"]
+aliases: [IL1400 to 2100, IL1400以降, IL2100まで, 征服の進め方, 超越の始め方, アルカナの段階別ロードマップ]
 related: [guide-il-700-to-1400, guide-il-2100-to-2800, progression-path-700-to-2800, expeditions-and-odyle, transcendence-overview, arcana, crafted-gear]
 sources:
   - id: S01

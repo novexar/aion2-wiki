@@ -1,13 +1,14 @@
 ---
 id: guide-day-1
-title: "初日ガイド：アカウント作成からLv10まで"
+title: 初日ガイド
+reading: しょにちがいど
 category: guide
 tags: [初日, 初心者, ロードマップ, 設定, Lv10]
 summary: 始めた日にやることを、準備・キャラクター作成・設定・Lv10到達の順に並べた手順書。迷ったらメインストーリー（エピソード）を進める。強化や課金は急がない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Day 1 guide", "初日", "始め方", "最初の日にやること", "Lv1〜10"]
+aliases: [Day 1 guide, 初日, 始め方, 最初の日にやること, Lv1〜10, アカウント作成からLv10まで]
 related: [day-one-checklist, guide-week-1, irreversible-choices, leveling-1-to-45-overview, recommended-settings, launch-rewards-and-codes]
 sources:
   - id: S01

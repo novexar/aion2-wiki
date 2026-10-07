@@ -1,13 +1,14 @@
 ---
 id: guide-daily-routine
-title: "日課・週課テンプレ：30分版と60分版"
+title: 日課と週課のテンプレ
+reading: にっかとしゅうかのてんぷれ
 category: guide
 tags: [日課, 週課, 時短, オードエネルギー, ロードマップ]
 summary: Lv45後の毎日・毎週のやることを、時間が30分の日と60分の日に分けた手順書。上限であふれて無駄になる資源を先に守り、残りの時間で次のILに必要なものを進める。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Daily routine", "日課テンプレ", "週課テンプレ", "デイリーウィークリー", "30分でやること", "60分でやること"]
+aliases: [Daily routine, 日課テンプレ, 週課テンプレ, デイリーウィークリー, 30分でやること, 60分でやること]
 related: [daily-and-weekly-checklist, reset-times, duty-quests, odyle-energy-tips, server-shared-limits-and-alts, guide-week-1]
 sources:
   - id: S01

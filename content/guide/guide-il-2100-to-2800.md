@@ -1,13 +1,14 @@
 ---
 id: guide-il-2100-to-2800
-title: "IL2100→2800ガイド：仕上げの段階と聖域レイドへの備え"
+title: IL2100→2800ガイド
+reading: IL2100から2800がいど
 category: guide
 tags: [アイテムレベル, 超越, 突破, 製作, ルドラ]
 summary: IL2,100で開く炎の神殿と獰猛な角岩窟、2,200と2,500の超越、製作装備の102への作り替え、強化と突破、覚醒戦の上位難度、IL2,800のルドラまでの進め方。ルドラは現在取り下げ中。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["IL2100 to 2800", "IL2100以降", "終盤の進め方", "IL2800まで", "ルドラへの道"]
+aliases: [IL2100 to 2800, IL2100以降, 終盤の進め方, IL2800まで, ルドラへの道, 仕上げの段階と聖域レイドへの備え]
 related: [guide-il-1400-to-2100, progression-path-700-to-2800, transcendence-overview, crafted-gear, amp-breakthrough, ludra-raid-suspension]
 sources:
   - id: S01

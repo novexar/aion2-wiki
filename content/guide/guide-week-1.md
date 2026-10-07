@@ -1,13 +1,14 @@
 ---
 id: guide-week-1
-title: "1週目ガイド：Lv45到達と解放要素の回収"
+title: 1週目ガイド
+reading: 1しゅうめがいど
 category: guide
 tags: [初週, Lv45, 覚醒, 日課, アイテムレベル]
 summary: 2日目から7日目までの進め方。Lv45到達、覚醒クエストの壁の越え方、Lv45後に一度だけ貰える報酬の回収、日課の型づくりを順番に並べた。目標はアイテムレベル1,000〜1,400。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Week 1 guide", "初週", "最初の1週間", "Lv45までの進め方", "2日目以降"]
+aliases: [Week 1 guide, 初週, 最初の1週間, Lv45までの進め方, 2日目以降, Lv45到達と解放要素の回収]
 related: [guide-day-1, guide-il-700-to-1400, first-week-progression-plan, leveling-1-to-45-overview, what-to-do-at-45, daily-and-weekly-checklist]
 sources:
   - id: S01

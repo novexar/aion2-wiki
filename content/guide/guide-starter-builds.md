@@ -1,13 +1,14 @@
 ---
 id: guide-starter-builds
-title: "クラス別スタータービルド早見"
+title: クラス別スタータービルド
+reading: くらすべつすたーたーびるど
 category: guide
 tags: [ビルド, クラス, スキル, スティグマ, 初心者]
 summary: 8クラスについて、Lv45までに最初に上げるスキル、スティグマの4本、優先するステータスを1ページにまとめた早見表。スキルとスティグマのリセットは無料なので、最初の例として使い、後で組み替える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Starter builds", "スタータービルド", "初心者ビルド", "おすすめビルド早見", "スキル振り早見"]
+aliases: [Starter builds, スタータービルド, 初心者ビルド, おすすめビルド早見, スキル振り早見, クラス別スタータービルド早見]
 related: [classes-overview, class-tier-and-recommendation, skills-and-specialties, stigma, gladiator, ranger, templar]
 sources:
   - id: S01

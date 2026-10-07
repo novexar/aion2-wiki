@@ -1,13 +1,14 @@
 ---
 id: guide-il-700-to-1400
-title: "IL700→1400ガイド：ほぼ無料で上げる道"
+title: IL700→1400ガイド
+reading: IL700から1400がいど
 category: guide
 tags: [アイテムレベル, 地域クエスト, 封印ダンジョン, 駐屯地, ルーン]
 summary: Lv45後のアイテムレベルを800前後から1,400へ上げる手順。地域クエスト、封印ダンジョン、駐屯地、神の痕跡、ルーン、ディーヴァニオン結晶で1,000へ。アビス、ベルトとアミュレットの昇級、製作で1,400へ。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["IL700 to 1400", "IL1000まで", "IL1400まで", "装備レベル1400", "無課金ルート"]
+aliases: [IL700 to 1400, IL1000まで, IL1400まで, 装備レベル1400, 無課金ルート, ほぼ無料で上げる道]
 related: [guide-week-1, guide-il-1400-to-2100, what-to-do-at-45, road-to-il-1000, road-to-il-1400, regional-quests, sealed-dungeons]
 sources:
   - id: S01
