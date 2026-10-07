@@ -1,13 +1,14 @@
 ---
 id: arena-of-tactics-10v10
-title: 戦術の闘技場（10v10・装備均一化・1日2回）
+title: 戦術の闘技場
+reading: せんじゅつのとうぎじょう
 category: pvp
 tags: [戦術の闘技場, 戦場, Battlefield, 10v10, 銀の功績メダル, PvP]
 summary: 戦術の闘技場は10v10の目標戦で、装備とスキルが均一化される唯一のPvP。1日2回の時間帯があり、週に参加3回・勝利3回の報酬が出る。Lv45の新人にもっとも公平なPvP。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Arena of Tactics, Battlefield, Battleground, 戦場, バトルグラウンド, 戦術アリーナ]
+aliases: [Arena of Tactics, Battlefield, Battleground, 戦場, バトルグラウンド, 戦術アリーナ, 装備均一化]
 related: [pvp-overview, arena-1v1-5v5, abyss-points-and-shop, silver-medal-of-merit, pvp-stats-and-gear]
 sources:
   - id: S01

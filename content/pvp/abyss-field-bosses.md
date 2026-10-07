@@ -1,13 +1,14 @@
 ---
 id: abyss-field-bosses
-title: アビスのフィールドボス（監視者カイラ・守護領主ナフマ・執行者）
+title: アビスのフィールドボス
+reading: あびすのふぃーるどぼす
 category: pvp
 tags: [アビス, フィールドボス, 監視者カイラ, ナフマ, 定時ボス, 銀の功績メダル]
 summary: 混沌のエレシュランタ下層にはLv65の定時ボスが5体。監視者カイラは01:00から3時間ごと、守護領主ナフマは金・日21:00、執行者3体は占領戦後の月・木・土21:30に出現し、クラス内の貢献順位で報酬が決まる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Watcher Kaira, Guardian Lord Nahma, Executor Argo, Executor Tamasa, Executor Kaira, アビスボス]
+aliases: [Watcher Kaira, Guardian Lord Nahma, Executor Argo, Executor Tamasa, Executor Kaira, アビスボス, 監視者カイラ, 守護領主ナフマ, 執行者]
 related: [abyss-overview, artifact-siege, silver-medal-of-merit, field-bosses, abyss-rank-and-season]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: spacetime-rift
-title: 時空の亀裂（3時間ごと・Lv45・PvP設定）
+title: 時空の亀裂
+reading: じくうのきれつ
 category: pvp
 tags: [時空の亀裂, Spacetime Rift, PvP, Lv45, 敵陣営, 封印ダンジョン]
 summary: 時空の亀裂は約3時間ごとに開く期間限定ポータルで、Lv45から敵陣営の領地へ入れる。滞在は約1時間、入る前にPvPかPvEかを選ぶ。大規模戦「争奪戦」はグローバル版に未実装。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Spacetime Rift, Dimensional Rift, 次元の亀裂, 時空の裂け目, 亀裂]
+aliases: [Spacetime Rift, Dimensional Rift, 次元の亀裂, 時空の裂け目, 亀裂, PvP設定]
 related: [pvp-overview, duels-and-pvp-mode-rules, abyss-overview, abyss-points-and-shop, sealed-dungeons, strongholds, pets-and-mounts]
 sources:
   - id: S01

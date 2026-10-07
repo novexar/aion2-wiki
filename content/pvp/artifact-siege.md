@@ -1,13 +1,14 @@
 ---
 id: artifact-siege
-title: アーティファクト占領戦（月・木・土 21:00）
+title: アーティファクト占領戦
+reading: あーてぃふぁくとせんりょうせん
 category: pvp
 tags: [アーティファクト, 占領戦, アビス, 陣営戦, アビス回廊, 定時イベント]
 summary: アビス下層のアーティファクトを天族と魔族が奪い合う定時の大規模戦。グローバル版はサーバー時間で月・木・土21:00準備開始、21:10戦闘。勝った陣営はアビス回廊を使える。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Artifact Siege, アーティファクト戦, 占領戦, Abyss Corridor, アビス回廊, 次元核]
+aliases: [Artifact Siege, アーティファクト戦, 占領戦, Abyss Corridor, アビス回廊, 次元核, 土 21]
 related: [abyss-overview, abyss-field-bosses, abyss-points-and-shop, silver-medal-of-merit, abyss-rank-and-season]
 sources:
   - id: S01

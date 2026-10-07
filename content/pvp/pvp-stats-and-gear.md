@@ -1,13 +1,14 @@
 ---
 id: pvp-stats-and-gear
-title: PvP用ステータス・装備ライン・無効化の読み合い
+title: PvP用ステータスと装備
+reading: PvPようすてーたすとそうび
 category: pvp
 tags: [PvP装備, PvPダメージ増加, 潜在力, 状態異常抵抗, アスフェル]
 summary: PvPにはPvP専用のステータスがあり、潜在力・魔石・称号・アスフェル盤・アビス装備で積む。PvPダメージはPvEと別計算で、状態異常を解除する「抵抗」を先に使わせる読み合いが重要。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [PvP Stats, PvP Damage Tolerance, PvPダメージ耐性, 抵抗]
+aliases: [PvP Stats, PvP Damage Tolerance, PvPダメージ耐性, 抵抗, 装備ライン, 無効化の読み合い]
 related: [pvp-overview, potential, status-effects-and-cc, abyss-points-and-shop, abyss-rank-and-season, daevanion-boards, how-damage-works]
 sources:
   - id: S01

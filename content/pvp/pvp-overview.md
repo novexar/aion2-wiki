@@ -1,13 +1,14 @@
 ---
 id: pvp-overview
-title: PvPの全体像（Lv45解放・PvPモード切替）
+title: PvPの全体像
+reading: PvPのぜんたいぞう
 category: pvp
 tags: [PvP, アビス, 闘技場, 戦場, 時空の亀裂, Lv45]
 summary: グローバル版のPvPは天族と魔族の陣営戦。アビス・闘技場・戦場・時空の亀裂はすべてLv45で解放され、通常フィールドにはPvPのオン/オフ切替がある。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [PvP, Player versus Player, 対人戦, 陣営戦, PvPモード]
+aliases: [PvP, Player versus Player, 対人戦, 陣営戦, PvPモード, PvPモード切替]
 related: [abyss-overview, arena-1v1-5v5, arena-of-tactics-10v10, spacetime-rift, duels-and-pvp-mode-rules, abyss-points-and-shop, pvp-stats-and-gear]
 sources:
   - id: S01

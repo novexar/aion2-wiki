@@ -1,13 +1,14 @@
 ---
 id: abyss-overview
-title: アビス（混沌のエレシュランタ下層・IL1000・週7時間）
+title: アビスの概要
+reading: あびすのがいよう
 category: pvp
 tags: [アビス, エレシュランタ, PvP, アビスポイント, Lv45, IL1000]
 summary: アビスは天族と魔族が出会う常時PvPエリア。グローバル版はLv45・合計IL1000で「混沌のエレシュランタ下層」に入れ、滞在時間は週7時間。PvEの指令でもアビスポイントを稼げる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Abyss, Reshanta, 混沌のエレシュランタ下層, Chaotic Lower Reshanta, アビス時間]
+aliases: [Abyss, Reshanta, 混沌のエレシュランタ下層, Chaotic Lower Reshanta, アビス時間, 週7時間]
 related: [pvp-overview, abyss-points-and-shop, artifact-siege, abyss-field-bosses, abyss-monolith, abyss-rank-and-season, spacetime-rift]
 sources:
   - id: S01

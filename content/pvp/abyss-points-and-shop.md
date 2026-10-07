@@ -1,13 +1,14 @@
 ---
 id: abyss-points-and-shop
-title: アビスポイントの稼ぎ方とアビスショップ
+title: アビスポイントとショップ
+reading: あびすぽいんととしょっぷ
 category: pvp
 tags: [アビスポイント, アビス商店, スティグマの欠片, 補給依頼, 指令, PvE]
 summary: アビスポイント（AP）はPvPだけでなく指令・補給依頼・闘技場・時空の亀裂でも稼げる通貨。アビス商店ではスティグマの欠片（200個まで、1個1万〜2.5万AP）を最優先で買うのが定石。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Abyss Points, AP, アビス商店, Abyss Shop, スティグマシャード, Stigma Shard]
+aliases: [Abyss Points, AP, アビス商店, Abyss Shop, スティグマシャード, Stigma Shard, アビスポイントの稼ぎ方とアビスショップ]
 related: [abyss-overview, arena-1v1-5v5, arena-of-tactics-10v10, spacetime-rift, stigma, abyss-points-for-pve, silver-medal-of-merit]
 sources:
   - id: S01
