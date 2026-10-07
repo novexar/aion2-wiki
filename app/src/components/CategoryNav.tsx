@@ -67,7 +67,7 @@ function CategorySection({
                 onClick={onNavigate}
                 aria-current={slug === a.id ? 'page' : undefined}
                 className={({ isActive }) =>
-                  `-ml-[9px] block truncate border-l-2 py-1 pr-2 pl-3 text-[13px] leading-snug transition-colors ${
+                  `-ml-[9px] line-clamp-2 border-l-2 py-1 pr-2 pl-3 text-[13px] leading-[1.4] transition-colors ${
                     isActive
                       ? 'border-accent font-medium text-fg'
                       : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'

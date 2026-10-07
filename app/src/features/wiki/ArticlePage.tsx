@@ -1,4 +1,3 @@
-import { AlertTriangle, CalendarDays, MessageSquare } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router';
 import { ConfidenceBadge } from '../../components/ConfidenceBadge';
@@ -81,68 +80,62 @@ function ArticleView({ article }: { readonly article: Article }) {
           ]}
         />
         <header className="mb-8">
-          <h1 className="text-[1.75rem] leading-tight font-bold tracking-tight text-balance sm:text-[2rem]">
+          <h1 className="text-[1.75rem] leading-tight font-bold text-balance sm:text-[2rem]">
             {article.title}
           </h1>
           {article.aliases.length > 0 && (
-            <p className="mt-2 text-sm text-fg-subtle">別名: {article.aliases.join(' / ')}</p>
+            <p className="mt-2 text-[13px] text-fg-subtle">{article.aliases.join('、')}</p>
           )}
           <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-fg-muted">
             <ConfidenceBadge confidence={article.confidence} />
-            <span className="inline-flex items-center gap-1.5">
-              <CalendarDays aria-hidden="true" className="size-3.5 text-fg-subtle" />
-              更新 <time dateTime={article.updated}>{article.updated}</time>
-            </span>
-            <span className="inline-flex flex-wrap gap-1.5">
-              {article.tags.map((t) => (
-                <Link
-                  key={t}
-                  to={`/index?view=tag&tag=${encodeURIComponent(t)}`}
-                  className="rounded border border-line px-1.5 py-0.5 text-xs text-fg-muted hover:border-line-strong hover:text-fg"
-                >
-                  #{t}
-                </Link>
-              ))}
+            <span>
+              <time dateTime={article.updated}>{article.updated}</time> 更新
             </span>
           </div>
-          <p className="mt-5 text-[15px] leading-relaxed text-fg-muted">{article.summary}</p>
-          {article.confidence === 'community' && (
-            <div
-              role="note"
-              className="mt-5 flex gap-2.5 rounded-md border border-warn-line bg-warn-bg px-4 py-3 text-sm text-warn"
-            >
-              <AlertTriangle aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
-              <p>
-                この記事は<strong className="font-semibold">要確認</strong>
-                の情報を含みます。1
-                つの資料や実プレイ報告に基づくため、ゲーム内の表示を優先してください。
-              </p>
-            </div>
-          )}
         </header>
 
         <MobileToc headings={article.headings} activeId={activeId} />
         <ArticleBody html={article.html} />
+        {article.tags.length > 0 && (
+          <p className="mt-10 text-[13px] text-fg-muted">
+            タグ:{' '}
+            {article.tags.map((t, i) => (
+              <span key={t}>
+                {i > 0 && '、'}
+                <Link
+                  to={`/index?view=tag&tag=${encodeURIComponent(t)}`}
+                  className="text-fg hover:underline"
+                >
+                  {t}
+                </Link>
+              </span>
+            ))}
+          </p>
+        )}
         <SourcesList sources={article.sources} />
+
+        <p className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <a
+            href={ISSUES_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-fg hover:underline"
+          >
+            誤りを報告 ↗
+          </a>
+          <Link to="/chat" className="text-fg hover:underline">
+            チャットで質問する
+          </Link>
+        </p>
 
         {related.length > 0 && (
           <section aria-labelledby="related" className="mt-12">
-            <h2 id="related" className="mb-3 text-base font-semibold tracking-tight">
+            <h2 id="related" className="mb-3 text-base font-semibold">
               関連記事
             </h2>
             <ArticleLinkGrid articles={related} />
           </section>
         )}
-
-        <footer className="mt-12 flex flex-wrap gap-x-5 gap-y-2 border-t border-line pt-5 text-[13px] text-fg-subtle">
-          <Link to="/chat" className="inline-flex items-center gap-1.5 hover:text-fg">
-            <MessageSquare aria-hidden="true" className="size-3.5" />
-            この話題をチャットで相談
-          </Link>
-          <a href={ISSUES_URL} target="_blank" rel="noopener noreferrer" className="hover:text-fg">
-            誤りを報告（GitHub）
-          </a>
-        </footer>
       </article>
     </WikiShell>
   );
