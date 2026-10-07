@@ -22,8 +22,8 @@ interface PaletteItem {
 }
 
 const QUICK_LINKS = [
-  { to: '/index', label: '索引を開く' },
-  { to: '/chat', label: 'Wiki に相談する（チャット）' },
+  { to: '/index', label: '索引' },
+  { to: '/chat', label: 'チャット' },
   { to: '/about', label: 'このサイトについて' },
 ];
 
@@ -69,7 +69,8 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
         to: searchPath(trimmed),
         render: () => (
           <span className="flex items-center gap-2 text-fg-muted">
-            <ArrowRight aria-hidden="true" className="size-4" />「{trimmed}」の検索結果をすべて表示
+            <ArrowRight aria-hidden="true" className="size-4" />
+            すべての結果
           </span>
         ),
       },
@@ -181,7 +182,7 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
             aria-autocomplete="list"
             aria-activedescendant={items.length > 0 ? optionId(activeIndex) : undefined}
             aria-label="記事を検索"
-            placeholder="記事・用語・英語名で検索"
+            placeholder="検索"
             className="h-13 min-w-0 flex-1 bg-transparent text-[15px] text-fg placeholder:text-fg-subtle focus:outline-none"
             autoComplete="off"
             spellCheck={false}
@@ -190,9 +191,10 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
           <button
             type="button"
             onClick={onClose}
-            className="rounded px-1.5 py-0.5 text-xs text-fg-subtle hover:bg-muted hover:text-fg"
+            className="rounded text-fg-subtle hover:text-fg"
+            aria-label="閉じる"
           >
-            Esc
+            <Kbd>Esc</Kbd>
           </button>
         </div>
 

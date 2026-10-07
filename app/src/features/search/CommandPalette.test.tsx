@@ -58,7 +58,7 @@ describe('CommandPalette', () => {
 
     await user.keyboard('{ArrowUp}{ArrowUp}');
     expect(screen.getAllByRole('option').at(-1)).toHaveAttribute('aria-selected', 'true');
-    expect(screen.getAllByRole('option').at(-1)).toHaveTextContent('すべて表示');
+    expect(screen.getAllByRole('option').at(-1)).toHaveTextContent('すべての結果');
 
     await user.keyboard('{Enter}');
     expect(onClose).toHaveBeenCalled();
