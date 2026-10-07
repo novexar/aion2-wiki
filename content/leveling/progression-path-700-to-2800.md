@@ -1,13 +1,14 @@
 ---
 id: progression-path-700-to-2800
-title: IL700→2800の進行ロードマップ
+title: IL700→2800ロードマップ
+reading: IL700から2800ろーどまっぷ
 category: leveling
 tags: [アイテムレベル, ロードマップ, 遠征, 超越, アルカナ]
 summary: ILの節目は700・1,000・1,400・1,600・1,900・2,100・2,200・2,500・2,800。解放された最新のコンテンツでオードエネルギーを使い、アクセサリと武器は製作、防具の強化は最後にする。聖域レイドLudraは現在取り下げ中。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Progression path, IL700→2800, 装備レベル進行, 遠征の進め方]
+aliases: [Progression path, IL700→2800, 装備レベル進行, 遠征の進め方, IL700→2800の進行ロードマップ]
 related: [what-to-do-at-45, road-to-il-1000, road-to-il-1400, item-level-and-combat-power, expeditions-and-odyle, transcendence-overview, arcana, ludra-raid-suspension]
 sources:
   - id: S01

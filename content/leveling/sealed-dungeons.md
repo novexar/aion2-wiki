@@ -1,13 +1,14 @@
 ---
 id: sealed-dungeons
-title: 封印ダンジョン（陣営ごと61か所）とその報酬
+title: 封印ダンジョン
+reading: ふういんだんじょん
 category: leveling
 tags: [封印ダンジョン, Sealed Dungeon, ディーヴァニオン結晶, 知恵の石, 一度きり]
 summary: 封印ダンジョンはマップの「？」にあるソロ用の一度きりインスタンス。自陣営に61か所あり、初回クリアでディーヴァニオン結晶2個・知恵の石2個・強化石・ギーナなどが貰える。他陣営の分はLv45以降に亀裂経由で回収する。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Sealed Dungeon, 封印ダンジョン, Hideout, 隠れ家, ？ダンジョン, 密閉ダンジョン]
+aliases: [Sealed Dungeon, Hideout, 隠れ家, ？ダンジョン, 密閉ダンジョン, 陣営ごと61か所]
 related: [what-to-do-at-45, regional-quests, strongholds, ascension-quests-and-gauge, elyos-leveling-route, asmodian-leveling-route, daevanion-crystals, wisdom-stones]
 sources:
   - id: S01

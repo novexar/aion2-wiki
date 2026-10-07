@@ -1,13 +1,14 @@
 ---
 id: attendance-and-growth-rewards
-title: 出席（チェックイン）と成長報酬
+title: 出席と成長報酬
+reading: しゅっせきとせいちょうほうしゅう
 category: leveling
 tags: [出席, チェックイン, 成長支援, 実績, 新芽の証]
 summary: 出席はLv10で開き、Esc > アクティビティ > 出席から毎日受け取る。ローンチ記念の7日ボードとデイリー14日ボードが12月16日まで。成長支援（Growth Support）と新芽の証は、Lv50で開くためグローバル版（上限45）では使えない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Attendance, 出席簿, Check-In, Growth Support, 成長支援, 新芽の証, Sprout Badge, ログインボーナス]
+aliases: [Attendance, 出席簿, Check-In, Growth Support, 成長支援, 新芽の証, Sprout Badge, ログインボーナス, チェックイン]
 related: [launch-rewards-and-codes, unlocks-by-level, reset-times, daeva-pass, collections-and-achievements, first-week-progression-plan]
 sources:
   - id: S01

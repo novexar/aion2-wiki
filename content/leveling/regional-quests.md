@@ -1,13 +1,14 @@
 ---
 id: regional-quests
-title: 地域クエスト（報酬：激突のルーン箱・ディーヴァニオン結晶・知恵の石）
+title: 地域クエスト
+reading: ちいきくえすと
 category: leveling
 tags: [地域クエスト, 激突のルーン, ディーヴァニオン結晶, 知恵の石, 一度きり]
 summary: 地域クエストは自陣営の地域にある一度きりのクエスト。合計で知恵の石58個とディーヴァニオン結晶58個、4件では激突のルーン箱が貰える。一部はアビスの引き渡し後に開く（天族22件、魔族23件）。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [District quests, 地域クエスト, Regional quests, 緑クエスト, 激突のルーン]
+aliases: [District quests, Regional quests, 緑クエスト, 激突のルーン, 激突のルーン箱]
 related: [what-to-do-at-45, leveling-1-to-45-overview, sealed-dungeons, strongholds, story-locks-and-abyss-handin, ascension-quests-and-gauge, wisdom-stones, daevanion-crystals, runes]
 sources:
   - id: S01

@@ -1,6 +1,7 @@
 ---
 id: monoliths-and-empyrean-traces
 title: モノリスと神の痕跡
+reading: ものりすとかみのこんせき
 category: leveling
 tags: [神の痕跡, 神のモノリス, Empyrean Trace, 啓示のアミュレット, 主神ステータス]
 summary: 神の痕跡（羽のアイコン）を集めて地域の神のモノリスで共鳴させると、主神ステータスの上昇とアミュレット強化スクロールなどが貰える。ベルテロン／アルトガルドは560個でLv30まで。グローバル版ではスキルポイントは出ない。

@@ -1,13 +1,14 @@
 ---
 id: story-locks-and-abyss-handin
-title: ストーリーロックとアビス引き渡し（覚醒45）
+title: ストーリーロック
+reading: すとーりーろっく
 category: leveling
 tags: [ストーリーロック, アビス, 引き渡し, 覚醒, コロ]
 summary: メインストーリーはLv22・Lv32前後とLv45に進行ロックがある。Lv45のロックは、ドラウプニル（IL700）を通り、アビス（IL1,000）で引き渡すまで解けず、覚醒クエストと地域クエスト22件（魔族23件）が閉じたまま。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Story lock, ストーリーロック, アビス引き渡し, 悪夢を見る者, Koro, コロ, Draupnir quest]
+aliases: [Story lock, アビス引き渡し, 悪夢を見る者, Koro, コロ, Draupnir quest, ストーリーロックとアビス引き渡し, 覚醒45]
 related: [ascension-quests-and-gauge, main-story-episodes, what-to-do-at-45, road-to-il-1000, regional-quests, unlocks-by-level, abyss-overview]
 sources:
   - id: S01

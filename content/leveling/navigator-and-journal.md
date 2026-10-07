@@ -1,13 +1,14 @@
 ---
 id: navigator-and-journal
-title: ナビゲーターとジャーナル（使命タブの既知不具合）
+title: ナビゲーターとジャーナル
+reading: なびげーたーとじゃーなる
 category: leveling
 tags: [ナビゲーター, ジャーナル, 使命, 既知の不具合, クエストトラッカー]
 summary: ジャーナルはLv2、ナビゲーターはLv10で解放。次にやることの案内と、クエストの場所への移動に使う。ジャーナルの「使命」タブをLv45になる前に開くと、使命が翌日まで解放されない既知の不具合がある。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Navigator, Journal, ジャーナル, ナビゲーター, 使命タブ, Duty tab bug, クエストトラッカー]
+aliases: [Navigator, Journal, ジャーナル, ナビゲーター, 使命タブ, Duty tab bug, クエストトラッカー, 使命タブの既知不具合]
 related: [unlocks-by-level, duty-quests, main-story-episodes, ascension-quests-and-gauge, known-issues, travel-and-teleport, first-week-progression-plan]
 sources:
   - id: S01

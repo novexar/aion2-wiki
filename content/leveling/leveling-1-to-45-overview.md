@@ -1,13 +1,14 @@
 ---
 id: leveling-1-to-45-overview
-title: レベル上げ1〜45の全体像
+title: レベル上げ1〜45
+reading: れべるあげ1から45
 category: leveling
 tags: [レベル上げ, 序盤, メインストーリー, 覚醒, 封印ダンジョン]
 summary: グローバル版のレベル上限は45。経験値の大半はメインストーリーから得られ、覚醒ゲージが足りない時だけ地域クエスト・封印ダンジョン・駐屯地で補うのが基本。初回キャラは通り道の成長要素だけ拾えばよい。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Leveling 1-45, レベリング, 最速レベル上げ, Road to 45]
+aliases: [Leveling 1-45, レベリング, 最速レベル上げ, Road to 45, レベル上げ1〜45の全体像]
 related: [elyos-leveling-route, asmodian-leveling-route, main-story-episodes, unlocks-by-level, ascension-quests-and-gauge, xp-tips-and-boosts, what-to-do-at-45]
 sources:
   - id: S01

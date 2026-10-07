@@ -1,13 +1,14 @@
 ---
 id: main-story-episodes
-title: メインストーリー（エピソード）と進行ロック
+title: メインストーリー
+reading: めいんすとーりー
 category: leveling
 tags: [エピソード, メインストーリー, 進行ロック, 覚醒, 章]
 summary: メインストーリー（エピソード）は経験値とシステム解放の背骨。魔族は全8章89件。Lv22・Lv32・Lv45付近に覚醒ゲージによる進行ロックがあり、足りない時は地域クエストや封印ダンジョンで補う。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Hero quests, メインクエスト, エピソード, Main Story, ストーリーロック]
+aliases: [Hero quests, メインクエスト, エピソード, Main Story]
 related: [leveling-1-to-45-overview, elyos-leveling-route, asmodian-leveling-route, ascension-quests-and-gauge, story-locks-and-abyss-handin, unlocks-by-level, navigator-and-journal]
 sources:
   - id: S01

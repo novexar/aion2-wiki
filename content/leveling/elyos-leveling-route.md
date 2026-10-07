@@ -1,13 +1,14 @@
 ---
 id: elyos-leveling-route
-title: 天族ルート（ポエタ→ベルテロン）
+title: 天族ルート
+reading: てんぞくるーと
 category: leveling
 tags: [天族, Elyos, レベル上げ, ベルテロン, ルート]
 summary: 天族はポエタで始まり、Lv10前後でベルテロンへ移る。Lv5で1次覚醒、Lv22で2次、Lv32で3次、Lv45で4次。各レベル帯の主なエピソードと、通り道で拾う封印ダンジョン・駐屯地をまとめる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Elyos leveling, 天族レベリング, ポエタ, ベルテロン, Poeta, Verteron]
+aliases: [Elyos leveling, 天族レベリング, ポエタ, ベルテロン, Poeta, Verteron, ポエタ→ベルテロン]
 related: [leveling-1-to-45-overview, asmodian-leveling-route, main-story-episodes, sealed-dungeons, strongholds, ascension-quests-and-gauge, unlocks-by-level]
 sources:
   - id: S01

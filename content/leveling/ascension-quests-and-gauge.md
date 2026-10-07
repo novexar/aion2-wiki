@@ -1,13 +1,14 @@
 ---
 id: ascension-quests-and-gauge
-title: 覚醒クエストと覚醒ゲージ（「声を聞く者」）
+title: 覚醒クエストとゲージ
+reading: かくせいくえすととげーじ
 category: leveling
 tags: [覚醒, 覚醒ゲージ, 声を聞く者, スティグマ, 進行ロック]
 summary: 覚醒はレベル5・22・32・45で受ける4段階のクエスト。レベルだけでは進めず、覚醒ゲージを100%にして前提エピソードを終える必要がある。ゲージが足りない時は近場の地域クエスト・封印ダンジョン・駐屯地で補う。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Ascension, 覚醒の道, Ascension Gauge, 覚醒ゲージ, 声を聞く者, 気を感じる者, 夢を見る者, 悪夢を見る者]
+aliases: [Ascension, 覚醒の道, Ascension Gauge, 覚醒ゲージ, 声を聞く者, 気を感じる者, 夢を見る者, 悪夢を見る者, 覚醒クエストと覚醒ゲージ, 「声を聞く者」]
 related: [main-story-episodes, leveling-1-to-45-overview, unlocks-by-level, story-locks-and-abyss-handin, sealed-dungeons, regional-quests, strongholds, stigma, wings]
 sources:
   - id: S01

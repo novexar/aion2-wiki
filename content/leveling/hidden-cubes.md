@@ -1,13 +1,14 @@
 ---
 id: hidden-cubes
-title: ヒドゥンキューブ（鍵・場所・報酬）
+title: ヒドゥンキューブ
+reading: ひどぅんきゅーぶ
 category: leveling
 tags: [ヒドゥンキューブ, 鍵, 魂結晶, 探索, 宝箱]
 summary: ヒドゥンキューブはフィールドに出現する隠し宝箱。グローバル版では鍵：ヒドゥンキューブ1個が必要で、1個につき魂結晶1,000個が確定。出現位置は固定でなく、候補地点の中から現れる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Hidden Cube, ヒドゥン キューブ, 隠し宝箱, "Key: Hidden Cube", "鍵：ヒドゥン キューブ"]
+aliases: [Hidden Cube, ヒドゥン キューブ, 隠し宝箱, "Key: Hidden Cube", 鍵：ヒドゥン キューブ]
 related: [monoliths-and-empyrean-traces, leveling-1-to-45-overview, what-to-do-at-45, soul-crystals, pet-genus, duty-quests, attendance-and-growth-rewards]
 sources:
   - id: S01

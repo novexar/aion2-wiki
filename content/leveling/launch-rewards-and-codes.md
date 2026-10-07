@@ -1,13 +1,14 @@
 ---
 id: launch-rewards-and-codes
-title: ローンチ報酬・クーポン・Twitch Drops
+title: ローンチ報酬とクーポン
+reading: ろーんちほうしゅうとくーぽん
 category: leveling
 tags: [ローンチ報酬, クーポン, Twitch Drops, 期間限定, 郵便]
 summary: クーポン「TAKEFLIGHTAION2」は10月13日 23:00 PDTまで。ローンチ報酬（ペット箱とウィッシュリスト箱）は郵便で届く。Twitch Dropsは10月16日まで。アカウント連携を間違えないこと。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Launch Rewards, TAKEFLIGHTAION2, Twitch Drops, クーポンコード, 記念報酬, War for Atreia]
+aliases: [Launch Rewards, TAKEFLIGHTAION2, クーポンコード, 記念報酬, War for Atreia]
 related: [first-week-progression-plan, attendance-and-growth-rewards, mail-and-coupon, twitch-drops-and-war-for-atreia, twitch-linking-pitfalls, community-launch-events]
 sources:
   - id: S01

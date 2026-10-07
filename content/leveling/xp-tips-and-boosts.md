@@ -1,13 +1,14 @@
 ---
 id: xp-tips-and-boosts
-title: 経験値効率（討伐数、寄り道の是非）
+title: 経験値効率
+reading: けいけんちこうりつ
 category: leveling
 tags: [経験値, 効率, 寄り道, 狩場, レギオン]
 summary: 経験値の大半はメインストーリーから得られ、フィールド狩りは効率が低い。グローバル版はクエストでほぼ転送されず、討伐数も約1.9倍と重い。常時効く経験値増加はレギオン効果（最大+3%）くらいで、経験値の巻物のような消耗品は確認できていない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [XP tips, 経験値効率, 狩場, レベリング効率, 経験値ブースト]
+aliases: [XP tips, 狩場, レベリング効率, 経験値ブースト, 討伐数, 寄り道の是非]
 related: [leveling-1-to-45-overview, main-story-episodes, ascension-quests-and-gauge, sealed-dungeons, regional-quests, legion, travel-and-teleport]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: strongholds
-title: 駐屯地（高潔のベルト強化スクロール）
+title: 駐屯地
+reading: ちゅうとんち
 category: leveling
 tags: [駐屯地, Stronghold, ベルト, 強化スクロール, 一度きり]
 summary: 駐屯地は各陣営に15か所ある一度きりのソロ拠点。初回クリアでギーナ15,000と高潔のベルト強化スクロール2個が貰え、30個でベルトを3等級ぶん+10にできる。ベルトを育てる唯一の入手元。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Stronghold, Garrison, 駐屯地, 高潔のベルト, Noble Belt Enhance Scroll]
+aliases: [Stronghold, Garrison, 高潔のベルト, Noble Belt Enhance Scroll, 高潔のベルト強化スクロール]
 related: [what-to-do-at-45, belt-and-amulet, sealed-dungeons, regional-quests, road-to-il-1000, monoliths-and-empyrean-traces, substance-morph]
 sources:
   - id: S01
