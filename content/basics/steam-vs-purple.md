@@ -1,13 +1,14 @@
 ---
 id: steam-vs-purple
-title: Steam版とPURPLE版の違い・連携
+title: Steam版とPURPLE版
+reading: Steamばんとぱーぷるばん
 category: basics
 tags: [基本情報, Steam, PURPLE, アカウント]
 summary: Steam 版と PURPLE 版はゲーム内容もサーバーも同じで、一緒に遊べる。Steam だけで遊ぶなら連携不要。両方で同じキャラを使うには NC アカウントに Steam を連携する。韓国・台湾版からの引き継ぎは不可。
 confidence: official
 region: global
 updated: 2026-10-08
-aliases: [Steam版, PURPLE版, パープル, ランチャー, アカウント連携]
+aliases: [Steam版, PURPLE版, パープル, ランチャー, アカウント連携, Steam版とPURPLE版の違い]
 related: [nc-account-and-purple-setup, platforms-and-requirements, regions-and-servers]
 sources:
   - id: S01

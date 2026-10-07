@@ -1,13 +1,14 @@
 ---
 id: death-and-resurrection
-title: 死亡と復活（復活の精霊石・ダンジョンの死亡回数）
+title: 死亡と復活
+reading: しぼうとふっかつ
 category: basics
 tags: [死亡, 復活, 復活の精霊石, ダンジョン, 初心者]
 summary: 倒れたときの復活方法と、ダンジョンごとに決められた死亡回数の上限、復活の精霊石の入手先をまとめます。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Death, Resurrection, Resurrection Spiritstone, 復活の精霊石, 蘇生, Revive, リザ]
+aliases: [Death, Resurrection, Resurrection Spiritstone, 復活の精霊石, 蘇生, Revive, リザ, ダンジョンの死亡回数]
 related: [party-and-matchmaking, mail-and-coupon, glossary]
 sources:
   - id: S01

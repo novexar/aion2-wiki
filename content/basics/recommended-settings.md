@@ -1,13 +1,14 @@
 ---
 id: recommended-settings
-title: おすすめ設定（グラフィック・FPS・チャット・操作）
+title: おすすめ設定
+reading: おすすめせってい
 category: basics
 tags: [設定, グラフィック, FPS, DLSS, HUD]
 summary: FPSを上げるにはDLSS（RTX）かFSR（Radeon）を有効にして品質を調整し、大規模戦闘品質やエフェクトを下げる。チャットの自動翻訳、HUD、カメラ揺れなどの見やすさ設定も紹介。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [おすすめ設定, グラフィック設定, DLSS, FSR, Frame Generation, FPS, カメラ揺れ]
+aliases: [グラフィック設定, DLSS, FSR, Frame Generation, FPS, カメラ揺れ, グラフィック]
 related: [platforms-and-requirements, controls-and-keybinds, controller-and-steam-deck, ui-and-menus, chat-and-social]
 sources:
   - id: S01

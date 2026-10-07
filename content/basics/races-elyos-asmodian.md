@@ -1,6 +1,7 @@
 ---
 id: races-elyos-asmodian
 title: 天族と魔族の違い
+reading: てんぞくとまぞくのちがい
 category: basics
 tags: [基本情報, 種族, 天族, 魔族, キャラクター作成]
 summary: 天族（Elyos）と魔族（Asmodian）に戦闘性能やクラスの差はない。違うのはストーリー・冒険する地域・所属サーバー・アビスでの敵味方。後から種族を変える手段はなく、友人と遊ぶなら同じ種族・同じサーバーを選ぶ。

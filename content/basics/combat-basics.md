@@ -1,13 +1,14 @@
 ---
 id: combat-basics
-title: 戦闘の基本（通常攻撃・キャンセル・無力化・予兆）
+title: 戦闘の基本
+reading: せんとうのきほん
 category: basics
 tags: [戦闘, スタッガー, 基本攻撃, 回避, MP]
 summary: AION2の戦闘はロックオン式の手動戦闘。基本攻撃でMPを回復し、スキルの合間に挟んでキャンセルする。ボスのスタッガーゲージを空にすると約5秒無力化できる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Combat Basics, スタッガー, Stagger, 無力化, 基本攻撃キャンセル, 戦闘システム]
+aliases: [Combat Basics, スタッガー, Stagger, 無力化, 基本攻撃キャンセル, 戦闘システム, 通常攻撃, キャンセル]
 related: [controls-and-keybinds, macros, stats-explained, how-damage-works, party-roles-and-buffs, status-effects-and-cc]
 sources:
   - id: S01

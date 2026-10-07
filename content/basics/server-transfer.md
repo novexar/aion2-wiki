@@ -1,13 +1,14 @@
 ---
 id: server-transfer
-title: サーバー移動（10月14日開始・同じ陣営のみ）
+title: サーバー移動
+reading: さーばーいどう
 category: basics
 tags: [基本情報, サーバー, サーバー移動, 引っ越し]
 summary: 2026年10月14日から同じリージョン・同じ陣営のサーバー間で移動できる。開始当初は無料。アーリーアクセスサーバーのキャラはアーリーアクセスサーバー間のみ。リージョン変更と天族⇔魔族の変更はできない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [サーバー移転, Server Transfer, 引っ越し, キャラクター移動]
+aliases: [サーバー移転, Server Transfer, 引っ越し, キャラクター移動, 同じ陣営のみ]
 related: [regions-and-servers, races-elyos-asmodian, storage-and-cube]
 sources:
   - id: S01

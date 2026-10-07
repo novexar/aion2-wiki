@@ -1,13 +1,14 @@
 ---
 id: how-damage-works
-title: ダメージ計算の仕組みと前方／後方ダメージ増幅
+title: ダメージ計算の仕組み
+reading: だめーじけいさんのしくみ
 category: basics
 tags: [ダメージ計算, ステータス, 前方ダメージ増幅, 後方ダメージ増幅, 理論値]
 summary: 最終ダメージがどの順番で計算されるか、「同じ山に積まれる増幅」と「独立した倍率」の違い、前方・後方ダメージ増幅の扱いを初心者向けに整理します。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [How damage works, ダメージ計算式, Damage formula, 전피증, Front Damage Boost, Back Damage Boost, 後方攻撃, バックアタック]
+aliases: [How damage works, ダメージ計算式, Damage formula, 전피증, Front Damage Boost, Back Damage Boost, 後方攻撃, バックアタック, ダメージ計算の仕組みと前方, 後方ダメージ増幅]
 related: [stats-explained, combat-basics, status-effects-and-cc]
 sources:
   - id: S01

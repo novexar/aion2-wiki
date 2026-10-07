@@ -1,6 +1,7 @@
 ---
 id: glossary
-title: 用語集（日英対照）
+title: 用語集
+reading: ようごしゅう
 category: basics
 tags: [用語集, 日英対照, 初心者, スラング, 略語]
 summary: AION2でよく出る用語を、世界観・クラス・戦闘・状態異常・育成・装備・通貨・コンテンツ・略語の分野別に日本語、英語、韓国語で対照。

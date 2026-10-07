@@ -1,13 +1,14 @@
 ---
 id: storage-and-cube
-title: キューブ（所持品）・サーバー倉庫・キャラクター倉庫・遠隔倉庫
+title: キューブと倉庫
+reading: きゅーぶとそうこ
 category: basics
 tags: [倉庫, キューブ, インベントリ, 拡張, アイテム復旧]
 summary: 持ち歩くのはキューブ、サーバー内の全キャラ共有はサーバー倉庫、そのキャラ専用はキャラクター倉庫。初期枠は40/25/25で、遠隔アクセスはメンバーシップ限定。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Cube, Server Storage, Character Storage, インベントリ, Remote Storage, 倉庫, アイテム復旧, Recover Item]
+aliases: [Cube, Server Storage, Character Storage, インベントリ, Remote Storage, 倉庫, アイテム復旧, Recover Item, 所持品, キャラクター倉庫, 遠隔倉庫]
 related: [whats-bound, legion, mail-and-coupon, ui-and-menus, controls-and-keybinds]
 sources:
   - id: S01

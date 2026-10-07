@@ -1,6 +1,7 @@
 ---
 id: controls-and-keybinds
 title: 基本操作とキー設定
+reading: きほんそうさときーせってい
 category: basics
 tags: [操作, キー設定, チャットコマンド, 操作モード, ゲームパッド]
 summary: グローバル版の初期キー、2つの操作モード（AION 2 / AION 1）、チャットコマンド、エモートの一覧。移動はWASD、攻撃はマウス左右クリック、設定はOキー。

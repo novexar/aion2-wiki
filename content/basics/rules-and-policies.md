@@ -1,13 +1,14 @@
 ---
 id: rules-and-policies
-title: 運営ポリシー・信頼ステータス・RMT警告
+title: 運営ポリシー
+reading: うんえいぽりしー
 category: basics
 tags: [規約, 処罰, RMT, 信頼ステータス, マクロ]
 summary: 外部プログラムやボットは初回から統合アカウント停止、リアルマネー取引は30日・90日。NC以外からのギーナ・Quna購入も規約違反。ゲーム内マクロはNC自身の機能。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Operation Policy, Code of Conduct, 運営ポリシー, RMT, BAN, アカウント停止, 信頼ステータス, Trust Status, 代行, ボット]
+aliases: [Operation Policy, Code of Conduct, RMT, BAN, アカウント停止, 信頼ステータス, Trust Status, 代行, ボット, RMT警告]
 related: [mail-and-coupon, storage-and-cube, macros, legion, useful-sites-and-tools]
 sources:
   - id: S01

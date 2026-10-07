@@ -1,6 +1,7 @@
 ---
 id: languages-and-voice
 title: 対応言語と音声
+reading: たいおうげんごとおんせい
 category: basics
 tags: [言語, 音声, 日本語, Steam]
 summary: グローバル版は8言語に対応し、フルボイスは英語・日本語・韓国語。中国語は非対応。日本語でUI、字幕、音声のすべてを遊べる。

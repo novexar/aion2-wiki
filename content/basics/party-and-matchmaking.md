@@ -1,13 +1,14 @@
 ---
 id: party-and-matchmaking
-title: パーティとマッチング（サーバー横断・陣営混在・貢献度）
+title: パーティとマッチング
+reading: ぱーてぃとまっちんぐ
 category: basics
 tags: [パーティ, マッチング, ダンジョン, フォース, 初心者]
 summary: 遠征は最大 5 人、超越は 2〜5 人、聖域は 10 人。グローバル版はリージョン内の全サーバー・両陣営でマッチングでき、「自陣営のみ」の設定も選べます。募集の見方と貢献度の注意点をまとめます。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Party, Matchmaking, Group finder, パーティ募集, フォース, Force, クロスサーバー, LFG]
+aliases: [Party, Matchmaking, Group finder, パーティ募集, フォース, Force, クロスサーバー, LFG, サーバー横断, 陣営混在]
 related: [party-roles-and-buffs, legion, chat-and-social, death-and-resurrection]
 sources:
   - id: S01

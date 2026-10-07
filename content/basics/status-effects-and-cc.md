@@ -1,6 +1,7 @@
 ---
 id: status-effects-and-cc
-title: 状態異常（CC）の種類と「衝撃解除（Defiance）」
+title: 状態異常
+reading: じょうたいいじょう
 category: basics
 tags: [状態異常, CC, 衝撃解除, PvP, 戦闘]
 summary: スタン・転倒・恐怖などの状態異常は3系統に分かれ、それぞれ別の抵抗値があります。全クラス共通の解除スキル「衝撃解除」の仕様と、対策の消耗品をまとめます。

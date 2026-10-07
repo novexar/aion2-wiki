@@ -1,13 +1,14 @@
 ---
 id: classes-overview
-title: 8クラス一覧（役割・武器・ひとこと特徴）
+title: クラス一覧
+reading: くらすいちらん
 category: basics
 tags: [基本情報, クラス, 職業, 武器, 役割]
 summary: グローバル版は8クラス。タンク＝テンプラー、ヒーラー＝クレリック、支援＝チャンター、DPS＝グラディエーター／アサシン／レンジャー／ソーサラー／スピリットマスター。天族・魔族で差はなく、各クラスはアクティブ12・パッシブ10・スティグマ13のスキル構成。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [クラス一覧, 職業一覧, Classes, Gladiator, Templar, Assassin, Ranger, Sorcerer, Spiritmaster, Cleric, Chanter, 拳星]
+aliases: [職業一覧, Classes, Gladiator, Templar, Assassin, Ranger, Sorcerer, Spiritmaster, Cleric, Chanter, 拳星, ひとこと特徴]
 related: [class-tier-and-recommendation, gladiator, templar, assassin, ranger, sorcerer, spiritmaster, cleric, chanter, races-elyos-asmodian]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: flight-and-glide
-title: 飛行とグライド（翼・飛行力・空中戦）
+title: 飛行とグライド
+reading: ひこうとぐらいど
 category: basics
 tags: [飛行, 翼, グライド, 移動, 空中戦]
 summary: AION2 の看板システムである自由飛行の仕組み。飛行ゲージ（飛行力）の回復方法、飛べない場所、ステータスを持つ翼と見た目だけの翼の違い、空中戦の基本をまとめます。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Flight, Glide, Wings, 翼, 飛行力, フリーフライト, 空中戦, Flight Circle, 飛行リング]
+aliases: [Flight, Glide, Wings, 飛行力, フリーフライト, 空中戦, Flight Circle, 飛行リング]
 related: [travel-and-teleport, controls-and-keybinds, glossary]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: class-tier-and-recommendation
-title: 初心者・ソロ・PvE・PvP別おすすめクラス
+title: おすすめクラス
+reading: おすすめくらす
 category: basics
 tags: [基本情報, クラス, おすすめ, Tier, 初心者]
 summary: 初心者は近接ならグラディエーター、遠距離ならレンジャーが各サイトで一致。ソロはスピリットマスター・レンジャー・グラディエーター。パーティではテンプラー（タンク）とクレリック（ヒーラー）が常に求められる。DPS の順位は開始直後で未確定。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [最強クラス, Tier表, ティアリスト, おすすめクラス, 初心者向けクラス, ソロ向けクラス]
+aliases: [最強クラス, Tier表, ティアリスト, 初心者向けクラス, ソロ向けクラス, 初心者, PvE, PvP別おすすめクラス]
 related: [classes-overview, gladiator, ranger, spiritmaster, templar, cleric]
 sources:
   - id: S01

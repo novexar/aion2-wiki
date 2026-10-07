@@ -1,13 +1,14 @@
 ---
 id: character-creation
-title: キャラクター作成（スロット・外見・性別・共有）
+title: キャラクター作成
+reading: きゃらくたーさくせい
 category: basics
 tags: [キャラクター作成, キャラクリ, スロット, 外見変更, スタイルショップ]
 summary: 作成画面は200以上の調整項目を持ち、性別でクラスは制限されない。スロットは初期4つで最大8つ。外見は外見変更券で後から直せ、スタイルショップのデータ適用には600 Qunaが必要。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [キャラメイク, キャラクリ, Character Creation, Appearance Change Voucher, 外見変更券, スタイルショップ, キャラクタースロット]
+aliases: [キャラメイク, キャラクリ, Character Creation, Appearance Change Voucher, 外見変更券, スタイルショップ, キャラクタースロット, スロット]
 related: [character-deletion-and-redo, classes-overview, races-elyos-asmodian, regions-and-servers, whats-bound]
 sources:
   - id: S01

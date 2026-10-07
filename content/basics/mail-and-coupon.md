@@ -1,13 +1,14 @@
 ---
 id: mail-and-coupon
-title: メールとクーポン入力（TAKEFLIGHTAION2）
+title: メールとクーポン
+reading: めーるとくーぽん
 category: basics
 tags: [クーポン, メール, ローンチ報酬, Twitch Drops, 無料報酬]
 summary: クーポン「TAKEFLIGHTAION2」は日本時間2026年10月14日15:00まで、アカウントで1回。ゲーム内の設定からメールとクーポンで報酬を受け取る手順をまとめる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [クーポンコード, Coupon, TAKEFLIGHTAION2, ローンチ報酬, Launch Rewards, メール, Mail, 出席ボード]
+aliases: [クーポンコード, Coupon, TAKEFLIGHTAION2, ローンチ報酬, Launch Rewards, メール, Mail, 出席ボード, メールとクーポン入力]
 related: [whats-bound, storage-and-cube, character-creation, launch-rewards-and-codes, twitch-drops-and-war-for-atreia]
 sources:
   - id: S01

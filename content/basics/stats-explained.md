@@ -1,13 +1,14 @@
 ---
 id: stats-explained
-title: ステータスの意味（命中・クリティカル・強打・戦闘速度ほか）
+title: ステータスの意味
+reading: すてーたすのいみ
 category: basics
 tags: [ステータス, 戦闘, 育成, 初心者]
 summary: ステータス画面に並ぶ攻撃・防御・命中系の項目が何を意味するか、グローバル版の上限値（クリティカル50%・回避30%）と優先順位の考え方をまとめます。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Stats, Stats explained, 能力値, 主神ステータス, 主要ステータス, Smite, 強打, Perfect, 完璧, Combat Speed, 戦闘速度]
+aliases: [Stats, Stats explained, 能力値, 主要ステータス, Smite, 強打, Perfect, 完璧, Combat Speed, 戦闘速度, 戦闘速度ほか]
 related: [how-damage-works, status-effects-and-cc, combat-basics, item-level-and-combat-power]
 sources:
   - id: S01

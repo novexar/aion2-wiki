@@ -1,13 +1,14 @@
 ---
 id: platforms-and-requirements
-title: 対応プラットフォームと必要スペック
+title: 対応環境と必要スペック
+reading: たいおうかんきょうとひつようすぺっく
 category: basics
 tags: [基本情報, PC, スペック, DLSS, コンソール]
 summary: グローバル版は Windows PC 専用（Steam / PURPLE）。最低は GTX 1050 Ti＋8GB、推奨は RTX 2070＋16GB で、いずれも 100GB の空き容量が必要。DLSS 4.5 対応。コンソール版は準備中で未発表、スマホ版は予定なし。
 confidence: official
 region: global
 updated: 2026-10-08
-aliases: [動作環境, 推奨スペック, システム要件, System Requirements, PS5]
+aliases: [動作環境, 推奨スペック, システム要件, System Requirements, PS5, 対応プラットフォームと必要スペック]
 related: [game-overview, steam-vs-purple, recommended-settings, controller-and-steam-deck]
 sources:
   - id: S01

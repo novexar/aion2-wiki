@@ -1,13 +1,14 @@
 ---
 id: chat-and-social
-title: チャット・フレンド・ブロック・自動翻訳
+title: チャットとフレンド
+reading: ちゃっととふれんど
 category: basics
 tags: [チャット, フレンド, ブロック, 自動翻訳, 社交]
 summary: 陣営チャットはLv30から。耳打ちとフレンドは同じ陣営・同じサーバーグループが条件。チャット設定で11種類の表示切替、ブロックリスト、自動翻訳を使える。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Chat, フレンド, Friends, ブロックリスト, Block List, 耳打ち, Whisper, 自動翻訳, 陣営チャット]
+aliases: [Chat, フレンド, Friends, ブロックリスト, Block List, 耳打ち, Whisper, 自動翻訳, 陣営チャット, ブロック]
 related: [controls-and-keybinds, party-and-matchmaking, legion, recommended-settings, regions-and-servers]
 sources:
   - id: S01

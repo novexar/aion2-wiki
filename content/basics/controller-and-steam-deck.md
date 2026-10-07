@@ -1,6 +1,7 @@
 ---
 id: controller-and-steam-deck
-title: コントローラー・Steam Deck
+title: コントローラー対応
+reading: こんとろーらーたいおう
 category: basics
 tags: [コントローラー, ゲームパッド, Steam Deck, Steam Input]
 summary: 戦闘はコントローラーで遊べるが、NCは公式サポート対象外としている。Xbox系が最も無難で、メニューはマウス併用が現実的。Steam Deckも公式非対応だが動作報告がある。

@@ -1,13 +1,14 @@
 ---
 id: game-overview
-title: AION2とは（世界観・エンジン・韓国版とグローバル版の経緯）
+title: AION2とは
+reading: AION2とは
 category: basics
 tags: [基本情報, グローバル版, リリース, NC]
 summary: NC（旧NCSOFT）が開発するUE5製MMORPG。前作AIONの200年後が舞台で、韓国・台湾は2025年11月、日本を含むグローバル版は2026年10月5日に開始。基本プレイ無料。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [AION 2, アイオン2, Aion 2 Global, グローバル版とは]
+aliases: [AION 2, アイオン2, Aion 2 Global, グローバル版とは, エンジン, 韓国版とグローバル版の経緯]
 related: [platforms-and-requirements, steam-vs-purple, regions-and-servers, story-and-lore, classes-overview]
 sources:
   - id: S01
