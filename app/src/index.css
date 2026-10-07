@@ -63,9 +63,17 @@
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.5);
 }
 
+/* Web フォント読込前の表示ずれを抑えるフォールバック（size-adjust で字幅を寄せる） */
+@font-face {
+  font-family: 'Noto Sans JP Fallback';
+  src: local('Hiragino Sans'), local('Yu Gothic UI'), local('Meiryo');
+  size-adjust: 98%;
+}
+
 @theme inline {
   --font-sans:
-    'Noto Sans JP', system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+    'Noto Sans JP', 'Noto Sans JP Fallback', system-ui, -apple-system, 'Hiragino Sans',
+    'Yu Gothic UI', sans-serif;
   --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Code', Menlo, Consolas, monospace;
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);

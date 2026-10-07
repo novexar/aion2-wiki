@@ -23,6 +23,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@fontsource/noto-sans-jp": "^5.3.0",
     "@google/genai": "^2.27.0",
     "lucide-react": "^1.52.0",
     "minisearch": "^7.2.0",
