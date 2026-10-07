@@ -1,13 +1,14 @@
 ---
 id: collaborations-and-campaigns
-title: コラボ・キャンペーン（森永エンゼルパイ、バンジージャパン、ストリーマー企画）
+title: コラボとキャンペーン
+reading: こらぼときゃんぺーん
 category: news
 tags: [コラボ, キャンペーン, 日本, 森永製菓, バンジー]
 summary: 日本公式は森永製菓「エンゼルパイ」（応募 9/8〜10/15、330名）と、バンジージャパンの岐阜バンジー（10/5〜2027/3/3、AION2 ウイングスーツ）とコラボ中。どちらもゲーム内報酬ではなく、X での応募や現地施設での企画が中心。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Morinaga collab, エンゼルパイ コラボ, バンジージャパン コラボ, 岐阜バンジー, ストリーマーPR配信, Wフォロー]
+aliases: [Morinaga collab, エンゼルパイ コラボ, バンジージャパン コラボ, 岐阜バンジー, ストリーマーPR配信, Wフォロー, 森永エンゼルパイ, バンジージャパン, ストリーマー企画]
 related: [jp-official-channels, community-launch-events, twitch-drops-and-war-for-atreia, player-numbers-and-reception]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: roadmap-and-upcoming
-title: 今後の予定（確定済みと未発表の区別：サーバー移動、コンソール、新クラス、チャプター）
+title: 今後の予定
+reading: こんごのよてい
 category: news
 tags: [今後の予定, ロードマップ, コンソール, サーバー移動, 未実装]
 summary: グローバル版で日付が確定しているのは、サーバー移動（10月14日開始予定）とルドラの復帰案内（10月16日まで）だけ。コンソール版は準備中、拳星・Lv50・新クラス・航海・ハウジングは韓国版でも日付未定で、グローバル版の時期は未発表。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Roadmap, ロードマップ, Console version, コンソール版, 新クラス, アウトランド, ハウジング]
+aliases: [Roadmap, ロードマップ, Console version, コンソール版, 新クラス, アウトランド, ハウジング, 確定済みと未発表の区別, コンソール]
 related: [content-not-in-global, global-vs-korea, korea-update-history, ludra-raid-suspension, server-transfer, platforms-and-requirements, brawler-kwonseong, global-launch-timeline]
 sources:
   - id: S01

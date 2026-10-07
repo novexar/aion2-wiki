@@ -1,13 +1,14 @@
 ---
 id: ludra-raid-suspension
-title: 聖域レイド「深淵の再錬：ルドラ」の一時削除と今後
+title: ルドラ一時削除と今後
+reading: るどらいちじさくじょとこんご
 category: news
 tags: [ルドラ, 聖域, レイド, 公式, 一時停止]
 summary: NC は10月5日の正式開始時に10人レイド「ルドラ」を一時的に削除した。アーリーアクセスで想定より早く討伐されたため調整中。復帰日は10月16日までに告知予定。EA で得たルドラ装備は復帰時に返還される。
 confidence: official
 region: global
 updated: 2026-10-08
-aliases: [Ludra, Sanctuary Raid, Update on Sanctuary Raid, 深淵の再錬]
+aliases: [Ludra, Sanctuary Raid, Update on Sanctuary Raid, 深淵の再錬, 聖域レイド「深淵の再錬, ルドラ」の一時削除と今後]
 related: [sanctuary-raids-overview, global-patch-notes, roadmap-and-upcoming, belt-and-amulet]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: community-launch-events
-title: コミュニティイベント（超越リーダーボード、ガイド募集、アジア限定イベント）
+title: コミュニティイベント
+reading: こみゅにてぃいべんと
 category: news
 tags: [イベント, 超越, リーダーボード, アジア, キャンペーン]
 summary: NC は正式サービス開始に合わせ、超越ダンジョンのリーダーボード（11/2まで、各サーバー・クラス上位50人に強化素材）、外見コンテスト、ガイド募集などを開催している。日本を含むアジアサーバーには、ルドラ初討伐、カスタマイズコンテスト、Visaキャッシュバックなど別枠のイベントがある。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Community Launch Events, 超越ダンジョンリーダーボード, Daeva Makeover, Guides for Glory, Beauty of Atreia, カスタマイズコンテスト, ルドラ討伐イベント]
+aliases: [Community Launch Events, 超越ダンジョンリーダーボード, Daeva Makeover, Guides for Glory, Beauty of Atreia, カスタマイズコンテスト, ルドラ討伐イベント, 超越リーダーボード, ガイド募集, アジア限定イベント]
 related: [twitch-drops-and-war-for-atreia, launch-rewards-and-codes, transcendence-overview, shattered-arkanis, deus-research-base, jp-official-channels, collaborations-and-campaigns]
 sources:
   - id: S01

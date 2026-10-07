@@ -1,13 +1,14 @@
 ---
 id: weekly-cube-limit-notice
-title: 週のサーバー共有キューブ受取制限（征服84回・超越56回で減額、未受取10回）
+title: 週のキューブ受取制限
+reading: しゅうのきゅーぶうけとりせいげん
 category: news
 tags: [報酬キューブ, 週制限, 減額, サーバー共有, ギーナ]
 summary: 報酬キューブのギーナは、同じサーバーの全キャラクター合計で週に征服84回・超越56回まで満額。それを超えると80%、60%、40%、20%と段階的に減る。キューブを開かずに出る「未受取」は週10回までで、尽きると入場できなくなる。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Weekly cube limit, キューブ減額, 受取回数制限, 未受取キューブ, Kina penalty, サーバー共有制限]
+aliases: [Weekly cube limit, キューブ減額, 受取回数制限, 未受取キューブ, Kina penalty, サーバー共有制限, 週のサーバー共有キューブ受取制限, 征服84回, 超越56回で減額, 未受取10回]
 related: [odyle-energy, expeditions-and-odyle, server-shared-limits-and-alts, kina-farming, tradeable-kina-daily-cap-notice, reset-times]
 sources:
   - id: S01

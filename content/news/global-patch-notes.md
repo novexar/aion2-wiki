@@ -1,13 +1,14 @@
 ---
 id: global-patch-notes
-title: グローバル版パッチノート履歴（2026年10月5日〜）
+title: グローバル版パッチノート
+reading: ぐろーばるばんぱっちのーと
 category: news
 tags: [パッチノート, アップデート, メンテナンス, 公式]
 summary: グローバル版で実施されたメンテナンスと変更点の時系列。10月5日の正式開始メンテ（キャラ削除24時間化など）と10月7日の初回定期メンテ（ファウンダーズ外形の全キャラ共有など）を収録。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Patch Notes, アップデートノート, メンテナンス履歴]
+aliases: [Patch Notes, アップデートノート, メンテナンス履歴, グローバル版パッチノート履歴]
 related: [known-issues, global-launch-timeline, korea-update-history, jp-official-channels]
 sources:
   - id: S01

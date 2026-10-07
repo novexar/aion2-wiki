@@ -1,13 +1,14 @@
 ---
 id: global-launch-timeline
-title: グローバル版の日程（LST・アーリーアクセス・正式開始・シーズン1）
+title: グローバル版の日程
+reading: ぐろーばるばんのにってい
 category: news
 tags: [日程, 正式サービス, アーリーアクセス, シーズン1, 公式]
 summary: グローバル版は2026年9月30日23:00（JST、予定22:00から1時間遅延）にアーリーアクセス、10月5日22:00に正式サービスを開始。シーズン1は12月16日16:00（JST）まで。主要な日付を一覧にまとめる。
 confidence: official
 region: global
 updated: 2026-10-08
-aliases: [Launch timeline, リリース日, Early Access, Advanced Access, Launch Scale Test]
+aliases: [Launch timeline, リリース日, Early Access, Advanced Access, Launch Scale Test, LST, アーリーアクセス, 正式開始]
 related: [official-launch-faq, season-1-end-notice, server-transfer, twitch-drops-and-war-for-atreia, ludra-raid-suspension]
 sources:
   - id: S01

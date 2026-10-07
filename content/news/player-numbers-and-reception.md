@@ -1,13 +1,14 @@
 ---
 id: player-numbers-and-reception
-title: 同時接続数と評価（グローバル版のSteam、40万人到達、ユーザーレビュー）
+title: 同時接続数と評価
+reading: どうじせつぞくすうとひょうか
 category: news
 tags: [同時接続数, Steam, 評価, 40万人, レビュー]
 summary: グローバル版は正式サービス初日（10月5日）に Steam の同時接続数397,905人を記録し、NC は PURPLE を含め40万人超と発表。Steam のユーザーレビューは「賛否両論（Mixed）」で、約65.7%が好評。課金設計への批判が評価を分けている。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [CCU, 同時接続者数, Steam reviews, Steamレビュー, 40万人, Peak players, 評価]
+aliases: [CCU, 同時接続者数, Steam reviews, Steamレビュー, 40万人, Peak players, 評価, グローバル版のSteam, ユーザーレビュー]
 related: [global-launch-timeline, known-issues, collaborations-and-campaigns, free-to-play-and-p2w, official-launch-faq]
 sources:
   - id: S01

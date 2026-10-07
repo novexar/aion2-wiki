@@ -1,13 +1,14 @@
 ---
 id: season-1-end-notice
-title: シーズン1の終了日（2026-12-16 16:00 JST）と、期限が来るもの
+title: シーズン1の終了日
+reading: しーずんいちのしゅうりょうび
 category: news
 tags: [シーズン1, 終了日, 誓いのコイン, ディーヴァパス, 期限]
 summary: グローバル版シーズン1は2026年12月16日の日次リセット（日本時間16:00）に終わる。誓いのコインとディーヴァパス商店コインは削除され、ランキングは報酬を出してから次シーズンへ移る。ディーヴァパスの販売と報酬は12月15日（太平洋時間22:30）のメンテナンスで終わる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Season 1 end, シーズン終了, シーズン1終了, パスコイン失効, 誓いのコイン失効, Oath Coin expiry]
+aliases: [Season 1 end, シーズン終了, シーズン1終了, パスコイン失効, 誓いのコイン失効, Oath Coin expiry, 期限が来るもの]
 related: [seasons-and-chapters, oath-coins-season-shop, daeva-pass, season-missions, reset-times, global-launch-timeline]
 sources:
   - id: S01

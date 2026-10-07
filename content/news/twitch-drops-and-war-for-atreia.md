@@ -1,13 +1,14 @@
 ---
 id: twitch-drops-and-war-for-atreia
-title: Twitch Drops と War for Atreia（視聴時間と報酬の一覧）
+title: Twitch Drops
+reading: Twitchどろっぷす
 category: news
 tags: [Twitch Drops, War for Atreia, 配信, 無料報酬, イベント]
 summary: Twitch Drops は2期間（アーリーアクセス 9/30〜10/4、正式サービス 10/5〜10/16）で、配信を視聴するだけで強化石やスキンが貰える。クリエイター限定の War for Atreia は10/2〜4、10/7〜9、10/12〜14の3回で別枠。連携するアカウントを間違えると届かない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Twitch Drops, War For Atreia, ドロップス, Global Launch Rewards, Advanced Access Rewards, Twitch 連携]
+aliases: [War For Atreia, ドロップス, Global Launch Rewards, Advanced Access Rewards, Twitch 連携, Twitch Drops と War for Atreia, 視聴時間と報酬の一覧]
 related: [launch-rewards-and-codes, mail-and-coupon, community-launch-events, global-launch-timeline, steam-vs-purple, nc-account-and-purple-setup]
 sources:
   - id: S01
