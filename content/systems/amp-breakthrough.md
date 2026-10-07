@@ -3,6 +3,7 @@ id: amp-breakthrough
 title: 突破
 reading: とっぱ
 category: systems
+order: 71
 tags: [突破, Amp, 強化, 突破石, 唯一]
 summary: +15まで強化した唯一装備を、さらに最大5段階伸ばす仕組み。段階数は装備ILで決まり、IL54未満はなし、54〜62は1、70〜78は3、86以上は5。失敗しても何も失わず、突破石とギーナだけを消費する。
 confidence: verified

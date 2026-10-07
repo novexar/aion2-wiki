@@ -3,6 +3,7 @@ id: transcendence-overview
 title: 超越の概要
 reading: ちょうえつのがいよう
 category: dungeons
+order: 112
 tags: [超越, アルカナ, 段階, Sランク, オードエネルギー, ランキング]
 summary: Lv45以降の2〜5人タイムアタック型ダンジョン。2種類（デウス研究基地／砕けたアルカニス）を4段階で遊び、ローンチ時の唯一のアルカナ入手先。報酬キューブは40オード。
 confidence: verified

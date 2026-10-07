@@ -3,6 +3,7 @@ id: healing-guide
 title: ヒーラーの基本
 reading: ひーらーのきほん
 category: classes
+order: 179
 tags: [ヒーラー, 回復, クレリック, チャンター, パーティ]
 summary: 回復はクレリックが主役、チャンターは強化しながら補助する。普段は攻撃し、必要な場面だけ回復スキルを押すのが基本。
 confidence: verified

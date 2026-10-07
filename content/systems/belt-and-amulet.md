@@ -3,6 +3,7 @@ id: belt-and-amulet
 title: ベルトとアミュレット
 reading: べるとあみゅれっと
 category: systems
+order: 82
 tags: [装備, ベルト, アミュレット, 特殊枠, 強化]
 summary: 高潔のベルト（防御）と啓示／激戦のアミュレット（攻撃）は買い替えない「育てる装備」。+1〜+10は専用スクロール付きで成功率100%、+10で物質変換すると次の等級（希少→伝承→唯一、IL13→36→65）になる。
 confidence: verified

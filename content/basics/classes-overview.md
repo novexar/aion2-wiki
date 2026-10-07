@@ -3,6 +3,7 @@ id: classes-overview
 title: クラス一覧
 reading: くらすいちらん
 category: basics
+order: 9
 tags: [基本情報, クラス, 職業, 武器, 役割]
 summary: グローバル版は8クラス。タンク＝テンプラー、ヒーラー＝クレリック、支援＝チャンター、DPS＝グラディエーター／アサシン／レンジャー／ソーサラー／スピリットマスター。天族・魔族で差はなく、各クラスはアクティブ12・パッシブ10・スティグマ13のスキル構成。
 confidence: verified

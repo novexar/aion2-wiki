@@ -3,6 +3,7 @@ id: leveling-1-to-45-overview
 title: レベル上げ1〜45
 reading: れべるあげ1から45
 category: leveling
+order: 36
 tags: [レベル上げ, 序盤, メインストーリー, 覚醒, 封印ダンジョン]
 summary: グローバル版のレベル上限は45。経験値の大半はメインストーリーから得られ、覚醒ゲージが足りない時だけ地域クエスト・封印ダンジョン・駐屯地で補うのが基本。初回キャラは通り道の成長要素だけ拾えばよい。
 confidence: verified

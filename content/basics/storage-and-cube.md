@@ -3,6 +3,7 @@ id: storage-and-cube
 title: キューブと倉庫
 reading: きゅーぶとそうこ
 category: basics
+order: 29
 tags: [倉庫, キューブ, インベントリ, 拡張, アイテム復旧]
 summary: 持ち歩くのはキューブ、サーバー内の全キャラ共有はサーバー倉庫、そのキャラ専用はキャラクター倉庫。初期枠は40/25/25で、遠隔アクセスはメンバーシップ限定。
 confidence: community

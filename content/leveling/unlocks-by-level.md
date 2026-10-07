@@ -3,6 +3,7 @@ id: unlocks-by-level
 title: レベル別の解放要素
 reading: れべるべつのかいほうようそ
 category: leveling
+order: 41
 tags: [解放, レベル, システム, Lv45, 早見表]
 summary: Lv4でスキル、Lv5で翼、Lv10で製作・採集・出席、Lv22でスティグマ、Lv25で補給依頼、Lv30でデイリーダンジョン、Lv45でアビス・超越・悪夢などが一斉に解放される。レベル別の早見表とレベルアップ報酬の累計。
 confidence: verified

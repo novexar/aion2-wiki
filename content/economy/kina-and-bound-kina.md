@@ -3,6 +3,7 @@ id: kina-and-bound-kina
 title: ギーナと刻印ギーナ
 reading: ぎーなとこくいんぎーな
 category: economy
+order: 150
 tags: [ギーナ, 刻印, 通貨, 金策, 取引所]
 summary: ギーナには取引できる「通常ギーナ」と、そのキャラ専用の「ギーナ（刻印）」がある。入手先の違い、支払い順、1日100万の取引可能ギーナ上限、サーバー内の移動方法を解説。
 confidence: verified

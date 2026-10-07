@@ -3,6 +3,7 @@ id: server-choice-for-japanese
 title: 日本人向けサーバー選び
 reading: にほんじんむけさーばーえらび
 category: tips
+order: 212
 tags: [サーバー, 日本, ASIA, 陣営, 初心者]
 summary: 公式の日本人向けサーバーはない。ASIAリージョンで、友人やレギオンと陣営・サーバーを揃え、迷うなら「推奨」表示や新規追加サーバーを選ぶ。アーリーアクセス側と移動の制限も整理する。
 confidence: verified

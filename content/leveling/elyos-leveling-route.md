@@ -3,6 +3,7 @@ id: elyos-leveling-route
 title: 天族ルート
 reading: てんぞくるーと
 category: leveling
+order: 37
 tags: [天族, Elyos, レベル上げ, ベルテロン, ルート]
 summary: 天族はポエタで始まり、Lv10前後でベルテロンへ移る。Lv5で1次覚醒、Lv22で2次、Lv32で3次、Lv45で4次。各レベル帯の主なエピソードと、通り道で拾う封印ダンジョン・駐屯地をまとめる。
 confidence: verified

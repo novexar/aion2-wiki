@@ -3,6 +3,7 @@ id: expeditions-and-odyle
 title: 遠征の基本
 reading: えんせいのきほん
 category: dungeons
+order: 103
 tags: [遠征, 探険, 征服, キューブ, オードエネルギー, 週制限]
 summary: 遠征の2つのモード（探険・征服）、報酬キューブの仕組み、1回の受取で何がもらえるか、未受取10回などの週制限をまとめた記事。
 confidence: verified

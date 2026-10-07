@@ -3,6 +3,7 @@ id: tanking-guide
 title: タンクの基本
 reading: たんくのきほん
 category: classes
+order: 178
 tags: [タンク, ヘイト, テンプラー, グラディエーター, パーティ]
 summary: ボスの注意（ヘイト）を保つ役割。強制的に引き戻せる「挑発」を持つのはテンプラーだけで、レイドでは 1 人が基本。
 confidence: verified

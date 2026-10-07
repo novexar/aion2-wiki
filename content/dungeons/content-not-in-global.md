@@ -3,6 +3,7 @@ id: content-not-in-global
 title: グローバル版未実装コンテンツ
 reading: ぐろーばるばんみじっそうこんてんつ
 category: dungeons
+order: 135
 tags: [韓国版, 未実装, Lv50, 拳星, 試練, 追加ダンジョン]
 summary: グローバル版はLv45・8クラス・遠征6種・超越2種・聖域1種で始まった。Lv50、拳星（Brawler）、追加ダンジョン、ハード、試練、英雄等級装備などは韓国版にあってグローバル版には無い。
 confidence: verified

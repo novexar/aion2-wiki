@@ -3,6 +3,7 @@ id: duels-and-pvp-mode-rules
 title: 決闘とPvPモード
 reading: けっとうとぴーぶいぴーもーど
 category: pvp
+order: 145
 tags: [決闘, PvPモード, 強制PvP, PvP切替, Lv45]
 summary: 通常のフィールドにはPvPのオン／オフ切替があり、アビスは常時PvP。切替には長いクールタイムがあり、攻撃や一部の行動で強制的にPvPになる。決闘は同陣営の練習用で報酬も罰もない。
 confidence: community

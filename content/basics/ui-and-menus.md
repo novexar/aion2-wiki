@@ -3,6 +3,7 @@ id: ui-and-menus
 title: 画面とメニュー名
 reading: がめんとめにゅーめい
 category: basics
+order: 14
 tags: [UI, メニュー, 日英対照, ショートカット, 解放レベル]
 summary: Escメニューの3グループ（コンテンツ・シーズン・アクティビティ）と主要ウィンドウのキー、メニュー名の日英対照、各機能が開くレベルをまとめる。
 confidence: community

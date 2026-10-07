@@ -3,6 +3,7 @@ id: main-story-episodes
 title: メインストーリー
 reading: めいんすとーりー
 category: leveling
+order: 39
 tags: [エピソード, メインストーリー, 進行ロック, 覚醒, 章]
 summary: メインストーリー（エピソード）は経験値とシステム解放の背骨。魔族は全8章89件。Lv22・Lv32・Lv45付近に覚醒ゲージによる進行ロックがあり、足りない時は地域クエストや封印ダンジョンで補う。
 confidence: verified

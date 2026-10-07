@@ -3,6 +3,7 @@ id: templar
 title: テンプラー
 reading: てんぷらー
 category: classes
+order: 169
 tags: [クラス, 近接, タンク, ロングソード, 盾]
 summary: 剣と盾で味方を守る唯一の本格タンク。「挑発」でボスの注意を引き戻せる。レイドでは1パーティに1人が基本。
 confidence: verified

@@ -3,6 +3,7 @@ id: navigator-and-journal
 title: ナビゲーターとジャーナル
 reading: なびげーたーとじゃーなる
 category: leveling
+order: 58
 tags: [ナビゲーター, ジャーナル, 使命, 既知の不具合, クエストトラッカー]
 summary: ジャーナルはLv2、ナビゲーターはLv10で解放。次にやることの案内と、クエストの場所への移動に使う。ジャーナルの「使命」タブをLv45になる前に開くと、使命が翌日まで解放されない既知の不具合がある。
 confidence: verified

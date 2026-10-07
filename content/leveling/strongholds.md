@@ -3,6 +3,7 @@ id: strongholds
 title: 駐屯地
 reading: ちゅうとんち
 category: leveling
+order: 47
 tags: [駐屯地, Stronghold, ベルト, 強化スクロール, 一度きり]
 summary: 駐屯地は各陣営に15か所ある一度きりのソロ拠点。初回クリアでギーナ15,000と高潔のベルト強化スクロール2個が貰え、30個でベルトを3等級ぶん+10にできる。ベルトを育てる唯一の入手元。
 confidence: verified

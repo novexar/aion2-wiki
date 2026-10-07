@@ -3,6 +3,7 @@ id: daevanion-boards
 title: ディーヴァニオンボード
 reading: でぃーゔぁにおんぼーど
 category: systems
+order: 62
 tags: [ディーヴァニオン, ボード, ノード, 結晶, 育成, スキルレベル]
 summary: 中央から隣接ノードを買い進める成長盤面。グローバル版は5枚（ネザカン134／ジケル134／バイゼル134／トリニエル168／PvP用アスフェル232）。結晶1個＝IL+1。
 confidence: verified

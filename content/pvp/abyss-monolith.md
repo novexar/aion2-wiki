@@ -3,6 +3,7 @@ id: abyss-monolith
 title: アビスのモノリス
 reading: あびすのものりす
 category: pvp
+order: 141
 tags: [モノリス, エレシュキガル, 神の痕跡, アスフェル結晶, アビス]
 summary: 混沌のエレシュランタ下層の神の痕跡200個を集めてエレシュキガルのモノリスに共鳴させると、アスフェル結晶36個などが得られる。グローバル版は下層の分だけでLv16まで。IL1000が必要。
 confidence: verified

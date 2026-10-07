@@ -3,6 +3,7 @@ id: stats-explained
 title: ステータスの意味
 reading: すてーたすのいみ
 category: basics
+order: 19
 tags: [ステータス, 戦闘, 育成, 初心者]
 summary: ステータス画面に並ぶ攻撃・防御・命中系の項目が何を意味するか、グローバル版の上限値（クリティカル50%・回避30%）と優先順位の考え方をまとめます。
 confidence: verified

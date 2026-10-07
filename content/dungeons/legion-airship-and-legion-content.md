@@ -3,6 +3,7 @@ id: legion-airship-and-legion-content
 title: レギオン飛行艇
 reading: れぎおんひこうてい
 category: dungeons
+order: 134
 tags: [レギオン, 飛行艇, アジト, ギルド, バフ]
 summary: レギオンはLv16前後で解放されるギルド。最大128人、レギオンLv1〜20の常時バフが付く。アジトへは飛行艇などで行く。レギオン専用の大型コンテンツは、現時点では最小限。
 confidence: verified

@@ -3,6 +3,7 @@ id: arena-1v1-5v5
 title: 闘技場
 reading: とうぎじょう
 category: pvp
+order: 143
 tags: [闘技場, Arena, ランク戦, 1v1, 5v5, PvP]
 summary: 闘技場は自分の装備のまま戦うランク戦。1v1（孤独の闘技場）と5v5（協力の闘技場）があり、Lv45で解放。週の報酬回数に上限があり、均一化されない点が戦術の闘技場との違い。
 confidence: verified

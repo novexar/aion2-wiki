@@ -2,6 +2,7 @@
 id: sample-kinah
 title: ギーナの稼ぎ方（サンプル）
 category: economy
+order: 1
 tags: [ギーナ, 金策, 取引所]
 summary: 開発用のサンプル記事です。ゲーム内通貨ギーナの入手と使い道をまとめた、という想定です。
 confidence: community

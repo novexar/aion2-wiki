@@ -3,6 +3,7 @@ id: story-and-lore
 title: ストーリーと世界観
 reading: すとーりーとせかいかん
 category: basics
+order: 8
 tags: [基本情報, ストーリー, 世界観, 龍族, ディーヴァ]
 summary: 舞台は前作 AION の200年後。アイオンの塔は崩壊し、龍族（バラウル）がアトレイアの大半を支配している。プレイヤーは傭兵からディーヴァに覚醒し、消えた守護神の「核」を集める。天族と魔族で物語は別々。
 confidence: verified

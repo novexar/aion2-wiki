@@ -3,6 +3,7 @@ id: growth-dungeons
 title: 成長ダンジョン
 reading: せいちょうだんじょん
 category: dungeons
+order: 132
 tags: [成長ダンジョン, ファフナイト盆地, 沈黙の墓域, Lv45, 強化石]
 summary: 推奨レベル45の2つのダンジョン（ファフナイト盆地、沈黙の墓域）。Lv45になったばかりのキャラが、征服へ進む前の準備に使う想定。報酬はシュラクの略奪包み、強化石、魂の結晶。
 confidence: verified

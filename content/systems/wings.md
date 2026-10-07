@@ -3,6 +3,7 @@ id: wings
 title: 翼
 reading: つばさ
 category: systems
+order: 83
 tags: [翼, 飛行, 征服, 収集, 物質変換]
 summary: 翼には「装備効果」（着けている間だけ）と「所持効果」（持っているだけで常時）がある。征服ダンジョンでは封印された翼が低確率でドロップし、光るオード×10の物質変換で完成する。グローバル版では翼の強化はできない。
 confidence: verified

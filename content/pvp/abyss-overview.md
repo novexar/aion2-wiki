@@ -3,6 +3,7 @@ id: abyss-overview
 title: アビスの概要
 reading: あびすのがいよう
 category: pvp
+order: 137
 tags: [アビス, エレシュランタ, PvP, アビスポイント, Lv45, IL1000]
 summary: アビスは天族と魔族が出会う常時PvPエリア。グローバル版はLv45・合計IL1000で「混沌のエレシュランタ下層」に入れ、滞在時間は週7時間。PvEの指令でもアビスポイントを稼げる。
 confidence: verified

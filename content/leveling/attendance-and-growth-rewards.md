@@ -3,6 +3,7 @@ id: attendance-and-growth-rewards
 title: 出席と成長報酬
 reading: しゅっせきとせいちょうほうしゅう
 category: leveling
+order: 51
 tags: [出席, チェックイン, 成長支援, 実績, 新芽の証]
 summary: 出席はLv10で開き、Esc > アクティビティ > 出席から毎日受け取る。ローンチ記念の7日ボードとデイリー14日ボードが12月16日まで。成長支援（Growth Support）と新芽の証は、Lv50で開くためグローバル版（上限45）では使えない。
 confidence: verified

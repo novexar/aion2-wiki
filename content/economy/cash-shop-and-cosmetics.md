@@ -3,6 +3,7 @@ id: cash-shop-and-cosmetics
 title: ショップと外形
 reading: しょっぷとがいけい
 category: economy
+order: 157
 tags: [ショップ, 外形, キューナ, チェンガルン商会, A2マイレージ]
 summary: 有料ショップの外形（衣装・武器スキン・ペット・翼）は見た目専用で能力値なし。ゲーム内商店はキューナショップ、チェンガルン商会、A2マイレージ、イベントの4つ。ほとんどの衣装はプレイで入手できる。
 confidence: verified

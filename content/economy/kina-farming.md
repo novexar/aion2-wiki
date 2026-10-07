@@ -3,6 +3,7 @@ id: kina-farming
 title: 金策
 reading: きんさく
 category: economy
+order: 158
 tags: [金策, ギーナ, 征服, サブキャラ, 取引所]
 summary: Lv45以降の金策の軸は、オードエネルギーで受け取る遠征「征服」の報酬キューブ（取引できる通常ギーナ20/30/40万）。サーバー単位の回数で減額され、取引可能ギーナは1日100万が上限。サブは通常ギーナだけがメインの資金になる。
 confidence: community

@@ -3,6 +3,7 @@ id: field-bosses
 title: フィールドボス
 reading: ふぃーるどぼす
 category: dungeons
+order: 125
 tags: [フィールドボス, ガルトゥア, ナフマ, 装備, アビス, 出現時間]
 summary: ベルテロン／アルトガルドに各24枠、混沌のエレシュランタ下層に8枠あるオープンワールドのボス。装備更新の候補はLv51のガルトゥアとアビスのナフマ。再出現はマップの表示で確認する。
 confidence: verified

@@ -3,6 +3,7 @@ id: titles
 title: 称号
 reading: しょうごう
 category: systems
+order: 66
 tags: [タイトル, 称号, 収集, 戦闘力, 実績]
 summary: 取得すると常時効く「所持効果」と、装着中だけ効く「装着効果」を持つ。装着枠は攻撃・防御・その他の3つ。グローバル版は半数が非表示で、強打を与えるものはない。
 confidence: verified

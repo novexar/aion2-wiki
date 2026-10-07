@@ -3,6 +3,7 @@ id: character-deletion-and-redo
 title: キャラクター削除と作り直し
 reading: きゃらくたーさくじょとつくりなおし
 category: basics
+order: 12
 tags: [キャラクター削除, 作り直し, 外見変更, クラス変更]
 summary: 2026年10月5日の正式サービスから、キャラ削除はLv1から可能で待機時間は24時間（アーリーアクセスはLv10以上・168時間）。見た目だけなら削除せず外見変更券を使う。
 confidence: verified

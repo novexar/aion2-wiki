@@ -3,6 +3,7 @@ id: asmodian-leveling-route
 title: 魔族ルート
 reading: まぞくるーと
 category: leveling
+order: 38
 tags: [魔族, Asmodian, レベル上げ, アルトガルド, ルート]
 summary: 魔族はイシャルゲンで始まり、Lv10前後でアルトガルドへ移る。メインストーリーは8章89件。Lv5〜6で1次覚醒、Lv22で2次、Lv32で3次、Lv45で4次。各区間の主なエピソードと通り道の成長要素をまとめる。
 confidence: verified

@@ -3,6 +3,7 @@ id: known-issues
 title: 既知の不具合と回避策
 reading: きちのふぐあいとかいひさく
 category: news
+order: 184
 tags: [不具合, 既知の問題, 回避策, 使命, Twitch]
 summary: 正式サービス開始時点で公式が認めている不具合と、その回避策。特に「Lv45前に使命タブを開くと翌日まで使命が使えない」問題は新規プレイヤー全員に関係する。
 confidence: verified

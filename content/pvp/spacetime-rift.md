@@ -3,6 +3,7 @@ id: spacetime-rift
 title: 時空の亀裂
 reading: じくうのきれつ
 category: pvp
+order: 142
 tags: [時空の亀裂, Spacetime Rift, PvP, Lv45, 敵陣営, 封印ダンジョン]
 summary: 時空の亀裂は約3時間ごとに開く期間限定ポータルで、Lv45から敵陣営の領地へ入れる。滞在は約1時間、入る前にPvPかPvEかを選ぶ。大規模戦「争奪戦」はグローバル版に未実装。
 confidence: verified

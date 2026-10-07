@@ -3,6 +3,7 @@ id: faq-account-and-platform
 title: FAQ アカウント
 reading: FAQあかうんと
 category: faq
+order: 216
 tags: [FAQ, アカウント, プラットフォーム, Steam, PURPLE, 言語]
 summary: グローバル版はPC専用（Steam／PURPLE）。アカウント連携の注意点、日本語対応、PS5・スマホ・コントローラー、韓国・台湾版からの引き継ぎ、サーバー移動など、始める前の疑問に短く答える。
 confidence: verified

@@ -3,6 +3,7 @@ id: combat-basics
 title: 戦闘の基本
 reading: せんとうのきほん
 category: basics
+order: 18
 tags: [戦闘, スタッガー, 基本攻撃, 回避, MP]
 summary: AION2の戦闘はロックオン式の手動戦闘。基本攻撃でMPを回復し、スキルの合間に挟んでキャンセルする。ボスのスタッガーゲージを空にすると約5秒無力化できる。
 confidence: verified

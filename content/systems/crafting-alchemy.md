@@ -3,6 +3,7 @@ id: crafting-alchemy
 title: 錬金
 reading: れんきん
 category: systems
+order: 92
 tags: [錬金, 製作, ポーション, 魔石, 魔導書]
 summary: 魔導書・オーブ、ポーション、スクロール、魔石・霊石を作る製作。スピリットマスターとソーサラーの武器を自作できる。中級以上の魔石は錬金でしか手に入らない。熟練度1は魔法の結晶作りから始める。
 confidence: verified

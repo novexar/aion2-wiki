@@ -3,6 +3,7 @@ id: brawler-kwonseong
 title: 権聖
 reading: けんせい
 category: classes
+order: 177
 tags: [クラス, 韓国版, 近接, 拳甲, 未実装]
 summary: 韓国・台湾版にだけ存在する第9のクラス。拳甲で殴る近接アタッカーで、グローバル版の8クラスには入っていない。
 confidence: verified

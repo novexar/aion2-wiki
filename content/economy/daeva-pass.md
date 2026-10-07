@@ -3,6 +3,7 @@ id: daeva-pass
 title: ディーヴァパス
 reading: でぃーゔぁぱす
 category: economy
+order: 156
 tags: [ディーヴァパス, バトルパス, キューナ, 報酬, シーズン]
 summary: キャラクターごとに買う期間限定のパス。無料の基本パスとキューナで買うプレミアムがあり、シーズン1は「暁のレギオン／イスハルゲンの傭兵」（1,500キューナ、週5万EXP上限）と「世界の呼びかけ」（1,000キューナ）。
 confidence: verified

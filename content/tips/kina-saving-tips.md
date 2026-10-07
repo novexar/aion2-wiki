@@ -3,6 +3,7 @@ id: kina-saving-tips
 title: ギーナを減らさない運用
 reading: ぎーなをへらさないうんよう
 category: tips
+order: 202
 tags: [ギーナ, 節約, 資源管理, 拘束ギーナ, 取引所]
 summary: 拘束ギーナ（キナ刻印）から先に使い、すぐ交換する装備に強化費を使わず、売る前に取引所の相場を見る。+11以降の強化失敗や深い再抽選など、ギーナが減る場面を避けるコツをまとめる。
 confidence: verified

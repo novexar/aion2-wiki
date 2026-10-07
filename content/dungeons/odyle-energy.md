@@ -3,6 +3,7 @@ id: odyle-energy
 title: オードエネルギー
 reading: おーどえねるぎー
 category: dungeons
+order: 104
 tags: [オードエネルギー, 遠征, 超越, 資源, メンバーシップ]
 summary: ダンジョンの報酬キューブを開けるための資源。3時間に15回復、上限は560（メンバーシップ840）。Lv45以降の装備更新に使い、上限で止めないことが最重要。
 confidence: verified

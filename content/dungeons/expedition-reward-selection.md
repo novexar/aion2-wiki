@@ -3,6 +3,7 @@ id: expedition-reward-selection
 title: 遠征の選択報酬
 reading: えんせいのせんたくほうしゅう
 category: dungeons
+order: 105
 tags: [遠征, 天井, 選択報酬, 装備変更券, 征服]
 summary: 探険は3回受取で防具1部位を確定選択、征服は14／21／28回受取ごとに装備か装備変更券を選べる。受取待ちを放置するとそのダンジョンに入れなくなる。
 confidence: verified

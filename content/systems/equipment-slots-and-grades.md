@@ -3,6 +3,7 @@ id: equipment-slots-and-grades
 title: 装備枠と等級
 reading: そうびわくととうきゅう
 category: systems
+order: 68
 tags: [装備, 装備枠, 等級, アイテムレベル, ガーダー]
 summary: 装備枠は全20（武器・ガーダー・防具7・装身具5・ブレスレット2・ベルト・アミュレット・ルーン2）。グローバル版の最上位は唯一で、唯一装備の基礎ILは36〜102。英雄や神話はない。
 confidence: verified

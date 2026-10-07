@@ -3,6 +3,7 @@ id: launch-rewards-and-codes
 title: ローンチ報酬とクーポン
 reading: ろーんちほうしゅうとくーぽん
 category: leveling
+order: 52
 tags: [ローンチ報酬, クーポン, Twitch Drops, 期間限定, 郵便]
 summary: クーポン「TAKEFLIGHTAION2」は10月13日 23:00 PDTまで。ローンチ報酬（ペット箱とウィッシュリスト箱）は郵便で届く。Twitch Dropsは10月16日まで。アカウント連携を間違えないこと。
 confidence: verified

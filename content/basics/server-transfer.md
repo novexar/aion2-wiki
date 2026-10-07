@@ -3,6 +3,7 @@ id: server-transfer
 title: サーバー移動
 reading: さーばーいどう
 category: basics
+order: 6
 tags: [基本情報, サーバー, サーバー移動, 引っ越し]
 summary: 2026年10月14日から同じリージョン・同じ陣営のサーバー間で移動できる。開始当初は無料。アーリーアクセスサーバーのキャラはアーリーアクセスサーバー間のみ。リージョン変更と天族⇔魔族の変更はできない。
 confidence: verified

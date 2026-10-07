@@ -3,6 +3,7 @@ id: guide-week-1
 title: 1週目ガイド
 reading: 1しゅうめがいど
 category: guide
+order: 226
 tags: [初週, Lv45, 覚醒, 日課, アイテムレベル]
 summary: 2日目から7日目までの進め方。Lv45到達、覚醒クエストの壁の越え方、Lv45後に一度だけ貰える報酬の回収、日課の型づくりを順番に並べた。目標はアイテムレベル1,000〜1,400。
 confidence: verified

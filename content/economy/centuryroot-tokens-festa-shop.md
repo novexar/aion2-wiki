@@ -3,6 +3,7 @@ id: centuryroot-tokens-festa-shop
 title: 百年人参の証とフェスタ商店
 reading: ひゃくねんにんじんのあかしとふぇすたしょうてん
 category: economy
+order: 160
 tags: [百年人参の証, フェスタ商店, シューゴフェスタ, 通貨, 魂の結晶]
 summary: 百年人参の証（Centuryroot Token）はシューゴフェスタのミニゲーム報酬で、フェスタ商店（49品目）で結晶・ペット・翼・外形などと交換する。取引不可で、シーズンが変わっても持ち越される。
 confidence: verified

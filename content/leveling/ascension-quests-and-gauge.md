@@ -3,6 +3,7 @@ id: ascension-quests-and-gauge
 title: 覚醒クエストとゲージ
 reading: かくせいくえすととげーじ
 category: leveling
+order: 42
 tags: [覚醒, 覚醒ゲージ, 声を聞く者, スティグマ, 進行ロック]
 summary: 覚醒はレベル5・22・32・45で受ける4段階のクエスト。レベルだけでは進めず、覚醒ゲージを100%にして前提エピソードを終える必要がある。ゲージが足りない時は近場の地域クエスト・封印ダンジョン・駐屯地で補う。
 confidence: verified

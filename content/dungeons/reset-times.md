@@ -3,6 +3,7 @@ id: reset-times
 title: リセット時刻
 reading: りせっとじこく
 category: dungeons
+order: 128
 tags: [リセット, 日課, 週課, 時刻, 夏時間]
 summary: 日次リセットは世界共通で07:00 UTC＝日本時間16:00。週次は水曜の同時刻。日本は夏時間がないので毎日16:00で固定。毎時のイベントは毎時0分（シューゴ）と30分（次元侵攻）。
 confidence: verified

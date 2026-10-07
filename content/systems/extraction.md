@@ -3,6 +3,7 @@ id: extraction
 title: 抽出
 reading: ちゅうしゅつ
 category: systems
+order: 73
 tags: [抽出, 分解, 強化石, 外形, アルカナ]
 summary: 不要な装備を分解して素材に変える機能。強化に使った強化石はすべて戻るが、ギーナは戻らない。外形（見た目）も手に入り、アルカナは神秘的な結晶の素材になる。Lv10で解放。
 confidence: verified

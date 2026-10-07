@@ -3,6 +3,7 @@ id: inventory-tips
 title: 所持品と倉庫整理のコツ
 reading: しょじひんとそうこせいりのこつ
 category: tips
+order: 198
 tags: [倉庫, キューブ, 所持品, 整理, 拡張]
 summary: キューブ（所持品）とサーバー倉庫・キャラクター倉庫の使い分け、拡張費用の目安、遠隔倉庫、誤売却や誤抽出を戻すアイテム回収の回数制限、ペットの拾得フィルタまで、所持品整理の小技をまとめる。
 confidence: verified

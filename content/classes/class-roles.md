@@ -3,6 +3,7 @@ id: class-roles
 title: クラスの役割分類
 reading: くらすのやくわりぶんるい
 category: classes
+order: 176
 tags: [クラス, 役割, アタッカー, ヒーラー, タンカー]
 summary: AION2 の 8 クラスはゲームデータ上アタッカー・ヒーラー・タンカーの 3 役割に分類される。複数の役割を兼ねるクラスもある。
 confidence: verified

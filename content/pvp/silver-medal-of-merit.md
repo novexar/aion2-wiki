@@ -3,6 +3,7 @@ id: silver-medal-of-merit
 title: 銀の功績メダル
 reading: ぎんのこうせきめだる
 category: pvp
+order: 148
 tags: [銀の功績メダル, 通貨, アビス, 戦術の闘技場, ランキング報酬]
 summary: 銀の功績メダルはPvP系コンテンツの報酬通貨。戦術の闘技場の勝利、アビスのボス・占領戦のランキング報酬などで入手し、アビス商店の一部品目の購入に使う。
 confidence: verified

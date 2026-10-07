@@ -3,6 +3,7 @@ id: daevanion-crystals
 title: ディーヴァニオン結晶
 reading: でぃーゔぁにおんけっしょう
 category: systems
+order: 63
 tags: [ディーヴァニオン, 結晶, 入手先, 地域クエスト, 封印ダンジョン, 商店]
 summary: ボード用ポイントの元。レベルアップで136、自陣営の地域クエスト58、自陣営の封印ダンジョン61か所×2、悪夢商店50、フェスタ商店50。クライアント上の入手先はこれで全部。
 confidence: verified

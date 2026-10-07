@@ -3,6 +3,7 @@ id: item-level-and-combat-power
 title: 合計ILと戦闘力の読み方
 reading: ごうけいILとせんとうりょくのよみかた
 category: leveling
+order: 53
 tags: [アイテムレベル, 戦闘力, IL, 装備レベル, 強化費用]
 summary: アイテムレベル（IL）は装備の等級・強化・ディーヴァニオン・魔石・アルカナなどの単純な合計で、コンテンツの入場条件になる。戦闘力は別の指標で、同じILでも実力は変わる。安い強化から先にILを稼ぐ。
 confidence: verified

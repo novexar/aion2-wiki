@@ -3,6 +3,7 @@ id: arcana
 title: アルカナ
 reading: あるかな
 category: systems
+order: 67
 tags: [アルカナ, カード, 超越, スキルレベル, 主神ステータス]
 summary: Lv45で解放されるカード型の装備枠。聖杯・羊皮紙・コンパス・鐘・鏡の5種を2セット（活力／魔力）から集め、スキルレベルと主神ステータスを上げる。主な入手先は超越。
 confidence: verified

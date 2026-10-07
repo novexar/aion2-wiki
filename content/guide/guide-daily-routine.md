@@ -3,6 +3,7 @@ id: guide-daily-routine
 title: 日課と週課のテンプレ
 reading: にっかとしゅうかのてんぷれ
 category: guide
+order: 230
 tags: [日課, 週課, 時短, オードエネルギー, ロードマップ]
 summary: Lv45後の毎日・毎週のやることを、時間が30分の日と60分の日に分けた手順書。上限であふれて無駄になる資源を先に守り、残りの時間で次のILに必要なものを進める。
 confidence: verified

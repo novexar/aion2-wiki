@@ -3,6 +3,7 @@ id: phantasmal-fragments-nightmare-shop
 title: 夢幻の破片と悪夢商店
 reading: むげんのはへんとあくむしょうてん
 category: economy
+order: 161
 tags: [夢幻の破片, 悪夢, 悪夢商店, スティグマ, パンテオン]
 summary: 夢幻の破片（Phantasmal Fragment）は悪夢の初回クリア報酬。悪夢商店ではジケルの巨像14,000、ボス像5,000〜8,000、スティグマの欠片1,500（35個）、ダエヴァニオン結晶300（50個）などと交換する。破片はシーズンを越えて持ち越される。
 confidence: verified

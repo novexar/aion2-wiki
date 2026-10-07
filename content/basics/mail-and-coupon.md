@@ -3,6 +3,7 @@ id: mail-and-coupon
 title: メールとクーポン
 reading: めーるとくーぽん
 category: basics
+order: 31
 tags: [クーポン, メール, ローンチ報酬, Twitch Drops, 無料報酬]
 summary: クーポン「TAKEFLIGHTAION2」は日本時間2026年10月14日15:00まで、アカウントで1回。ゲーム内の設定からメールとクーポンで報酬を受け取る手順をまとめる。
 confidence: verified

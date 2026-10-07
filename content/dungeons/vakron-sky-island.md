@@ -3,6 +3,7 @@ id: vakron-sky-island
 title: バクロンの空中島
 reading: ばくろんのくうちゅうとう
 category: dungeons
+order: 109
 tags: [遠征, バクロン, 空中島, 探険, 征服, ボス攻略]
 summary: Lv45・IL1,400で入れる★2の遠征。探険も征服も報酬キューブは40オード。最終ボスのバクロンは、3連の輪をジャンプで避ける攻撃と、赤い岩を全員で割る「ロードストーン牢獄」が全滅ポイント。
 confidence: verified

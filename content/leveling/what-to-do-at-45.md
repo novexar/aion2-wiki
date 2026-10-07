@@ -3,6 +3,7 @@ id: what-to-do-at-45
 title: Lv45到達後にやること
 reading: Lv45とうたつごにやること
 category: leveling
+order: 43
 tags: [Lv45, 装備レベル, 初動, ディーヴァニオン, アビス]
 summary: Lv45になったらアイテムレベル約780から1,400までを5つの段階で上げる。ストーリー完走、一度きりの報酬の回収、1,000までの安い強化、アビスへの引き渡し、1,400に向けた昇級の順に進める。
 confidence: verified

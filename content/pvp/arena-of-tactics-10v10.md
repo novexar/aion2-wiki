@@ -3,6 +3,7 @@ id: arena-of-tactics-10v10
 title: 戦術の闘技場
 reading: せんじゅつのとうぎじょう
 category: pvp
+order: 144
 tags: [戦術の闘技場, 戦場, Battlefield, 10v10, 銀の功績メダル, PvP]
 summary: 戦術の闘技場は10v10の目標戦で、装備とスキルが均一化される唯一のPvP。1日2回の時間帯があり、週に参加3回・勝利3回の報酬が出る。Lv45の新人にもっとも公平なPvP。
 confidence: verified

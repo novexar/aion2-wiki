@@ -3,6 +3,7 @@ id: pet-selection-box
 title: ペット選択箱のおすすめ
 reading: ぺっとせんたくばこのおすすめ
 category: tips
+order: 204
 tags: [ペット, ローンチ報酬, 選択箱, 乗り物]
 summary: ローンチ報酬のペット箱はパガティと、パピス・銀色の刃ロータン・コヌティ作業員・黒煙モルトの4択から1体。後から手に入りにくいロータンかモルトを選ぶ案が多いが、移動を優先するならパピスも有力。
 confidence: verified

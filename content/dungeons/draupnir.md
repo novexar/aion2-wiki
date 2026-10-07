@@ -3,6 +3,7 @@ id: draupnir
 title: ドラウプニル
 reading: どらうぷにる
 category: dungeons
+order: 107
 tags: [遠征, ドラウプニル, ヴォカルマ, 探険, 征服, ボス攻略]
 summary: Lv45・IL700で入れる★1の遠征。探険でも報酬キューブに40オードが必要で、初回の防具選択が狙い目。最終ボスは波を跳んでスタッガーを割るチェックが2回ある。
 confidence: verified

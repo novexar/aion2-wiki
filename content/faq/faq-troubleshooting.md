@@ -3,6 +3,7 @@ id: faq-troubleshooting
 title: FAQ トラブル
 reading: FAQとらぶる
 category: faq
+order: 224
 tags: [FAQ, トラブル, ログイン, Twitch Drops, アカウント連携, 不具合]
 summary: アカウント連携でアーリーアクセスの権利を失う問題、Twitch Dropsが届かない時、使命タブの既知の不具合、チャットが出ない時の対処など、開始直後に多いトラブルに短く答える。
 confidence: community

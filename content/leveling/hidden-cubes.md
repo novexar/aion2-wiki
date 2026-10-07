@@ -3,6 +3,7 @@ id: hidden-cubes
 title: ヒドゥンキューブ
 reading: ひどぅんきゅーぶ
 category: leveling
+order: 49
 tags: [ヒドゥンキューブ, 鍵, 魂結晶, 探索, 宝箱]
 summary: ヒドゥンキューブはフィールドに出現する隠し宝箱。グローバル版では鍵：ヒドゥンキューブ1個が必要で、1個につき魂結晶1,000個が確定。出現位置は固定でなく、候補地点の中から現れる。
 confidence: verified

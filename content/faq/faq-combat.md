@@ -3,6 +3,7 @@ id: faq-combat
 title: FAQ 戦闘
 reading: FAQせんとう
 category: faq
+order: 221
 tags: [FAQ, 戦闘, ステータス, 強打, クリティカル, ダメージ計算]
 summary: 強打・完璧・クリティカルの違い、前方・後方ダメージ増幅の価値、足し算と掛け算の違い、アルカナ、クラス選びなど、戦闘とステータスの疑問に短く答える。
 confidence: community

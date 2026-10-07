@@ -3,6 +3,7 @@ id: field-instances
 title: フィールドインスタンス
 reading: ふぃーるどいんすたんす
 category: dungeons
+order: 133
 tags: [フィールドインスタンス, 放棄されたバラウ要塞, ファフニウム研究所, 日課]
 summary: 1日1回ずつ（最大7回ためられる）入れる日課用のフィールド型ダンジョン。クライアントのデータ上は存在するが、グローバル版で開放されているかは未確認で、一次資料が1つしかない。
 confidence: community

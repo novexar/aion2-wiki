@@ -3,6 +3,7 @@ id: boss-challenge
 title: ボスチャレンジ
 reading: ぼすちゃれんじ
 category: dungeons
+order: 118
 tags: [ボスチャレンジ, 悪夢, 夢幻の破片, ボス, 段階]
 summary: クライアントに26体のボスがそれぞれ最大10段階の挑戦はしごを持つ。悪夢（Nightmare）と同じ仕組みで、初回クリアで夢幻の破片が出る。グローバル版シーズン1で遊べるのは、その中の7体。
 confidence: verified

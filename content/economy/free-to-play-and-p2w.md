@@ -3,6 +3,7 @@ id: free-to-play-and-p2w
 title: 無課金とP2W
 reading: むかきんとぴーつーうぃん
 category: economy
+order: 165
 tags: [無課金, P2W, 基本無料, メンバーシップ, 課金]
 summary: AION2は基本プレイ無料で、ガチャ型の装備販売はない。有料はメンバーシップ、キューナ、ディーヴァパス、外形ショップ。公式は外形と消耗品に優位性なしと説明するが、パスの育成素材と取引所への入り口は差になりうる。
 confidence: verified

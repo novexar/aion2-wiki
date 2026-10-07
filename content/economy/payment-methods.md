@@ -3,6 +3,7 @@ id: payment-methods
 title: 決済方法
 reading: けっさいほうほう
 category: economy
+order: 164
 tags: [決済, PURPLE, 3Dセキュア, Apple Pay, 返金]
 summary: 日本のPC版PURPLEで使えるのはクレジット／デビットカード、BitCash、PayPay、キャリア決済（docomo・softbank）。コンビニ決済は終了。初回カード決済は3Dセキュアの確認があり、Apple Payは日本が対象外。
 confidence: verified

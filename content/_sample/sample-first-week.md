@@ -2,6 +2,7 @@
 id: sample-first-week
 title: 最初の1週間の過ごし方（サンプル）
 category: guide
+order: 1
 tags: [初心者, 日課, ロードマップ]
 summary: 開発用のサンプル記事です。始めて数日のプレイヤーが毎日やることを順番に並べた、という想定です。
 confidence: official

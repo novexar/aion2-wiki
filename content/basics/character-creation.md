@@ -3,6 +3,7 @@ id: character-creation
 title: キャラクター作成
 reading: きゃらくたーさくせい
 category: basics
+order: 11
 tags: [キャラクター作成, キャラクリ, スロット, 外見変更, スタイルショップ]
 summary: 作成画面は200以上の調整項目を持ち、性別でクラスは制限されない。スロットは初期4つで最大8つ。外見は外見変更券で後から直せ、スタイルショップのデータ適用には600 Qunaが必要。
 confidence: verified

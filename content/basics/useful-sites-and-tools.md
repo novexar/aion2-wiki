@@ -3,6 +3,7 @@ id: useful-sites-and-tools
 title: 便利サイトとツール
 reading: べんりさいととつーる
 category: basics
+order: 35
 tags: [サイト, データベース, マップ, ツール, 公式]
 summary: グローバル版の情報は公式サイトとSteamのお知らせが最優先。確率公示、データベース、マップ、プランナーの使い分けと、アジト版データが混ざる点の注意をまとめる。
 confidence: verified

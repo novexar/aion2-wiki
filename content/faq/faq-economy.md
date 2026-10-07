@@ -3,6 +3,7 @@ id: faq-economy
 title: FAQ 経済
 reading: FAQけいざい
 category: faq
+order: 218
 tags: [FAQ, ギーナ, キューナ, 取引所, 刻印, 受け渡し]
 summary: (刻印)付きアイテムの意味、キャラクター間の受け渡し、プレイヤー同士の直接取引が使えない理由、取引所とメンバーシップの関係、ギーナとキューナの違いに短く答える。
 confidence: verified

@@ -3,6 +3,7 @@ id: performance-tips
 title: 軽量化とカクつき対策
 reading: けいりょうかとかくつきたいさく
 category: tips
+order: 208
 tags: [FPS, 軽量化, グラフィック, DLSS, 動作環境]
 summary: まずDLSSかFSRを有効にし、解像度スケール、大規模戦闘品質、エフェクト、影の順に下げる。街や大人数戦だけ重いなら他プレイヤーの表示を減らす。FPSが高いのにカクつくときはフレーム生成を一度切る。
 confidence: verified

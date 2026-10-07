@@ -3,6 +3,7 @@ id: crafting-overview
 title: 製作の基本
 reading: せいさくのきほん
 category: systems
+order: 88
 tags: [製作, 熟練度, 昇級試験, COMBO, 専門技術]
 summary: 製作はLv10で解放される5種の専門技術（鍛冶・防具製作・細工・錬金・料理）。熟練度は1〜100で、50で昇級試験が必要。成功でも失敗でも熟練度が上がり、成功時にCOMBOで上位品になることがある。
 confidence: verified

@@ -3,6 +3,7 @@ id: skills-and-specialties
 title: スキルと特化
 reading: すきるととっか
 category: systems
+order: 59
 tags: [スキル, 特化, スキルポイント, 育成, ビルド]
 summary: 通常スキル（マスタリー）はスキルポイントでLv10まで。11以降は装備・ディーヴァニオン・アルカナで積み上げ、Lv8/12/16/20で特化（Specialty）が開く。
 confidence: verified

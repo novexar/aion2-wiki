@@ -3,6 +3,7 @@ id: crafted-gear
 title: 製作装備
 reading: せいさくそうび
 category: systems
+order: 96
 tags: [製作装備, ドラゴンロード, アップクラフト, COMBO, IL102]
 summary: グローバル版のシーズン1で最上位のPvE装備は製作で作るドラゴンロード系。直接作れるのは62のトゥルー・ドラゴンロードだけで、以降は1段階ずつ作り替えて102まで上げる。強化・突破・魂刻印は引き継がれる。
 confidence: verified

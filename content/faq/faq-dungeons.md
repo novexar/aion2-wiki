@@ -3,6 +3,7 @@ id: faq-dungeons
 title: FAQ ダンジョン
 reading: FAQだんじょん
 category: faq
+order: 219
 tags: [FAQ, ダンジョン, 遠征, 超越, オードエネルギー, 貢献度]
 summary: オードエネルギーの使い方、探険と征服の違い、貢献度、超越に入る時期、聖域とバス、パーティ人数など、Lv45前後で多いダンジョンの疑問に短く答える。
 confidence: verified

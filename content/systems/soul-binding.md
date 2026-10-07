@@ -3,6 +3,7 @@ id: soul-binding
 title: 魂刻印
 reading: たましいこくいん
 category: systems
+order: 77
 tags: [魂刻印, ステータスライン, 魂の書, 調律, 厳選]
 summary: 装備を初めて装着したときに付くステータスライン（追加効果）を育てる仕組み。値を上げる「束縛」、1本を引き直す「調律」、全部引き直す「初期化」、1本足す「魂融合」の4つ。取引不可になり、魂融合のラインだけは継承で移らない。
 confidence: verified

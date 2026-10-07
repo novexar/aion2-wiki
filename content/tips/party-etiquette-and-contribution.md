@@ -3,6 +3,7 @@ id: party-etiquette-and-contribution
 title: パーティマナーと貢献度
 reading: ぱーてぃまなーとこうけんど
 category: tips
+order: 203
 tags: [パーティ, マナー, 貢献度, 規約, 遠征]
 summary: 遠征・超越では貢献度が低いと報酬キューブを受け取れない。報酬キューブを受け取らずに抜けない、事前に決めた分配を守る、有償の代行は処分対象、といったパーティでの守り事をまとめる。
 confidence: community

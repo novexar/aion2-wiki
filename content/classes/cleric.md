@@ -3,6 +3,7 @@ id: cleric
 title: クレリック
 reading: くれりっく
 category: classes
+order: 174
 tags: [クラス, ヒーラー, サポート, メイス, 蘇生]
 summary: メイスを持つパーティの主力ヒーラー。回復・蘇生に加え、ボスを弱らせるデバフと味方へのバフを出す。普段は攻撃して、必要な時だけ回復する。
 confidence: verified

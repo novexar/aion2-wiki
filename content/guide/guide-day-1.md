@@ -3,6 +3,7 @@ id: guide-day-1
 title: 初日ガイド
 reading: しょにちがいど
 category: guide
+order: 225
 tags: [初日, 初心者, ロードマップ, 設定, Lv10]
 summary: 始めた日にやることを、準備・キャラクター作成・設定・Lv10到達の順に並べた手順書。迷ったらメインストーリー（エピソード）を進める。強化や課金は急がない。
 confidence: verified

@@ -3,6 +3,7 @@ id: pvp-stats-and-gear
 title: PvP用ステータスと装備
 reading: PvPようすてーたすとそうび
 category: pvp
+order: 147
 tags: [PvP装備, PvPダメージ増加, 潜在力, 状態異常抵抗, アスフェル]
 summary: PvPにはPvP専用のステータスがあり、潜在力・魔石・称号・アスフェル盤・アビス装備で積む。PvPダメージはPvEと別計算で、状態異常を解除する「抵抗」を先に使わせる読み合いが重要。
 confidence: community

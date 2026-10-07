@@ -3,6 +3,7 @@ id: macros
 title: ゲーム内マクロ
 reading: げーむないまくろ
 category: basics
+order: 17
 tags: [マクロ, スキル, 設定, 基本攻撃キャンセル, 規約]
 summary: ゲーム内マクロは、マクロキーを押している間だけ登録したクイックスロットのスキルを順に試す機能。最大20ステップ、遅延10〜9,900ms。マクロキーは初期未設定。外部ツールはBANのリスクがある。
 confidence: verified

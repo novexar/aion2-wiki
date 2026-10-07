@@ -3,6 +3,7 @@ id: transfer-inheritance
 title: 継承
 reading: けいしょう
 category: systems
+order: 72
 tags: [継承, 唯一, 継承石, 強化, 装備更新]
 summary: 育てた唯一装備の強化段階・突破・ステータスラインを、同じ部位の新しい唯一装備へ移す仕組み。継承石を使い、ギーナは不要で、成功率は常に100%。魔石・神石・潜在能力は移らない。
 confidence: verified

@@ -3,6 +3,7 @@ id: story-locks-and-abyss-handin
 title: ストーリーロック
 reading: すとーりーろっく
 category: leveling
+order: 57
 tags: [ストーリーロック, アビス, 引き渡し, 覚醒, コロ]
 summary: メインストーリーはLv22・Lv32前後とLv45に進行ロックがある。Lv45のロックは、ドラウプニル（IL700）を通り、アビス（IL1,000）で引き渡すまで解けず、覚醒クエストと地域クエスト22件（魔族23件）が閉じたまま。
 confidence: verified

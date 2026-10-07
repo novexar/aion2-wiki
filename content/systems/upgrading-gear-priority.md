@@ -3,6 +3,7 @@ id: upgrading-gear-priority
 title: 装備更新の優先順位
 reading: そうびこうしんのゆうせんじゅんい
 category: systems
+order: 100
 tags: [装備更新, 強化, 優先順位, 効率, アイテムレベル]
 summary: 「強化できるから強化する」ではなく「次のコンテンツに入るために強化する」が基本。ドロップ品は+10まで、武器とガーダーとベルト・アミュレットを優先し、防具は最後。製作装備に強化を集めるのが定番。
 confidence: verified

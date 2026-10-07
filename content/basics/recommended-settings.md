@@ -3,6 +3,7 @@ id: recommended-settings
 title: おすすめ設定
 reading: おすすめせってい
 category: basics
+order: 15
 tags: [設定, グラフィック, FPS, DLSS, HUD]
 summary: FPSを上げるにはDLSS（RTX）かFSR（Radeon）を有効にして品質を調整し、大規模戦闘品質やエフェクトを下げる。チャットの自動翻訳、HUD、カメラ揺れなどの見やすさ設定も紹介。
 confidence: verified

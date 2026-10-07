@@ -3,6 +3,7 @@ id: irreversible-choices
 title: 取り返しのつかない要素
 reading: とりかえしのつかないようそ
 category: tips
+order: 196
 tags: [初心者, 陣営, サーバー, 削除, 注意]
 summary: 陣営とクラス、サーバー、名前、ファウンダーズパックの受け取り先、強化の失敗など、やり直せない要素とやり直せる要素を一覧にし、始める前に決めておくことを整理する。
 confidence: verified

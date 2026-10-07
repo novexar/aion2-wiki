@@ -3,6 +3,7 @@ id: commands-and-command-scrolls
 title: 指令と指令書
 reading: しれいとしれいしょ
 category: dungeons
+order: 122
 tags: [使命, 指令, 指令書, 週課, アビスポイント]
 summary: 使命の「指令」は週単位のクエスト。首都の指令商人から指令書を1枚15,000ギーナで買い、週12件（アビス下層の指令書を含めると最大20件）まで受けられる。アビスポイントが主な報酬で、PvEだけの人にも必要。
 confidence: verified

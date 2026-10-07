@@ -3,6 +3,7 @@ id: oath-coins-season-shop
 title: 誓いのコインとシーズン商店
 reading: ちかいのこいんとしーずんしょうてん
 category: economy
+order: 162
 tags: [誓いのコイン, シーズン商店, シーズンミッション, 期限, 通貨]
 summary: 誓いのコイン（Oath Coin）はシーズンミッションで貯めるシーズン商店専用の通貨。グローバル版シーズン1の順位報酬には含まれず、シーズン終了（2026年12月16日）で削除されるので使い切りが必要。
 confidence: verified

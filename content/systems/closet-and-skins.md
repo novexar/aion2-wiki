@@ -3,6 +3,7 @@ id: closet-and-skins
 title: クローゼットと外形
 reading: くろーぜっととがいけい
 category: systems
+order: 86
 tags: [外形, スキン, クローゼット, 染色, 収集, 課金]
 summary: クローゼットは外見を変える機能だが、スキンを解放するごとに永続の収集ボーナス（武器種ごとの攻撃力増加など）が付き、サーバー内の全キャラクターで共有される。ショップの課金スキンにはステータスも収集ポイントもない。
 confidence: verified

@@ -3,6 +3,7 @@ id: pvp-overview
 title: PvPの全体像
 reading: PvPのぜんたいぞう
 category: pvp
+order: 136
 tags: [PvP, アビス, 闘技場, 戦場, 時空の亀裂, Lv45]
 summary: グローバル版のPvPは天族と魔族の陣営戦。アビス・闘技場・戦場・時空の亀裂はすべてLv45で解放され、通常フィールドにはPvPのオン/オフ切替がある。
 confidence: verified

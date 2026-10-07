@@ -3,6 +3,7 @@ id: supply-requests
 title: 補給依頼
 reading: ほきゅういらい
 category: leveling
+order: 50
 tags: [補給依頼, アビスポイント, Lv25, 納品, 日課]
 summary: 補給依頼はLv25で解放される納品型のクエスト。指定された素材や装備を納めるとアビスポイントなどが貰える。全員に同じ依頼が出るため市場の需要の目安にもなる。内容の詳細は資料が少なく、要確認。
 confidence: verified

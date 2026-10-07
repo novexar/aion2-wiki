@@ -3,6 +3,7 @@ id: rotation-and-skill-macros
 title: ローテーションとマクロ
 reading: ろーてーしょんとまくろ
 category: classes
+order: 180
 tags: [マクロ, ローテーション, 基本攻撃キャンセル, クラス, 設定]
 summary: ゲーム内マクロで「基本攻撃＋マクロキー」を押しっぱなしにするのが標準。8クラスごとに、マクロに入れるスキルと手で押すスキルの分け方をまとめる。
 confidence: verified

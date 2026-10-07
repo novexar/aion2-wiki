@@ -3,6 +3,7 @@ id: dungeons-overview
 title: ダンジョンの種類
 reading: だんじょんのしゅるい
 category: dungeons
+order: 102
 tags: [ダンジョン, 遠征, 超越, 聖域, 悪夢, 入場条件]
 summary: グローバル版で遊べるダンジョンの全種類と、人数・解放レベル・必要アイテムレベル（IL）の一覧。Lv45以降は征服→超越→聖域の順に目標が上がる。
 confidence: verified

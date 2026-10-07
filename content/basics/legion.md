@@ -3,6 +3,7 @@ id: legion
 title: レギオン
 reading: れぎおん
 category: basics
+order: 27
 tags: [レギオン, ギルド, アジト, 倉庫, 社交]
 summary: レギオンはAION2のギルド。上限128人、創設は100,000ギーナ、脱退後24時間は再加入不可。アジトは1,000,000ギーナで30日間レンタルする。
 confidence: verified

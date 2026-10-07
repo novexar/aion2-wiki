@@ -3,6 +3,7 @@ id: nc-account-and-purple-setup
 title: NCアカウントとPURPLE
 reading: NCあかうんととぱーぷる
 category: basics
+order: 4
 tags: [基本情報, アカウント, PURPLE, 始め方]
 summary: NC アカウントは事前に作らなくても始められる。Steam 版は Steam アカウントのままで可、PURPLE はメール／Google／Apple／Steam などで登録。既存の NC アカウントがある人は、Steam でログインする前に「ログイン管理」で Steam を連携するのが最重要。
 confidence: verified

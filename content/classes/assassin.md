@@ -3,6 +3,7 @@ id: assassin
 title: アサシン
 reading: あさしん
 category: classes
+order: 170
 tags: [クラス, 近接, アタッカー, ダガー, ステルス]
 summary: 背後から短時間で大ダメージを出す近接アタッカー。「刻印」を貯めて「紋様爆発」で爆発させる。位置取りが命。
 confidence: verified

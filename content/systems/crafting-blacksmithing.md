@@ -3,6 +3,7 @@ id: crafting-blacksmithing
 title: 鍛冶
 reading: かじ
 category: systems
+order: 89
 tags: [鍛冶, 製作, 武器, ガーダー, 熟練度]
 summary: 剣・大剣・短剣・メイスとガーダー、金属素材を作る製作。グラディエーター、テンプラー、アサシン、クレリックの武器を自作できる。熟練度1はオリハルコンのインゴット作りから始め、50で昇級する。
 confidence: verified

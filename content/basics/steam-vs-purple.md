@@ -3,6 +3,7 @@ id: steam-vs-purple
 title: Steam版とPURPLE版
 reading: Steamばんとぱーぷるばん
 category: basics
+order: 3
 tags: [基本情報, Steam, PURPLE, アカウント]
 summary: Steam 版と PURPLE 版はゲーム内容もサーバーも同じで、一緒に遊べる。Steam だけで遊ぶなら連携不要。両方で同じキャラを使うには NC アカウントに Steam を連携する。韓国・台湾版からの引き継ぎは不可。
 confidence: official

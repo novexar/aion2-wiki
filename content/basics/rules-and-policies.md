@@ -3,6 +3,7 @@ id: rules-and-policies
 title: 運営ポリシー
 reading: うんえいぽりしー
 category: basics
+order: 34
 tags: [規約, 処罰, RMT, 信頼ステータス, マクロ]
 summary: 外部プログラムやボットは初回から統合アカウント停止、リアルマネー取引は30日・90日。NC以外からのギーナ・Quna購入も規約違反。ゲーム内マクロはNC自身の機能。
 confidence: verified

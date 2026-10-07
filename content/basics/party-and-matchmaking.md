@@ -3,6 +3,7 @@ id: party-and-matchmaking
 title: パーティとマッチング
 reading: ぱーてぃとまっちんぐ
 category: basics
+order: 25
 tags: [パーティ, マッチング, ダンジョン, フォース, 初心者]
 summary: 遠征は最大 5 人、超越は 2〜5 人、聖域は 10 人。グローバル版はリージョン内の全サーバー・両陣営でマッチングでき、「自陣営のみ」の設定も選べます。募集の見方と貢献度の注意点をまとめます。
 confidence: verified

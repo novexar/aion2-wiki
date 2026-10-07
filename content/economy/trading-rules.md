@@ -3,6 +3,7 @@ id: trading-rules
 title: 取引ルール
 reading: とりひきるーる
 category: economy
+order: 153
 tags: [取引, 直接取引, RMT, BOT, サーバー倉庫, 信頼ステータス]
 summary: グローバル版ではプレイヤー間の直接取引が BOT 対策で無効化されている。他人と物をやり取りする手段、自分のキャラ間の移動（サーバー倉庫）、RMT や代行の罰則、信頼ステータス。
 confidence: verified

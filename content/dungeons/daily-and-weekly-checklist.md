@@ -3,6 +3,7 @@ id: daily-and-weekly-checklist
 title: 日課と週課チェック
 reading: にっかとしゅうかちぇっく
 category: dungeons
+order: 127
 tags: [日課, 週課, チェックリスト, オードエネルギー, リセット]
 summary: Lv45以降に毎日・毎週繰り返すことの一覧。毎日は使命5件、オードエネルギー、悪夢、シューゴフェスタの鍵、次元侵攻の鍵。毎週は遠征・超越・覚醒戦・デイリーダンジョン・指令・ルドラ。
 confidence: verified

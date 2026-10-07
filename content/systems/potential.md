@@ -3,6 +3,7 @@ id: potential
 title: 潜在能力
 reading: せんざいのうりょく
 category: systems
+order: 78
 tags: [潜在能力, Potential, PvP, アビス, 強化]
 summary: 唯一装備に付くPvP専用の強化ライン。武器・装身具はPvPダメージ増幅、防具・ブレスレットはPvPダメージ耐性が最大2%。4段階で必ず成功し、アビスポイントと専用の石を使う。継承では移らない。
 confidence: community

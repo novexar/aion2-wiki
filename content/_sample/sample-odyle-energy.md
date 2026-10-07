@@ -2,6 +2,7 @@
 id: sample-odyle-energy
 title: オードエネルギー（サンプル）
 category: dungeons
+order: 1
 tags: [遠征, 報酬, 資源]
 summary: 開発用のサンプル記事です。ダンジョン報酬の受け取りに使う資源という想定で、表・注意書き・出典参照の表示を確認します。
 confidence: verified

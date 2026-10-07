@@ -3,6 +3,7 @@ id: faq-gear
 title: FAQ 装備
 reading: FAQそうび
 category: faq
+order: 220
 tags: [FAQ, 装備, 強化, 継承, 翼, ルーン]
 summary: 唯一装備の育て方、継承の時期、ガーダーの扱い、外形の仕様、翼、強化の失敗、ルーンの注意点など、装備まわりの疑問に短く答える。
 confidence: verified

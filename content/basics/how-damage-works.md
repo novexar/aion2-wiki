@@ -3,6 +3,7 @@ id: how-damage-works
 title: ダメージ計算の仕組み
 reading: だめーじけいさんのしくみ
 category: basics
+order: 20
 tags: [ダメージ計算, ステータス, 前方ダメージ増幅, 後方ダメージ増幅, 理論値]
 summary: 最終ダメージがどの順番で計算されるか、「同じ山に積まれる増幅」と「独立した倍率」の違い、前方・後方ダメージ増幅の扱いを初心者向けに整理します。
 confidence: community

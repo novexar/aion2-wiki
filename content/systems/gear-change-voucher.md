@@ -3,6 +3,7 @@ id: gear-change-voucher
 title: 装備変更券
 reading: そうびへんこうけん
 category: systems
+order: 101
 tags: [装備変更券, 天井, 征服, 選択箱, 武器]
 summary: 征服ダンジョンの天井（確定報酬）で選べる券。同じダンジョンの武器と組み合わせ、ギーナを払うと好きな武器・ガーダーの選択箱になる。取引不可で、サーバー倉庫にも入れられない。
 confidence: verified

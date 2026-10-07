@@ -3,6 +3,7 @@ id: quna
 title: キューナ
 reading: きゅーな
 category: economy
+order: 151
 tags: [キューナ, 課金, ショップ, 交換所, キャラクター枠]
 summary: 現金で買う通貨キューナの価格（400＝$5.99〜4,000＝$59.99）、使い道（ショップ・ディーヴァパス・交換所でギーナ購入）、キャラクター枠拡張 1,000 キューナなど。
 confidence: verified

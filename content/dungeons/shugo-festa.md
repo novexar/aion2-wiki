@@ -3,6 +3,7 @@ id: shugo-festa
 title: シューゴフェスタ
 reading: しゅーごふぇすた
 category: dungeons
+order: 123
 tags: [シューゴフェスタ, ミニゲーム, 報酬の鍵, 百年人参の証, 日課]
 summary: 毎時0分に始まる順位制のミニゲーム。参加には報酬の鍵を使い、鍵は毎日補充され、上限は12個（会員は21個）。報酬は百年人参の証、装備素材、アビスポイントなど。
 confidence: verified

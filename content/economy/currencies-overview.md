@@ -3,6 +3,7 @@ id: currencies-overview
 title: 通貨一覧
 reading: つうかいちらん
 category: economy
+order: 149
 tags: [通貨, ギーナ, キューナ, アビスポイント, 交換商店]
 summary: グローバル版クライアントに定義されている通貨をまとめて解説。ギーナ系3種、キューナ、アビスポイント、季節・イベント用コイン、各商店で使う専用通貨の入手先と使い道。
 confidence: verified

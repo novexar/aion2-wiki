@@ -3,6 +3,7 @@ id: bracelets
 title: ブレスレット
 reading: ぶれすれっと
 category: systems
+order: 81
 tags: [装備, 装身具, ブレスレット, 覚醒, ルドラ]
 summary: ブレスレットは2枠ある装身具。唯一等級は覚醒クエスト報酬の「覚醒のブレスレット」（IL51）と、ルドラ経由の「深淵のブレスレット」（IL86）の2種類だけ。覚醒品は+10まで上げて長く使う。
 confidence: verified

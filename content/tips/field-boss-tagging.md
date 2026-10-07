@@ -3,6 +3,7 @@ id: field-boss-tagging
 title: フィールドボスは一撃で報酬
 reading: ふぃーるどぼすはいちげきでほうしゅう
 category: tips
+order: 210
 tags: [フィールドボス, 戦利品箱, 補給依頼, 探索]
 summary: 通りがかりのフィールドボスには一撃だけでも当てておく。戦利品箱が手に入る。出現状況はワールドマップの探索一覧で見られ、取引できないドロップは補給依頼でアビスポイントに変えられる。
 confidence: community

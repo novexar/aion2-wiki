@@ -3,6 +3,7 @@ id: scam-and-rmt-avoidance
 title: ゴールドセラーと詐欺対策
 reading: ごーるどせらーとさぎたいさく
 category: tips
+order: 207
 tags: [RMT, ゴールドセラー, 規約, 処分, 安全]
 summary: NCは10月4日、第三者からのギーナ・キューナ購入を「最初で最後の警告」として禁止した。RMT（現金取引）、有償の代行、他サーバー相手の取引、アカウント共有、VPNは処分対象で、取引所とNCのストア以外から通貨を買わない。
 confidence: verified

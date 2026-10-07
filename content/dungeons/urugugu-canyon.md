@@ -3,6 +3,7 @@ id: urugugu-canyon
 title: ウルググ峡谷
 reading: うるぐぐきょうこく
 category: dungeons
+order: 108
 tags: [遠征, ウルググ峡谷, アウルドール, 探険, 征服, ボス攻略]
 summary: Lv28・IL300から入れる★2の遠征。探険のキューブは20オード、征服はIL1,400で40オード。最終ボスのアウルドールは「マーク役に全員が重なる」ソークと厳しい時間制限が山場。
 confidence: verified

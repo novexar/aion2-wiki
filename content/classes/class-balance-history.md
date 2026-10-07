@@ -3,6 +3,7 @@ id: class-balance-history
 title: クラスバランス変更履歴
 reading: くらすばらんすへんこうりれき
 category: classes
+order: 181
 tags: [バランス調整, 韓国版, パッチ, クラス, 履歴]
 summary: グローバル版のクラス性能は韓国版 2026-09-16 パッチ時点のもの。7月〜9月の主な調整の流れと、グローバル版に反映されていない例外をまとめる。
 confidence: verified

@@ -3,6 +3,7 @@ id: deus-research-base
 title: デウス研究基地
 reading: でうすけんきゅうきち
 category: dungeons
+order: 113
 tags: [超越, デウス研究基地, Atiel, アルカナ, ボス攻略]
 summary: 超越の1つ目。最終ボスはAtiel。鐘（Bell）・コンパス（Compass）・聖杯（Chalice）のアルカナが出る。足場が崩れる戦いで、約20%のスタッガー確認に失敗すると全滅。
 confidence: verified

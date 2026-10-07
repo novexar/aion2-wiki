@@ -3,6 +3,7 @@ id: crafting-handicrafting
 title: 細工
 reading: さいく
 category: systems
+order: 91
 tags: [細工, 製作, 装身具, 弓, 杖]
 summary: 弓・杖・ネックレス・イヤリング・リング・ブレスレットを作る製作。レンジャーとチャンターの武器を自作でき、装身具の更新にも使える。熟練度1は宝石の装飾作りから始め、50で昇級する。
 confidence: verified

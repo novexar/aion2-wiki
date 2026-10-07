@@ -3,6 +3,7 @@ id: first-week-progression-plan
 title: 最初の1週間の進め方
 reading: さいしょのいっしゅうかんのすすめかた
 category: leveling
+order: 44
 tags: [初週, ロードマップ, 日課, 週課, Lv45]
 summary: 初日はサーバー設定と記念報酬の受け取り、Lv45到達を優先する。2日目以降は使命5回、残りの成長要素の回収、アイテムレベル1,400を目標にする。リセットは毎日07:00 UTC、週は水曜。
 confidence: verified

@@ -3,6 +3,7 @@ id: fire-temple
 title: 炎の神殿
 reading: ほのおのしんでん
 category: dungeons
+order: 110
 tags: [遠征, 炎の神殿, クロメデ, 探険, 征服, ボス攻略]
 summary: Lv35・IL500から入れる★3の遠征。探険は30オード、征服はIL2,100で40オード。最終ボスのクロメデは炎の壁、下向きの弓、分身が続き、時間切れも全滅の主因。
 confidence: verified

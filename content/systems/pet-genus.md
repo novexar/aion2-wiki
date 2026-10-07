@@ -3,6 +3,7 @@ id: pet-genus
 title: ペットジーナス
 reading: ぺっとじーなす
 category: systems
+order: 85
 tags: [ペット, ジーナス, 理解度, 分析, 魂結晶]
 summary: ペットは5種族ごとに「ジーナス盤面」を持ち、魂結晶とギーナで「分析」すると9枠のステータスがランダムに付く。理解度（Insight）は種族ごとに最大10で、上がるほど枠と高等級が解放される。ロックは分析費用を上げるので理解度10まで我慢が基本。
 confidence: verified

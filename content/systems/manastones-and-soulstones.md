@@ -3,6 +3,7 @@ id: manastones-and-soulstones
 title: 魔石と霊石
 reading: ませきとれいせき
 category: systems
+order: 75
 tags: [魔石, 霊石, 刻印, 厳選, 錬金]
 summary: 魔石は武器と防具、霊石は装身具に刻印して追加の能力値を付ける石。等級は灰→緑→青→黄で、黄が最高。入手先は終盤コンテンツ中心で、継承では移らないため、長く使う装備にだけ使う。
 confidence: verified

@@ -3,6 +3,7 @@ id: wisdom-stones
 title: 知恵の石
 reading: ちえのいし
 category: systems
+order: 64
 tags: [知恵の石, スキルポイント, 地域クエスト, 封印ダンジョン]
 summary: 使うとスキルポイントが1増える消耗品。自陣営の地域クエストで58個、自陣営の封印ダンジョン61か所で各2個。レベルアップの203ポイントに上乗せできる。
 confidence: verified

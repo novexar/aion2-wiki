@@ -3,6 +3,7 @@ id: shattered-arkanis
 title: 砕けたアルカニス
 reading: くだけたあるかにす
 category: dungeons
+order: 114
 tags: [超越, 砕けたアルカニス, Talisra, アルカナ, ボス攻略]
 summary: 超越の2つ目。最終ボスはTalisra of the Void。羊皮紙（Parchment）・鏡（Mirror）・聖杯のアルカナが出る。白と黒の玉の色分け、奇数の槍壊し、輪のジャンプが山場。
 confidence: verified

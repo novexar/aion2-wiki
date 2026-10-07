@@ -3,6 +3,7 @@ id: time-budget-routines
 title: 時間別の遊び方
 reading: じかんべつのあそびかた
 category: tips
+order: 214
 tags: [日課, 週課, 時短, ルーティン, エンドゲーム]
 summary: Lv45以降の日課・週課を、使える時間別に優先順位で並べる。毎日の中心は使命5件、あとは週単位の上限を週のうちに消化すれば足りる。時間は目安で、順番が要点。
 confidence: verified

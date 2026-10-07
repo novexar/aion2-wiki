@@ -3,6 +3,7 @@ id: whats-bound
 title: 帰属の仕組み
 reading: きぞくのしくみ
 category: basics
+order: 30
 tags: [帰属, アカウント, サーバー, ファウンダーズパック, メンバーシップ]
 summary: 「アカウント単位」は一度だけ受け取れる意味。メンバーシップは1サーバー分、Qunaとディーヴァパスはキャラ単位、ファウンダーズパックの見た目類は10月7日以降アカウント共有。
 confidence: community

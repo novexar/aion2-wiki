@@ -3,6 +3,7 @@ id: abyss-rank-and-season
 title: アビスランクとシーズン報酬
 reading: あびすらんくとしーずんほうしゅう
 category: pvp
+order: 146
 tags: [アビスランク, 軍階級, シーズン, ランキング報酬, PvPバフ]
 summary: シーズン1（2026-09-30〜12-16）では、アビスと両闘技場がクラス別にランキングされる。アビスランクのバフはグローバル版で唯一のランキングバフで、最大でPvPダメージ+5%。AP加算の効果はない。
 confidence: verified

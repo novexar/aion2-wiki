@@ -3,6 +3,7 @@ id: theostones-godstones
 title: 神石
 reading: しんせき
 category: systems
+order: 76
 tags: [神石, テオストーン, ゴッドストーン, 武器, 特殊効果]
 summary: 武器とガーダーに1つだけ付けられる、一定確率で発動する特殊効果の石。クライアントには51種（希少・伝承・唯一が各17）ある。同じ石を複数の装備に付けても効果は1つ分で、継承では移らない。ダメージへの寄与は小さい。
 confidence: verified

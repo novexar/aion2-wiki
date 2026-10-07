@@ -3,6 +3,7 @@ id: class-tier-and-recommendation
 title: おすすめクラス
 reading: おすすめくらす
 category: basics
+order: 10
 tags: [基本情報, クラス, おすすめ, Tier, 初心者]
 summary: 初心者は近接ならグラディエーター、遠距離ならレンジャーが各サイトで一致。ソロはスピリットマスター・レンジャー・グラディエーター。パーティではテンプラー（タンク）とクレリック（ヒーラー）が常に求められる。DPS の順位は開始直後で未確定。
 confidence: verified

@@ -3,6 +3,7 @@ id: wind-breeze-merchants
 title: そよ風商会
 reading: そよかぜしょうかい
 category: economy
+order: 163
 tags: [そよ風商会, メンバーシップ, 会員専用, 商店, ギーナ]
 summary: メンバーシップ会員だけが使える商店。ギーナ払いで魂の結晶、オードエネルギー、日課即完チケット、ペットのオート拾得券などを週・月の上限付きで買える。価格は10月の更新で一部下がった。
 confidence: community

@@ -3,6 +3,7 @@ id: chat-and-social
 title: チャットとフレンド
 reading: ちゃっととふれんど
 category: basics
+order: 28
 tags: [チャット, フレンド, ブロック, 自動翻訳, 社交]
 summary: 陣営チャットはLv30から。耳打ちとフレンドは同じ陣営・同じサーバーグループが条件。チャット設定で11種類の表示切替、ブロックリスト、自動翻訳を使える。
 confidence: community

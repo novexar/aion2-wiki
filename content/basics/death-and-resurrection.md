@@ -3,6 +3,7 @@ id: death-and-resurrection
 title: 死亡と復活
 reading: しぼうとふっかつ
 category: basics
+order: 24
 tags: [死亡, 復活, 復活の精霊石, ダンジョン, 初心者]
 summary: 倒れたときの復活方法と、ダンジョンごとに決められた死亡回数の上限、復活の精霊石の入手先をまとめます。
 confidence: verified

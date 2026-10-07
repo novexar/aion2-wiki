@@ -3,6 +3,7 @@ id: regions-and-servers
 title: リージョンとサーバー
 reading: りーじょんとさーばー
 category: basics
+order: 5
 tags: [基本情報, サーバー, リージョン, 天族, 魔族]
 summary: ログイン時にリージョン→陣営→サーバーの順で選ぶ。日本からはアジア（東京）が推奨。各サーバーは天族か魔族のどちらか専用で、天族と魔族のサーバーがペアになりアビスや時空の亀裂で対戦する。リージョンは後から変えられない。
 confidence: verified

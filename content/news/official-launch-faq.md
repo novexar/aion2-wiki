@@ -3,6 +3,7 @@ id: official-launch-faq
 title: 公式ローンチFAQ
 reading: こうしきろーんちFAQ
 category: news
+order: 183
 tags: [公式, FAQ, プラットフォーム, 課金方針, 引き継ぎ]
 summary: NC が公開した Launch FAQ の要点。Steam と PURPLE は同じ内容、韓国・台湾版からの引き継ぎ無し、基本無料＋任意の月額会員、コントローラーは「遊べるが公式サポート外」など。
 confidence: verified

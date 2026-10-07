@@ -3,6 +3,7 @@ id: sealed-dungeons
 title: 封印ダンジョン
 reading: ふういんだんじょん
 category: leveling
+order: 46
 tags: [封印ダンジョン, Sealed Dungeon, ディーヴァニオン結晶, 知恵の石, 一度きり]
 summary: 封印ダンジョンはマップの「？」にあるソロ用の一度きりインスタンス。自陣営に61か所あり、初回クリアでディーヴァニオン結晶2個・知恵の石2個・強化石・ギーナなどが貰える。他陣営の分はLv45以降に亀裂経由で回収する。
 confidence: verified

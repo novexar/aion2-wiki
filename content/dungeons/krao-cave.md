@@ -3,6 +3,7 @@ id: krao-cave
 title: クラオ洞窟
 reading: くらおどうくつ
 category: dungeons
+order: 106
 tags: [遠征, クラオ洞窟, ベルク, 探険, 征服, ボス攻略]
 summary: Lv20・IL200から入れる最初の遠征。探険の報酬キューブは20オード、征服はIL700・40オード。最終ボス「ベルク」は50%のスタッガー（体勢崩し）確認と、石の陰に隠れる全体攻撃が山場。
 confidence: verified

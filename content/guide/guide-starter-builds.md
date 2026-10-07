@@ -3,6 +3,7 @@ id: guide-starter-builds
 title: クラス別スタータービルド
 reading: くらすべつすたーたーびるど
 category: guide
+order: 231
 tags: [ビルド, クラス, スキル, スティグマ, 初心者]
 summary: 8クラスについて、Lv45までに最初に上げるスキル、スティグマの4本、優先するステータスを1ページにまとめた早見表。スキルとスティグマのリセットは無料なので、最初の例として使い、後で組み替える。
 confidence: verified

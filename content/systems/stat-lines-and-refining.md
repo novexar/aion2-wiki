@@ -3,6 +3,7 @@ id: stat-lines-and-refining
 title: ステータスラインと厳選
 reading: すてーたすらいんとげんせん
 category: systems
+order: 79
 tags: [ステータスライン, オプション, 厳選, 魂刻印, ライン確率]
 summary: 唯一装備に付く追加効果（ライン）の仕組みと確率。ラインの80%は一般ステータス、20%は自分のクラスのスキル。武器の最レアはダメージ増幅1.6%。厳選は長く使う装備だけに行い、ラインは継承で移せる。
 confidence: verified

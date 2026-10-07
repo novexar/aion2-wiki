@@ -3,6 +3,7 @@ id: nightmare
 title: 悪夢
 reading: あくむ
 category: dungeons
+order: 117
 tags: [悪夢, ソロ, ジケル, 夢幻の破片, パンテオン, ランキング]
 summary: ボスと1対1で戦うソロコンテンツ。7体のボスを各10段階で挑み、挑戦は1日2回（最大14回ためられる）。報酬は夢幻の破片で、商店でスティグマの欠片やパンテオンの像と交換する。
 confidence: verified

@@ -3,6 +3,7 @@ id: market-and-exchange
 title: 取引所と交換所
 reading: とりひきじょとこうかんじょ
 category: economy
+order: 152
 tags: [取引所, 交換所, メンバーシップ, 手数料, ギーナ箱]
 summary: サーバー取引所と統合取引所の違い、Lv45 で解放、非会員は出品のみ・購入は会員のみという公式告知と実機報告の食い違い、手数料 12%、ギーナ↔キューナ交換所の仕組み。
 confidence: verified

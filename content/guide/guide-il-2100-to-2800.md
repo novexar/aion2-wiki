@@ -3,6 +3,7 @@ id: guide-il-2100-to-2800
 title: IL2100→2800ガイド
 reading: IL2100から2800がいど
 category: guide
+order: 229
 tags: [アイテムレベル, 超越, 突破, 製作, ルドラ]
 summary: IL2,100で開く炎の神殿と獰猛な角岩窟、2,200と2,500の超越、製作装備の102への作り替え、強化と突破、覚醒戦の上位難度、IL2,800のルドラまでの進め方。ルドラは現在取り下げ中。
 confidence: verified

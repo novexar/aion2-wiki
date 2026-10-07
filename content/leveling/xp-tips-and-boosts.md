@@ -3,6 +3,7 @@ id: xp-tips-and-boosts
 title: 経験値効率
 reading: けいけんちこうりつ
 category: leveling
+order: 40
 tags: [経験値, 効率, 寄り道, 狩場, レギオン]
 summary: 経験値の大半はメインストーリーから得られ、フィールド狩りは効率が低い。グローバル版はクエストでほぼ転送されず、討伐数も約1.9倍と重い。常時効く経験値増加はレギオン効果（最大+3%）くらいで、経験値の巻物のような消耗品は確認できていない。
 confidence: verified

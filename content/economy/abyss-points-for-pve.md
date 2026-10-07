@@ -3,6 +3,7 @@ id: abyss-points-for-pve
 title: PvE向けアビスポイント活用
 reading: PvEむけあびすぽいんとかつよう
 category: economy
+order: 166
 tags: [アビスポイント, PvE, スティグマの欠片, 補給依頼, アビス商店]
 summary: PvEだけでもアビスポイントは必要。スティグマの欠片が買えるため。使命・補給依頼・闘技場・時空の亀裂・フェスタなど対人しない稼ぎ方があり、Lv45・IL1000でアビスに入れば週7時間使える。
 confidence: verified

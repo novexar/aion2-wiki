@@ -3,6 +3,7 @@ id: daily-dungeon
 title: デイリーダンジョン
 reading: でいりーだんじょん
 category: dungeons
+order: 120
 tags: [デイリーダンジョン, 強化石, 週課, ソロ]
 summary: 「デイリー」という名前だが実態は週14回のソロ用ダンジョン。グローバル版にあるのは「ディーヴァ生体研究基地」1種のみで、スコアに応じて最大10,000個の強化石がもらえる。回数はサーバー内のキャラクターで共有。
 confidence: verified

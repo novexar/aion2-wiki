@@ -3,6 +3,7 @@ id: global-patch-notes
 title: グローバル版パッチノート
 reading: ぐろーばるばんぱっちのーと
 category: news
+order: 185
 tags: [パッチノート, アップデート, メンテナンス, 公式]
 summary: グローバル版で実施されたメンテナンスと変更点の時系列。10月5日の正式開始メンテ（キャラ削除24時間化など）と10月7日の初回定期メンテ（ファウンダーズ外形の全キャラ共有など）を収録。
 confidence: verified

@@ -3,6 +3,7 @@ id: faq-pvp-and-social
 title: FAQ 対人と社交
 reading: FAQたいじんとしゃこう
 category: faq
+order: 222
 tags: [FAQ, PvP, アビス, レギオン, チャット, 社交]
 summary: PvEだけでもアビスポイントが必要な理由、PvPの解放と切替、アビスと亀裂の違い、レギオンの陣営制限、チャットの不具合など、対人と社交の疑問に短く答える。
 confidence: verified

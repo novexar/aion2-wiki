@@ -3,6 +3,7 @@ id: dimensional-invasion
 title: 次元侵攻
 reading: じげんしんこう
 category: dungeons
+order: 124
 tags: [次元侵攻, オープンワールド, 報酬の鍵, 日課, イベント]
 summary: Lv45から参加できるオープンワールドの防衛イベント。毎時30分に開催され、報酬は「次元侵攻の報酬の鍵」で開ける。鍵は1日1個、7個までためられ、サーバー内のキャラで共有。
 confidence: verified

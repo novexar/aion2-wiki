@@ -3,6 +3,7 @@ id: unknown-fissure
 title: 未知の狭間
 reading: みちのはざま
 category: dungeons
+order: 126
 tags: [未知の狭間, チケット, デイリーダンジョン, 挑戦券, 週14回]
 summary: デイリーダンジョン「ディーヴァ生体研究基地」へ入るための仕組み。入場には「未知の狭間挑戦券」が必要で、週14回、サーバー内のキャラで共有。チケットは使命の報酬や出席報酬でもらえる。
 confidence: verified

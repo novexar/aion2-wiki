@@ -3,6 +3,7 @@ id: jp-official-channels
 title: 日本向け公式チャンネル
 reading: にほんむけこうしきちゃんねる
 category: news
+order: 192
 tags: [公式, 日本, SNS, お知らせ, 生放送]
 summary: 日本語の公式情報は、NC の公式サイト（お知らせ・アップデート）、特設サイトの公式ガイド、X・YouTube・Discord・LINE・Instagram・TikTok の6つの公式アカウント、公式生放送「AION2 Navi」の3系統で出る。メンテナンスや配布は「お知らせ」本文が正。
 confidence: verified

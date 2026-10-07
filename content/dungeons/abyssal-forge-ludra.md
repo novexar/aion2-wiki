@@ -3,6 +3,7 @@ id: abyssal-forge-ludra
 title: 深淵の再錬ルドラ
 reading: しんえんのさいれんるどら
 category: dungeons
+order: 116
 tags: [ルドラ, 聖域, レイド, 10人, 一時停止]
 summary: グローバル版唯一の聖域レイド。Lv45・IL2,800、10人。報酬は取引可能ギーナ100万など。2026年10月5日の正式開始時に調整のため一時削除され、復帰日は10月16日までに案内予定。
 confidence: verified

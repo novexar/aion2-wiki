@@ -3,6 +3,7 @@ id: faq-membership-and-pass
 title: FAQ 課金
 reading: FAQかきん
 category: faq
+order: 223
 tags: [FAQ, メンバーシップ, ディーヴァパス, 課金, キューナ]
 summary: 基本無料で、有料はクァイリン特級メンバーシップ、ディーヴァパス、キューナ、外形ショップ。メンバーシップの特典、サーバー単位の効果、パスの買い方、最初に買うべきものに短く答える。
 confidence: verified

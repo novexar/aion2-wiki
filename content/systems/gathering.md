@@ -3,6 +3,7 @@ id: gathering
 title: 採集
 reading: さいしゅう
 category: systems
+order: 94
 tags: [採集, 精気抽出, オード, 鉱石, 製作素材]
 summary: 採集はゲーム内で「精気抽出」と呼ばれ、Lv10で解放される。鉱石・宝石・木材・薬草・食材・オードの6系統があり、1つのノードで3回まで試せる。費用も1日の上限もない。
 confidence: verified

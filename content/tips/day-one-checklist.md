@@ -3,6 +3,7 @@ id: day-one-checklist
 title: 初日チェックリスト
 reading: しょにちちぇっくりすと
 category: tips
+order: 197
 tags: [初心者, 初日, チェックリスト, 設定]
 summary: プラットフォームと動作確認、リージョン・陣営・サーバーの決定、キャラクター作成、設定の確認、特典とメールの受け取りまで、始めた日にやることを順番に並べたチェックリスト。
 confidence: verified

@@ -3,6 +3,7 @@ id: seasons-and-chapters
 title: シーズン1とランキング
 reading: しーずんいちとらんきんぐ
 category: dungeons
+order: 130
 tags: [シーズン, チャプター, ランキング, 報酬, 持ち越し]
 summary: グローバル版シーズン1は2026年9月30日〜12月16日（日本時間16:00）。悪夢、超越、覚醒戦、アビス、闘技場がクラス別にランクされ、各クラス上位1,000人に称号などが出る。誓いのコインはシーズン終了で消える。
 confidence: verified

@@ -3,6 +3,7 @@ id: platforms-and-requirements
 title: 対応環境と必要スペック
 reading: たいおうかんきょうとひつようすぺっく
 category: basics
+order: 2
 tags: [基本情報, PC, スペック, DLSS, コンソール]
 summary: グローバル版は Windows PC 専用（Steam / PURPLE）。最低は GTX 1050 Ti＋8GB、推奨は RTX 2070＋16GB で、いずれも 100GB の空き容量が必要。DLSS 4.5 対応。コンソール版は準備中で未発表、スマホ版は予定なし。
 confidence: official
