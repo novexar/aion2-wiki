@@ -25,9 +25,19 @@ sources:
     url: https://aion2maps.com/guides/unlocks/
     date: 2026-10-04
     kind: guide
+  - id: S04
+    title: DefKey：Aion 2 keyboard shortcuts
+    url: https://defkey.com/aion-2-shortcuts
+    date: 2026-10-08
+    kind: guide
+  - id: S05
+    title: Space4Games：AION 2 Best Settings（FPS, Graphics, Controls & Keybinds）
+    url: https://space4games.com/en/games-en/aion-2-best-settings-guide/
+    date: 2026-10-08
+    kind: guide
 ---
 
-> **要確認**：メニュー名の日本語表記は、攻略サイトの表記を使っています。ゲーム内の表示と違う場合は、ゲーム内を優先してください。
+> **要確認**：ウィンドウのショートカットキーは DefKey と Space4Games の一覧でも確認でき、実績は Aion 2 Maps の Y ではなく両サイトの Z に合わせています。Esc メニューの3グループ構成、機能が開くレベル、HUD プリセットの数は Aion 2 Maps のみの記述で、第2の資料がありません。メニュー名の日本語表記は攻略サイトの表記を使っているため、ゲーム内の表示と違う場合はゲーム内を優先してください。
 
 AION2 では、多くの機能が Esc メニューか、キーボードのショートカットから開きます。ところが、遠征、悪夢、超越、アビス、取引所、メールなど十数個のウィンドウには、初期キーがありません。この記事では、日本語と英語のメニュー名、開き方、解放レベルを対応させます。
 
@@ -59,7 +69,7 @@ Esc は、キャスト中断、ウィンドウを閉じる、ターゲット解�
 | 透過マップ | Transparent map | Alt + M |
 | ジャーナル | Journal | J |
 | レギオン | Legion | L |
-| 実績 | Achievements | Y |
+| 実績 | Achievements | Z |
 | 設定 | Settings | O |
 | ショップ | Shop | H |
 | サブスクリプション（メンバーシップ・ディーヴァパス） | Subscription | G |
@@ -79,7 +89,7 @@ Esc は、キャスト中断、ウィンドウを閉じる、ターゲット解�
 
 キーは設定画面（O）の「キー設定」で変更できます。キーの全一覧は [[controls-and-keybinds]] にあります。
 
-根拠：[S01]
+根拠：[S01] [S04] [S05]
 
 ## 画面のよく使う場所
 

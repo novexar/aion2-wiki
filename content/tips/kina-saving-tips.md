@@ -4,7 +4,7 @@ title: ギーナを減らさない運用
 category: tips
 tags: [ギーナ, 節約, 資源管理, 拘束ギーナ, 取引所]
 summary: 拘束ギーナ（キナ刻印）から先に使い、すぐ交換する装備に強化費を使わず、売る前に取引所の相場を見る。+11以降の強化失敗や深い再抽選など、ギーナが減る場面を避けるコツをまとめる。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
 aliases: ["Kina Saving", "ギーナ節約", "キナ節約", "金策より節約", "拘束ギーナの使い方"]
@@ -30,9 +30,19 @@ sources:
     url: https://mein-mmo.de/aion-2-einsteiger-guide-tipps/
     date: 2026-10-07
     kind: guide
+  - id: S05
+    title: Aion 2 viki：Kina and Quna
+    url: https://aion2.vi.ki/kina-and-quna
+    date: 2026-10-08
+    kind: guide
+  - id: S06
+    title: Metabot：AION 2 Kinah Farming Guide
+    url: https://metabot.gg/en/aion-2/guides/kinah-farming-guide
+    date: 2026-10-08
+    kind: guide
 ---
 
-> **要確認**：ギーナの稼ぎ方は [[kina-farming]] にあります。ここでは「稼ぐ前に減らさない」運用に絞ります。報酬の種類や相場は始まったばかりで変動します。数値と表記はゲーム内の表示が優先です。
+> **要確認**：通常ギーナと拘束ギーナの区別（拘束は取引所で使えず、クエストや探索で出る）は、Aion 2 viki と Metabot でも確認できました。一方、使命・指令の再抽選を85,000で止める助言（Aion 2 Maps の助言）と、取引可能ギーナの日上限100万は、主にAion 2 Mapsだけが根拠です。報酬の種類や相場は始まったばかりで変動します。数値と表記はゲーム内の表示が優先です。ギーナの稼ぎ方は [[kina-farming]] にあります。
 
 ギーナ（Kina）は、強化、スキルや各種システムの利用料、NPCからの購入で出ていきます。AION2では「通常ギーナ（取引可能）」と「拘束ギーナ（Bound Kina、資料では「キナ刻印」）」があり、使い分けるだけで出費を抑えられます。
 
@@ -45,7 +55,7 @@ sources:
 
 探索（遠征の低難度）で得るのは拘束ギーナ、征服では通常ギーナが出るとされます。拘束ギーナも、強化などの支出を減らせるので価値は低くありません。倉庫に入れられるのは通常ギーナだけです。
 
-根拠：[S01] [S03]
+根拠：[S01] [S03] [S05] [S06]
 
 → [[kina-and-bound-kina]]、[[inventory-tips]]
 

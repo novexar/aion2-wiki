@@ -20,9 +20,19 @@ sources:
     url: https://aion2maps.com/guides/whats-bound/
     date: 2026-10-04
     kind: guide
+  - id: S03
+    title: TimeSaver：AION 2 Membership
+    url: https://timesaver.gg/blog/aion-2-membership
+    date: 2026-10-08
+    kind: guide
+  - id: S04
+    title: Aion 2 viki：Membership
+    url: https://aion2.vi.ki/membership
+    date: 2026-10-08
+    kind: guide
 ---
 
-> **要確認**：拡張費用や復旧回数は、クライアント解析に基づく1つの攻略サイトの資料です。ゲーム内の表示が優先されます。
+> **要確認**：遠隔倉庫がメンバーシップの特典であることは、vi.ki と TimeSaver（NC のファウンダーズパック説明を引用）でも確認できます。一方、初期枠（40/25/25）、倉庫の拡張費用、キューブの拡張回数、アイテム復旧の回数とリセット日は、クライアント解析に基づく Aion 2 Maps 1件のみの資料で、第2の資料が見つかっていません。ゲーム内の表示が優先されます。
 
 AION2 には、持ち歩く所持品の「キューブ（Cube）」と、2種類の倉庫があります。サーバー倉庫（Server Storage）は同じサーバー上の自分の全キャラクターで共有でき、キャラクター倉庫（Character Storage）はそのキャラ専用です。素材はキャラクター倉庫に置くと、製作・物質変換・補給要請・強化がそこから直接引き出して使えるので出し入れが不要です。
 
@@ -51,7 +61,7 @@ AION2 には、持ち歩く所持品の「キューブ（Cube）」と、2種類
 
 メンバーシップの内容は [[membership]] を参照してください。
 
-根拠：[S01]
+根拠：[S01] [S03] [S04]
 
 ## 枠の拡張
 

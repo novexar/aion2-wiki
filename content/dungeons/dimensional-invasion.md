@@ -4,7 +4,7 @@ title: 次元侵攻（毎時30分・報酬の鍵は1日1個）
 category: dungeons
 tags: [次元侵攻, オープンワールド, 報酬の鍵, 日課, イベント]
 summary: Lv45から参加できるオープンワールドの防衛イベント。毎時30分に開催され、報酬は「次元侵攻の報酬の鍵」で開ける。鍵は1日1個、7個までためられ、サーバー内のキャラで共有。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
 aliases: [Dimensional Invasion, 次元侵攻イベント, Invasion Reward Key]
@@ -30,9 +30,14 @@ sources:
     url: https://gamerch.com/aion2/1019900
     date: 2026-10-08
     kind: guide
+  - id: S05
+    title: MeinMMO：Aion 2 Daily and Weekly Checklist
+    url: https://mein-mmo.de/en/aion-2-daily-weekly-checklist-perfect-start,1589979/
+    date: 2026-10-08
+    kind: guide
 ---
 
-> **要確認**：次元侵攻は、グローバル版の一次資料が少ないコンテンツです。この記事は、数字が複数の攻略サイトで一致する部分だけを書いています。戦闘の中身（敵の種類や報酬の詳細）は確認できていないため、書いていません。
+> **要確認**：次元侵攻はグローバル版の一次資料が少ないコンテンツです。毎時30分の開催、鍵が1日1個で上限7個という点は、独立した2つの攻略サイト（Wikirealm、MeinMMO）で一致しています。Lv45からの参加とサーバー共有は aion2maps の記述のみで、戦闘の中身（敵の種類や報酬の詳細）は確認できていないため書いていません。
 
 次元侵攻（Dimensional Invasion）は、Lv45から参加できる、フィールドで行う防衛型のイベントです。毎時30分に始まり、参加すると報酬の鍵が使えるようになります。報酬を開けるには鍵が必要で、鍵は毎日少しずつ補充されます。
 
@@ -49,7 +54,7 @@ sources:
 
 鍵は、使わなくても7個までたまり、それ以上は補充されません。1日1個なので、7日間まったく使わないと満タンになります。
 
-根拠：[S01] [S02] [S03]
+根拠：[S01] [S02] [S03] [S05]
 
 ## 日課での扱い
 

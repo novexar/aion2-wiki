@@ -4,7 +4,7 @@ title: 初心者がやりがちな失敗
 category: tips
 tags: [初心者, 失敗, 落とし穴, 序盤]
 summary: 友人とサーバーがずれる、強化素材を序盤装備に使い切る、シューゴフェスタに早く行きすぎる、スキル特化の枠を埋め忘れるなど、始めて数日で起きやすい失敗と回避策を12項目にまとめる。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
 aliases: ["Beginner Mistakes", "初心者の失敗", "やってはいけないこと", "序盤の落とし穴"]
@@ -40,9 +40,19 @@ sources:
     url: https://mein-mmo.de/aion-2-einsteiger-guide-tipps/
     date: 2026-10-07
     kind: guide
+  - id: S07
+    title: aion2.run：Systems（サーバー単位の制限・未受取キューブ）
+    url: https://aion2.run/en/systemes
+    date: 2026-10-08
+    kind: guide
+  - id: S08
+    title: Metabot：Weekly reset（未受取キューブ数・シューゴフェスタ鍵のカウンター）
+    url: https://metabot.gg/en/aion-2/weekly-reset
+    date: 2026-10-08
+    kind: guide
 ---
 
-> **要確認**：ここに並べた失敗は、複数の攻略サイトが挙げている共通点と、韓国・台湾版の経験者の報告をもとにしています。数値や仕様はゲーム内の表示が優先です。
+> **要確認**：ここに並べた失敗は、複数の独立した攻略サイト（MeinMMO、redfreshet、Aion 2 Maps、AION2 Hub など）が挙げている共通点です。使命タブの不具合はNCの告知を紹介するAION2 Hubの記述、シューゴフェスタの鍵の上限（12／21）と未受取キューブの枠（週10回）は主にAion 2 Mapsの解析値で、後者は別サイトでは「枠が存在する」ことのみ確認できています。数値や仕様はゲーム内の表示が優先です。
 
 始めて数日で多くの人がつまずく点を、避け方といっしょに並べます。どれも「知っていれば防げる」ものばかりです。詳しい仕組みは各記事にリンクしています。
 
@@ -142,7 +152,7 @@ sources:
 
 遠征や超越は、クリア後に報酬キューブを受け取らずに退出すると、週に10回ある「未受取」枠を1つ消費します。0になるとリセットまで入場できません。クリアしたら必ずキューブを開けてから出ましょう。
 
-根拠：[S05]
+根拠：[S05] [S07] [S08]
 
 → [[odyle-energy-tips]]
 

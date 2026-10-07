@@ -4,7 +4,7 @@ title: ペット選択箱のおすすめ
 category: tips
 tags: [ペット, ローンチ報酬, 選択箱, 乗り物]
 summary: ローンチ報酬のペット箱はパガティと、パピス・銀色の刃ロータン・コヌティ作業員・黒煙モルトの4択から1体。後から手に入りにくいロータンかモルトを選ぶ案が多いが、移動を優先するならパピスも有力。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
 aliases: ["Pet Selection Box", "Pet Chest", "Advance Pet Chest", "ペット箱 どれ", "パピス", "ロータン", "モルト"]
@@ -25,9 +25,19 @@ sources:
     url: https://aion2maps.com/guides/launch-rewards/
     date: 2026-10-07
     kind: guide
+  - id: S04
+    title: Metabot：AION 2 Mounts, Pets & Wings Guide（系統別の所持効果）
+    url: https://metabot.gg/en/aion-2/guides/mounts-wings-guide
+    date: 2026-10-08
+    kind: guide
+  - id: S05
+    title: "Metabot：Soul: Silver Blade Rotan (Bound)（入手元）"
+    url: https://metabot.gg/en/aion-2/items/soul-silver-blade-rotan-bound
+    date: 2026-10-08
+    kind: database
 ---
 
-> **要確認**：4体の優劣は、2つの攻略サイトの見解にもとづく目安です。効果の数値と入手場所は、ゲーム内のペット画面で確認してください。どれを選んでも、後から別の方法で手に入ります。
+> **要確認**：4体の所持効果の系統（野性は地上移動速度、変形は疾走時の行動力消費、自然は行動力）と、箱の中身は、Metabot とAion 2 Maps でも一致します。ただし「どれが一番よいか」の優劣は、2つの攻略サイトの見解にもとづく目安です。効果の数値と入手場所は、ゲーム内のペット画面で確認してください。どれを選んでも、後から別の方法で手に入ります。
 
 ローンチ報酬の「Advance: Pet Chest（ペット箱）」では、パガティが必ずもらえるほか、4体から1体を選べます。ペットは乗り物としても使えるため、最初の1体を何にするか迷う人が多い項目です。箱は郵便で届きます。受け取りの期限は [[launch-rewards-and-codes]] にあります。
 
@@ -42,7 +52,7 @@ sources:
 | コヌティ作業員 | 自然 | 行動力が増える。レベルを上げると抵抗も上がる |
 | 黒煙モルト | 自然 | 行動力が増える。レベルを上げるとクリティカル抵抗なども付く |
 
-根拠：[S01] [S02]
+根拠：[S01] [S02] [S04] [S05]
 
 ## 選び方の考え方
 

@@ -7,7 +7,7 @@ summary: シーズン中の週間ミッション。ポイントに応じて強�
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Season Missions, Oath Coin, 誓いのコイン, シーズン商店, Season Shop]
+aliases: [Season Missions, 誓いのコイン]
 related: [seasons-and-chapters, reset-times, daily-and-weekly-checklist, nightmare]
 sources:
   - id: S01
@@ -32,7 +32,7 @@ sources:
     kind: guide
 ---
 
-> **要確認**：シーズンミッションの一次資料は少なく、個々のミッションの内容は確認できていません。この記事は、ポイントごとの週報酬と通貨の扱いだけを書いています。
+> **要確認**：誓いのコインの入手元（シーズンミッション）と期限は Wikirealm と Aion 2 Maps で一致しています。一方、ポイントごとの週報酬（1,500点で強化石400、4,500点でオードエネルギー、8,000点で強化石2,000）は Aion 2 Maps の1資料だけが根拠で、DB・ほかのサイトでは見つかりませんでした。個々のミッションの内容も未確認です。報酬画面を優先してください。
 
 シーズンミッション（Season Missions）は、Lv45以降に使える、シーズン限定の週間ミッションです。進めるとポイントがたまり、週の報酬がもらえます。報酬や商店で使う通貨が「誓いのコイン（Oath Coin）」です。
 

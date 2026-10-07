@@ -7,7 +7,7 @@ summary: 「デイリー」という名前だが実態は週14回のソロ用ダ
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Daily Dungeon, Daeva Bio-Research Base, 未知の狭間, Unknown Fissure]
+aliases: [Daily Dungeon, Daeva Bio-Research Base, 未知の狭間]
 related: [unknown-fissure, server-shared-limits-and-alts, daily-and-weekly-checklist, reset-times, content-not-in-global]
 sources:
   - id: S01

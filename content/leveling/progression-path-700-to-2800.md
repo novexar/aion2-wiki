@@ -7,7 +7,7 @@ summary: ILの節目は700・1,000・1,400・1,600・1,900・2,100・2,200・2,5
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Progression path, IL700→2800, 装備レベル進行, 遠征の進め方, ロードマップ]
+aliases: [Progression path, IL700→2800, 装備レベル進行, 遠征の進め方]
 related: [what-to-do-at-45, road-to-il-1000, road-to-il-1400, item-level-and-combat-power, expeditions-and-odyle, transcendence-overview, arcana, ludra-raid-suspension]
 sources:
   - id: S01

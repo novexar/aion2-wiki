@@ -7,7 +7,7 @@ summary: PvPにはPvP専用のステータスがあり、潜在力・魔石・�
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [PvP Stats, PvP Damage Boost, PvP Damage Tolerance, PvPダメージ耐性, 抵抗, Defiance]
+aliases: [PvP Stats, PvP Damage Tolerance, PvPダメージ耐性, 抵抗]
 related: [pvp-overview, potential, status-effects-and-cc, abyss-points-and-shop, abyss-rank-and-season, daevanion-boards, how-damage-works]
 sources:
   - id: S01
@@ -32,7 +32,7 @@ sources:
     kind: guide
 ---
 
-> **要確認**：PvPの数値はクライアント解析値と海外クリエイターの助言が中心です。バランス調整で変わりやすいため、ゲーム内の表示を優先してください。
+> **要確認**：PvP専用ステータスの種類と、PvPとPvEでダメージ計算が分かれていること自体は複数の資料（S01・S03）で一致しています。しかし、強打の倍率（2倍→1.5倍）、クリティカル1.25倍、回復量の減少率、潜在力の数値、抵抗スキルの細部は、Aion 2 Maps（S01・S02・S04は同一サイト）または海外クリエイターの助言が唯一の根拠で、独立した第2資料で確認できていません。韓国版ではPvPダメージの一律削減（2026年7月）などバランス調整が続いており、数値は変わりやすいため、ゲーム内の表示を優先してください。
 
 PvPには**PvP専用のステータス**があり、PvEの強さがそのまま通用するわけではありません。アビスや闘技場に本格的に行くなら、装備の「PvP」ラインを意識して積みます。PvEだけなら、ほとんど無視して構いません。
 

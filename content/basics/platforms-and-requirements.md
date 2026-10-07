@@ -7,7 +7,7 @@ summary: グローバル版は Windows PC 専用（Steam / PURPLE）。最低は
 confidence: official
 region: global
 updated: 2026-10-08
-aliases: [動作環境, 推奨スペック, システム要件, System Requirements, PS5, Steam Deck]
+aliases: [動作環境, 推奨スペック, システム要件, System Requirements, PS5]
 related: [game-overview, steam-vs-purple, recommended-settings, controller-and-steam-deck]
 sources:
   - id: S01

@@ -7,7 +7,7 @@ summary: キューブ（所持品）とサーバー倉庫・キャラクター�
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Inventory Tips", "倉庫整理", "キューブ拡張", "アイテム回収", "Recover Item"]
+aliases: ["Inventory Tips", "倉庫整理", "キューブ拡張", "アイテム回収"]
 related: [storage-and-cube, whats-bound, extraction, pets-and-mounts, membership, server-shared-limits-and-alts, kina-and-bound-kina]
 sources:
   - id: S01

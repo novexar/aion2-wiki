@@ -7,7 +7,7 @@ summary: 実績（Achievement）はLv9で解放され、達成するとギーナ
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Achievements, Collections, Supply Request, 補給依頼, 実績ポイント]
+aliases: [Achievements, Collections, Supply Request, 実績ポイント]
 related: [titles, closet-and-skins, wings, pets-and-mounts, pantheon-stats, abyss-points-and-shop, crafting-overview]
 sources:
   - id: S01
@@ -42,7 +42,7 @@ sources:
     kind: guide
 ---
 
-> **要確認**：この記事はデータベースの一覧と攻略サイトの断片的な記述をまとめたものです。実績の報酬額やポイントの使い道は、ゲーム内の実績画面の表示を優先してください。
+> **要確認**：実績が2,550件（うち2,385件に報酬）という点は AION2 Hub のデータベースで確認できています。一方、「実績はLv9で解放」「補給依頼はLv25で解放」は Aion 2 Maps（S04・S05）のみ、翼・ペット・称号の収集の節目（翼25種、ペット5体・以後10体ごと、称号枠3つ）は aion2.run（S06）のみが根拠で、独立した第2資料が見つかっていません。報酬額やポイントの使い道はゲーム内の実績画面の表示を優先してください。
 
 AION2には「実績（Achievement）」「収集（翼・ペット・スキン・称号の収集）」「アビス補給依頼（Supply Request）」という、普段のプレイで自然に進む積み上げ要素があります。どれも直接アイテムレベルは上げませんが、称号や素材、アビスポイントが手に入り、戦闘力に効きます。
 

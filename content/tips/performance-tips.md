@@ -4,7 +4,7 @@ title: 軽量化・カクつき対策
 category: tips
 tags: [FPS, 軽量化, グラフィック, DLSS, 動作環境]
 summary: まずDLSSかFSRを有効にし、解像度スケール、大規模戦闘品質、エフェクト、影の順に下げる。街や大人数戦だけ重いなら他プレイヤーの表示を減らす。FPSが高いのにカクつくときはフレーム生成を一度切る。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
 aliases: ["Performance Tips", "軽量化", "FPS向上", "カクつき対策", "DLSS FSR 設定", "ラグ 対策"]
@@ -25,9 +25,19 @@ sources:
     url: https://mein-mmo.de/aion2-endgame-tipps/
     date: 2026-10-07
     kind: guide
+  - id: S04
+    title: AION2 Hub：Aion 2 System Requirements（Steamストア記載の動作環境・DLSS 4.5）
+    url: https://aion2hub.com/guides/aion-2-system-requirements
+    date: 2026-10-08
+    kind: guide
+  - id: S05
+    title: Skycoach：AION 2 Best Settings
+    url: https://skycoach.gg/blog/aion-2/articles/aion-2-best-settings
+    date: 2026-10-08
+    kind: guide
 ---
 
-> **要確認**：設定の目安は攻略サイトの経験にもとづくもので、PCの構成で結果が変わります。1〜2項目ずつ変えて、同じ場所で確認してください。基本の設定は [[recommended-settings]] にあります。
+> **要確認**：動作環境の表（Steamストアの記載）とDLSS 4.5対応は AION2 Hub で、下げる順番（影・グローバルイルミネーション・反射・他プレイヤーのエフェクトが先、フレーム生成はPvE向き）は Skycoach でも確認できました。ただし設定の効果はPCの構成で変わります。1〜2項目ずつ変えて、同じ場所で確認してください。基本の設定は [[recommended-settings]] にあります。
 
 AION2はUnreal Engine 5製で、街や大人数の戦闘では負荷が上がります。画質を全部最低にする前に、効く順に手を入れると、見た目を保ちながら軽くできます。
 
@@ -42,7 +52,7 @@ AION2はUnreal Engine 5製で、街や大人数の戦闘では負荷が上がり
 
 推奨環境でもフルHD・低設定が基準です。推奨を超えていても、最高設定で60FPS以上が出るとは限りません。まず低〜中で安定させてから画質を上げてください。
 
-根拠：[S01] [S02]
+根拠：[S02] [S04]
 
 → [[platforms-and-requirements]]
 
@@ -60,7 +70,7 @@ AION2はUnreal Engine 5製で、街や大人数の戦闘では負荷が上がり
 
 一度に全部変えず、1〜2項目ずつ同じ場所でFPSを確認すると、原因が分かります。テクスチャ品質は、VRAMに余裕があれば下げてもFPSはあまり伸びません。
 
-根拠：[S01]
+根拠：[S01] [S05]
 
 ## DLSSとフレーム生成
 

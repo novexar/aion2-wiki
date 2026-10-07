@@ -7,7 +7,7 @@ summary: FPSを上げるにはDLSS（RTX）かFSR（Radeon）を有効にして�
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [おすすめ設定, グラフィック設定, 軽量化, DLSS, FSR, Frame Generation, FPS, カメラ揺れ]
+aliases: [おすすめ設定, グラフィック設定, DLSS, FSR, Frame Generation, FPS, カメラ揺れ]
 related: [platforms-and-requirements, controls-and-keybinds, controller-and-steam-deck, ui-and-menus, chat-and-social]
 sources:
   - id: S01

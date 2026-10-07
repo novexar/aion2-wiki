@@ -4,7 +4,7 @@ title: 基本操作とキー設定
 category: basics
 tags: [操作, キー設定, チャットコマンド, 操作モード, ゲームパッド]
 summary: グローバル版の初期キー、2つの操作モード（AION 2 / AION 1）、チャットコマンド、エモートの一覧。移動はWASD、攻撃はマウス左右クリック、設定はOキー。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
 aliases: [キー設定, Key Settings, 操作モード, Control Mode, チャットコマンド, ショートカット]
@@ -20,9 +20,19 @@ sources:
     url: https://aion2.vi.ki/combat-system
     date: 2026-10-07
     kind: guide
+  - id: S03
+    title: DefKey：Aion 2 keyboard shortcuts
+    url: https://defkey.com/aion-2-shortcuts
+    date: 2026-10-08
+    kind: guide
+  - id: S04
+    title: Space4Games：AION 2 Best Settings（FPS, Graphics, Controls & Keybinds）
+    url: https://space4games.com/en/games-en/aion-2-best-settings-guide/
+    date: 2026-10-08
+    kind: guide
 ---
 
-> **要確認**：キー配置は、グローバル版クライアント（ローンチビルド）を解析した1つの攻略サイトの資料に基づきます。ゲーム内の「設定（O）→ キー設定」の表示が常に優先されます。
+> **要確認**：移動・ジャンプ・飛行・ターゲット切替・ウィンドウを開くキーは、DefKey と Space4Games の一覧とも一致します。食い違いが2点あります。実績ウィンドウは、Aion 2 Maps が Y、DefKey と Space4Games が Z とするため本文では Z にしています。パワーシャードは、Aion 2 Maps（B）と DefKey（R）で異なり未確定です。自動移動の Num Lock、休息の「,」、ギアセットのキーは Aion 2 Maps のみの記述です。ゲーム内の「設定（O）→ キー設定」の表示が常に優先されます。
 
 AION2 は、移動・ジャンプ・攻撃をキーボードとマウスで行うマニュアル戦闘の MMORPG です。自動戦闘はありません。最初に覚えるのは「WASD で移動、左クリックで基本攻撃、右クリックで強攻撃、Tab でターゲット切替」の4つです。この記事では初期キーと、2種類ある操作モードをまとめます。
 
@@ -46,7 +56,7 @@ AION2 は、移動・ジャンプ・攻撃をキーボードとマウスで行�
 | 操作モード切替 | / |
 | ズーム | マウスホイール、またはテンキーの + と − |
 
-根拠：[S01]
+根拠：[S01] [S03]
 
 ## 戦闘のキー
 
@@ -87,14 +97,14 @@ AION2 は、移動・ジャンプ・攻撃をキーボードとマウスで行�
 | 透過マップ | Alt + M | クローゼット | Alt + O |
 | ジャーナル | J | 称号 | Alt + T |
 | レギオン | L | 製作 | Alt + G |
-| 実績 | Y | 抽出 | Alt + F |
+| 実績 | Z | 抽出 | Alt + F |
 | 設定 | O | 物質変換 | Alt + H |
 | ショップ | H | 補給要請 | Alt + J |
 | サブスクリプション | G | UI を隠す | F12 |
 
 Esc はキャスト中断、ウィンドウを閉じる、ターゲット解除、メニューを開く、を兼ねます。遠征・悪夢・超越・アビス・取引所・メールなど十数個のウィンドウには初期キーがなく、Esc メニューから開くか、自分で割り当てます。メニューの中身は [[ui-and-menus]] にまとめています。
 
-根拠：[S01]
+根拠：[S01] [S03] [S04]
 
 ## 2つの操作モード
 

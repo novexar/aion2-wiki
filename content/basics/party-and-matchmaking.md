@@ -7,7 +7,7 @@ summary: 遠征は最大 5 人、超越は 2〜5 人、聖域は 10 人。グロ
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Party, Matchmaking, Group finder, パーティ募集, フォース, Force, 貢献度, Contribution, クロスサーバー, LFG]
+aliases: [Party, Matchmaking, Group finder, パーティ募集, フォース, Force, クロスサーバー, LFG]
 related: [party-roles-and-buffs, legion, chat-and-social, death-and-resurrection]
 sources:
   - id: S01

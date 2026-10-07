@@ -4,7 +4,7 @@ title: コントローラー・Steam Deck
 category: basics
 tags: [コントローラー, ゲームパッド, Steam Deck, Steam Input]
 summary: 戦闘はコントローラーで遊べるが、NCは公式サポート対象外としている。Xbox系が最も無難で、メニューはマウス併用が現実的。Steam Deckも公式非対応だが動作報告がある。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
 aliases: [Controller, Gamepad, ゲームパッド, Steam Deck, Steam Input, DualSense, Xboxコントローラー]
@@ -25,13 +25,18 @@ sources:
     url: https://aion2maps.com/guides/commands-and-controls/
     date: 2026-09-28
     kind: guide
+  - id: S04
+    title: NC：Launch FAQ（Will there be controller support? / Linux or Steam Deck support?）
+    url: https://lounge.plaync.com/feed/82939?country=US&locale=en-US
+    date: 2026-10-08
+    kind: official
 ---
 
-> **要確認**：コントローラーとSteam Deckの動作は、ユーザー報告に基づきます。更新やアンチチートの変更で動かなくなる可能性があります。
+> **要確認**：「コントローラーで遊べるが公式サポート対象外」「Steam Deck・Linux は公式サポート対象外」は NC の Launch FAQ で確認済みです。初期ボタン割り当ては Aion 2 Maps のクライアント解析1件のみ、機種ごとの動作（Xbox・DualSense・Steam Deck の快適さ）はユーザー報告に基づくため、更新やアンチチートの変更で動かなくなる可能性があります。
 
-AION2 のグローバル版は、コントローラーを使って戦闘できますが、NC の Launch FAQ（2026-09-30）では「遊べるが公式サポート対象ではない」とされています。Steam Deck も同じ扱いです。戦闘や移動はパッドで快適に動く一方、メニューやインベントリはマウスのカーソルを前提にした部分が残っています。
+AION2 のグローバル版は、コントローラーを使って戦闘できますが、NC の Launch FAQ（2026-09-30、[S04]）では「遊べるが公式サポート対象ではない」とされています。Steam Deck も同じ扱いです。戦闘や移動はパッドで快適に動く一方、メニューやインベントリはマウスのカーソルを前提にした部分が残っています。
 
-根拠：[S01] [S02]
+根拠：[S01] [S02] [S04]
 
 ## 対応状況
 

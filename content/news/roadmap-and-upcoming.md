@@ -4,10 +4,10 @@ title: 今後の予定（確定済みと未発表の区別：サーバー移動�
 category: news
 tags: [今後の予定, ロードマップ, コンソール, サーバー移動, 未実装]
 summary: グローバル版で日付が確定しているのは、サーバー移動（10月14日開始予定）とルドラの復帰案内（10月16日まで）だけ。コンソール版は準備中、拳星・Lv50・新クラス・航海・ハウジングは韓国版でも日付未定で、グローバル版の時期は未発表。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Roadmap, ロードマップ, Console version, コンソール版, 新クラス, 統合取引所, アウトランド, ハウジング]
+aliases: [Roadmap, ロードマップ, Console version, コンソール版, 新クラス, アウトランド, ハウジング]
 related: [content-not-in-global, global-vs-korea, korea-update-history, ludra-raid-suspension, server-transfer, platforms-and-requirements, brawler-kwonseong, global-launch-timeline]
 sources:
   - id: S01
@@ -30,9 +30,19 @@ sources:
     url: https://aion2-times.com/aion2-navi-03-summary/
     date: 2026-10-03
     kind: guide
+  - id: S05
+    title: AION2 Builds：Sources（NC 告知の要約。サーバー移動10月14日、ルドラ一時削除と復帰、8クラスの公式一覧）
+    url: https://aion2builds.com/sources/
+    date: 2026-10-08
+    kind: guide
+  - id: S06
+    title: Mein-MMO：Aion 2 on Xbox and PS5（コンソール版は準備中で時期未発表、西洋版にモバイルは出さない）
+    url: https://mein-mmo.de/en/aion-2-on-xbox-and-ps5-is-the-mmorpg-coming-to-consoles,1583245/
+    date: 2026-10-06
+    kind: guide
 ---
 
-> **要確認**：この記事の大半は「予定」または「検討中」です。NC が日付を示したものと、示していないものを分けて書きますが、予定は変わります。日付が確定していない項目は、今後の公式お知らせで更新されるまで計画の前提にしないでください。
+> **要確認**：この記事の大半は「予定」または「検討中」で、予定は変わります。サーバー移動（10月14日）・ルドラの一時削除と復帰案内・8クラス、およびコンソール版が準備中で日付未発表という点は、複数の資料で一致しています。一方、「韓国版でも未実装の予告」（アウトランド、航海、ハウジング、2つ目の新クラスなど）と、DLSS 5・毎週の生放送・クロスプレイの見通しは、単一の資料（S01・S02）に基づきます。日付が確定していない項目は、公式お知らせで更新されるまで計画の前提にしないでください。
 
 グローバル版の今後の予定は、「日付が決まっているもの」「実装は決まっているが日付が未定のもの」「韓国版にあるがグローバル版の予定がないもの」「韓国版でも未実装のもの」の4つに分けると整理できます。
 
@@ -47,7 +57,7 @@ sources:
 | ディーヴァパス（シーズン1） | 12月15日（太平洋時間22:30）のメンテナンスまで | 日付あり |
 | シーズン1の終了 | 12月16日の日次リセット（日本時間16:00） | 日付あり |
 
-根拠：[S01] [S04]（ディーヴァパスとシーズン終了の日付の根拠は [[season-1-end-notice]]、ルドラは [[ludra-raid-suspension]] を参照）。
+根拠：[S01] [S04] [S05]（ディーヴァパスとシーズン終了の日付の根拠は [[season-1-end-notice]]、ルドラは [[ludra-raid-suspension]] を参照）。
 
 > **注意**：ルドラの案内日は、資料により「10月16日まで」（NC の英語告知、太平洋時間）と「10月17日」（日本語の資料）が出ています。時差による表記の違いと考えられます。
 
@@ -73,7 +83,7 @@ sources:
 - PCとコンソールのクロスプレイは、決定していないが「おそらくサポートしない」という考えです。確定した方針ではありません。
 - モバイル版は、グローバル版には計画がありません。コントローラーは PC 版で対応しています。
 
-根拠：[S02]
+根拠：[S02] [S06]
 
 ## 韓国版にあるが、グローバル版の時期が未発表のもの
 

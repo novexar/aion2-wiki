@@ -4,7 +4,7 @@ title: 補給依頼（Lv25、アビスポイント）
 category: leveling
 tags: [補給依頼, アビスポイント, Lv25, 納品, 日課]
 summary: 補給依頼はLv25で解放される納品型のクエスト。指定された素材や装備を納めるとアビスポイントなどが貰える。全員に同じ依頼が出るため市場の需要の目安にもなる。内容の詳細は資料が少なく、要確認。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
 aliases: [Supply Requests, Emergency Supply Requests, アビス補給依頼, 納品依頼, Weekly Supply Requests]
@@ -37,7 +37,7 @@ sources:
     kind: guide
 ---
 
-> **要確認**：補給依頼については、解放レベルと「アビスポイントが貰える納品クエスト」という基本以外、グローバル版で数値まで確認できた資料がありません。具体的な報酬量は、ゲーム内の表示を確認してください。
+> **要確認**：解放Lv25（Aion 2 Maps と AION2 Times）、納品型でアビスポイントなどが貰えること、日々・週ごと・シーズンの3種類（MeinMMO）は独立した資料で一致しています。具体的な納品物や報酬量は、グローバル版で数値まで確認できた資料がありません。ゲーム内の表示を確認してください。
 
 補給依頼（Supply Request）は、指定された素材や装備を納めると、アビスポイント（Abyss Points）などの報酬が貰える納品型のクエストです。Lv25で解放されます。
 

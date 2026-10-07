@@ -4,7 +4,7 @@ title: ステータスライン（オプション）と厳選
 category: systems
 tags: [ステータスライン, オプション, 厳選, 魂刻印, ライン確率]
 summary: 唯一装備に付く追加効果（ライン）の仕組みと確率。ラインの80%は一般ステータス、20%は自分のクラスのスキル。武器の最レアはダメージ増幅1.6%。厳選は長く使う装備だけに行い、ラインは継承で移せる。
-confidence: community
+confidence: verified
 region: global
 updated: 2026-10-08
 aliases: [Stat Lines, Options, オプションライン, ライン厳選, 精錬石, Refining Stone]
@@ -30,13 +30,18 @@ sources:
     url: https://aion2-times.com/aion2-gear-enhancement/
     date: 2026-10-06
     kind: guide
+  - id: S05
+    title: Gameplay.tips：AION 2 Ideal Stat Lines Guide
+    url: https://gameplay.tips/guides/aion-2-ideal-stat-lines-guide.html
+    date: 2026-10-08
+    kind: guide
 ---
 
-> **要確認**：ラインの確率は、アジア版で公開された確率に基づく Aion 2 Maps の整理が主な根拠です。グローバル版は一部のライン（特に防具の特殊ライン）の重みを下げているため、実際の確率はゲーム内で装備ごとに確認してください。
+> **要確認**：ラインの確率は、アジア版で公開された確率に基づく Aion 2 Maps の整理が主な根拠です（Gameplay.tips の表も、武器の最レアがダメージ増幅の約2%、戦闘速度・武器ダメージ増幅が約4%など、相対的な順位は一致します）。ただし防具の特殊ラインはグローバル版で重みが下げられており、数値は部位ごとの「目安」です。ラインの正確な確率や数値はゲーム内で装備ごとに確認してください。
 
 ステータスライン（Stat lines）は、唯一装備に付く追加効果です。装備を初めて装着したときに付き、[[soul-binding]] で値を上げたり引き直したりできます。ラインの内容によって戦闘力が大きく変わるため、**長く使う装備のラインを厳選する**のがエンドゲームの楽しみ方の一つです。
 
-根拠：[S01] [S04]
+根拠：[S01] [S04] [S05]
 
 ## ラインの基本ルール
 
