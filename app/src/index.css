@@ -1,0 +1,321 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ---------- デザイントークン ---------- */
+:root {
+  --canvas: #ffffff;
+  --surface: #fafafa;
+  --muted: #f4f4f5;
+  --line: #e4e4e7;
+  --line-strong: #d4d4d8;
+  --fg: #18181b;
+  --fg-muted: #52525b;
+  --fg-subtle: #6b6b74;
+  /* 単一アクセント: 深い金。塗りは --accent、文字色は可読性のため濃い --accent-strong */
+  --accent: #c9a227;
+  --accent-strong: #7f640f;
+  --accent-soft: rgb(201 162 39 / 0.12);
+  --accent-contrast: #1c1505;
+  --ok-fg: #166534;
+  --ok-bg: #f0fdf4;
+  --ok-line: #bbf7d0;
+  --info-fg: #1e40af;
+  --info-bg: #eff6ff;
+  --info-line: #bfdbfe;
+  --warn-fg: #92400e;
+  --warn-bg: #fffbeb;
+  --warn-line: #fde68a;
+  --danger-fg: #b91c1c;
+  --danger-bg: #fef2f2;
+  --danger-line: #fecaca;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.08);
+  --header-h: 3.5rem;
+}
+
+[data-theme='dark'] {
+  --canvas: #09090b;
+  --surface: #0f0f12;
+  --muted: #18181b;
+  --line: #27272a;
+  --line-strong: #3f3f46;
+  --fg: #fafafa;
+  --fg-muted: #a1a1aa;
+  --fg-subtle: #8c8c96;
+  --accent: #d4af37;
+  --accent-strong: #e2c15a;
+  --accent-soft: rgb(212 175 55 / 0.14);
+  --accent-contrast: #140f02;
+  --ok-fg: #86efac;
+  --ok-bg: rgb(34 197 94 / 0.1);
+  --ok-line: rgb(34 197 94 / 0.3);
+  --info-fg: #93c5fd;
+  --info-bg: rgb(59 130 246 / 0.1);
+  --info-line: rgb(59 130 246 / 0.3);
+  --warn-fg: #fcd34d;
+  --warn-bg: rgb(245 158 11 / 0.1);
+  --warn-line: rgb(245 158 11 / 0.3);
+  --danger-fg: #fca5a5;
+  --danger-bg: rgb(239 68 68 / 0.1);
+  --danger-line: rgb(239 68 68 / 0.3);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.5);
+}
+
+@theme inline {
+  --font-sans:
+    'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, 'Hiragino Sans',
+    'Yu Gothic UI', sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Code', Menlo, Consolas, monospace;
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-ok: var(--ok-fg);
+  --color-ok-bg: var(--ok-bg);
+  --color-ok-line: var(--ok-line);
+  --color-info: var(--info-fg);
+  --color-info-bg: var(--info-bg);
+  --color-info-line: var(--info-line);
+  --color-warn: var(--warn-fg);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-line: var(--warn-line);
+  --color-danger: var(--danger-fg);
+  --color-danger-bg: var(--danger-bg);
+  --color-danger-line: var(--danger-line);
+  --shadow-pop: var(--shadow);
+}
+
+/* ---------- ベース ---------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-fg font-sans antialiased;
+    font-feature-settings: 'palt' 0;
+    min-width: 320px;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  [id] {
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- 記事本文 ---------- */
+.prose-wiki {
+  max-width: 72ch;
+  font-size: 0.975rem;
+  line-height: 1.8;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+
+.prose-wiki > * + * {
+  margin-top: 1.1em;
+}
+
+.prose-wiki h2 {
+  margin-top: 2.6em;
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.35rem;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+
+.prose-wiki h3 {
+  margin-top: 2em;
+  font-size: 1.1rem;
+  font-weight: 650;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.prose-wiki h4 {
+  margin-top: 1.6em;
+  font-weight: 650;
+}
+
+.prose-wiki .heading-anchor {
+  margin-left: 0.4em;
+  color: var(--fg-subtle);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 120ms;
+}
+
+.prose-wiki :is(h2, h3, h4):hover .heading-anchor {
+  opacity: 1;
+}
+
+.prose-wiki a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 120ms;
+}
+
+.prose-wiki a:hover {
+  text-decoration-color: currentColor;
+}
+
+.prose-wiki a.source-ref {
+  font-size: 0.8em;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  vertical-align: 0.1em;
+}
+
+.prose-wiki .wikilink-missing {
+  color: var(--fg-subtle);
+  font-style: normal;
+  text-decoration: underline dashed;
+  text-underline-offset: 3px;
+  cursor: help;
+}
+
+.prose-wiki strong {
+  font-weight: 650;
+}
+
+.prose-wiki ul,
+.prose-wiki ol {
+  padding-left: 1.4em;
+}
+
+.prose-wiki ul {
+  list-style: disc;
+}
+
+.prose-wiki ol {
+  list-style: decimal;
+}
+
+.prose-wiki li + li {
+  margin-top: 0.3em;
+}
+
+.prose-wiki li::marker {
+  color: var(--fg-subtle);
+}
+
+.prose-wiki blockquote {
+  padding: 0.75em 1em;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  background: var(--surface);
+  color: var(--fg-muted);
+}
+
+.prose-wiki blockquote strong {
+  color: var(--fg);
+}
+
+.prose-wiki code {
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+.prose-wiki pre {
+  overflow-x: auto;
+  padding: 1em;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  line-height: 1.6;
+}
+
+.prose-wiki pre code {
+  padding: 0;
+  background: none;
+}
+
+.prose-wiki hr {
+  border-color: var(--line);
+}
+
+.prose-wiki .table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.prose-wiki table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose-wiki th,
+.prose-wiki td {
+  padding: 0.55em 0.85em;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.prose-wiki td {
+  white-space: normal;
+  min-width: 6em;
+}
+
+.prose-wiki th {
+  background: var(--surface);
+  color: var(--fg-muted);
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
+.prose-wiki tr:last-child td {
+  border-bottom: 0;
+}
+
+/* スクロールバーを目立たせない */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
