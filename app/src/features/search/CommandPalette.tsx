@@ -1,12 +1,13 @@
 import { ArrowDown, ArrowRight, ArrowUp, CornerDownLeft, Loader2, Search } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { Fragment, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router';
 import { Kbd } from '../../components/Kbd';
 import { categoryLabel } from '../../lib/categories';
 import { articlePath, searchPath } from '../../lib/paths';
-import { nav } from '../wiki/data';
+import { readRecentIds } from '../../lib/recent';
+import { articleById } from '../wiki/data';
 import { SearchResultRow } from './SearchResultRow';
 import { useSearch } from './useSearch';
 
@@ -17,15 +18,26 @@ interface CommandPaletteProps {
 
 interface PaletteItem {
   readonly key: string;
+  /** 節の見出し。直前の項目と異なるときに見出し行を挟む */
+  readonly section?: string;
   readonly to: string;
   readonly render: () => React.ReactNode;
 }
+
+const RECENT_SECTION = '最近開いた記事';
+const PAGES_SECTION = 'ページ';
 
 const QUICK_LINKS = [
   { to: '/index', label: '索引' },
   { to: '/chat', label: 'チャット' },
   { to: '/about', label: 'このサイトについて' },
 ];
+
+/** 見出し行を挟むべき項目ならその見出しを返す */
+function sectionOf(items: readonly PaletteItem[], i: number): string | undefined {
+  const section = items[i]?.section;
+  return section && section !== items[i - 1]?.section ? section : undefined;
+}
 
 export default function CommandPalette({ initialQuery, onClose }: CommandPaletteProps) {
   const [query, setQuery] = useState(initialQuery);
@@ -40,18 +52,29 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
 
   const items = useMemo<PaletteItem[]>(() => {
     if (!trimmed) {
-      const recent = nav.articles.slice(0, 5).map((a) => ({
-        key: `recent-${a.id}`,
-        to: articlePath(a.category, a.id),
-        render: () => (
-          <span className="flex min-w-0 items-center gap-2">
-            <span className="truncate">{a.title}</span>
-            <span className="shrink-0 text-xs text-fg-subtle">{categoryLabel(a.category)}</span>
-          </span>
-        ),
-      }));
+      const recent = readRecentIds().flatMap((id) => {
+        const a = articleById.get(id);
+        return a
+          ? [
+              {
+                key: `recent-${a.id}`,
+                section: RECENT_SECTION,
+                to: articlePath(a.category, a.id),
+                render: () => (
+                  <span className="flex min-w-0 items-center gap-2">
+                    <span className="truncate">{a.title}</span>
+                    <span className="shrink-0 text-xs text-fg-subtle">
+                      {categoryLabel(a.category)}
+                    </span>
+                  </span>
+                ),
+              },
+            ]
+          : [];
+      });
       const quick = QUICK_LINKS.map((l) => ({
         key: `quick-${l.to}`,
+        section: PAGES_SECTION,
         to: l.to,
         render: () => <span>{l.label}</span>,
       }));
@@ -136,7 +159,7 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
   };
 
   const optionId = (i: number): string => `${listId}-opt-${i}`;
-  const sectionLabel = trimmed ? '検索結果' : '最近の更新とショートカット';
+  const sectionLabel = trimmed ? '検索結果' : '候補';
 
   return createPortal(
     <div
@@ -199,9 +222,6 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
         </div>
 
         <div className="scroll-thin min-h-0 flex-1 overflow-y-auto p-2">
-          <div className="px-2 pt-1 pb-1.5 text-[11px] font-medium tracking-wide text-fg-subtle">
-            {sectionLabel}
-          </div>
           {status === 'error' && (
             <p className="px-2 py-6 text-center text-sm text-danger">
               検索インデックスを読み込めませんでした。
@@ -220,20 +240,29 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
             className="space-y-0.5"
           >
             {items.map((item, i) => (
-              <li
-                key={item.key}
-                id={optionId(i)}
-                data-index={i}
-                role="option"
-                aria-selected={i === activeIndex}
-                onMouseMove={() => i !== activeIndex && setActive(i)}
-                onClick={() => go(item.to)}
-                className={`cursor-pointer rounded-md px-2.5 py-2 text-sm ${
-                  i === activeIndex ? 'bg-muted text-fg' : 'text-fg-muted'
-                }`}
-              >
-                {item.render()}
-              </li>
+              <Fragment key={item.key}>
+                {sectionOf(items, i) && (
+                  <li
+                    role="presentation"
+                    className="px-2.5 pt-2 pb-1 text-[11px] font-medium text-fg-subtle"
+                  >
+                    {sectionOf(items, i)}
+                  </li>
+                )}
+                <li
+                  id={optionId(i)}
+                  data-index={i}
+                  role="option"
+                  aria-selected={i === activeIndex}
+                  onMouseMove={() => i !== activeIndex && setActive(i)}
+                  onClick={() => go(item.to)}
+                  className={`cursor-pointer rounded-md px-2.5 py-2 text-sm ${
+                    i === activeIndex ? 'bg-muted text-fg' : 'text-fg-muted'
+                  }`}
+                >
+                  {item.render()}
+                </li>
+              </Fragment>
             ))}
           </ul>
         </div>

@@ -31,13 +31,26 @@ function setup(initialQuery = '') {
 }
 
 describe('CommandPalette', () => {
-  it('focuses the combobox and shows recent articles and shortcuts when empty', () => {
+  it('shows only the pages section when nothing was opened yet', () => {
+    localStorage.removeItem('aion2wiki:recent-articles');
     setup();
     const input = screen.getByRole('combobox', { name: '記事を検索' });
     expect(input).toHaveFocus();
     const options = screen.getAllByRole('option');
-    expect(options[0]).toHaveTextContent('オードエネルギー');
+    expect(options[0]).toHaveTextContent('索引');
     expect(options.at(-1)).toHaveTextContent('このサイトについて');
+    expect(screen.queryByText('最近開いた記事')).toBeNull();
+    expect(screen.getByText('ページ')).toBeInTheDocument();
+  });
+
+  it('lists recently opened articles before the pages section', () => {
+    localStorage.setItem('aion2wiki:recent-articles', JSON.stringify(['kinah', 'unknown-id']));
+    setup();
+    const options = screen.getAllByRole('option');
+    expect(options[0]).toHaveTextContent('ギーナ');
+    expect(screen.getByText('最近開いた記事')).toBeInTheDocument();
+    expect(screen.getByText('ページ')).toBeInTheDocument();
+    localStorage.removeItem('aion2wiki:recent-articles');
   });
 
   it('searches as you type with highlighted matches', async () => {
@@ -85,8 +98,10 @@ describe('CommandPalette', () => {
   });
 
   it('navigates when an option is clicked', async () => {
+    localStorage.setItem('aion2wiki:recent-articles', JSON.stringify(['odyle-energy', 'kinah']));
     const { user } = setup();
     await user.click(screen.getAllByRole('option')[1] as HTMLElement);
     expect(screen.getByTestId('location')).toHaveTextContent('/wiki/economy/kinah');
+    localStorage.removeItem('aion2wiki:recent-articles');
   });
 });

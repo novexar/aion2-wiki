@@ -11,6 +11,7 @@ import NotFoundPage from '../../routes/NotFoundPage';
 import { ArticleBody } from './ArticleBody';
 import { ArticleLinkGrid } from './ArticleList';
 import { Breadcrumb } from './Breadcrumb';
+import { pushRecentId } from '../../lib/recent';
 import { articleById, loadArticle } from './data';
 import { SourcesList } from './SourcesList';
 import { MobileToc, Toc } from './Toc';
@@ -29,6 +30,7 @@ function useArticle(id: string): LoadState {
     let active = true;
     loadArticle(id)
       .then((article) => {
+        if (article) pushRecentId(id);
         if (active)
           setState(article ? { status: 'ready', id, article } : { status: 'missing', id });
       })
