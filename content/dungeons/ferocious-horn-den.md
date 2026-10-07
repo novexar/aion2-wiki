@@ -1,13 +1,14 @@
 ---
 id: ferocious-horn-den
-title: 獰猛な角岩窟（遠征★3：Lv45/IL2,100）
+title: 獰猛な角岩窟
+reading: どうもうなかくがんくつ
 category: dungeons
 tags: [遠征, 獰猛な角岩窟, ヌアクム, 探険, 征服, ボス攻略]
 summary: Lv45・IL2,100で入れる★3の遠征。探険も征服も報酬キューブは40オードで、防具が出る。最終ボスのヌアクムは「狩り」ギミック、30%の青い光、終盤の赤い玉の3つで勝負が決まる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Ferocious Horn Den, Cave of the Savage Horn, 角岩窟, ヌアクム, Nuakum, Horn Den]
+aliases: [Ferocious Horn Den, Cave of the Savage Horn, 角岩窟, ヌアクム, Nuakum, Horn Den, "Lv45/IL2,100"]
 related: [fire-temple, vakron-sky-island, expeditions-and-odyle, odyle-energy, expedition-reward-selection, content-not-in-global]
 sources:
   - id: S01

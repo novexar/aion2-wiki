@@ -1,13 +1,14 @@
 ---
 id: shugo-festa
-title: シューゴフェスタ（毎時開催・鍵の上限12/21・百年人参の証）
+title: シューゴフェスタ
+reading: しゅーごふぇすた
 category: dungeons
 tags: [シューゴフェスタ, ミニゲーム, 報酬の鍵, 百年人参の証, 日課]
 summary: 毎時0分に始まる順位制のミニゲーム。参加には報酬の鍵を使い、鍵は毎日補充され、上限は12個（会員は21個）。報酬は百年人参の証、装備素材、アビスポイントなど。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Shugo Festa, Shugo Festival, Shugo Games, シューゴフェスティバル, 百年人参の証, Centuryroot Token]
+aliases: [Shugo Festa, Shugo Festival, Shugo Games, シューゴフェスティバル, 百年人参の証, Centuryroot Token, 毎時開催, 鍵の上限12/21]
 related: [daily-and-weekly-checklist, reset-times, dimensional-invasion, server-shared-limits-and-alts, dungeons-overview]
 sources:
   - id: S01

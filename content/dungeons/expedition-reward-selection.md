@@ -1,13 +1,14 @@
 ---
 id: expedition-reward-selection
-title: 遠征の選択報酬（天井）と装備変更券
+title: 遠征の選択報酬
+reading: えんせいのせんたくほうしゅう
 category: dungeons
 tags: [遠征, 天井, 選択報酬, 装備変更券, 征服]
 summary: 探険は3回受取で防具1部位を確定選択、征服は14／21／28回受取ごとに装備か装備変更券を選べる。受取待ちを放置するとそのダンジョンに入れなくなる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Pity, 天井アイテム, Gear Change Voucher, 装備変更券, 確定報酬]
+aliases: [Pity, 天井アイテム, Gear Change Voucher, 確定報酬]
 related: [expeditions-and-odyle, draupnir, vakron-sky-island, ferocious-horn-den, krao-cave, urugugu-canyon, fire-temple]
 sources:
   - id: S01

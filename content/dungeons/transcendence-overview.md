@@ -1,13 +1,14 @@
 ---
 id: transcendence-overview
-title: 超越（段階IL1,600/1,900/2,200/2,500、報酬アルカナ、ランク）
+title: 超越の概要
+reading: ちょうえつのがいよう
 category: dungeons
 tags: [超越, アルカナ, 段階, Sランク, オードエネルギー, ランキング]
 summary: Lv45以降の2〜5人タイムアタック型ダンジョン。2種類（デウス研究基地／砕けたアルカニス）を4段階で遊び、ローンチ時の唯一のアルカナ入手先。報酬キューブは40オード。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Transcendence, 超越ダンジョン, 超越ランキング]
+aliases: [Transcendence, 超越ダンジョン, 超越ランキング, "段階IL1,600/1,900/2,200/2,500", 報酬アルカナ, ランク]
 related: [deus-research-base, shattered-arkanis, arcana, odyle-energy, expeditions-and-odyle, server-shared-limits-and-alts]
 sources:
   - id: S01

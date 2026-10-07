@@ -1,13 +1,14 @@
 ---
 id: unknown-fissure
-title: 未知の狭間（Unknown Fissure：チケット制のデイリーダンジョン入口）
+title: 未知の狭間
+reading: みちのはざま
 category: dungeons
 tags: [未知の狭間, チケット, デイリーダンジョン, 挑戦券, 週14回]
 summary: デイリーダンジョン「ディーヴァ生体研究基地」へ入るための仕組み。入場には「未知の狭間挑戦券」が必要で、週14回、サーバー内のキャラで共有。チケットは使命の報酬や出席報酬でもらえる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Unknown Fissure, 未知の狭間挑戦券, 不明な亀裂, 未知の亀裂]
+aliases: [Unknown Fissure, 未知の狭間挑戦券, 不明な亀裂, 未知の亀裂, チケット制のデイリーダンジョン入口]
 related: [daily-dungeon, duty-quests, daily-and-weekly-checklist, server-shared-limits-and-alts]
 sources:
   - id: S01

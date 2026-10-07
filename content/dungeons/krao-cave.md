@@ -1,13 +1,14 @@
 ---
 id: krao-cave
-title: クラオ洞窟（遠征★1：入場条件・報酬・ボス攻略）
+title: クラオ洞窟
+reading: くらおどうくつ
 category: dungeons
 tags: [遠征, クラオ洞窟, ベルク, 探険, 征服, ボス攻略]
 summary: Lv20・IL200から入れる最初の遠征。探険の報酬キューブは20オード、征服はIL700・40オード。最終ボス「ベルク」は50%のスタッガー（体勢崩し）確認と、石の陰に隠れる全体攻撃が山場。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Krao Cave, クラオ, ベルク, Berk, レパル団]
+aliases: [Krao Cave, クラオ, ベルク, Berk, レパル団, 入場条件, ボス攻略]
 related: [expeditions-and-odyle, odyle-energy, draupnir, dungeons-overview, expedition-reward-selection]
 sources:
   - id: S01

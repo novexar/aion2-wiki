@@ -1,13 +1,14 @@
 ---
 id: field-bosses
-title: フィールドボス（一覧・出現・報酬・狙うべき装備）
+title: フィールドボス
+reading: ふぃーるどぼす
 category: dungeons
 tags: [フィールドボス, ガルトゥア, ナフマ, 装備, アビス, 出現時間]
 summary: ベルテロン／アルトガルドに各24枠、混沌のエレシュランタ下層に8枠あるオープンワールドのボス。装備更新の候補はLv51のガルトゥアとアビスのナフマ。再出現はマップの表示で確認する。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Field Boss, フィールドネームド, ナフマ, ガルトゥア, Nahma, Galtuah]
+aliases: [Field Boss, フィールドネームド, ナフマ, ガルトゥア, Nahma, Galtuah, 狙うべき装備]
 related: [abyss-field-bosses, dungeons-overview, expeditions-and-odyle, duty-quests, daily-and-weekly-checklist]
 sources:
   - id: S01

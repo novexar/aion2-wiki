@@ -1,13 +1,14 @@
 ---
 id: field-instances
-title: フィールドインスタンス（放棄されたバラウ要塞・ファフニウム研究所）
+title: フィールドインスタンス
+reading: ふぃーるどいんすたんす
 category: dungeons
 tags: [フィールドインスタンス, 放棄されたバラウ要塞, ファフニウム研究所, 日課]
 summary: 1日1回ずつ（最大7回ためられる）入れる日課用のフィールド型ダンジョン。クライアントのデータ上は存在するが、グローバル版で開放されているかは未確認で、一次資料が1つしかない。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Field Instance, Abandoned Balaur Fortress, Fafnium Laboratory, 放棄された龍族要塞, Daily field instance]
+aliases: [Field Instance, Abandoned Balaur Fortress, Fafnium Laboratory, 放棄された龍族要塞, Daily field instance, 放棄されたバラウ要塞, ファフニウム研究所]
 related: [growth-dungeons, daily-and-weekly-checklist, dungeons-overview, reset-times]
 sources:
   - id: S01

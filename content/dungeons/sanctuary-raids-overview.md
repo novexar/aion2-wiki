@@ -1,6 +1,7 @@
 ---
 id: sanctuary-raids-overview
-title: 聖域（10人レイド）の仕組み
+title: 聖域レイドの仕組み
+reading: せいいきれいどのしくみ
 category: dungeons
 tags: [聖域, レイド, 10人, ルドラ, 週制限]
 summary: 聖域はAION2の最上位のレイド。グローバル版は10人（5人×2パーティー）で、ローンチ時の聖域は「深淵の再錬：ルドラ」だけ。週1回の報酬付き討伐で、正式開始時に一時削除された。

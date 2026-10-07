@@ -1,13 +1,14 @@
 ---
 id: daily-and-weekly-checklist
-title: 日課・週課チェックリスト（Lv45以降）
+title: 日課と週課チェック
+reading: にっかとしゅうかちぇっく
 category: dungeons
 tags: [日課, 週課, チェックリスト, オードエネルギー, リセット]
 summary: Lv45以降に毎日・毎週繰り返すことの一覧。毎日は使命5件、オードエネルギー、悪夢、シューゴフェスタの鍵、次元侵攻の鍵。毎週は遠征・超越・覚醒戦・デイリーダンジョン・指令・ルドラ。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Daily and weekly, デイリー, ウィークリー, 日課, 週課, 毎日やること, 毎週やること]
+aliases: [Daily and weekly, デイリー, ウィークリー, 日課, 週課, 毎日やること, 毎週やること, 週課チェックリスト, Lv45以降]
 related: [reset-times, duty-quests, odyle-energy, nightmare, shugo-festa, dimensional-invasion, daily-dungeon, ascension-trial, commands-and-command-scrolls, server-shared-limits-and-alts]
 sources:
   - id: S01

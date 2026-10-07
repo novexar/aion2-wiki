@@ -1,13 +1,14 @@
 ---
 id: season-missions
-title: シーズンミッションと誓いのコイン
+title: シーズンミッション
+reading: しーずんみっしょん
 category: dungeons
 tags: [シーズンミッション, 誓いのコイン, 週報酬, シーズン商店]
 summary: シーズン中の週間ミッション。ポイントに応じて強化石などの週報酬が出て、毎週水曜にリセット。誓いのコインはシーズン商店の通貨で、シーズン終了とともに消える。
 confidence: community
 region: global
 updated: 2026-10-08
-aliases: [Season Missions, 誓いのコイン]
+aliases: [Season Missions, 誓いのコイン, シーズンミッションと誓いのコイン]
 related: [seasons-and-chapters, reset-times, daily-and-weekly-checklist, nightmare]
 sources:
   - id: S01

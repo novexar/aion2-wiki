@@ -1,13 +1,14 @@
 ---
 id: fire-temple
-title: 炎の神殿（遠征★3：Lv35/IL500、征服IL2,100）
+title: 炎の神殿
+reading: ほのおのしんでん
 category: dungeons
 tags: [遠征, 炎の神殿, クロメデ, 探険, 征服, ボス攻略]
 summary: Lv35・IL500から入れる★3の遠征。探険は30オード、征服はIL2,100で40オード。最終ボスのクロメデは炎の壁、下向きの弓、分身が続き、時間切れも全滅の主因。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Fire Temple, Temple of Fire, 炎の神殿, クロメデ, Kromede's Desire]
+aliases: [Fire Temple, Temple of Fire, クロメデ, "Kromede's Desire", Lv35/IL500, "征服IL2,100"]
 related: [vakron-sky-island, ferocious-horn-den, expeditions-and-odyle, odyle-energy, expedition-reward-selection]
 sources:
   - id: S01

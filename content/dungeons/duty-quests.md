@@ -1,13 +1,14 @@
 ---
 id: duty-quests
-title: 使命（任務）：1日5件のデイリークエスト
+title: 使命クエスト
+reading: しめいくえすと
 category: dungeons
 tags: [使命, 任務, 日課, デイリー, 報酬]
 summary: Lv45で解放される唯一の「毎日必ずやる」コンテンツ。1日5件、サーバー内のキャラクター共有。報酬は5枠のランダム表示で、最初の枠だけ確定。再抽選はギーナで可能（1,000→2,500→…→200,000）。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Duty, Duty Quest, 任務, 使命クエスト]
+aliases: [Duty, Duty Quest, 任務]
 related: [commands-and-command-scrolls, daily-and-weekly-checklist, server-shared-limits-and-alts, reset-times]
 sources:
   - id: S01

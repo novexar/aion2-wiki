@@ -1,13 +1,14 @@
 ---
 id: abyssal-forge-ludra
-title: 深淵の再錬：ルドラ（ローンチ時一時停止、IL2,800）
+title: 深淵の再錬ルドラ
+reading: しんえんのさいれんるどら
 category: dungeons
 tags: [ルドラ, 聖域, レイド, 10人, 一時停止]
 summary: グローバル版唯一の聖域レイド。Lv45・IL2,800、10人。報酬は取引可能ギーナ100万など。2026年10月5日の正式開始時に調整のため一時削除され、復帰日は10月16日までに案内予定。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: ["Abyssal Forge: Ludra", "Sanctuary Raid Ludra", "Eternal Ludra", "永遠のルドラ", "ラフ", "ケトゥ", "Rahu", "Ketu"]
+aliases: ["Abyssal Forge: Ludra", Sanctuary Raid Ludra, Eternal Ludra, 永遠のルドラ, ラフ, ケトゥ, Rahu, Ketu, ローンチ時一時停止, "IL2,800"]
 related: [sanctuary-raids-overview, ludra-raid-suspension, odyle-energy, content-not-in-global, daily-and-weekly-checklist]
 sources:
   - id: S01

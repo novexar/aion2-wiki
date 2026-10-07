@@ -1,13 +1,14 @@
 ---
 id: ascension-trial
-title: 覚醒戦（Ascension Trial）
+title: 覚醒戦
+reading: かくせいせん
 category: dungeons
 tags: [覚醒戦, ソロ, 週課, 強化石, ペット]
 summary: 週3回だけ挑める1人用のタイムアタック型ダンジョン。難易度4段階（簡単/普通/難しい/極限）で、必要ILは1,000/1,500/2,000/2,500。強化石・成長のペット箱・突破石の欠片が主な報酬。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Ascension Trial, 昇天の試練, 覚醒の試練, 覚醒戦]
+aliases: [Ascension Trial, 昇天の試練, 覚醒の試練]
 related: [nightmare, daily-and-weekly-checklist, reset-times, daily-dungeon]
 sources:
   - id: S01

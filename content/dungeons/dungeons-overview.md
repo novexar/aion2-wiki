@@ -1,13 +1,14 @@
 ---
 id: dungeons-overview
-title: ダンジョンの種類一覧（遠征・超越・聖域・悪夢・覚醒戦・デイリー・封印・駐屯地）
+title: ダンジョンの種類
+reading: だんじょんのしゅるい
 category: dungeons
 tags: [ダンジョン, 遠征, 超越, 聖域, 悪夢, 入場条件]
 summary: グローバル版で遊べるダンジョンの全種類と、人数・解放レベル・必要アイテムレベル（IL）の一覧。Lv45以降は征服→超越→聖域の順に目標が上がる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Dungeons, Dungeon list, ダンジョン一覧, インスタンス]
+aliases: [Dungeons, Dungeon list, ダンジョン一覧, インスタンス, ダンジョンの種類一覧]
 related: [expeditions-and-odyle, odyle-energy, transcendence-overview, sanctuary-raids-overview, nightmare, ascension-trial, daily-dungeon, sealed-dungeons, strongholds, content-not-in-global]
 sources:
   - id: S01

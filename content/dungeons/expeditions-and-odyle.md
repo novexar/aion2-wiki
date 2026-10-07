@@ -1,13 +1,14 @@
 ---
 id: expeditions-and-odyle
-title: 遠征（探険・征服）と報酬キューブ・週制限
+title: 遠征の基本
+reading: えんせいのきほん
 category: dungeons
 tags: [遠征, 探険, 征服, キューブ, オードエネルギー, 週制限]
 summary: 遠征の2つのモード（探険・征服）、報酬キューブの仕組み、1回の受取で何がもらえるか、未受取10回などの週制限をまとめた記事。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Expedition, Exploration, Conquest, 探索, 遠征ダンジョン, 報酬キューブ]
+aliases: [Expedition, Exploration, Conquest, 探索, 遠征ダンジョン, 報酬キューブ, 週制限]
 related: [dungeons-overview, odyle-energy, expedition-reward-selection, krao-cave, draupnir, urugugu-canyon, vakron-sky-island, fire-temple, ferocious-horn-den, server-shared-limits-and-alts]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: odyle-energy
-title: オードエネルギー（回復・上限・使い道・補充方法）
+title: オードエネルギー
+reading: おーどえねるぎー
 category: dungeons
 tags: [オードエネルギー, 遠征, 超越, 資源, メンバーシップ]
 summary: ダンジョンの報酬キューブを開けるための資源。3時間に15回復、上限は560（メンバーシップ840）。Lv45以降の装備更新に使い、上限で止めないことが最重要。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Odyle Energy, オード エネルギー, オディルエネルギー, OD]
+aliases: [Odyle Energy, オード エネルギー, オディルエネルギー, OD, 使い道, 補充方法]
 related: [expeditions-and-odyle, transcendence-overview, daily-and-weekly-checklist, server-shared-limits-and-alts]
 sources:
   - id: S01

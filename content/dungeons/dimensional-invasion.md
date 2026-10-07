@@ -1,13 +1,14 @@
 ---
 id: dimensional-invasion
-title: 次元侵攻（毎時30分・報酬の鍵は1日1個）
+title: 次元侵攻
+reading: じげんしんこう
 category: dungeons
 tags: [次元侵攻, オープンワールド, 報酬の鍵, 日課, イベント]
 summary: Lv45から参加できるオープンワールドの防衛イベント。毎時30分に開催され、報酬は「次元侵攻の報酬の鍵」で開ける。鍵は1日1個、7個までためられ、サーバー内のキャラで共有。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Dimensional Invasion, 次元侵攻イベント, Invasion Reward Key]
+aliases: [Dimensional Invasion, 次元侵攻イベント, Invasion Reward Key, 毎時30分, 報酬の鍵は1日1個]
 related: [shugo-festa, daily-and-weekly-checklist, reset-times, server-shared-limits-and-alts]
 sources:
   - id: S01

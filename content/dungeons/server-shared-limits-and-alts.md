@@ -1,13 +1,14 @@
 ---
 id: server-shared-limits-and-alts
-title: サーバー共有の回数制限とサブキャラ
+title: サーバー共有回数とサブキャラ
+reading: さーばーきょうゆうかいすうとさぶきゃら
 category: dungeons
 tags: [サブキャラ, サーバー共有, 週制限, ギーナ, オードエネルギー]
 summary: 使命、デイリーダンジョン、遠征・超越の未受取回数などはサーバー内の全キャラで共有。オードエネルギーはキャラごと。サブキャラは、メインへ取引できるギーナと素材を稼ぐ手段になる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [サブキャラ, 共有制限, alts, Alt characters, サブ垢, サーバー共有]
+aliases: [サブキャラ, 共有制限, alts, Alt characters, サブ垢, サーバー共有, サーバー共有の回数制限とサブキャラ]
 related: [daily-and-weekly-checklist, odyle-energy, expeditions-and-odyle, reset-times, duty-quests, daily-dungeon]
 sources:
   - id: S01

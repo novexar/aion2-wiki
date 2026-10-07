@@ -1,13 +1,14 @@
 ---
 id: growth-dungeons
-title: 成長ダンジョン（ファフナイト盆地・沈黙の墓域）
+title: 成長ダンジョン
+reading: せいちょうだんじょん
 category: dungeons
 tags: [成長ダンジョン, ファフナイト盆地, 沈黙の墓域, Lv45, 強化石]
 summary: 推奨レベル45の2つのダンジョン（ファフナイト盆地、沈黙の墓域）。Lv45になったばかりのキャラが、征服へ進む前の準備に使う想定。報酬はシュラクの略奪包み、強化石、魂の結晶。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Growth Dungeon, Fafnite Amphitheater, Silent Graveyard, ファフナイト闘技場, 静寂の墓地]
+aliases: [Growth Dungeon, Fafnite Amphitheater, Silent Graveyard, ファフナイト闘技場, 静寂の墓地, ファフナイト盆地, 沈黙の墓域]
 related: [dungeons-overview, expeditions-and-odyle, daily-and-weekly-checklist, field-instances]
 sources:
   - id: S01

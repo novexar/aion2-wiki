@@ -1,13 +1,14 @@
 ---
 id: content-not-in-global
-title: グローバル版にまだ無いコンテンツ一覧（韓国版限定）
+title: グローバル版未実装コンテンツ
+reading: ぐろーばるばんみじっそうこんてんつ
 category: dungeons
 tags: [韓国版, 未実装, Lv50, 拳星, 試練, 追加ダンジョン]
 summary: グローバル版はLv45・8クラス・遠征6種・超越2種・聖域1種で始まった。Lv50、拳星（Brawler）、追加ダンジョン、ハード、試練、英雄等級装備などは韓国版にあってグローバル版には無い。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [未実装コンテンツ, Korea only, KR限定, Brawler, 拳星, 権聖, Chapter 1, Lv50]
+aliases: [未実装コンテンツ, Korea only, KR限定, Brawler, 拳星, Chapter 1, Lv50, グローバル版にまだ無いコンテンツ一覧, 韓国版限定]
 related: [dungeons-overview, transcendence-overview, expeditions-and-odyle, ludra-raid-suspension, ferocious-horn-den]
 sources:
   - id: S01

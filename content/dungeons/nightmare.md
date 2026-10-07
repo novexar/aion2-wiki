@@ -1,13 +1,14 @@
 ---
 id: nightmare
-title: 悪夢（ジケルの思念体・10段階・1日2回/上限14・夢幻の破片）
+title: 悪夢
+reading: あくむ
 category: dungeons
 tags: [悪夢, ソロ, ジケル, 夢幻の破片, パンテオン, ランキング]
 summary: ボスと1対1で戦うソロコンテンツ。7体のボスを各10段階で挑み、挑戦は1日2回（最大14回ためられる）。報酬は夢幻の破片で、商店でスティグマの欠片やパンテオンの像と交換する。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Nightmare, 悪夢ダンジョン, ジケルの幻影, ジケルの思念体, Zikel's Apparition, Phantasmal Fragment, 幻影の欠片, ボスチャレンジ]
+aliases: [Nightmare, 悪夢ダンジョン, ジケルの幻影, ジケルの思念体, "Zikel's Apparition", Phantasmal Fragment, 幻影の欠片, 夢幻の破片]
 related: [dungeons-overview, ascension-trial, pantheon-stats, daily-and-weekly-checklist, boss-challenge]
 sources:
   - id: S01

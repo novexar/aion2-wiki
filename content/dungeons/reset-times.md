@@ -1,13 +1,14 @@
 ---
 id: reset-times
-title: リセット時刻（日次は日本時間16:00、週次は水曜16:00）
+title: リセット時刻
+reading: りせっとじこく
 category: dungeons
 tags: [リセット, 日課, 週課, 時刻, 夏時間]
 summary: 日次リセットは世界共通で07:00 UTC＝日本時間16:00。週次は水曜の同時刻。日本は夏時間がないので毎日16:00で固定。毎時のイベントは毎時0分（シューゴ）と30分（次元侵攻）。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Daily reset, Weekly reset, 日次リセット, 週次リセット, 初期化]
+aliases: [Daily reset, Weekly reset, 日次リセット, 週次リセット, 初期化, 日次は日本時間16, 週次は水曜16]
 related: [daily-and-weekly-checklist, shugo-festa, dimensional-invasion, server-shared-limits-and-alts, odyle-energy]
 sources:
   - id: S01

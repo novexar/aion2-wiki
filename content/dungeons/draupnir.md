@@ -1,13 +1,14 @@
 ---
 id: draupnir
-title: ドラウプニル（遠征★1：Lv45・IL700の最初の探険/征服）
+title: ドラウプニル
+reading: どらうぷにる
 category: dungeons
 tags: [遠征, ドラウプニル, ヴォカルマ, 探険, 征服, ボス攻略]
 summary: Lv45・IL700で入れる★1の遠征。探険でも報酬キューブに40オードが必要で、初回の防具選択が狙い目。最終ボスは波を跳んでスタッガーを割るチェックが2回ある。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Draupnir, ドラウプニル遠征, Transcendent Bakarma, ヴォカルマ]
+aliases: [Draupnir, ドラウプニル遠征, Transcendent Bakarma, ヴォカルマ, IL700の最初の探険/征服]
 related: [krao-cave, expeditions-and-odyle, odyle-energy, expedition-reward-selection, dungeons-overview]
 sources:
   - id: S01

@@ -1,13 +1,14 @@
 ---
 id: daily-dungeon
-title: デイリーダンジョン（ディーヴァ生体研究基地）
+title: デイリーダンジョン
+reading: でいりーだんじょん
 category: dungeons
 tags: [デイリーダンジョン, 強化石, 週課, ソロ]
 summary: 「デイリー」という名前だが実態は週14回のソロ用ダンジョン。グローバル版にあるのは「ディーヴァ生体研究基地」1種のみで、スコアに応じて最大10,000個の強化石がもらえる。回数はサーバー内のキャラクターで共有。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Daily Dungeon, Daeva Bio-Research Base, 未知の狭間]
+aliases: [Daily Dungeon, Daeva Bio-Research Base, ディーヴァ生体研究基地]
 related: [unknown-fissure, server-shared-limits-and-alts, daily-and-weekly-checklist, reset-times, content-not-in-global]
 sources:
   - id: S01
