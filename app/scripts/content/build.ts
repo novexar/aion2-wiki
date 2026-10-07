@@ -8,7 +8,9 @@ import type { Article, ArticleMeta, Chunk, ChunksData, NavData } from '../../src
 import { chunkArticle } from './chunker';
 import { ContentBuildError, ContentError } from './errors';
 import { parseArticleFile, type Frontmatter } from './frontmatter';
+import { readGitDates } from './git-dates';
 import { renderMarkdown } from './markdown';
+import { extractRelatedSection } from './related-section';
 import type { WikilinkTarget } from './wikilink';
 
 export interface BuildOptions {
@@ -21,6 +23,8 @@ export interface BuildOptions {
   /** サイトのベースパス（例: '/AION2/'） */
   readonly base: string;
   readonly now?: Date;
+  /** false なら git 履歴を読まず frontmatter の updated を使う（既定 true） */
+  readonly useGitDates?: boolean;
 }
 
 export interface BuildResult {
@@ -132,6 +136,7 @@ export function toMeta(src: ArticleMeta): ArticleMeta {
     summary: src.summary,
     confidence: src.confidence,
     updated: src.updated,
+    ...(src.updatedAt ? { updatedAt: src.updatedAt } : {}),
     aliases: src.aliases,
     ...(src.reading ? { reading: src.reading } : {}),
   };
@@ -141,7 +146,7 @@ const byTitle = (a: ArticleMeta, b: ArticleMeta): number =>
   (a.reading ?? a.title).localeCompare(b.reading ?? b.title, 'ja');
 
 const byUpdatedDesc = (a: ArticleMeta, b: ArticleMeta): number =>
-  b.updated.localeCompare(a.updated) || byTitle(a, b);
+  (b.updatedAt ?? b.updated).localeCompare(a.updatedAt ?? a.updated) || byTitle(a, b);
 
 export function buildNav(metas: readonly ArticleMeta[], now: Date): NavData {
   return {
@@ -199,8 +204,10 @@ async function renderArticle(
   targets: ReadonlyMap<string, WikilinkTarget>,
   warn: (message: string) => void,
   hashLinks: HashLink[],
+  gitDates: ReadonlyMap<string, string>,
 ): Promise<{ article: Article; chunks: Chunk[] }> {
-  const { fm, body, file } = item;
+  const { fm, file } = item;
+  const { body, relatedIds } = extractRelatedSection(item.body);
   const { html, headings } = await renderMarkdown(body, {
     resolve: (slug) => targets.get(slug),
     sourceIds: new Set(fm.sources.map((s) => s.id)),
@@ -208,14 +215,15 @@ async function renderArticle(
     onHashLink: (slug, hash) => hashLinks.push({ file: file.relPath, slug, hash }),
     onMissingSource: (id) => warn(`${file.relPath}: 本文の [${id}] が sources にありません`),
   });
-  const related = fm.related.filter((id) => {
+  const related = [...new Set([...fm.related, ...relatedIds])].filter((id) => {
     if (id === fm.id) return false;
     if (targets.has(id)) return true;
     warn(`${file.relPath}: related の "${id}" が存在しません（無視します）`);
     return false;
   });
+  const gitDate = gitDates.get(file.relPath.replace(/^content\//, ''));
   const article: Article = {
-    ...toMeta(fm),
+    ...toMeta(gitDate ? { ...fm, updated: gitDate.slice(0, 10), updatedAt: gitDate } : fm),
     region: fm.region,
     related,
     sources: fm.sources,
@@ -316,8 +324,9 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
   const articles: Article[] = [];
   const chunksById = new Map<string, Chunk[]>();
   const hashLinks: HashLink[] = [];
+  const gitDates = options.useGitDates === false ? new Map() : readGitDates(options.contentDir);
   for (const item of loaded) {
-    const { article, chunks } = await renderArticle(item, targets, warn, hashLinks);
+    const { article, chunks } = await renderArticle(item, targets, warn, hashLinks, gitDates);
     articles.push(article);
     chunksById.set(article.id, chunks);
   }

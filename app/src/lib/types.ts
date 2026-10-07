@@ -27,6 +27,8 @@ export interface ArticleMeta {
   readonly summary: string;
   readonly confidence: Confidence;
   readonly updated: string;
+  /** git の最終コミット日時（ISO 8601）。並び替えに使う */
+  readonly updatedAt?: string;
   readonly aliases: readonly string[];
   readonly reading?: string;
 }
