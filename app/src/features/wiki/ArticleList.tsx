@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { ConfidenceBadge } from '../../components/ConfidenceBadge';
 import { categoryLabel } from '../../lib/categories';
+import { LIST_COLUMNS } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
 import type { ArticleMeta } from '../../lib/types';
 
@@ -25,15 +26,18 @@ export function ArticleRows({
   articles,
   showCategory = false,
   showDate = false,
+  columns = false,
 }: {
   readonly articles: readonly ArticleMeta[];
   readonly showCategory?: boolean;
   readonly showDate?: boolean;
+  /** true なら 2 列（lg）／3 列（2xl）に段組みする */
+  readonly columns?: boolean;
 }) {
   return (
-    <ul className="divide-y divide-line border-y border-line">
+    <ul className={`border-t border-line ${columns ? LIST_COLUMNS : ''}`}>
       {articles.map((a) => (
-        <li key={a.id}>
+        <li key={a.id} className="border-b border-line">
           <Link
             to={articlePath(a.category, a.id)}
             className="group flex items-baseline gap-x-4 px-1 py-2 transition-colors hover:bg-surface"

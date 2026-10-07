@@ -2,6 +2,7 @@ import { Menu, Search, Settings } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { NavLink } from 'react-router';
 import { useSearchPalette } from '../features/search/search-context';
+import { PAGE_CONTAINER } from '../lib/layout';
 import { modKeyLabel } from '../lib/platform';
 import { CategoryNav } from './CategoryNav';
 import { Kbd } from './Kbd';
@@ -33,7 +34,7 @@ export function Header() {
       >
         本文へスキップ
       </a>
-      <div className="mx-auto flex h-full max-w-[90rem] items-center gap-2 px-3 sm:px-5">
+      <div className={`${PAGE_CONTAINER} flex h-full items-center gap-2`}>
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}

@@ -2,6 +2,7 @@ import { Search } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
+import { LIST_COLUMNS, PAGE_CONTAINER } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
 import { SearchResultRow } from './SearchResultRow';
 import { useSearch } from './useSearch';
@@ -17,9 +18,13 @@ export default function SearchPage() {
   useDocumentMeta(query ? `「${query}」の検索結果` : '検索');
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
-      <h1 className="text-[1.75rem] font-bold tracking-tight">検索</h1>
-      <form role="search" className="relative mt-5" onSubmit={(e) => e.preventDefault()}>
+    <div className={`${PAGE_CONTAINER} py-8`}>
+      <h1 className="text-2xl font-bold sm:text-[1.75rem]">検索</h1>
+      <form
+        role="search"
+        className="relative mt-5 max-w-[42rem]"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <label htmlFor="search-page-input" className="sr-only">
           記事を検索
         </label>
@@ -65,9 +70,9 @@ export default function SearchPage() {
           </p>
         )}
         {results.length > 0 && trimmed && (
-          <ul className="divide-y divide-line border-y border-line">
+          <ul className={`border-t border-line ${LIST_COLUMNS}`}>
             {results.map((hit) => (
-              <li key={hit.id}>
+              <li key={hit.id} className="border-b border-line">
                 <Link
                   to={articlePath(hit.category, hit.id)}
                   className="block px-1 py-4 hover:bg-surface"

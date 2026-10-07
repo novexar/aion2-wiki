@@ -2,6 +2,7 @@ import { useMemo, useState, type KeyboardEvent } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
 import { categoryLabel } from '../../lib/categories';
+import { LIST_COLUMNS, PAGE_CONTAINER } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
 import { Breadcrumb } from './Breadcrumb';
 import { nav } from './data';
@@ -47,7 +48,7 @@ export default function IndexPage() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8">
+    <div className={`${PAGE_CONTAINER} py-8`}>
       <Breadcrumb items={[{ label: 'ホーム', to: '/' }, { label: '索引' }]} />
       <h1 className="text-[1.75rem] font-bold">索引</h1>
       <p className="mt-2 text-fg-muted">{nav.articles.length} 記事</p>
@@ -153,7 +154,7 @@ export default function IndexPage() {
                     {g.entries.length}
                   </span>
                 </h2>
-                <ul className="grid grid-cols-1 gap-x-8 xl:grid-cols-2">
+                <ul className={LIST_COLUMNS}>
                   {g.entries.map(({ article: a, label }) => {
                     const names =
                       label === a.title

@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { Link, Outlet } from 'react-router';
+import { PAGE_CONTAINER } from '../lib/layout';
 import { REPO_URL } from '../lib/site';
 import { Header } from './Header';
 import { PageLoading } from './PageLoading';
@@ -16,7 +17,9 @@ export function Layout() {
         </Suspense>
       </main>
       <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-[90rem] flex-col gap-2 px-4 py-6 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between sm:px-5">
+        <div
+          className={`${PAGE_CONTAINER} flex flex-col gap-2 py-6 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between`}
+        >
           <p>非公式のファンサイトです。NC（NCSOFT）とは関係ありません。</p>
           <div className="flex gap-4">
             <Link to="/about" className="hover:text-fg">

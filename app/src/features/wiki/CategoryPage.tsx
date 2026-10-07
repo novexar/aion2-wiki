@@ -14,18 +14,16 @@ export default function CategoryPage() {
 
   return (
     <WikiShell>
-      <div className="max-w-3xl">
+      <div>
         <Breadcrumb items={[{ label: 'ホーム', to: '/' }, { label: info.label }]} />
-        <h1 className="text-[1.75rem] font-bold tracking-tight">{info.label}</h1>
+        <h1 className="text-2xl font-bold sm:text-[1.75rem]">{info.label}</h1>
         <p className="mt-2 text-fg-muted">{info.description}</p>
         <p className="mt-1 text-sm text-fg-subtle">{info.articles.length} 記事</p>
         <div className="mt-8">
           {info.articles.length === 0 ? (
-            <p className="rounded-lg border border-dashed border-line px-4 py-10 text-center text-sm text-fg-muted">
-              このカテゴリの記事は準備中です。
-            </p>
+            <p className="text-sm text-fg-muted">このカテゴリの記事は準備中です。</p>
           ) : (
-            <ArticleRows articles={info.articles} />
+            <ArticleRows articles={info.articles} columns />
           )}
         </div>
       </div>
