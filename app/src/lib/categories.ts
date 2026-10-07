@@ -22,16 +22,16 @@ export interface CategoryInfo {
 }
 
 export const CATEGORIES: readonly CategoryInfo[] = [
-  { id: 'guide', label: '初心者ガイド', description: '始めたばかりの人向けのロードマップ' },
-  { id: 'basics', label: '基本', description: 'ゲーム概要・種族・クラス一覧・操作・用語' },
-  { id: 'leveling', label: 'レベリング', description: 'Lv1→45、覚醒、45到達後の流れ' },
-  { id: 'systems', label: 'システム', description: 'スキル・スティグマ・強化・製作など' },
+  { id: 'guide', label: '初心者ガイド', description: '最初の 1 週間・Lv45 まで・日課' },
+  { id: 'basics', label: '基本', description: '操作・用語・アカウント・キャラクター' },
+  { id: 'leveling', label: 'レベリング', description: 'Lv1〜45・覚醒・IL 上げ' },
+  { id: 'systems', label: 'システム', description: 'スキル・スティグマ・強化・製作' },
   { id: 'dungeons', label: 'ダンジョン', description: '遠征・超越・悪夢・レイド・フィールドボス' },
-  { id: 'pvp', label: 'PvP', description: 'アビス・要塞戦・PvPの基礎' },
-  { id: 'economy', label: '経済', description: 'ギーナ・取引所・メンバーシップ・金策' },
-  { id: 'classes', label: 'クラス', description: '8クラスの個別ページ' },
+  { id: 'pvp', label: 'PvP', description: 'アビス・要塞戦・アリーナ' },
+  { id: 'economy', label: '経済', description: 'ギーナ・取引所・メンバーシップ' },
+  { id: 'classes', label: 'クラス', description: '8 クラスの個別記事' },
   { id: 'news', label: 'ニュース', description: '公式告知・既知の問題・韓国版との差' },
-  { id: 'tips', label: '小技', description: '時短・UX・初心者の落とし穴' },
+  { id: 'tips', label: '小技', description: '時短・設定・落とし穴' },
   { id: 'faq', label: 'FAQ', description: 'よくある質問' },
 ];
 
