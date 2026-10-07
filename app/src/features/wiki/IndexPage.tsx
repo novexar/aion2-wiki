@@ -1,5 +1,4 @@
-import { X } from 'lucide-react';
-import { useMemo, type KeyboardEvent } from 'react';
+import { useMemo, useState, type KeyboardEvent } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
 import { categoryLabel } from '../../lib/categories';
@@ -7,6 +6,8 @@ import { articlePath } from '../../lib/paths';
 import { Breadcrumb } from './Breadcrumb';
 import { nav } from './data';
 import { groupArticles, INDEX_VIEWS, isIndexView, tagCounts, type IndexView } from './index-groups';
+
+const MIN_TAG_COUNT = 3;
 
 export default function IndexPage() {
   useDocumentMeta('索引', '全記事の索引（五十音・A–Z・カテゴリ・タグ）');
@@ -30,6 +31,9 @@ export default function IndexPage() {
     [view, filter, tag],
   );
   const tags = useMemo(() => tagCounts(nav.articles), []);
+  const [showAllTags, setShowAllTags] = useState(false);
+  const visibleTags = tags.filter((t) => showAllTags || t.count >= MIN_TAG_COUNT || t.tag === tag);
+  const hiddenTagCount = tags.length - tags.filter((t) => t.count >= MIN_TAG_COUNT).length;
   const total = groups.reduce((n, g) => n + g.entries.length, 0);
 
   const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number): void => {
@@ -85,29 +89,38 @@ export default function IndexPage() {
         </label>
       </div>
 
-      {view === 'tag' && tags.length > 0 && (
-        <div className="mt-4 flex flex-wrap gap-1.5" aria-label="タグで絞り込み">
-          {tags.map(({ tag: t, count }) => {
+      {view === 'tag' && visibleTags.length > 0 && (
+        <p className="mt-4 text-[13px] leading-relaxed text-fg-muted" aria-label="タグで絞り込み">
+          {visibleTags.map(({ tag: t, count }, i) => {
             const selected = tag === t;
             return (
-              <button
-                key={t}
-                type="button"
-                aria-pressed={selected}
-                onClick={() => update({ tag: selected ? null : t })}
-                className={`inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs transition-colors ${
-                  selected
-                    ? 'border-accent bg-accent-soft font-medium text-fg'
-                    : 'border-line text-fg-muted hover:border-line-strong hover:text-fg'
-                }`}
-              >
-                #{t}
-                <span className="text-fg-subtle tabular-nums">{count}</span>
-                {selected && <X aria-hidden="true" className="size-3" />}
-              </button>
+              <span key={t}>
+                {i > 0 && '、'}
+                <button
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() => update({ tag: selected ? null : t })}
+                  className={`hover:underline ${selected ? 'font-bold text-fg underline' : 'text-fg'}`}
+                >
+                  {t}
+                </button>
+                <span className="text-fg-subtle tabular-nums">（{count}）</span>
+              </span>
             );
           })}
-        </div>
+          {hiddenTagCount > 0 && (
+            <>
+              {'　'}
+              <button
+                type="button"
+                onClick={() => setShowAllTags((v) => !v)}
+                className="text-fg underline"
+              >
+                {showAllTags ? '件数の多いタグのみ' : `すべて表示（${tags.length}）`}
+              </button>
+            </>
+          )}
+        </p>
       )}
 
       <div id="index-panel" role="tabpanel" aria-labelledby={`tab-${view}`} className="mt-8">
@@ -140,37 +153,39 @@ export default function IndexPage() {
                     {g.entries.length}
                   </span>
                 </h2>
-                <ul className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
-                  {g.entries.map(({ article: a, label }) => (
-                    <li key={`${g.key}-${a.id}`}>
-                      <Link
-                        to={articlePath(a.category, a.id)}
-                        className="group flex items-baseline gap-2 rounded px-1 py-1.5 hover:bg-surface"
-                      >
-                        <span className="min-w-0">
-                          <span className="text-sm text-fg group-hover:underline group-hover:decoration-line-strong group-hover:underline-offset-4">
-                            {label}
+                <ul className="grid grid-cols-1 gap-x-8 xl:grid-cols-2">
+                  {g.entries.map(({ article: a, label }) => {
+                    const names =
+                      label === a.title
+                        ? a.aliases
+                        : [a.title, ...a.aliases.filter((x) => x !== label)];
+                    return (
+                      <li key={`${g.key}-${a.id}`}>
+                        <Link
+                          to={articlePath(a.category, a.id)}
+                          className="group flex items-baseline gap-2 px-1 py-1.5 hover:bg-surface"
+                        >
+                          <span className="min-w-0 flex-1">
+                            <span className="text-sm text-fg group-hover:underline">{label}</span>
+                            {names.length > 0 && (
+                              <span className="text-xs text-fg-muted">
+                                {' — '}
+                                {names.join('、')}
+                              </span>
+                            )}
+                            {a.confidence === 'community' && (
+                              <span className="ml-2 text-xs text-warn">要確認</span>
+                            )}
                           </span>
-                          {label !== a.title && (
-                            <span className="ml-2 text-xs text-fg-muted">{a.title}</span>
-                          )}
-                          {label === a.title && a.aliases.length > 0 && (
-                            <span className="ml-2 text-xs text-fg-subtle">
-                              {a.aliases.join(' / ')}
-                            </span>
-                          )}
-                          {a.confidence === 'community' && (
-                            <span className="ml-2 text-xs text-warn">要確認</span>
-                          )}
                           {view !== 'category' && (
-                            <span className="ml-2 text-xs text-fg-subtle">
-                              · {categoryLabel(a.category)}
+                            <span className="w-24 shrink-0 text-right text-xs text-fg-subtle">
+                              {categoryLabel(a.category)}
                             </span>
                           )}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </section>
             ))}
