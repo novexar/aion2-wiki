@@ -1,4 +1,4 @@
-import GithubSlugger from 'github-slugger';
+import { HeadingSlugger } from './slugger';
 import type { List, Root, RootContent, Table } from 'mdast';
 import { toString as mdToString } from 'mdast-util-to-string';
 import remarkGfm from 'remark-gfm';
@@ -104,7 +104,7 @@ export function packBlocks(blocks: readonly string[], maxChars: number): string[
 }
 
 function parseSections(tree: Root): Section[] {
-  const slugger = new GithubSlugger();
+  const slugger = new HeadingSlugger();
   const sections: Section[] = [{ heading: '', anchor: '', blocks: [] }];
   let h2 = '';
   for (const node of tree.children) {

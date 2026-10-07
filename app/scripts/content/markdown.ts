@@ -1,7 +1,6 @@
 import type { Element, Root as HastRoot } from 'hast';
 import { toString as hastToString } from 'hast-util-to-string';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeSlug from 'rehype-slug';
 import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
 import remarkParse from 'remark-parse';
@@ -9,7 +8,14 @@ import remarkRehype from 'remark-rehype';
 import { unified, type Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
 import type { Heading } from '../../src/lib/types';
-import { rehypeExternalLinks, rehypeStripUnsafeUrls, rehypeWrapTables } from './rehype-plugins';
+import {
+  rehypeCallouts,
+  rehypeEvidence,
+  rehypeExternalLinks,
+  rehypeHeadingIds,
+  rehypeStripUnsafeUrls,
+  rehypeWrapTables,
+} from './rehype-plugins';
 import { remarkSourceRefs, remarkWikilink, type WikilinkTarget } from './wikilink';
 
 export interface RenderOptions {
@@ -61,13 +67,15 @@ export async function renderMarkdown(
     })
     .use(remarkSourceRefs, { knownIds: options.sourceIds, onMissing: options.onMissingSource })
     .use(remarkRehype)
-    .use(rehypeSlug)
+    .use(rehypeHeadingIds)
     .use(rehypeCollectHeadings)
     .use(rehypeAutolinkHeadings, {
       behavior: 'append',
       properties: { className: ['heading-anchor'], ariaHidden: 'true', tabIndex: -1 },
       content: { type: 'text', value: '#' },
     })
+    .use(rehypeCallouts)
+    .use(rehypeEvidence)
     .use(rehypeWrapTables)
     .use(rehypeStripUnsafeUrls)
     .use(rehypeExternalLinks)

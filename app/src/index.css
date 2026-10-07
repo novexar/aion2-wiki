@@ -237,17 +237,40 @@
   color: var(--fg-subtle);
 }
 
-.prose-wiki blockquote {
-  padding: 0.75em 1em;
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 6px 6px 0;
-  background: var(--surface);
-  color: var(--fg-muted);
+.prose-wiki blockquote,
+.prose-wiki .callout {
+  padding: 0.25em 0 0.25em 1em;
+  border-left: 2px solid var(--line-strong);
+  color: var(--fg);
 }
 
-.prose-wiki blockquote strong {
-  color: var(--fg);
+.prose-wiki .callout[data-kind='caution'] {
+  border-left-color: var(--warn-fg);
+}
+
+.prose-wiki .callout[data-kind='kr'] {
+  border-left-color: var(--info-fg);
+}
+
+.prose-wiki .callout p {
+  margin: 0;
+}
+
+.prose-wiki .callout p + p {
+  margin-top: 0.5em;
+}
+
+.prose-wiki blockquote strong,
+.prose-wiki .callout strong {
+  font-weight: 700;
+}
+
+.prose-wiki a.external::after {
+  content: '97';
+  margin-left: 0.15em;
+  font-size: 0.85em;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .prose-wiki code {

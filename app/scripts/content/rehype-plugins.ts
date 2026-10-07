@@ -1,6 +1,8 @@
 import type { Element, Root } from 'hast';
+import { toString as hastToString } from 'hast-util-to-string';
 import type { Plugin } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
+import { HeadingSlugger } from './slugger';
 
 /** 表を横スクロール用のラッパーで囲む（キーボードでもスクロールできるよう tabindex を付与） */
 export const rehypeWrapTables: Plugin<[], Root> = () => (tree) => {
@@ -25,6 +27,7 @@ export const rehypeExternalLinks: Plugin<[], Root> = () => (tree) => {
     if (typeof href !== 'string' || !/^https?:\/\//.test(href)) return;
     node.properties.target = '_blank';
     node.properties.rel = ['noopener', 'noreferrer'];
+    node.properties.className = ['external'];
   });
 };
 
@@ -40,5 +43,48 @@ export const rehypeStripUnsafeUrls: Plugin<[], Root> = () => (tree) => {
       const normalized = typeof value === 'string' ? value.replace(/[\u0000-\u0020]/g, '') : null;
       if (normalized !== null && !SAFE_URL.test(normalized)) delete node.properties[name];
     }
+  });
+};
+
+/** 見出しに id を付ける（全角記号は `-` に置換） */
+export const rehypeHeadingIds: Plugin<[], Root> = () => (tree) => {
+  const slugger = new HeadingSlugger();
+  visit(tree, 'element', (node: Element) => {
+    if (!/^h[1-6]$/.test(node.tagName) || node.properties.id) return;
+    node.properties.id = slugger.slug(hastToString(node));
+  });
+};
+
+const CALLOUT_KINDS: Readonly<Record<string, string>> = {
+  注意: 'caution',
+  要確認: 'caution',
+  韓国版のみ: 'kr',
+  補足: 'note',
+};
+
+/** 先頭が `**ラベル**：` の blockquote を `<aside class="callout" data-kind>` に変換する */
+export const rehypeCallouts: Plugin<[], Root> = () => (tree) => {
+  visit(tree, 'element', (node: Element) => {
+    if (node.tagName !== 'blockquote') return;
+    const para = node.children.find((c): c is Element => c.type === 'element');
+    const strong = para?.children.find((c) => !(c.type === 'text' && c.value.trim() === ''));
+    if (!para || para.tagName !== 'p' || strong?.type !== 'element' || strong.tagName !== 'strong')
+      return;
+    const kind = CALLOUT_KINDS[hastToString(strong).trim()];
+    const next = para.children[para.children.indexOf(strong) + 1];
+    if (!kind || next?.type !== 'text' || !/^\s*[：:]/.test(next.value)) return;
+    node.tagName = 'aside';
+    node.properties = { className: ['callout'], dataKind: kind };
+  });
+};
+
+/** `根拠：` で始まる段落に evidence クラスを付け、ラベルを「出典:」にする */
+export const rehypeEvidence: Plugin<[], Root> = () => (tree) => {
+  visit(tree, 'element', (node: Element) => {
+    if (node.tagName !== 'p') return;
+    const first = node.children[0];
+    if (first?.type !== 'text' || !/^根拠[：:]\s*/.test(first.value)) return;
+    first.value = first.value.replace(/^根拠[：:]\s*/, '出典: ');
+    node.properties.className = ['evidence'];
   });
 };

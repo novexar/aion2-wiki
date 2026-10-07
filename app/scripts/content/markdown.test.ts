@@ -43,7 +43,7 @@ describe('renderMarkdown', () => {
   it('adds rel="noopener noreferrer" to external links', async () => {
     const { html } = await renderMarkdown('[公式](https://example.com)', options);
     expect(html).toContain(
-      '<a href="https://example.com" target="_blank" rel="noopener noreferrer">',
+      '<a href="https://example.com" target="_blank" rel="noopener noreferrer" class="external">',
     );
   });
 
@@ -64,5 +64,21 @@ describe('renderMarkdown', () => {
     expect(html).toContain('href="#source-S01"');
     expect(onMissingLink).toHaveBeenCalledWith('nope');
     expect(onMissingSource).toHaveBeenCalledWith('S02');
+  });
+
+  it('replaces fullwidth punctuation with hyphens in heading ids', async () => {
+    const { headings } = await renderMarkdown('## 結論：迷ったらこの順番\n\n## FAQ：\n', options);
+    expect(headings.map((h) => h.id)).toEqual(['結論-迷ったらこの順番', 'faq']);
+  });
+
+  it('turns labelled blockquotes into callouts', async () => {
+    const { html } = await renderMarkdown('> **注意**：消える\n\n> 普通の引用\n', options);
+    expect(html).toContain('<aside class="callout" data-kind="caution">');
+    expect(html).toContain('<blockquote>');
+  });
+
+  it('marks 根拠 paragraphs as evidence with a 出典 label', async () => {
+    const { html } = await renderMarkdown('根拠：[S01]\n', options);
+    expect(html).toContain('<p class="evidence">出典: <a');
   });
 });
