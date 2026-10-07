@@ -1,13 +1,14 @@
 ---
 id: tanking-guide
-title: タンクの基本（ヘイト管理とテンプラー）
+title: タンクの基本
+reading: たんくのきほん
 category: classes
 tags: [タンク, ヘイト, テンプラー, グラディエーター, パーティ]
 summary: ボスの注意（ヘイト）を保つ役割。強制的に引き戻せる「挑発」を持つのはテンプラーだけで、レイドでは 1 人が基本。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Tanking, Aggro, Enmity, ヘイト管理, 敵対値, 挑発]
+aliases: [Tanking, Aggro, Enmity, ヘイト管理, 敵対値, 挑発, ヘイト管理とテンプラー]
 related: [templar, gladiator, class-roles, party-roles-and-buffs, healing-guide, combat-basics]
 sources:
   - id: S01

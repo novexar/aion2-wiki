@@ -1,13 +1,14 @@
 ---
 id: healing-guide
-title: ヒーラーの基本（クレリックとチャンター）
+title: ヒーラーの基本
+reading: ひーらーのきほん
 category: classes
 tags: [ヒーラー, 回復, クレリック, チャンター, パーティ]
 summary: 回復はクレリックが主役、チャンターは強化しながら補助する。普段は攻撃し、必要な場面だけ回復スキルを押すのが基本。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Healing, Healer, ヒール, 回復役, サポート]
+aliases: [Healing, Healer, ヒール, 回復役, サポート, クレリックとチャンター]
 related: [cleric, chanter, class-roles, tanking-guide, party-roles-and-buffs, rotation-and-skill-macros, class-balance-history]
 sources:
   - id: S01

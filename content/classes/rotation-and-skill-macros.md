@@ -1,13 +1,14 @@
 ---
 id: rotation-and-skill-macros
-title: ローテーションとスキルマクロ（クラス別）
+title: ローテーションとマクロ
+reading: ろーてーしょんとまくろ
 category: classes
 tags: [マクロ, ローテーション, 基本攻撃キャンセル, クラス, 設定]
 summary: ゲーム内マクロで「基本攻撃＋マクロキー」を押しっぱなしにするのが標準。8クラスごとに、マクロに入れるスキルと手で押すスキルの分け方をまとめる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Rotation, Macro, スキルマクロ, 回し方, 基本攻撃キャンセル, スキル回し]
+aliases: [Rotation, Macro, スキルマクロ, 回し方, 基本攻撃キャンセル, スキル回し, ローテーションとスキルマクロ, クラス別]
 related: [macros, combat-basics, controls-and-keybinds, rules-and-policies, gladiator, templar, assassin, ranger, sorcerer, spiritmaster, cleric, chanter]
 sources:
   - id: S01

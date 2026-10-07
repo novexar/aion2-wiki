@@ -1,13 +1,14 @@
 ---
 id: brawler-kwonseong
-title: 権聖（Brawler）：韓国・台湾限定の第9クラス
+title: 権聖
+reading: けんせい
 category: classes
 tags: [クラス, 韓国版, 近接, 拳甲, 未実装]
 summary: 韓国・台湾版にだけ存在する第9のクラス。拳甲で殴る近接アタッカーで、グローバル版の8クラスには入っていない。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Brawler, Kwonseong, 拳星, 権聖, ブローラー, 格闘家]
+aliases: [Brawler, Kwonseong, 拳星, ブローラー, 格闘家, 台湾限定の第9クラス]
 related: [classes-overview, class-roles, gladiator, class-balance-history]
 sources:
   - id: S01

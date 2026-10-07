@@ -1,6 +1,7 @@
 ---
 id: gladiator
-title: グラディエーター（Gladiator）
+title: グラディエーター
+reading: ぐらでぃえーたー
 category: classes
 tags: [クラス, 近接, アタッカー, サブタンク, グレートソード]
 summary: グレートソードを振るう近接アタッカー。高いHPでサブタンクも務める。転倒させた敵に「打ち下ろし」を叩き込むのが火力の核。

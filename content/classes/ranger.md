@@ -1,6 +1,7 @@
 ---
 id: ranger
-title: レンジャー（Ranger）
+title: レンジャー
+reading: れんじゃー
 category: classes
 tags: [クラス, 遠距離, アタッカー, ボウ]
 summary: ボウで20mから撃つ遠距離物理アタッカー。「標的の矢」で精密状態にして「必中の矢」をチャージで撃つのが基本。移動しながら戦える。

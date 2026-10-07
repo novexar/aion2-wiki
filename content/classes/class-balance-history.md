@@ -1,13 +1,14 @@
 ---
 id: class-balance-history
-title: クラスバランス変更履歴（グローバル版に含まれる韓国版パッチ）
+title: クラスバランス変更履歴
+reading: くらすばらんすへんこうりれき
 category: classes
 tags: [バランス調整, 韓国版, パッチ, クラス, 履歴]
 summary: グローバル版のクラス性能は韓国版 2026-09-16 パッチ時点のもの。7月〜9月の主な調整の流れと、グローバル版に反映されていない例外をまとめる。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Class Balance, バランス調整, 下方修正, 上方修正, ナーフ, バフ]
+aliases: [Class Balance, バランス調整, 下方修正, 上方修正, ナーフ, バフ, グローバル版に含まれる韓国版パッチ]
 related: [classes-overview, class-roles, cleric, chanter, templar, gladiator, brawler-kwonseong, tanking-guide, healing-guide]
 sources:
   - id: S01

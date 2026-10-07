@@ -1,6 +1,7 @@
 ---
 id: chanter
-title: チャンター（Chanter）
+title: チャンター
+reading: ちゃんたー
 category: classes
 tags: [クラス, サポート, バッファー, 近接, ワンド]
 summary: 前に出て殴りながら、マントラと「疾風の権能」でパーティ全員を強化するサポート。回復は「快癒の呪文」が中心で、蘇生は持たない。

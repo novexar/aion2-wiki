@@ -1,13 +1,14 @@
 ---
 id: class-roles
-title: クラスの役割分類（アタッカー／ヒーラー／タンカー）
+title: クラスの役割分類
+reading: くらすのやくわりぶんるい
 category: classes
 tags: [クラス, 役割, アタッカー, ヒーラー, タンカー]
 summary: AION2 の 8 クラスはゲームデータ上アタッカー・ヒーラー・タンカーの 3 役割に分類される。複数の役割を兼ねるクラスもある。
 confidence: verified
 region: global
 updated: 2026-10-08
-aliases: [Class Roles, ロール, DPS, ヒーラー, タンク, Dealer, Healer, Tank]
+aliases: [Class Roles, ロール, DPS, ヒーラー, タンク, Dealer, Healer, Tank, アタッカー, タンカー]
 related: [classes-overview, party-roles-and-buffs, tanking-guide, healing-guide, gladiator, templar, cleric, chanter]
 sources:
   - id: S01

@@ -1,6 +1,7 @@
 ---
 id: sorcerer
-title: ソーサラー（Sorcerer）
+title: ソーサラー
+reading: そーさらー
 category: classes
 tags: [クラス, 遠距離, アタッカー, 魔法, スペルブック]
 summary: スペルブックで火と水の魔法を放つ遠距離アタッカー。3段階チャージの「地獄の火炎」が最大の一撃で、HPと防御は低い。

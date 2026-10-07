@@ -1,6 +1,7 @@
 ---
 id: spiritmaster
-title: スピリットマスター（Spiritmaster）
+title: スピリットマスター
+reading: すぴりっとますたー
 category: classes
 tags: [クラス, 遠距離, アタッカー, 召喚, オーブ]
 summary: 火・水・風・地の精霊を召喚して戦う遠距離アタッカー。精霊が技を使うたびに元素がたまり、4重になると最大の技「元素融合」を撃てる。
