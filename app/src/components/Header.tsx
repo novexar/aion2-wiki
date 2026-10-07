@@ -7,12 +7,11 @@ import { CategoryNav } from './CategoryNav';
 import { Kbd } from './Kbd';
 import { Logo } from './Logo';
 import { MobileDrawer } from './MobileDrawer';
-import { ThemeToggle } from './ThemeToggle';
 
 const NAV_ITEMS = [
   { to: '/index', label: '索引' },
   { to: '/chat', label: 'チャット' },
-  { to: '/about', label: 'About' },
+  { to: '/about', label: 'このサイトについて' },
 ];
 
 function navClass({ isActive }: { isActive: boolean }): string {
@@ -27,7 +26,7 @@ export function Header() {
   const closeDrawer = useCallback(() => setDrawerOpen(false), []);
 
   return (
-    <header className="sticky top-0 z-40 h-(--header-h) border-b border-line bg-canvas/95 supports-[backdrop-filter]:bg-canvas/90">
+    <header className="sticky top-0 z-40 h-(--header-h) border-b border-line bg-canvas">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-fg focus:px-3 focus:py-2 focus:text-canvas"
@@ -61,7 +60,7 @@ export function Header() {
             aria-keyshortcuts="Control+K Meta+K"
           >
             <Search aria-hidden="true" className="size-4" />
-            <span className="flex-1 text-left">検索…</span>
+            <span className="flex-1 text-left">検索</span>
             <span className="flex gap-0.5">
               <Kbd>{modKeyLabel()}</Kbd>
               <Kbd>K</Kbd>
@@ -75,7 +74,6 @@ export function Header() {
           >
             <Search aria-hidden="true" className="size-[18px]" />
           </button>
-          <ThemeToggle />
           <NavLink
             to="/settings"
             className={({ isActive }) =>
@@ -95,13 +93,11 @@ export function Header() {
           aria-label="メイン（モバイル）"
           className="mb-4 flex flex-col gap-0.5 border-b border-line pb-3"
         >
-          {[{ to: '/', label: 'ホーム' }, ...NAV_ITEMS, { to: '/settings', label: '設定' }].map(
-            (item) => (
-              <NavLink key={item.to} to={item.to} end onClick={closeDrawer} className={navClass}>
-                {item.label}
-              </NavLink>
-            ),
-          )}
+          {[{ to: '/', label: 'ホーム' }, ...NAV_ITEMS].map((item) => (
+            <NavLink key={item.to} to={item.to} end onClick={closeDrawer} className={navClass}>
+              {item.label}
+            </NavLink>
+          ))}
         </nav>
         <CategoryNav onNavigate={closeDrawer} />
       </MobileDrawer>

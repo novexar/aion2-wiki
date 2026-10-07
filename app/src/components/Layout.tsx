@@ -17,10 +17,7 @@ export function Layout() {
       </main>
       <footer className="border-t border-line">
         <div className="mx-auto flex max-w-[90rem] flex-col gap-2 px-4 py-6 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between sm:px-5">
-          <p>
-            AION2 非公式Wiki — NCSOFT
-            とは無関係のファンサイトです。ゲーム内の表示を優先してください。
-          </p>
+          <p>非公式のファンサイトです。NC（NCSOFT）とは関係ありません。</p>
           <div className="flex gap-4">
             <Link to="/about" className="hover:text-fg">
               このサイトについて

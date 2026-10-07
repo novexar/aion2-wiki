@@ -7,7 +7,6 @@ import { SearchProvider } from '../features/search/SearchProvider';
 import { useSearchPalette } from '../features/search/search-context';
 import { Toc } from '../features/wiki/Toc';
 import { ConfidenceBadge } from './ConfidenceBadge';
-import { ThemeToggle } from './ThemeToggle';
 
 vi.mock('../features/search/CommandPalette', () => ({
   default: ({ onClose }: { onClose: () => void }) => (
@@ -87,20 +86,6 @@ describe('Toc', () => {
   it('renders nothing without headings', () => {
     const { container } = render(<Toc headings={[]} activeId={null} />);
     expect(container).toBeEmptyDOMElement();
-  });
-});
-
-describe('ThemeToggle', () => {
-  it('cycles system → light → dark → system', async () => {
-    render(<ThemeToggle />);
-    const button = screen.getByRole('button');
-    expect(button).toHaveAccessibleName(/テーマ: システム/);
-    await userEvent.click(button);
-    expect(button).toHaveAccessibleName(/テーマ: ライト/);
-    await userEvent.click(button);
-    expect(button).toHaveAccessibleName(/テーマ: ダーク/);
-    await userEvent.click(button);
-    expect(button).toHaveAccessibleName(/テーマ: システム/);
   });
 });
 
