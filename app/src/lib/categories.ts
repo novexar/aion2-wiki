@@ -48,3 +48,13 @@ export function getCategory(id: string): CategoryInfo | undefined {
 export function categoryLabel(id: string): string {
   return CATEGORY_MAP.get(id)?.label ?? id;
 }
+
+/** ホームの「日課・週課」に並べる記事 ID（編集者が選ぶ固定 6 本） */
+export const DAILY_LINKS: readonly string[] = [
+  'daily-and-weekly-checklist',
+  'reset-times',
+  'duty-quests',
+  'shugo-festa',
+  'dimensional-invasion',
+  'daily-dungeon',
+];

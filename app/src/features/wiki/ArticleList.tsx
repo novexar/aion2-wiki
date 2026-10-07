@@ -20,7 +20,7 @@ export function ArticleLinkGrid({ articles }: { readonly articles: readonly Arti
   );
 }
 
-/** 行形式の記事一覧（カテゴリページ・更新履歴） */
+/** 行形式の記事一覧（日付｜タイトル｜カテゴリ）。要約は出さず、バッジは要確認・公式のみ */
 export function ArticleRows({
   articles,
   showCategory = false,
@@ -36,32 +36,27 @@ export function ArticleRows({
         <li key={a.id}>
           <Link
             to={articlePath(a.category, a.id)}
-            className="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 px-1 py-3 transition-colors hover:bg-surface sm:grid-cols-[auto_1fr_auto]"
+            className="group flex items-baseline gap-x-4 px-1 py-2 transition-colors hover:bg-surface"
           >
             {showDate && (
               <time
                 dateTime={a.updated}
-                className="text-xs text-fg-subtle tabular-nums max-sm:hidden"
+                className="w-[5.5rem] shrink-0 text-xs text-fg-subtle tabular-nums max-sm:hidden"
               >
                 {a.updated}
               </time>
             )}
-            <span className="min-w-0">
-              <span className="font-medium text-fg group-hover:underline group-hover:decoration-line-strong group-hover:underline-offset-4">
+            <span className="min-w-0 flex-1">
+              <span className="text-fg group-hover:underline group-hover:underline-offset-4">
                 {a.title}
-              </span>
-              <span className="mt-0.5 line-clamp-1 block text-[13px] text-fg-muted">
-                {a.summary}
-              </span>
+              </span>{' '}
+              <ConfidenceBadge confidence={a.confidence} size="sm" hideVerified />
             </span>
-            <span className="flex items-center gap-2">
-              {showCategory && (
-                <span className="text-xs text-fg-subtle max-sm:hidden">
-                  {categoryLabel(a.category)}
-                </span>
-              )}
-              <ConfidenceBadge confidence={a.confidence} size="sm" />
-            </span>
+            {showCategory && (
+              <span className="shrink-0 text-xs text-fg-subtle max-sm:hidden">
+                {categoryLabel(a.category)}
+              </span>
+            )}
           </Link>
         </li>
       ))}

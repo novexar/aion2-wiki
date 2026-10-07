@@ -12,7 +12,8 @@ export default function HomePage() {
   useDocumentMeta();
   const { open } = useSearchPalette();
   const daily = dailyArticles();
-  const recent = nav.articles.slice(0, 8);
+  const recent = nav.articles.slice(0, 10);
+  const hasDistinctDates = new Set(nav.articles.map((a) => a.updated)).size > 1;
   const total = nav.articles.length;
   const lastUpdated = nav.articles.reduce((m, a) => (a.updated > m ? a.updated : m), '');
 
@@ -40,65 +41,70 @@ export default function HomePage() {
         </button>
       </section>
 
-      <section className="py-12" aria-labelledby="categories-title">
+      <section className="py-8" aria-labelledby="categories-title">
         <h2 id="categories-title" className="text-lg font-semibold">
           カテゴリ
         </h2>
-        <ul className="mt-5 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-4 border-y border-line lg:columns-2 lg:gap-8 lg:border-y-0">
           {nav.categories.map((c) => (
-            <li key={c.id} className="bg-canvas">
-              <Link
-                to={categoryPath(c.id)}
-                className="group flex h-full flex-col gap-1 p-5 transition-colors hover:bg-surface"
-              >
-                <span className="flex items-center justify-between">
-                  <span className="font-medium text-fg">{c.label}</span>
-                  <span className="text-xs text-fg-subtle tabular-nums">
-                    {c.articles.length} 記事
-                  </span>
-                </span>
-                <span className="text-[13px] leading-relaxed text-fg-muted">{c.description}</span>
+            <li
+              key={c.id}
+              className="grid break-inside-avoid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-1 border-b border-line py-2 first:lg:border-t last:border-b-0 sm:grid-cols-[7rem_3rem_minmax(0,1fr)] lg:border-b lg:last:border-b"
+            >
+              <Link to={categoryPath(c.id)} className="font-bold text-fg hover:underline">
+                {c.label}
               </Link>
+              <span className="text-right text-xs text-fg-subtle tabular-nums sm:pt-0.5">
+                {c.articles.length}
+              </span>
+              <div className="col-span-2 min-w-0 text-[13px] sm:col-span-1">
+                <p className="text-fg-muted">{c.description}</p>
+                <p className="mt-0.5 text-fg-subtle">
+                  {c.articles.slice(0, 3).map((a, i) => (
+                    <span key={a.id}>
+                      {i > 0 && '、'}
+                      <Link to={articlePath(a.category, a.id)} className="text-fg hover:underline">
+                        {a.title}
+                      </Link>
+                    </span>
+                  ))}
+                </p>
+              </div>
             </li>
           ))}
         </ul>
       </section>
 
-      <div className="grid grid-cols-1 gap-12 pb-16 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-        <section aria-labelledby="daily-title">
+      {daily.length > 0 && (
+        <section className="pb-8" aria-labelledby="daily-title">
           <h2 id="daily-title" className="text-lg font-semibold">
-            今日の日課
+            日課・週課
           </h2>
-          <p className="mt-1 text-[13px] text-fg-subtle">毎日の確認に使う記事へのショートカット</p>
-          {daily.length === 0 ? (
-            <p className="mt-5 text-sm text-fg-muted">記事はまだありません。</p>
-          ) : (
-            <ol className="mt-5 list-decimal space-y-1 pl-6 text-sm marker:text-fg-subtle">
-              {daily.map((a) => (
-                <li key={a.id} className="py-1">
-                  <Link to={articlePath(a.category, a.id)} className="text-fg hover:underline">
-                    {a.title}
-                  </Link>
-                </li>
-              ))}
-            </ol>
-          )}
+          <ul className="mt-4 divide-y divide-line border-y border-line text-sm">
+            {daily.map((a) => (
+              <li key={a.id}>
+                <Link
+                  to={articlePath(a.category, a.id)}
+                  className="block px-1 py-2 text-fg hover:bg-surface hover:underline"
+                >
+                  {a.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
+      )}
 
-        <section aria-labelledby="updates-title">
+      {hasDistinctDates && (
+        <section className="pb-16" aria-labelledby="updates-title">
           <h2 id="updates-title" className="text-lg font-semibold">
-            更新履歴
+            最近の更新
           </h2>
-          <p className="mt-1 text-[13px] text-fg-subtle">最近調査・更新された記事</p>
-          <div className="mt-5">
-            {recent.length === 0 ? (
-              <p className="text-sm text-fg-muted">記事はまだありません。</p>
-            ) : (
-              <ArticleRows articles={recent} showCategory showDate />
-            )}
+          <div className="mt-4">
+            <ArticleRows articles={recent} showCategory showDate />
           </div>
         </section>
-      </div>
+      )}
     </div>
   );
 }

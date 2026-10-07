@@ -4,13 +4,16 @@ import type { Confidence } from '../lib/types';
 interface ConfidenceBadgeProps {
   readonly confidence: Confidence;
   readonly size?: 'sm' | 'md';
+  /** 一覧用: 既定値の「検証済み」は表示しない */
+  readonly hideVerified?: boolean;
 }
 
 const TITLES: Partial<Record<Confidence, string>> = {
   community: '資料が 1 つの記述を含みます',
 };
 
-export function ConfidenceBadge({ confidence }: ConfidenceBadgeProps) {
+export function ConfidenceBadge({ confidence, hideVerified = false }: ConfidenceBadgeProps) {
+  if (hideVerified && confidence === 'verified') return null;
   const info = CONFIDENCE_INFO[confidence];
   return (
     <span

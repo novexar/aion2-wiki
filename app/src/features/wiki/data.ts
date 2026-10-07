@@ -1,4 +1,5 @@
 import navJson from '../../generated/nav.json';
+import { DAILY_LINKS } from '../../lib/categories';
 import type { Article, ArticleMeta, NavData } from '../../lib/types';
 
 /** ナビ・一覧用の軽量メタデータ（初期バンドルに含める） */
@@ -22,9 +23,10 @@ export async function loadArticle(id: string): Promise<Article | null> {
   return loader ? loader() : null;
 }
 
-/** 「今日の日課」: 日課/デイリータグの記事。なければ初心者ガイド */
-export function dailyArticles(limit = 6): ArticleMeta[] {
-  const tagged = nav.articles.filter((a) => a.tags.some((t) => /日課|デイリー|毎日/.test(t)));
-  const picked = tagged.length > 0 ? tagged : nav.articles.filter((a) => a.category === 'guide');
-  return picked.slice(0, limit);
+/** ホームの「日課・週課」: DAILY_LINKS の順に解決した記事 */
+export function dailyArticles(): ArticleMeta[] {
+  return DAILY_LINKS.flatMap((id) => {
+    const meta = articleById.get(id);
+    return meta ? [meta] : [];
+  });
 }
