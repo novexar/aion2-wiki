@@ -5,7 +5,10 @@ import { describe, expect, it, vi } from 'vitest';
 import { buildPageIndex, mockWikiData } from '../../test/fixtures';
 
 vi.mock('../wiki/data', () => mockWikiData());
-vi.mock('./index-loader', () => ({ loadPageIndex: () => Promise.resolve(buildPageIndex()) }));
+vi.mock('./index-loader', () => ({
+  loadPageIndex: () => Promise.resolve(buildPageIndex()),
+  loadPageTexts: () => Promise.resolve(new Map<string, string>()),
+}));
 
 const { default: CommandPalette } = await import('./CommandPalette');
 

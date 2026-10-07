@@ -242,7 +242,7 @@ async function renderArticle(
 
 function buildPageIndex(
   articles: readonly Article[],
-  chunksById: ReadonlyMap<string, Chunk[]>,
+  pageTexts: Readonly<Record<string, string>>,
 ): unknown {
   const index = new MiniSearch(pageIndexOptions);
   index.addAll(
@@ -255,10 +255,28 @@ function buildPageIndex(
       aliases: a.aliases.join(' / '),
       tags: a.tags.join(' '),
       headings: a.headings.map((h) => h.text).join(' '),
-      body: (chunksById.get(a.id) ?? []).map((c) => c.text).join('\n'),
+      body: pageTexts[a.id] ?? '',
     })),
   );
   return index.toJSON();
+}
+
+/** 検索結果のスニペット用に、記事ごとの本文先頭 2,000 文字を返す（インデックスには含めない） */
+export const SEARCH_TEXT_LIMIT = 2000;
+
+function buildPageTexts(
+  articles: readonly Article[],
+  chunksById: ReadonlyMap<string, Chunk[]>,
+): Record<string, string> {
+  return Object.fromEntries(
+    articles.map((a) => [
+      a.id,
+      (chunksById.get(a.id) ?? [])
+        .map((c) => c.text)
+        .join(' ')
+        .slice(0, SEARCH_TEXT_LIMIT),
+    ]),
+  );
 }
 
 function buildChunkIndex(chunks: readonly Chunk[]): unknown {
@@ -332,6 +350,7 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
   }
   checkHashLinks(hashLinks, articles, warn);
   const allChunks = [...chunksById.values()].flat();
+  const pageTexts = buildPageTexts(articles, chunksById);
   const nav = buildNav(articles.map(toMeta), options.now ?? new Date());
   const chunksData: ChunksData = { chunks: allChunks, index: buildChunkIndex(allChunks) };
 
@@ -342,8 +361,9 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
   await writeJson(path.join(options.outDir, 'pages.json'), articles);
   await writeJson(
     path.join(options.outDir, 'search-index.json'),
-    buildPageIndex(articles, chunksById),
+    buildPageIndex(articles, pageTexts),
   );
+  await writeJson(path.join(options.outDir, 'search-text.json'), pageTexts);
   await writeJson(path.join(options.outDir, 'chunks.json'), chunksData);
   await writeJson(path.join(options.outDir, 'nav.json'), nav);
 

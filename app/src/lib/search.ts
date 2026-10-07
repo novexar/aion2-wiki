@@ -12,6 +12,8 @@ export interface PageHit {
   readonly confidence: Confidence;
   readonly aliases: string;
   readonly score: number;
+  /** 本文先頭 2,000 文字（読み込み後のみ） */
+  readonly text?: string;
 }
 
 /** OR 検索にフォールバックした時に、クエリ語の何割以上が一致すれば結果に残すか */

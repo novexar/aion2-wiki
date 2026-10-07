@@ -74,3 +74,21 @@ export function makeSnippet(text: string, query: string, maxLength = 120): Segme
     ...(end < chars.length ? [{ text: '…', hit: false }] : []),
   ];
 }
+
+/** 最初の一致箇所の前後 radius 文字を切り出す。一致がなければ null */
+export function makeContextSnippet(text: string, query: string, radius = 80): Segment[] | null {
+  const chars = Array.from(text);
+  const marks = computeMarks(chars, query);
+  const first = marks.indexOf(true);
+  if (first < 0) return null;
+  let last = first;
+  while (marks[last + 1]) last += 1;
+  const start = Math.max(0, first - radius);
+  const end = Math.min(chars.length, last + 1 + radius);
+  const flat = chars.slice(start, end).join('').replace(/\s+/g, ' ');
+  return [
+    ...(start > 0 ? [{ text: '…', hit: false }] : []),
+    ...highlight(flat, query),
+    ...(end < chars.length ? [{ text: '…', hit: false }] : []),
+  ];
+}
