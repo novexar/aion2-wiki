@@ -25,38 +25,40 @@ function CategorySection({
   const listId = `nav-${category.id}`;
   return (
     <li>
-      <div className="flex items-center">
-        <button
-          type="button"
-          onClick={() => setToggled(!open)}
-          aria-expanded={open}
-          aria-controls={listId}
-          aria-label={`${category.label}を${open ? '閉じる' : '開く'}`}
-          className="inline-flex size-8 shrink-0 items-center justify-center rounded text-fg-subtle hover:bg-muted hover:text-fg"
-        >
-          <ChevronRight
-            aria-hidden="true"
-            className={`size-3.5 transition-transform ${open ? 'rotate-90' : ''}`}
-          />
-        </button>
-        <NavLink
-          to={categoryPath(category.id)}
-          end
-          onClick={onNavigate}
-          className={({ isActive }) =>
-            `flex min-w-0 flex-1 items-center justify-between rounded-md px-1.5 py-1 text-[13px] font-medium ${
-              isActive ? 'text-fg' : 'text-fg-muted hover:text-fg'
-            }`
-          }
-        >
-          <span className="truncate">{category.label}</span>
-          <span className="text-[11px] font-normal text-fg-subtle tabular-nums">
-            {category.articles.length}
-          </span>
-        </NavLink>
-      </div>
+      <button
+        type="button"
+        onClick={() => setToggled(!open)}
+        aria-expanded={open}
+        aria-controls={listId}
+        className="flex w-full items-center gap-1.5 rounded-md px-1.5 py-1.5 text-left text-[13px] font-medium text-fg-muted hover:bg-muted hover:text-fg"
+      >
+        <ChevronRight
+          aria-hidden="true"
+          className={`size-3.5 shrink-0 text-fg-subtle transition-transform ${open ? 'rotate-90' : ''}`}
+        />
+        <span className="min-w-0 flex-1 truncate">{category.label}</span>
+        <span className="text-[11px] font-normal text-fg-subtle tabular-nums">
+          {category.articles.length}
+        </span>
+      </button>
       {open && (
         <ul id={listId} className="mt-0.5 mb-2 ml-3.5 border-l border-line pl-2">
+          <li>
+            <NavLink
+              to={categoryPath(category.id)}
+              end
+              onClick={onNavigate}
+              className={({ isActive }) =>
+                `-ml-[9px] block border-l-2 py-1 pr-2 pl-3 text-[13px] leading-[1.4] ${
+                  isActive
+                    ? 'border-accent font-medium text-fg'
+                    : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'
+                }`
+              }
+            >
+              一覧（{category.articles.length}）
+            </NavLink>
+          </li>
           {category.articles.length === 0 && (
             <li className="px-2 py-1 text-xs text-fg-subtle">準備中</li>
           )}
