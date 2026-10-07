@@ -45,7 +45,7 @@ jobs:
       - name: Build (content → vite build)
         run: npm run build
         env:
-          BASE_PATH: /AION2/
+          BASE_PATH: /aion2-wiki/
 
       - if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
