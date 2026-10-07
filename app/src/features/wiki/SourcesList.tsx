@@ -18,7 +18,7 @@ function hostname(url: string): string {
 export function SourcesList({ sources }: { readonly sources: readonly Source[] }) {
   if (sources.length === 0) return null;
   return (
-    <section aria-labelledby="sources" className="mt-14 max-w-[72ch]">
+    <section aria-labelledby="sources" className="mt-10">
       <h2 id="sources" className="mb-3 text-base font-semibold">
         出典
       </h2>

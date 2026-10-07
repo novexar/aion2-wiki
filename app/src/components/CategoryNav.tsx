@@ -32,7 +32,7 @@ function CategorySection({
           aria-expanded={open}
           aria-controls={listId}
           aria-label={`${category.label}を${open ? '閉じる' : '開く'}`}
-          className="inline-flex size-7 shrink-0 items-center justify-center rounded text-fg-subtle hover:bg-muted hover:text-fg"
+          className="inline-flex size-8 shrink-0 items-center justify-center rounded text-fg-subtle hover:bg-muted hover:text-fg"
         >
           <ChevronRight
             aria-hidden="true"

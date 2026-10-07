@@ -40,7 +40,7 @@ function ThemeSetting() {
     <div
       role="radiogroup"
       aria-label="テーマ"
-      className="inline-flex h-8 overflow-hidden rounded border border-line-strong text-[13px]"
+      className="inline-flex h-8 overflow-hidden rounded border border-line-input text-[13px]"
     >
       {THEME_OPTIONS.map((opt) => {
         const checked = preference === opt.value;
@@ -51,7 +51,7 @@ function ThemeSetting() {
             role="radio"
             aria-checked={checked}
             onClick={() => saveThemePreference(opt.value)}
-            className={`border-l border-line-strong px-4 first:border-l-0 ${
+            className={`border-l border-line-input px-4 first:border-l-0 ${
               checked ? 'bg-muted font-medium text-fg' : 'text-fg-muted hover:text-fg'
             }`}
           >
@@ -93,7 +93,7 @@ function ModelSetting() {
           }}
           spellCheck={false}
           autoComplete="off"
-          className="h-10 w-full rounded-md border border-line bg-canvas px-3 font-mono text-sm hover:border-line-strong focus:border-accent focus:outline-none sm:max-w-sm"
+          className="h-10 w-full rounded border border-line-input bg-canvas px-3 font-mono text-sm hover:border-fg-subtle focus:border-accent focus:outline-none sm:max-w-sm"
         />
         <datalist id={listId}>
           {SUGGESTED_MODELS.map((m) => (

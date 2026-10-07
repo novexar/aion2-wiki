@@ -116,7 +116,7 @@ function Composer({
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-md border border-line-strong bg-canvas p-2 focus-within:border-fg-subtle"
+      className="rounded-md border border-line-input bg-canvas p-2 focus-within:border-fg-subtle"
     >
       <label htmlFor="chat-input" className="sr-only">
         質問を入力

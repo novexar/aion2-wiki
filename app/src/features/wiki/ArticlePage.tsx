@@ -71,7 +71,7 @@ function ArticleView({ article }: { readonly article: Article }) {
 
   return (
     <WikiShell aside={<Toc headings={article.headings} activeId={activeId} />}>
-      <article className="max-w-[72ch]">
+      <article>
         <Breadcrumb
           items={[
             { label: 'ホーム', to: '/' },
@@ -149,7 +149,13 @@ export default function ArticlePage() {
   if (!isCategoryId(category) || !meta) return <NotFoundPage />;
   if (meta.category !== category)
     return <Navigate to={articlePath(meta.category, meta.id)} replace />;
-  if (state.status === 'loading') return <PageLoading />;
+  if (state.status === 'loading') {
+    return (
+      <WikiShell>
+        <PageLoading bare />
+      </WikiShell>
+    );
+  }
   if (state.status === 'missing') return <NotFoundPage />;
   if (state.status === 'error') {
     return (

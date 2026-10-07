@@ -9,13 +9,13 @@ interface WikiShellProps {
 /** 左サイドバー + 本文 + 右カラム（目次）の 3 カラムレイアウト */
 export function WikiShell({ children, aside }: WikiShellProps) {
   return (
-    <div className="mx-auto grid max-w-[90rem] grid-cols-1 lg:grid-cols-[16rem_minmax(0,1fr)] xl:grid-cols-[16rem_minmax(0,1fr)_14rem]">
+    <div className="mx-auto grid max-w-[90rem] grid-cols-1 lg:grid-cols-[16rem_minmax(0,44rem)] lg:justify-center lg:gap-x-12 xl:grid-cols-[16rem_minmax(0,44rem)_14rem]">
       <aside className="hidden border-r border-line lg:block" aria-label="サイドバー">
         <div className="scroll-thin sticky top-(--header-h) max-h-[calc(100dvh-var(--header-h))] overflow-y-auto px-3 py-6">
           <CategoryNav />
         </div>
       </aside>
-      <div className="min-w-0 px-4 py-8 sm:px-8 lg:px-12">{children}</div>
+      <div className="min-w-0 px-4 py-8 sm:px-8 lg:px-0">{children}</div>
       <aside className="hidden xl:block" aria-label="ページ内の補助情報">
         <div className="scroll-thin sticky top-(--header-h) max-h-[calc(100dvh-var(--header-h))] overflow-y-auto py-8 pr-5">
           {aside}

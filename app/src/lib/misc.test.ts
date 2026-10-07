@@ -38,10 +38,11 @@ describe('gojuon', () => {
     expect(gojuonRow('漢')).toBeNull();
   });
 
-  it('groups by reading, title, then kana alias', () => {
+  it('groups by reading then title, ignoring aliases', () => {
     expect(kanaGroup({ title: '遠征', aliases: [], reading: 'えんせい' })).toBe('あ');
     expect(kanaGroup({ title: 'ギーナ', aliases: [] })).toBe('か');
-    expect(kanaGroup({ title: '遠征', aliases: ['Expedition', 'ダンジョン'] })).toBe('た');
+    expect(kanaGroup({ title: '遠征', aliases: ['Expedition', 'ダンジョン'] })).toBe(OTHER_GROUP);
+    expect(kanaGroup({ title: 'AION2とは', aliases: ['あいおん'] })).toBe(OTHER_GROUP);
     expect(kanaGroup({ title: '遠征', aliases: [] })).toBe(OTHER_GROUP);
   });
 

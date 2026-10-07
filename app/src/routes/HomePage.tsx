@@ -28,7 +28,7 @@ export default function HomePage() {
         <button
           type="button"
           onClick={() => open()}
-          className="mt-6 flex h-9 w-full max-w-xl items-center gap-3 rounded border border-line-strong bg-canvas px-3 text-left text-fg-subtle transition-colors hover:border-fg-subtle hover:text-fg-muted"
+          className="mt-6 flex h-9 w-full max-w-xl items-center gap-3 rounded border border-line-input bg-canvas px-3 text-left text-fg-subtle transition-colors hover:border-fg-subtle hover:text-fg-muted"
           aria-label="サイト内検索を開く"
         >
           <Search aria-hidden="true" className="size-4" />

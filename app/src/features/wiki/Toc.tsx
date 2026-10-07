@@ -16,7 +16,7 @@ function TocList({ headings, activeId }: TocProps) {
             <a
               href={`#${encodeURIComponent(h.id)}`}
               aria-current={isActive ? 'location' : undefined}
-              className={`-ml-px block border-l-2 py-1 leading-snug transition-colors ${h.depth === 3 ? 'pl-6' : 'pl-3'} ${
+              className={`-ml-px flex min-h-8 items-center border-l-2 py-1 leading-snug transition-colors ${h.depth === 3 ? 'pl-6' : 'pl-3'} ${
                 isActive
                   ? 'border-accent font-medium text-fg'
                   : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'

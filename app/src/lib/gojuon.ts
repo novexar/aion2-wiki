@@ -32,11 +32,9 @@ export function gojuonRow(ch: string): GojuonRow | null {
   return null;
 }
 
-/** 五十音の見出し: reading → title → かな始まりの alias の順で判定。漢字のみなら「その他」 */
+/** 五十音の見出し: reading → title の順で判定（別名は見ない）。漢字・英数字始まりは「その他」 */
 export function kanaGroup(meta: Pick<ArticleMeta, 'title' | 'aliases' | 'reading'>): string {
-  const candidates = [meta.reading, meta.title, ...meta.aliases].filter((v): v is string =>
-    Boolean(v),
-  );
+  const candidates = [meta.reading, meta.title].filter((v): v is string => Boolean(v));
   for (const candidate of candidates) {
     const row = gojuonRow(Array.from(candidate.trim())[0] ?? '');
     if (row) return row;

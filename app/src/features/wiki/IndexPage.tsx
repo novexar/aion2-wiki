@@ -1,8 +1,7 @@
-import { Filter, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useMemo, type KeyboardEvent } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
-import { CONFIDENCE_INFO } from '../../lib/confidence';
 import { categoryLabel } from '../../lib/categories';
 import { articlePath } from '../../lib/paths';
 import { Breadcrumb } from './Breadcrumb';
@@ -10,7 +9,7 @@ import { nav } from './data';
 import { groupArticles, INDEX_VIEWS, isIndexView, tagCounts, type IndexView } from './index-groups';
 
 export default function IndexPage() {
-  useDocumentMeta('索引', '記事を五十音・A–Z・カテゴリ・タグで一覧できます。');
+  useDocumentMeta('索引', '全記事の索引（五十音・A–Z・カテゴリ・タグ）');
   const [params, setParams] = useSearchParams();
   const rawView = params.get('view');
   const view: IndexView = isIndexView(rawView) ? rawView : 'kana';
@@ -46,10 +45,8 @@ export default function IndexPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8">
       <Breadcrumb items={[{ label: 'ホーム', to: '/' }, { label: '索引' }]} />
-      <h1 className="text-[1.75rem] font-bold tracking-tight">索引</h1>
-      <p className="mt-2 text-fg-muted">
-        全 {nav.articles.length} 記事。別名（英語名・別表記）でも引けます。
-      </p>
+      <h1 className="text-[1.75rem] font-bold">索引</h1>
+      <p className="mt-2 text-fg-muted">{nav.articles.length} 記事</p>
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div
@@ -69,9 +66,7 @@ export default function IndexPage() {
               onClick={() => update({ view: v.value, tag: null })}
               onKeyDown={(e) => onTabKeyDown(e, i)}
               className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
-                view === v.value
-                  ? 'bg-canvas font-medium text-fg shadow-sm'
-                  : 'text-fg-muted hover:text-fg'
+                view === v.value ? 'bg-canvas font-medium text-fg' : 'text-fg-muted hover:text-fg'
               }`}
             >
               {v.label}
@@ -80,16 +75,12 @@ export default function IndexPage() {
         </div>
         <label className="relative block sm:w-64">
           <span className="sr-only">一覧を絞り込む</span>
-          <Filter
-            aria-hidden="true"
-            className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-fg-subtle"
-          />
           <input
             type="search"
             value={filter}
             onChange={(e) => update({ q: e.target.value })}
-            placeholder="絞り込み"
-            className="h-9 w-full rounded-md border border-line bg-canvas pr-3 pl-8 text-sm placeholder:text-fg-subtle hover:border-line-strong focus:border-accent focus:outline-none"
+            placeholder="タイトルで絞り込み"
+            className="h-9 w-full rounded border border-line-input bg-canvas px-3 text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-accent focus:outline-none"
           />
         </label>
       </div>
@@ -126,7 +117,7 @@ export default function IndexPage() {
               <a
                 key={g.key}
                 href={`#idx-${encodeURIComponent(g.key)}`}
-                className="inline-flex h-7 min-w-7 items-center justify-center rounded border border-line px-1.5 text-xs text-fg-muted hover:border-line-strong hover:text-fg"
+                className="inline-flex h-8 min-w-8 items-center justify-center rounded border border-line px-1.5 text-xs text-fg-muted hover:border-line-strong hover:text-fg"
               >
                 {g.label}
               </a>
@@ -135,13 +126,7 @@ export default function IndexPage() {
         )}
 
         {total === 0 ? (
-          <p className="rounded-lg border border-dashed border-line px-4 py-10 text-center text-sm text-fg-muted">
-            {nav.articles.length === 0
-              ? '記事は準備中です。'
-              : view === 'latin'
-                ? '英語名のある記事が見つかりません。'
-                : '条件に一致する記事がありません。'}
-          </p>
+          <p className="text-sm text-fg-muted">該当する記事はありません。</p>
         ) : (
           <div className="space-y-10">
             {groups.map((g) => (
@@ -162,10 +147,6 @@ export default function IndexPage() {
                         to={articlePath(a.category, a.id)}
                         className="group flex items-baseline gap-2 rounded px-1 py-1.5 hover:bg-surface"
                       >
-                        <span
-                          aria-hidden="true"
-                          className={`size-1.5 shrink-0 translate-y-[-2px] rounded-full ${CONFIDENCE_INFO[a.confidence].dot}`}
-                        />
                         <span className="min-w-0">
                           <span className="text-sm text-fg group-hover:underline group-hover:decoration-line-strong group-hover:underline-offset-4">
                             {label}
@@ -177,6 +158,9 @@ export default function IndexPage() {
                             <span className="ml-2 text-xs text-fg-subtle">
                               {a.aliases.join(' / ')}
                             </span>
+                          )}
+                          {a.confidence === 'community' && (
+                            <span className="ml-2 text-xs text-warn">要確認</span>
                           )}
                           {view !== 'category' && (
                             <span className="ml-2 text-xs text-fg-subtle">

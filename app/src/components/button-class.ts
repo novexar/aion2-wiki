@@ -4,7 +4,7 @@ export type Size = 'sm' | 'md';
 const VARIANTS: Record<Variant, string> = {
   primary: 'bg-fg text-canvas border-transparent hover:bg-fg/85 active:bg-fg/75 disabled:bg-fg/40',
   secondary:
-    'bg-canvas text-fg border-line hover:bg-muted hover:border-line-strong active:bg-line disabled:text-fg-subtle',
+    'bg-canvas text-fg border-line-input hover:bg-muted active:bg-line disabled:text-fg-subtle',
   ghost:
     'bg-transparent text-fg-muted border-transparent hover:bg-muted hover:text-fg active:bg-line disabled:text-fg-subtle',
   danger:
@@ -17,5 +17,5 @@ const SIZES: Record<Size, string> = {
 };
 
 export function buttonClass(variant: Variant = 'secondary', size: Size = 'md'): string {
-  return `inline-flex items-center justify-center rounded-md border font-medium whitespace-nowrap transition-colors disabled:cursor-not-allowed ${VARIANTS[variant]} ${SIZES[size]}`;
+  return `inline-flex items-center justify-center rounded border font-medium whitespace-nowrap transition-colors disabled:cursor-not-allowed ${VARIANTS[variant]} ${SIZES[size]}`;
 }

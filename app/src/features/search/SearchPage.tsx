@@ -38,7 +38,7 @@ export default function SearchPage() {
           placeholder="検索"
           autoFocus
           autoComplete="off"
-          className="h-12 w-full rounded-lg border border-line bg-canvas pr-4 pl-10 text-base placeholder:text-fg-subtle hover:border-line-strong focus:border-accent focus:outline-none"
+          className="h-12 w-full rounded border border-line-input bg-canvas pr-4 pl-10 text-base placeholder:text-fg-subtle hover:border-fg-subtle focus:border-accent focus:outline-none"
         />
       </form>
 
@@ -82,7 +82,7 @@ export default function SearchPage() {
           <button
             type="button"
             onClick={() => setLimit(limit + PAGE_SIZE)}
-            className="mt-4 h-9 rounded border border-line-strong px-4 text-sm text-fg hover:bg-muted"
+            className="mt-4 h-9 rounded border border-line-input px-4 text-sm text-fg hover:bg-muted"
           >
             さらに表示
           </button>

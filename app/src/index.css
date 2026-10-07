@@ -9,6 +9,7 @@
   --muted: #f4f4f5;
   --line: #e4e4e7;
   --line-strong: #d4d4d8;
+  --line-input: #8c8c96;
   --fg: #18181b;
   --fg-muted: #52525b;
   --fg-subtle: #6b6b74;
@@ -39,6 +40,7 @@
   --muted: #18181b;
   --line: #27272a;
   --line-strong: #3f3f46;
+  --line-input: #71717a;
   --fg: #fafafa;
   --fg-muted: #a1a1aa;
   --fg-subtle: #8c8c96;
@@ -63,14 +65,14 @@
 
 @theme inline {
   --font-sans:
-    'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, 'Hiragino Sans',
-    'Yu Gothic UI', sans-serif;
+    'Noto Sans JP', system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
   --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Code', Menlo, Consolas, monospace;
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-line-input: var(--line-input);
   --color-fg: var(--fg);
   --color-fg-muted: var(--fg-muted);
   --color-fg-subtle: var(--fg-subtle);
@@ -139,8 +141,8 @@
 
 /* ---------- 記事本文 ---------- */
 .prose-wiki {
-  max-width: 72ch;
-  font-size: 0.975rem;
+  max-width: 44rem;
+  font-size: 1rem;
   line-height: 1.8;
   color: var(--fg);
   overflow-wrap: anywhere;
@@ -154,23 +156,21 @@
   margin-top: 2.6em;
   padding-bottom: 0.4em;
   border-bottom: 1px solid var(--line);
-  font-size: 1.35rem;
-  font-weight: 650;
+  font-size: 1.25rem;
+  font-weight: 700;
   line-height: 1.4;
-  letter-spacing: -0.015em;
 }
 
 .prose-wiki h3 {
   margin-top: 2em;
-  font-size: 1.1rem;
-  font-weight: 650;
+  font-size: 1.0625rem;
+  font-weight: 700;
   line-height: 1.5;
-  letter-spacing: -0.01em;
 }
 
 .prose-wiki h4 {
   margin-top: 1.6em;
-  font-weight: 650;
+  font-weight: 700;
 }
 
 .prose-wiki .heading-anchor {
@@ -213,7 +213,7 @@
 }
 
 .prose-wiki strong {
-  font-weight: 650;
+  font-weight: 700;
 }
 
 .prose-wiki ul,
@@ -278,14 +278,20 @@
 
 .prose-wiki .table-wrap {
   overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: 6px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  /* 横スクロールできるときだけ右端にフェードを出す（末尾まで行くと local の覆いで消える） */
+  background:
+    linear-gradient(to left, var(--canvas), var(--canvas)) right center / 24px 100% no-repeat local,
+    linear-gradient(to left, color-mix(in srgb, var(--fg) 14%, transparent), transparent) right
+      center / 24px 100% no-repeat scroll;
 }
 
 .prose-wiki table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   line-height: 1.6;
   font-variant-numeric: tabular-nums;
 }
@@ -295,12 +301,11 @@
   padding: 0.55em 0.85em;
   border-bottom: 1px solid var(--line);
   text-align: left;
-  white-space: nowrap;
 }
 
 .prose-wiki td {
   white-space: normal;
-  min-width: 6em;
+  min-width: 5em;
 }
 
 .prose-wiki th {
@@ -312,6 +317,14 @@
 
 .prose-wiki tr:last-child td {
   border-bottom: 0;
+}
+
+/* 「根拠：[S01]」段落は前段落の付記として小さく表示する */
+.prose-wiki .evidence {
+  margin-top: 0.25em;
+  color: var(--fg-subtle);
+  font-size: 0.75rem;
+  line-height: 1.5;
 }
 
 /* スクロールバーを目立たせない */

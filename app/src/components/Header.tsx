@@ -55,7 +55,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => open()}
-            className="group hidden h-9 w-56 items-center gap-2 rounded-md border border-line bg-surface px-2.5 text-sm text-fg-subtle transition-colors hover:border-line-strong hover:text-fg-muted sm:flex lg:w-64"
+            className="group hidden h-9 w-56 items-center gap-2 rounded border border-line-input bg-surface px-2.5 text-sm text-fg-subtle transition-colors hover:border-fg-subtle hover:text-fg-muted sm:flex lg:w-64"
             aria-label="サイト内検索を開く"
             aria-keyshortcuts="Control+K Meta+K"
           >

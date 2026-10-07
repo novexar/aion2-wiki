@@ -63,7 +63,7 @@ export function ApiKeyForm({ onSaved, submitLabel = '保存', primary = true }: 
             spellCheck={false}
             aria-invalid={error !== null}
             aria-describedby={helpId}
-            className="h-10 w-full rounded-md border border-line bg-canvas pr-10 pl-9 font-mono text-sm placeholder:text-fg-subtle hover:border-line-strong focus:border-accent focus:outline-none aria-[invalid=true]:border-danger"
+            className="h-10 w-full rounded border border-line-input bg-canvas pr-10 pl-9 font-mono text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-accent focus:outline-none aria-[invalid=true]:border-danger"
           />
           <button
             type="button"
