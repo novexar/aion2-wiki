@@ -9,10 +9,17 @@ interface ApiKeyFormProps {
   readonly submitLabel?: string;
   /** 1 画面 1 primary のため、設定画面などでは false にする */
   readonly primary?: boolean;
+  /** チャットのコンポーザー位置に置く 1 行版（説明文・アイコンなし） */
+  readonly compact?: boolean;
 }
 
 /** Gemini API キーの入力フォーム（チャット初回・設定画面で共用） */
-export function ApiKeyForm({ onSaved, submitLabel = '保存', primary = true }: ApiKeyFormProps) {
+export function ApiKeyForm({
+  onSaved,
+  submitLabel = '保存',
+  primary = true,
+  compact = false,
+}: ApiKeyFormProps) {
   const [value, setValue] = useState('');
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,6 +45,40 @@ export function ApiKeyForm({ onSaved, submitLabel = '保存', primary = true }: 
     setError(null);
     onSaved?.();
   };
+
+  if (compact) {
+    return (
+      <form onSubmit={onSubmit} noValidate className="space-y-1.5">
+        <label htmlFor={inputId} className="block text-sm text-fg-muted">
+          Gemini API キーを保存すると使えます
+        </label>
+        <div className="flex gap-2">
+          <input
+            id={inputId}
+            type="password"
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+              setError(null);
+            }}
+            placeholder="AIza…"
+            autoComplete="off"
+            spellCheck={false}
+            aria-invalid={error !== null}
+            className="h-10 min-w-0 flex-1 rounded border border-line-input bg-canvas px-3 font-mono text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-accent focus:outline-none aria-[invalid=true]:border-danger"
+          />
+          <Button type="submit" variant="primary" className="h-10">
+            {submitLabel}
+          </Button>
+        </div>
+        {error && (
+          <p role="alert" className="text-sm text-danger">
+            {error}
+          </p>
+        )}
+      </form>
+    );
+  }
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-3">

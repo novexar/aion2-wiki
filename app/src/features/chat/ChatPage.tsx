@@ -1,6 +1,6 @@
 import { ArrowUp, Square } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { Link } from 'react-router';
 import { Button } from '../../components/Button';
 import { Kbd } from '../../components/Kbd';
@@ -9,12 +9,14 @@ import { articlePath } from '../../lib/paths';
 import { useApiKey, useModel } from '../../lib/settings';
 import { ApiKeyForm } from './ApiKeyForm';
 import type { ChatMessage } from './chat-history';
+import { citedArticles } from './cited-articles';
 import { MessageContent } from './MessageContent';
 import { useChat } from './useChat';
 
 const SUGGESTIONS = ['毎日やること', 'ギーナの稼ぎ方', '報酬キューブを開けるのに必要なもの'];
 
 function MessageView({ message }: { readonly message: ChatMessage }) {
+  const cited = useMemo(() => citedArticles(message.text), [message.text]);
   if (message.role === 'user') {
     return (
       <p className="text-[15px] leading-relaxed font-bold whitespace-pre-wrap text-fg">
@@ -58,19 +60,43 @@ function MessageView({ message }: { readonly message: ChatMessage }) {
           </span>
         </p>
       )}
-      {message.refs && message.refs.length > 0 && (
-        <div className="mt-3 flex flex-wrap items-center gap-1.5">
-          <span className="text-xs text-fg-subtle">出典</span>
-          {message.refs.map((ref) => (
-            <Link
-              key={ref.id}
-              to={articlePath(ref.category, ref.id, ref.anchor || undefined)}
-              className="text-xs text-fg-muted underline underline-offset-4 hover:text-fg"
-            >
-              {ref.title}
-            </Link>
-          ))}
+      {cited.length > 0 ? (
+        <div className="mt-3 text-xs text-fg-subtle">
+          <span>出典</span>
+          <ol className="mt-1 space-y-0.5">
+            {cited.map((a, i) => (
+              <li key={a.id}>
+                <span className="tabular-nums">[{i + 1}]</span>{' '}
+                <Link
+                  to={articlePath(
+                    a.category,
+                    a.id,
+                    message.refs?.find((r) => r.id === a.id)?.anchor || undefined,
+                  )}
+                  className="text-fg-muted underline underline-offset-4 hover:text-fg"
+                >
+                  {a.title}
+                </Link>
+              </li>
+            ))}
+          </ol>
         </div>
+      ) : (
+        message.refs &&
+        message.refs.length > 0 && (
+          <div className="mt-3 flex flex-wrap items-center gap-1.5">
+            <span className="text-xs text-fg-subtle">出典</span>
+            {message.refs.map((ref) => (
+              <Link
+                key={ref.id}
+                to={articlePath(ref.category, ref.id, ref.anchor || undefined)}
+                className="text-xs text-fg-muted underline underline-offset-4 hover:text-fg"
+              >
+                {ref.title}
+              </Link>
+            ))}
+          </div>
+        )
       )}
     </motion.div>
   );
@@ -183,20 +209,6 @@ export default function ChatPage() {
     if (nearBottomRef.current) endRef.current?.scrollIntoView({ block: 'end' });
   }, [messages]);
 
-  if (!apiKey) {
-    return (
-      <div className="mx-auto max-w-2xl px-4 py-10 sm:px-8">
-        <h1 className="text-[1.75rem] font-bold">チャット</h1>
-        <p className="mt-3 leading-relaxed text-fg-muted">
-          この Wiki の記事を根拠に Gemini が回答します。Gemini API キーが必要です。
-        </p>
-        <div className="mt-8">
-          <ApiKeyForm submitLabel="保存" />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="mx-auto flex min-h-[calc(100dvh-var(--header-h))] max-w-3xl flex-col px-4 sm:px-8">
       <div className="flex items-center justify-between gap-3 border-b border-line py-4">
@@ -220,7 +232,8 @@ export default function ChatPage() {
                   <button
                     type="button"
                     onClick={() => void send(q)}
-                    className="underline underline-offset-4 hover:text-fg"
+                    disabled={!apiKey}
+                    className="underline underline-offset-4 hover:text-fg disabled:no-underline disabled:opacity-50"
                   >
                     {q}
                   </button>
@@ -236,12 +249,16 @@ export default function ChatPage() {
       </div>
 
       <div className="sticky bottom-0 bg-canvas pt-2 pb-[max(1rem,env(safe-area-inset-bottom))]">
-        <Composer
-          disabled={false}
-          isStreaming={isStreaming}
-          onSend={(q) => void send(q)}
-          onStop={stop}
-        />
+        {apiKey ? (
+          <Composer
+            disabled={false}
+            isStreaming={isStreaming}
+            onSend={(q) => void send(q)}
+            onStop={stop}
+          />
+        ) : (
+          <ApiKeyForm compact />
+        )}
       </div>
     </div>
   );

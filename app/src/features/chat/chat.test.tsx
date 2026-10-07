@@ -88,12 +88,13 @@ describe('MessageContent', () => {
       </MemoryRouter>,
     );
     expect(screen.getByText('560').tagName).toBe('STRONG');
-    expect(screen.getByRole('link', { name: 'オードエネルギー' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: '出典 1: オードエネルギー' })).toHaveTextContent('[1]');
+    expect(screen.getByRole('link', { name: '出典 1: オードエネルギー' })).toHaveAttribute(
       'href',
       '/wiki/dungeons/odyle-energy',
     );
     expect(screen.getAllByRole('listitem')).toHaveLength(2);
     expect(screen.getByText(/<b>x<\/b>/)).toBeInTheDocument();
-    expect(screen.getByText('[不明な記事]')).toBeInTheDocument();
+    expect(screen.queryByText(/不明な記事/)).toBeNull();
   });
 });
