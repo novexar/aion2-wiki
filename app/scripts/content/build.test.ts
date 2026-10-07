@@ -7,7 +7,8 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { chunkIndexOptions, pageIndexOptions } from '../../src/lib/search-options';
 import { searchChunks, searchPages } from '../../src/lib/search';
 import type { Article, Chunk, ChunksData, NavData } from '../../src/lib/types';
-import { buildContent, buildNav } from './build';
+import type { CategoryId } from '../../src/lib/categories';
+import { buildContent, buildNav, byReadingOrder } from './build';
 import { ContentBuildError } from './errors';
 import { articleMarkdown } from './test-fixtures';
 
@@ -126,8 +127,10 @@ describe('buildContent', () => {
     expect(result.articles).toBe(2);
     expect(result.warnings.join()).toContain('"ghost" が存在しません');
 
+    expect(result.warnings.join()).toContain('order が未設定です');
     const kinah = await readOut<Article>('pages/kinah.json');
     expect(kinah.related).toEqual(['odyle']);
+    expect(kinah.order).toBe(999);
     expect(kinah.html).toContain('href="/AION2/wiki/dungeons/odyle"');
     expect(kinah.headings).toEqual([{ id: '入手方法', text: '入手方法', depth: 2 }]);
 
@@ -185,24 +188,67 @@ describe('buildContent', () => {
   });
 });
 
+const meta = (id: string, title: string, reading?: string, order = 1, category = 'basics') => ({
+  id,
+  title,
+  category: category as CategoryId,
+  tags: [],
+  summary: '',
+  confidence: 'verified' as const,
+  updated: '2026-10-08',
+  aliases: [],
+  order,
+  ...(reading ? { reading } : {}),
+});
+
 describe('buildNav', () => {
-  it('sorts by reading when present', () => {
-    const meta = (id: string, title: string, reading?: string) => ({
-      id,
-      title,
-      category: 'basics' as const,
-      tags: [],
-      summary: '',
-      confidence: 'verified' as const,
-      updated: '2026-10-08',
-      aliases: [],
-      ...(reading ? { reading } : {}),
-    });
+  it('falls back to reading when order ties', () => {
     const nav = buildNav([meta('b', '漢字', 'あ'), meta('a', 'か')], new Date(0));
     expect(nav.categories.find((c) => c.id === 'basics')?.articles.map((a) => a.id)).toEqual([
       'b',
       'a',
     ]);
     expect(nav.generatedAt).toBe('1970-01-01T00:00:00.000Z');
+  });
+
+  it('sorts articles in a category by order before reading', () => {
+    const nav = buildNav(
+      [meta('a', 'あ', 'あ', 3), meta('c', 'さ', 'さ', 1), meta('b', 'か', 'か', 2)],
+      new Date(0),
+    );
+    expect(nav.categories.find((c) => c.id === 'basics')?.articles.map((a) => a.id)).toEqual([
+      'c',
+      'b',
+      'a',
+    ]);
+  });
+
+  it('lists categories in reading order', () => {
+    const nav = buildNav([], new Date(0));
+    expect(nav.categories.map((c) => c.id)).toEqual([
+      'guide',
+      'basics',
+      'leveling',
+      'systems',
+      'dungeons',
+      'economy',
+      'classes',
+      'pvp',
+      'tips',
+      'faq',
+      'news',
+    ]);
+  });
+});
+
+describe('byReadingOrder', () => {
+  it('orders by category, then order, then reading', () => {
+    const items = [
+      meta('x', 'x', 'x', 1, 'news'),
+      meta('y', 'y', 'y', 5, 'basics'),
+      meta('z', 'z', 'z', 2, 'basics'),
+      meta('g', 'g', 'g', 9, 'guide'),
+    ];
+    expect([...items].sort(byReadingOrder).map((a) => a.id)).toEqual(['g', 'z', 'y', 'x']);
   });
 });

@@ -1,16 +1,16 @@
-/** content/ のカテゴリー定義（content/SCHEMA.md と同期） */
+/** content/ のカテゴリー定義（content/SCHEMA.md と同期）。配列順 = 閲覧順（サイドバー・ホーム・索引） */
 export const CATEGORY_IDS = [
   'guide',
   'basics',
   'leveling',
   'systems',
   'dungeons',
-  'pvp',
   'economy',
   'classes',
-  'news',
+  'pvp',
   'tips',
   'faq',
+  'news',
 ] as const;
 
 export type CategoryId = (typeof CATEGORY_IDS)[number];
@@ -27,12 +27,12 @@ export const CATEGORIES: readonly CategoryInfo[] = [
   { id: 'leveling', label: 'レベリング', description: 'Lv1〜45・覚醒・IL 上げ' },
   { id: 'systems', label: 'システム', description: 'スキル・スティグマ・強化・製作' },
   { id: 'dungeons', label: 'ダンジョン', description: '遠征・超越・悪夢・レイド・フィールドボス' },
-  { id: 'pvp', label: 'PvP', description: 'アビス・要塞戦・アリーナ' },
   { id: 'economy', label: '経済', description: 'ギーナ・取引所・メンバーシップ' },
   { id: 'classes', label: 'クラス', description: '8 クラスの個別記事' },
-  { id: 'news', label: 'ニュース', description: '公式告知・既知の問題・韓国版との差' },
+  { id: 'pvp', label: 'PvP', description: 'アビス・要塞戦・アリーナ' },
   { id: 'tips', label: '小技', description: '時短・設定・落とし穴' },
   { id: 'faq', label: 'FAQ', description: 'よくある質問' },
+  { id: 'news', label: 'ニュース', description: '公式告知・既知の問題・韓国版との差' },
 ];
 
 const CATEGORY_MAP: ReadonlyMap<string, CategoryInfo> = new Map(CATEGORIES.map((c) => [c.id, c]));

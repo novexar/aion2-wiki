@@ -7,7 +7,7 @@ import { chunkIndexOptions, pageIndexOptions } from '../../src/lib/search-option
 import type { Article, ArticleMeta, Chunk, ChunksData, NavData } from '../../src/lib/types';
 import { chunkArticle } from './chunker';
 import { ContentBuildError, ContentError } from './errors';
-import { parseArticleFile, type Frontmatter } from './frontmatter';
+import { ORDER_MISSING, parseArticleFile, type Frontmatter } from './frontmatter';
 import { readGitDates } from './git-dates';
 import { renderMarkdown } from './markdown';
 import { extractRelatedSection } from './related-section';
@@ -139,11 +139,20 @@ export function toMeta(src: ArticleMeta): ArticleMeta {
     ...(src.updatedAt ? { updatedAt: src.updatedAt } : {}),
     aliases: src.aliases,
     ...(src.reading ? { reading: src.reading } : {}),
+    order: src.order,
   };
 }
 
 const byTitle = (a: ArticleMeta, b: ArticleMeta): number =>
   (a.reading ?? a.title).localeCompare(b.reading ?? b.title, 'ja');
+
+const CATEGORY_RANK: ReadonlyMap<string, number> = new Map(CATEGORIES.map((c, i) => [c.id, i]));
+
+/** 閲覧順: カテゴリの並び → order 昇順 → 読み（五十音は /index だけで使う） */
+export const byReadingOrder = (a: ArticleMeta, b: ArticleMeta): number =>
+  (CATEGORY_RANK.get(a.category) ?? 0) - (CATEGORY_RANK.get(b.category) ?? 0) ||
+  a.order - b.order ||
+  byTitle(a, b);
 
 const byUpdatedDesc = (a: ArticleMeta, b: ArticleMeta): number =>
   (b.updatedAt ?? b.updated).localeCompare(a.updatedAt ?? a.updated) || byTitle(a, b);
@@ -155,10 +164,21 @@ export function buildNav(metas: readonly ArticleMeta[], now: Date): NavData {
       id: c.id,
       label: c.label,
       description: c.description,
-      articles: metas.filter((m) => m.category === c.id).sort(byTitle),
+      articles: metas.filter((m) => m.category === c.id).sort(byReadingOrder),
     })),
     articles: [...metas].sort(byUpdatedDesc),
   };
+}
+
+/** 関連記事を閲覧順（カテゴリ → order → 読み）に並べ替えた記事配列を返す */
+export function withSortedRelated(articles: readonly Article[]): Article[] {
+  const byId = new Map(articles.map((a) => [a.id, a]));
+  const compare = (x: string, y: string): number => {
+    const ax = byId.get(x);
+    const ay = byId.get(y);
+    return ax && ay ? byReadingOrder(ax, ay) : 0;
+  };
+  return articles.map((a) => ({ ...a, related: [...a.related].sort(compare) }));
 }
 
 interface HashLink {
@@ -207,6 +227,8 @@ async function renderArticle(
   gitDates: ReadonlyMap<string, string>,
 ): Promise<{ article: Article; chunks: Chunk[] }> {
   const { fm, file } = item;
+  if (fm.order === undefined)
+    warn(`${file.relPath}: order が未設定です（末尾 ${ORDER_MISSING} として扱います）`);
   const { body, relatedIds } = extractRelatedSection(item.body);
   const { html, headings } = await renderMarkdown(body, {
     resolve: (slug) => targets.get(slug),
@@ -222,8 +244,9 @@ async function renderArticle(
     return false;
   });
   const gitDate = gitDates.get(file.relPath.replace(/^content\//, ''));
+  const base = { ...fm, order: fm.order ?? ORDER_MISSING };
   const article: Article = {
-    ...toMeta(gitDate ? { ...fm, updated: gitDate.slice(0, 10), updatedAt: gitDate } : fm),
+    ...toMeta(gitDate ? { ...base, updated: gitDate.slice(0, 10), updatedAt: gitDate } : base),
     region: fm.region,
     related,
     sources: fm.sources,
@@ -339,16 +362,17 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
     ]),
   );
 
-  const articles: Article[] = [];
+  const rendered: Article[] = [];
   const chunksById = new Map<string, Chunk[]>();
   const hashLinks: HashLink[] = [];
   const gitDates = options.useGitDates === false ? new Map() : readGitDates(options.contentDir);
   for (const item of loaded) {
     const { article, chunks } = await renderArticle(item, targets, warn, hashLinks, gitDates);
-    articles.push(article);
+    rendered.push(article);
     chunksById.set(article.id, chunks);
   }
-  checkHashLinks(hashLinks, articles, warn);
+  checkHashLinks(hashLinks, rendered, warn);
+  const articles = withSortedRelated(rendered);
   const allChunks = [...chunksById.values()].flat();
   const pageTexts = buildPageTexts(articles, chunksById);
   const nav = buildNav(articles.map(toMeta), options.now ?? new Date());

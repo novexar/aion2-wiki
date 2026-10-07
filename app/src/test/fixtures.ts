@@ -13,6 +13,7 @@ export const META: ArticleMeta[] = [
     confidence: 'verified',
     updated: '2026-10-08',
     aliases: ['Odyle Energy'],
+    order: 2,
   },
   {
     id: 'kinah',
@@ -23,6 +24,7 @@ export const META: ArticleMeta[] = [
     confidence: 'community',
     updated: '2026-10-07',
     aliases: ['Kinah'],
+    order: 1,
   },
   {
     id: 'expedition',
@@ -34,6 +36,7 @@ export const META: ArticleMeta[] = [
     updated: '2026-10-01',
     aliases: [],
     reading: 'えんせい',
+    order: 1,
   },
 ];
 

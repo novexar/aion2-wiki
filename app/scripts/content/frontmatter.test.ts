@@ -20,7 +20,21 @@ function reasonsOf(fn: () => unknown): string[] {
   throw new Error('ContentError が投げられませんでした');
 }
 
+const NL = String.fromCharCode(10);
+
 describe('parseArticleFile', () => {
+  it('parses order as an integer and rejects fractions', () => {
+    const ok = parseArticleFile(
+      articleMarkdown({ id: 'kinah', extra: 'order: 12' + NL }),
+      ctx('kinah'),
+    );
+    expect(ok.frontmatter.order).toBe(12);
+    const reasons = reasonsOf(() =>
+      parseArticleFile(articleMarkdown({ id: 'kinah', extra: 'order: 1.5' + NL }), ctx('kinah')),
+    );
+    expect(reasons.join()).toContain('order は整数');
+  });
+
   it('parses a valid article and normalizes dates to YYYY-MM-DD', () => {
     const { frontmatter, body } = parseArticleFile(articleMarkdown({ id: 'kinah' }), ctx('kinah'));
     expect(frontmatter.id).toBe('kinah');

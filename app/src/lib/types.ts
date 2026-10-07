@@ -31,6 +31,8 @@ export interface ArticleMeta {
   readonly updatedAt?: string;
   readonly aliases: readonly string[];
   readonly reading?: string;
+  /** カテゴリ内の閲覧順（小さい順） */
+  readonly order: number;
 }
 
 /** 記事ページ用のフルデータ */

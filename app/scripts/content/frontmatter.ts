@@ -53,6 +53,8 @@ export const frontmatterSchema = z
     sources: z.array(sourceSchema).min(1, 'sources を 1 件以上指定してください'),
     /** 任意: 五十音索引用の読み（ひらがな） */
     reading: z.string().trim().min(1).optional(),
+    /** カテゴリ内の閲覧順（小さい順）。未設定は ORDER_MISSING として末尾 */
+    order: z.number().int('order は整数にしてください').nonnegative().optional(),
   })
   .superRefine((data, ctx) => {
     const ids = data.sources.map((s) => s.id);
@@ -65,6 +67,9 @@ export const frontmatterSchema = z
       });
     }
   });
+
+/** order 未設定の記事に割り当てる値（カテゴリ内の末尾） */
+export const ORDER_MISSING = 999;
 
 export type Frontmatter = z.output<typeof frontmatterSchema>;
 
