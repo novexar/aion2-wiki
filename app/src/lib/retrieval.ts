@@ -79,7 +79,7 @@ export const FIELD_WEIGHTS: Readonly<Record<string, number>> = {
 };
 export const BODY_WEIGHT = 1;
 /** 同義語展開で足した語の重み（元の質問語を 1 とする） */
-const EXPANDED_TERM_WEIGHT = 0.7;
+const EXPANDED_TERM_WEIGHT = 1;
 /** 見出し系の一致が無い記事（本文一致のみ）を候補に入れる最大数 */
 export const BODY_ONLY_LIMIT = 1;
 /** 本文一致のみの記事に必要な、質問語の一致割合 */
@@ -104,16 +104,18 @@ function weightedTerms(query: string, synonyms: SynonymDict): WeightedTerm[] {
   return [...words, ...expanded];
 }
 
-/** 語が珍しいほど大きい重み（0.1〜1）。どの記事にも出る語は軽くなる */
+/** 語が珍しいほど大きい重み（idf。最小 0.1）。どの記事にも出る語は軽くなる */
 function rarity(df: number, total: number): number {
-  return Math.max(0.1, Math.log((total + 1) / (df + 0.5)) / Math.log(total + 1));
+  return Math.max(0.1, Math.log((total + 1) / (df + 0.5)));
 }
 
 /** 語ごとに、見出し系フィールドへ一致した記事 → そのフィールド重みの最大値 */
 function headlineMatches(index: MiniSearch, term: string): Map<string, number> {
   const matches = new Map<string, number>();
   for (const result of searchWithFallback(index, term)) {
-    const fields = Object.values(result.match).flat();
+    // 語を作る全 bigram が当たったフィールドだけを数える（別々のフィールドに散った一致は除く）
+    const [first = [], ...rest] = Object.values(result.match);
+    const fields = first.filter((f) => rest.every((other) => other.includes(f)));
     const best = Math.max(0, ...fields.map((f) => FIELD_WEIGHTS[f] ?? 0));
     if (best > 0) matches.set(String(result.id), best);
   }
@@ -283,8 +285,10 @@ function candidatesOf(
     .filter((s) => s.score.distinct > 0)
     .sort((a, b) => b.score.weight - a.score.weight || b.score.total - a.score.total)
     .slice(0, perArticle);
-  // 本文に質問語が無くても（題名・別名で選ばれた記事）、冒頭のチャンクは候補に残す
-  const picks = scored.length > 0 ? scored : [{ position: 0, score: NO_SCORE }];
+  // 本文に質問語が無くても（題名・別名で選ばれた記事）、冒頭（導入）のチャンクは必ず候補に残す
+  const picks = scored.some((s) => s.position === 0)
+    ? scored
+    : [...scored, { position: 0, score: NO_SCORE }];
   return picks.flatMap(({ position, score }) => {
     const chunk = toChunk(article, position);
     return chunk ? [{ chunk, score, articleRank }] : [];

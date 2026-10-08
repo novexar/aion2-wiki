@@ -3,14 +3,14 @@ import { buildSynonymDict, expandTerms } from './synonyms';
 
 describe('buildSynonymDict', () => {
   const dict = buildSynonymDict([
-    { title: '金策', aliases: ['ギーナ稼ぎ', 'Kina farming', '10', 'あ', '金策'] },
+    { title: '金策', aliases: ['ギーナ稼ぎ', 'Kina farm', '10', 'あ', '金策'] },
     { title: 'オードエネルギー', aliases: ['OD', '使い道'] },
     { title: '別の記事', aliases: ['使い道', 'x'.repeat(40)] },
   ]);
 
   it('maps normalized aliases to article titles', () => {
     expect(dict['ギーナ稼ぎ']).toEqual(['金策']);
-    expect(dict['kina farming']).toEqual(['金策']);
+    expect(dict['kina farm']).toEqual(['金策']);
     expect(dict['od']).toEqual(['オードエネルギー']);
   });
 

@@ -28,16 +28,45 @@ export interface ArticleRef {
 /** マルチターンで保持する往復数 */
 export const MAX_EXCHANGES = 3;
 /** 取得するチャンク数 */
-export const TOP_K = 5;
+export const TOP_K = 6;
 
 /** 同じ記事から使うチャンク数の上限 */
 export const PER_ARTICLE_LIMIT = 2;
 /** プロンプトに入れる抜粋本文の合計文字数の上限 */
-export const CONTEXT_CHAR_LIMIT = 3000;
+export const CONTEXT_CHAR_LIMIT = 3600;
+/** 導入チャンクを必ず含める記事数（関連度の高い記事から） */
+export const LEAD_ARTICLES = 3;
+
+const isLead = (chunk: Chunk): boolean => chunk.id === `${chunk.articleId}#0`;
+
+/**
+ * 関連度順のチャンクのうち、上位 LEAD_ARTICLES 記事の導入チャンク（記事の最初）を
+ * その記事で最初に出るチャンクの直後に移す。導入には記事の主題と前提が書かれているため、
+ * 件数・文字数の上限で切られても落ちないようにする。
+ */
+function withLeadChunks(chunks: readonly Chunk[]): Chunk[] {
+  const leads = new Map(chunks.filter(isLead).map((c) => [c.articleId, c]));
+  const seen = new Set<string>();
+  const placed = new Set<Chunk>();
+  const out: Chunk[] = [];
+  for (const chunk of chunks) {
+    if (placed.has(chunk)) continue;
+    out.push(chunk);
+    if (seen.has(chunk.articleId)) continue;
+    seen.add(chunk.articleId);
+    const lead = leads.get(chunk.articleId);
+    if (lead && lead !== chunk && seen.size <= LEAD_ARTICLES) {
+      out.push(lead);
+      placed.add(lead);
+    }
+  }
+  return out;
+}
 
 /**
  * 検索結果（関連度順）をプロンプトに入れる抜粋に絞る。
- * 同一記事は PER_ARTICLE_LIMIT 件まで → 先頭から TOP_K 件 → 本文合計 CONTEXT_CHAR_LIMIT 字で打ち切り
+ * 上位記事の導入チャンクを必ず含める → 同一記事は PER_ARTICLE_LIMIT 件まで →
+ * 先頭から TOP_K 件 → 本文合計 CONTEXT_CHAR_LIMIT 字で打ち切り
  */
 export function selectContext(
   chunks: readonly Chunk[],
@@ -47,7 +76,7 @@ export function selectContext(
   const counts = new Map<string, number>();
   const picked: Chunk[] = [];
   let used = 0;
-  for (const chunk of chunks) {
+  for (const chunk of withLeadChunks(chunks)) {
     if (picked.length >= topK || used >= maxChars) break;
     const count = counts.get(chunk.articleId) ?? 0;
     if (count >= perArticle) continue;
