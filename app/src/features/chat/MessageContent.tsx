@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router';
 import { parseMiniMarkdown, type Inline } from '../../lib/mini-markdown';
 import { articlePath } from '../../lib/paths';
@@ -57,8 +58,8 @@ function Inlines({
 
 /** モデルの回答を安全に描画する（HTML を挿入しない） */
 export function MessageContent({ text }: { readonly text: string }) {
-  const blocks = parseMiniMarkdown(text);
-  const numbers = new Map(citedArticles(text).map((a, i) => [a.id, i + 1]));
+  const blocks = useMemo(() => parseMiniMarkdown(text), [text]);
+  const numbers = useMemo(() => new Map(citedArticles(text).map((a, i) => [a.id, i + 1])), [text]);
   return (
     <div className="space-y-3 text-sm leading-[1.8] whitespace-pre-wrap">
       {blocks.map((block, i) => {

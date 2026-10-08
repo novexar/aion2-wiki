@@ -30,7 +30,7 @@ const MESSAGES: Record<ChatErrorKind, string> = {
 
 function statusOf(error: unknown): number | undefined {
   if (typeof error === 'object' && error !== null && 'status' in error) {
-    const status = (error as { status: unknown }).status;
+    const status: unknown = Reflect.get(error, 'status');
     if (typeof status === 'number') return status;
   }
   return undefined;
@@ -87,21 +87,60 @@ export function preloadGemini(): Promise<unknown> {
   return import('@google/genai');
 }
 
-/** 応答の最大トークン数（5 行以内の回答に十分な量） */
+/** 応答の最大トークン数（5 行以内の回答に十分な量。思考が最小のとき） */
 export const MAX_OUTPUT_TOKENS = 512;
 
-/** 思考を無効化して初動を速くする。非対応モデルで拒否された時は外して再試行する */
+/** Gemini 2.x 向け: 思考を無効化する */
 export const THINKING_CONFIG = { thinkingBudget: 0 } as const;
 
+/** 思考設定の候補。モデルが拒否したら次の候補へ進む */
+export type ThinkingMode =
+  | { readonly kind: 'level'; readonly level: 'MINIMAL' | 'LOW' }
+  | { readonly kind: 'budget-zero' }
+  | { readonly kind: 'default' };
+
+const MINIMAL: ThinkingMode = { kind: 'level', level: 'MINIMAL' };
+const LOW: ThinkingMode = { kind: 'level', level: 'LOW' };
+const BUDGET_ZERO: ThinkingMode = { kind: 'budget-zero' };
+const DEFAULT_THINKING: ThinkingMode = { kind: 'default' };
+
+/** モデル名から、試す順番の思考設定を返す（Gemini 3 は thinkingLevel、2.x は thinkingBudget: 0） */
+export function thinkingCandidates(model: string): readonly ThinkingMode[] {
+  if (/gemini-3/i.test(model)) return [MINIMAL, LOW, DEFAULT_THINKING];
+  if (/gemini-2/i.test(model)) return [BUDGET_ZERO, DEFAULT_THINKING];
+  return [MINIMAL, LOW, BUDGET_ZERO, DEFAULT_THINKING];
+}
+
+/** 思考トークンも上限に数えられる。思考が軽いほど小さくて済む */
+export function maxOutputTokensFor(mode: ThinkingMode): number {
+  if (mode.kind === 'budget-zero') return MAX_OUTPUT_TOKENS;
+  if (mode.kind === 'level') return mode.level === 'MINIMAL' ? MAX_OUTPUT_TOKENS : 1024;
+  return FALLBACK_MAX_OUTPUT_TOKENS;
+}
+
+function thinkingConfigFor(mode: ThinkingMode): Record<string, unknown> {
+  if (mode.kind === 'level') return { thinkingConfig: { thinkingLevel: mode.level } };
+  if (mode.kind === 'budget-zero') return { thinkingConfig: THINKING_CONFIG };
+  return {};
+}
+
+/** 最初に通った思考設定をモデルごとに覚え、次回から失敗する往復を省く */
+const workingThinking = new Map<string, ThinkingMode>();
+
+/** 思考を無効にできないモデルは思考トークンが出力上限を食うため、上限を広げる */
+export const FALLBACK_MAX_OUTPUT_TOKENS = 2048;
+
+export const TRUNCATED_NOTE = '\n\n（回答が長いため、途中で打ち切られました）';
+
 function rejectsThinking(error: unknown): boolean {
-  return statusOf(error) === 400 && /thinking/i.test(messageOf(error));
+  return statusOf(error) === 400 && /thinking|level/i.test(messageOf(error));
 }
 
 /** Gemini にストリーミングで問い合わせる。SDK はこの関数の呼び出し時に初めて読み込む */
 export async function streamGemini(options: StreamOptions): Promise<string> {
   const { GoogleGenAI } = await import('@google/genai');
   const ai = new GoogleGenAI({ apiKey: options.apiKey });
-  const request = (withThinking: boolean) =>
+  const request = (mode: ThinkingMode) =>
     ai.models.generateContentStream({
       model: options.model,
       contents: options.contents.map((c) => ({
@@ -111,23 +150,50 @@ export async function streamGemini(options: StreamOptions): Promise<string> {
       config: {
         systemInstruction: options.systemInstruction,
         temperature: 0.3,
-        maxOutputTokens: MAX_OUTPUT_TOKENS,
-        ...(withThinking ? { thinkingConfig: THINKING_CONFIG } : {}),
+        maxOutputTokens: maxOutputTokensFor(mode),
+        ...thinkingConfigFor(mode),
         abortSignal: options.signal,
       },
     });
-  const stream = await request(true).catch((error: unknown) => {
-    if (!rejectsThinking(error)) throw error;
-    return request(false);
-  });
+
+  const candidates = thinkingCandidates(options.model);
+  const remembered = workingThinking.get(options.model);
+  const start = remembered
+    ? Math.max(
+        0,
+        candidates.findIndex((m) => sameMode(m, remembered)),
+      )
+    : 0;
+  let stream: Awaited<ReturnType<typeof request>> | null = null;
+  for (const mode of candidates.slice(start)) {
+    try {
+      stream = await request(mode);
+      workingThinking.set(options.model, mode);
+      break;
+    } catch (error: unknown) {
+      if (!rejectsThinking(error)) throw error;
+    }
+  }
+  if (!stream) throw new Error('Gemini がすべての思考設定を拒否しました');
   let full = '';
+  let truncated = false;
   for await (const chunk of stream) {
     if (options.signal?.aborted) break;
+    if (chunk.candidates?.[0]?.finishReason === 'MAX_TOKENS') truncated = true;
     const text = chunk.text ?? '';
     if (!text) continue;
     full += text;
     options.onText(full);
   }
   if (options.signal?.aborted) throw new DOMException('Aborted', 'AbortError');
-  return full;
+  return truncated ? full + TRUNCATED_NOTE : full;
+}
+
+function sameMode(a: ThinkingMode, b: ThinkingMode): boolean {
+  return a.kind === b.kind && (a.kind !== 'level' || (b.kind === 'level' && a.level === b.level));
+}
+
+/** テスト用: 覚えた思考設定を消す */
+export function resetThinkingRejections(): void {
+  workingThinking.clear();
 }

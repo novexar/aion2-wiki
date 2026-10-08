@@ -37,6 +37,20 @@ describe('ApiKeyForm', () => {
   });
 });
 
+describe('ApiKeyForm session-only', () => {
+  it('stores the key in sessionStorage only when the option is checked', async () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    render(<ApiKeyForm onSaved={vi.fn()} />);
+    const user = userEvent.setup();
+    await user.type(screen.getByLabelText('Gemini API キー'), 'AIzaSyTEST_1234567890abcdef');
+    await user.click(screen.getByRole('checkbox', { name: /タブを閉じたら/ }));
+    await user.click(screen.getByRole('button', { name: '保存' }));
+    expect(sessionStorage.getItem(STORAGE_KEYS.apiKey)).toBe('AIzaSyTEST_1234567890abcdef');
+    expect(localStorage.getItem(STORAGE_KEYS.apiKey)).toBeNull();
+  });
+});
+
 describe('MessageContent', () => {
   it('renders lists, bold and links citations to known articles without injecting HTML', () => {
     render(
@@ -55,5 +69,21 @@ describe('MessageContent', () => {
     expect(screen.getAllByRole('listitem')).toHaveLength(2);
     expect(screen.getByText(/<b>x<\/b>/)).toBeInTheDocument();
     expect(screen.queryByText(/不明な記事/)).toBeNull();
+  });
+});
+
+describe('toTurns', () => {
+  it('drops a user turn whose reply failed, so user turns never repeat', async () => {
+    const { toTurns } = await import('./chat-history');
+    const turns = toTurns([
+      { id: '1', role: 'user', text: 'q1', status: 'done' },
+      { id: '2', role: 'model', text: '', status: 'error', error: 'x' },
+      { id: '3', role: 'user', text: 'q2', status: 'done' },
+      { id: '4', role: 'model', text: 'a2', status: 'done' },
+    ]);
+    expect(turns).toEqual([
+      { role: 'user', text: 'q2' },
+      { role: 'model', text: 'a2' },
+    ]);
   });
 });

@@ -295,3 +295,54 @@ describe('article context', () => {
     expect(result.current.messages[1]?.text).toContain('該当する記事がありません');
   });
 });
+
+describe('useChat regressions (code review 2)', () => {
+  const KEY = 'AIzaSyTEST_1234567890abcdef';
+
+  it('keeps the partial answer and its references when the user stops the stream', async () => {
+    streamGemini.mockImplementation(
+      (o: { onText: (t: string) => void; signal: AbortSignal }) =>
+        new Promise((_resolve, reject) => {
+          o.onText('途中まで [kinah]');
+          o.signal.addEventListener('abort', () =>
+            reject(new DOMException('Aborted', 'AbortError')),
+          );
+        }),
+    );
+    const { result } = renderHook(() =>
+      useChat({ apiKey: KEY, model: 'm', contextArticleId: 'kinah' }),
+    );
+    let sending: Promise<void> = Promise.resolve();
+    act(() => {
+      sending = result.current.send('上限は？');
+    });
+    await waitFor(() => expect(result.current.messages[1]?.text).toBe('途中まで [kinah]'));
+    await act(async () => {
+      result.current.stop();
+      await sending;
+    });
+    const reply = result.current.messages[1];
+    expect(reply?.status).toBe('done');
+    expect(reply?.text).toBe('途中まで [kinah]');
+    expect(reply?.refs?.map((r) => r.id)).toContain('kinah');
+    const repo = await getChatRepository();
+    const saved = await repo.messages(result.current.activeId ?? '');
+    expect(saved[1]?.content).toBe('途中まで [kinah]');
+  });
+
+  it('does not let the initial history load replace a conversation started meanwhile', async () => {
+    const repo = await getChatRepository();
+    const old = await repo.create();
+    await repo.append(old.id, { id: 'old1', role: 'user', content: '古い質問', citations: [] });
+    resetChatRepository();
+    streamGemini.mockResolvedValue('新しい答え');
+    found = [EXPEDITION];
+    const { result } = renderHook(() =>
+      useChat({ apiKey: KEY, model: 'm', contextArticleId: null }),
+    );
+    await act(() => result.current.send('新しい質問'));
+    await waitFor(() => expect(result.current.conversations.length).toBe(2));
+    expect(result.current.activeId).not.toBe(old.id);
+    expect(result.current.messages.map((m) => m.text)).toEqual(['新しい質問', '新しい答え']);
+  });
+});

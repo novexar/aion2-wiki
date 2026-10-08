@@ -25,4 +25,13 @@ describe('prefetchChat', () => {
     prefetchChat([fail], (cb) => cb());
     expect(fail).toHaveBeenCalled();
   });
+
+  it('allows scheduling again after a loader fails', async () => {
+    const fail = vi.fn(() => Promise.reject(new Error('offline')));
+    const schedule = vi.fn((cb: () => void) => cb());
+    prefetchChat([fail], schedule);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    prefetchChat([fail], schedule);
+    expect(schedule).toHaveBeenCalledTimes(2);
+  });
 });

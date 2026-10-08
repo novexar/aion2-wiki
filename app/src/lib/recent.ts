@@ -1,6 +1,6 @@
-import { readJson, writeJson } from './storage';
+import { readJson, STORAGE_KEYS, writeJson } from './storage';
 
-const KEY = 'aion2wiki:recent-articles';
+const KEY = STORAGE_KEYS.recentArticles;
 export const RECENT_LIMIT = 5;
 
 const isIdList = (value: unknown): value is string[] =>

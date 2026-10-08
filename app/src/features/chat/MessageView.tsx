@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { Link } from 'react-router';
 import { articlePath } from '../../lib/paths';
 import type { ChatMessage } from './chat-history';
@@ -7,7 +7,14 @@ import { citedArticles } from './cited-articles';
 import { MessageContent } from './MessageContent';
 
 /** 1 件のメッセージ（質問は太字、回答は Markdown + 出典） */
-export function MessageView({ message }: { readonly message: ChatMessage }) {
+export const MessageView = memo(function MessageView({
+  message,
+  model,
+}: {
+  readonly message: ChatMessage;
+  /** 生成中の表示に添えるモデル名 */
+  readonly model?: string;
+}) {
   const cited = useMemo(() => citedArticles(message.text), [message.text]);
   if (message.role === 'user') {
     return (
@@ -31,7 +38,9 @@ export function MessageView({ message }: { readonly message: ChatMessage }) {
             <span className="size-1.5 animate-pulse rounded-full bg-fg-subtle [animation-delay:150ms]" />
             <span className="size-1.5 animate-pulse rounded-full bg-fg-subtle [animation-delay:300ms]" />
           </span>
-          {message.refs && message.refs.length > 0 ? '回答を生成中' : '検索中'}
+          {message.refs && message.refs.length > 0
+            ? `回答を生成中${model ? `（${model}）` : ''}`
+            : '検索中'}
         </p>
       ) : null}
       {message.status === 'error' && message.error && (
@@ -92,4 +101,4 @@ export function MessageView({ message }: { readonly message: ChatMessage }) {
       )}
     </motion.div>
   );
-}
+});

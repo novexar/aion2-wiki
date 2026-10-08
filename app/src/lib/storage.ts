@@ -9,6 +9,7 @@ export const STORAGE_KEYS = {
   chat: 'aion2wiki:chat-history',
   chatPanelOpen: 'aion2wiki:chat-panel-open',
   chatPanelWidth: 'aion2wiki:chat-panel-width',
+  recentArticles: 'aion2wiki:recent-articles',
   homeStaggerPlayed: 'aion2wiki:home-stagger-played',
 } as const;
 

@@ -244,9 +244,20 @@ export class MemoryRepository implements ChatRepository {
   }
 }
 
-export async function openIdbRepository(): Promise<ChatRepository> {
+/**
+ * @param onConnectionLost 他タブのバージョン更新やブラウザによる切断で接続が使えなくなった時に呼ぶ
+ */
+export async function openIdbRepository(onConnectionLost?: () => void): Promise<ChatRepository> {
   if (typeof indexedDB === 'undefined') throw new Error('IndexedDB がありません');
   const db = await openDB<ChatDB>(DB_NAME, DB_VERSION, {
+    blocking() {
+      // 別タブがバージョンを上げようとしている。接続を閉じて譲る
+      db.close();
+      onConnectionLost?.();
+    },
+    terminated() {
+      onConnectionLost?.();
+    },
     upgrade(database) {
       const conversations = database.createObjectStore('conversations', { keyPath: 'id' });
       conversations.createIndex('updatedAt', 'updatedAt');

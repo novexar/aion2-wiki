@@ -214,26 +214,38 @@ export function withSortedRelated(articles: readonly Article[]): Article[] {
   return articles.map((a) => ({ ...a, related: [...a.related].sort(compare) }));
 }
 
-interface HashLink {
+export interface HashLink {
   readonly file: string;
   readonly slug: string;
   readonly hash: string;
 }
 
-/** `[[slug#hash]]` が対象記事の見出し（id または本文）に一致しなければ警告する */
-function checkHashLinks(
+/**
+ * `[[slug#hash]]` の検証。リンク先の URL は hash をそのまま使うため、見出し id と一致しないと
+ * ジャンプできない。見出しテキストにしか一致しない場合はビルドエラー（id を使うよう案内する）。
+ */
+export function checkHashLinks(
   hashLinks: readonly HashLink[],
   articles: readonly Article[],
   warn: (message: string) => void,
-): void {
+): ContentError[] {
   const byId = new Map(articles.map((a) => [a.id, a]));
+  const errors: ContentError[] = [];
   for (const { file, slug, hash } of hashLinks) {
     const target = byId.get(slug);
-    if (!target) continue;
-    if (!target.headings.some((h) => h.id === hash || h.text === hash)) {
+    if (!target || target.headings.some((h) => h.id === hash)) continue;
+    const byText = target.headings.find((h) => h.text === hash);
+    if (byText) {
+      errors.push(
+        new ContentError(file, [
+          `[[${slug}#${hash}]] は見出しテキストです。ジャンプできないよう、見出し id を使って [[${slug}#${byText.id}]] と書いてください`,
+        ]),
+      );
+    } else {
       warn(`${file}: [[${slug}#${hash}]] の見出しが ${slug} に存在しません`);
     }
   }
+  return errors;
 }
 
 /** タイトル・別名が複数記事で重複していれば、ファイル名つきのメッセージを返す */
@@ -406,7 +418,8 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
     rendered.push(article);
     chunksById.set(article.id, chunks);
   }
-  checkHashLinks(hashLinks, rendered, warn);
+  const hashErrors = checkHashLinks(hashLinks, rendered, warn);
+  if (hashErrors.length > 0) throw new ContentBuildError(hashErrors);
   const articles = withSortedRelated(rendered);
   const allChunks = [...chunksById.values()].flat();
   const pageTexts = buildPageTexts(articles, chunksById);

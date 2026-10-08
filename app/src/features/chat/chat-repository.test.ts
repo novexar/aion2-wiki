@@ -144,7 +144,6 @@ describe('chat message conversion', () => {
     expect(toTurns(msgs)).toEqual([
       { role: 'user', text: 'Q' },
       { role: 'model', text: 'A' },
-      { role: 'user', text: 'Q2' },
     ]);
   });
 

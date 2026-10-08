@@ -33,6 +33,15 @@ describe('renderMarkdown', () => {
     expect(html).toContain('href="/AION2/x"');
   });
 
+  it('drops scheme-relative URLs that would load from another host', async () => {
+    const { html } = await renderMarkdown(
+      '[a](//evil.example/x) ![b](//evil.example/i.png) [ok](/AION2/y)\n',
+      options,
+    );
+    expect(html).not.toContain('evil.example');
+    expect(html).toContain('href="/AION2/y"');
+  });
+
   it('renders GFM tables wrapped in a scrollable region', async () => {
     const { html } = await renderMarkdown('| a | b |\n| - | - |\n| 1 | 2 |\n', options);
     expect(html).toContain(

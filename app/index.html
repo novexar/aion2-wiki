@@ -2,6 +2,10 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://generativelanguage.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AION2 非公式Wiki</title>
     <meta
@@ -19,21 +23,7 @@
     />
     <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
-    <script>
-      // 初回描画前にテーマを適用してちらつきを防ぐ
-      (function () {
-        var pref = 'system';
-        try {
-          pref = localStorage.getItem('aion2wiki:theme') || 'system';
-        } catch (e) {}
-        var dark =
-          pref === 'dark' ||
-          (pref !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        var root = document.documentElement;
-        root.dataset.theme = dark ? 'dark' : 'light';
-        root.style.colorScheme = dark ? 'dark' : 'light';
-      })();
-    </script>
+    <script src="%BASE_URL%theme-init.js"></script>
   </head>
   <body>
     <noscript>このサイトの表示には JavaScript が必要です。</noscript>
