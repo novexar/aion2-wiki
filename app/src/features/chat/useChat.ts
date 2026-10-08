@@ -11,6 +11,7 @@ import {
   type ChatMessage,
 } from './chat-history';
 import { WARN_BYTES, type ChatRepository, type Conversation } from './chat-repository';
+import { startChatTimer } from './chat-timing';
 import { retrieveChunks } from './chunk-loader';
 
 export interface UseChatOptions {
@@ -128,6 +129,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
       const question = rawQuestion.trim();
       if (!question || !apiKey || controllerRef.current !== null) return;
 
+      const timer = startChatTimer();
       const controller = new AbortController();
       controllerRef.current = controller;
       const history = toTurns(messages);
@@ -150,6 +152,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
         }
         await save(conversationId, userMsg, sentAt);
         const chunks = await retrieve(question, history, contextArticleId, controller.signal);
+        timer.retrieved();
         if (chunks.length === 0) {
           // 根拠になる抜粋がなければ API を呼ばずに返す
           update({ text: 'この Wiki に該当する記事がありません。', status: 'done', refs: [] });
@@ -164,8 +167,12 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
           systemInstruction: request.systemInstruction,
           contents: request.contents,
           signal: controller.signal,
-          onText: (text) => patch(reply.id, { text }),
+          onText: (text) => {
+            timer.firstToken();
+            patch(reply.id, { text });
+          },
         });
+        timer.done();
         update({ text: full, status: 'done', refs: pickReferences(chunks, full) });
       } catch (error: unknown) {
         const chatError = toChatError(error);
