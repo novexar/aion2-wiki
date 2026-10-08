@@ -24,3 +24,27 @@ describe('motion tokens', () => {
     expect(css).not.toMatch(/transition:\s*all/);
   });
 });
+
+describe('reduced motion', () => {
+  const app = readFileSync(resolve(process.cwd(), 'src/App.tsx'), 'utf8');
+  const reduceBlocks = [
+    ...css.matchAll(/@media \(prefers-reduced-motion: reduce\) \{([\s\S]*?)\n\}/g),
+  ]
+    .map((m) => m[1] ?? '')
+    .join('\n');
+
+  it('motion は OS の設定に従う', () => {
+    expect(app).toContain('reducedMotion="user"');
+  });
+
+  it('CSS の animation／transition は reduce で実質 0 になり、スケルトンは止まる', () => {
+    expect(reduceBlocks).toMatch(/animation-duration: 0\.01ms !important/);
+    expect(reduceBlocks).toMatch(/transition-duration: 0\.01ms !important/);
+    expect(reduceBlocks).toMatch(/\.skeleton-bar \{\s*animation: none/);
+  });
+
+  it('無限ループの animation はスケルトンだけ', () => {
+    expect(css.match(/infinite/g)).toHaveLength(1);
+    expect(css).toMatch(/\.skeleton-bar \{\s*animation: skeleton-pulse[^;]*infinite/);
+  });
+});
