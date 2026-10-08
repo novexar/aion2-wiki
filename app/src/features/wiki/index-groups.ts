@@ -33,6 +33,17 @@ const sortEntries = (entries: IndexEntry[]): IndexEntry[] =>
     (a.article.reading ?? a.label).localeCompare(b.article.reading ?? b.label, 'ja'),
   );
 
+/** 索引の行に添える別名の数（残りは「他 n」） */
+export const ALIAS_PREVIEW = 2;
+
+/** 索引の行に添える別名: 先頭 max 件と、残りの件数 */
+export function aliasPreview(
+  names: readonly string[],
+  max = ALIAS_PREVIEW,
+): { shown: readonly string[]; rest: number } {
+  return { shown: names.slice(0, max), rest: Math.max(0, names.length - max) };
+}
+
 /** 絞り込み語がタイトル・別名・タグ・概要のどれかに含まれるか */
 export function matchesFilter(article: ArticleMeta, filter: string): boolean {
   const f = normalizeText(filter.trim());

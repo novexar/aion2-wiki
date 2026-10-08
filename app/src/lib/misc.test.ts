@@ -57,6 +57,25 @@ describe('gojuon', () => {
     });
     expect(latinGroup({ title: 'ギーナ', aliases: [] })).toBeNull();
   });
+
+  it('A–Z は先頭を大文字にし、略語より長い別名を採る', () => {
+    expect(latinGroup({ title: '代替', aliases: ['alts', 'Alt characters'] })).toEqual({
+      letter: 'A',
+      label: 'Alt characters',
+    });
+    expect(latinGroup({ title: '増幅', aliases: ['AMP', 'amplification'] })).toEqual({
+      letter: 'A',
+      label: 'Amplification',
+    });
+    expect(latinGroup({ title: '経験値', aliases: ['EXP'] })).toEqual({
+      letter: 'E',
+      label: 'EXP',
+    });
+  });
+
+  it('英数字始まりの群名は「英数字」', () => {
+    expect(OTHER_GROUP).toBe('英数字');
+  });
 });
 
 describe('paths', () => {

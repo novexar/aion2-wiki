@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { META } from '../../test/fixtures';
-import { groupArticles, isIndexView, matchesFilter, tagCounts } from './index-groups';
+import { aliasPreview, groupArticles, isIndexView, matchesFilter, tagCounts } from './index-groups';
 
 describe('groupArticles', () => {
   it('groups by gojuon row with reading support', () => {
@@ -45,5 +45,13 @@ describe('tagCounts / isIndexView', () => {
     expect(isIndexView('kana')).toBe(true);
     expect(isIndexView('x')).toBe(false);
     expect(isIndexView(null)).toBe(false);
+  });
+});
+
+describe('aliasPreview', () => {
+  it('別名は 2 件まで出し、残りを数える', () => {
+    expect(aliasPreview(['a', 'b', 'c', 'd'])).toEqual({ shown: ['a', 'b'], rest: 2 });
+    expect(aliasPreview(['a'])).toEqual({ shown: ['a'], rest: 0 });
+    expect(aliasPreview([])).toEqual({ shown: [], rest: 0 });
   });
 });

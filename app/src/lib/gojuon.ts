@@ -2,7 +2,8 @@ import type { ArticleMeta } from './types';
 
 export const GOJUON_ROWS = ['あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'や', 'ら', 'わ'] as const;
 export type GojuonRow = (typeof GOJUON_ROWS)[number];
-export const OTHER_GROUP = 'その他';
+/** 読みの無い英数字始まりの記事の群（漢字始まりは reading で五十音に入る） */
+export const OTHER_GROUP = '英数字';
 
 const ROW_CHARS: Record<GojuonRow, string> = {
   あ: 'あいうえおぁぃぅぇぉゔ',
@@ -32,7 +33,7 @@ export function gojuonRow(ch: string): GojuonRow | null {
   return null;
 }
 
-/** 五十音の見出し: reading → title の順で判定（別名は見ない）。漢字・英数字始まりは「その他」 */
+/** 五十音の見出し: reading → title の順で判定（別名は見ない）。どちらも仮名でなければ OTHER_GROUP */
 export function kanaGroup(meta: Pick<ArticleMeta, 'title' | 'aliases' | 'reading'>): string {
   const candidates = [meta.reading, meta.title].filter((v): v is string => Boolean(v));
   for (const candidate of candidates) {
@@ -42,13 +43,30 @@ export function kanaGroup(meta: Pick<ArticleMeta, 'title' | 'aliases' | 'reading
   return OTHER_GROUP;
 }
 
-/** A–Z の見出し: 英字始まりの title / alias。なければ null（A–Z 索引に載せない） */
+const startsLatin = (text: string): boolean => /^[a-z]/i.test(text);
+/** 4 文字以下の全大文字（略語）。A–Z のラベルには後回しにする */
+const isAbbreviation = (text: string): boolean => text.length <= 4 && /^[A-Z0-9]+$/.test(text);
+
+/**
+ * A–Z の見出し: 英字始まりの title。title が英字始まりでなければ英字始まりの別名のうち
+ * 略語でない最長のもの（略語しか無ければ最長の略語）。表示ラベルは先頭を大文字にする。
+ * 候補が無ければ null（A–Z 索引に載せない）
+ */
 export function latinGroup(
   meta: Pick<ArticleMeta, 'title' | 'aliases'>,
 ): { letter: string; label: string } | null {
-  for (const candidate of [meta.title, ...meta.aliases]) {
-    const first = candidate.normalize('NFKC').trim()[0];
-    if (first && /[a-z]/i.test(first)) return { letter: first.toUpperCase(), label: candidate };
-  }
-  return null;
+  const title = meta.title.normalize('NFKC').trim();
+  const aliases = meta.aliases
+    .map((a) => a.normalize('NFKC').trim())
+    .filter(startsLatin)
+    .sort(
+      (a, b) =>
+        Number(isAbbreviation(a)) - Number(isAbbreviation(b)) ||
+        b.length - a.length ||
+        a.localeCompare(b, 'en'),
+    );
+  const picked = startsLatin(title) ? title : aliases[0];
+  if (!picked) return null;
+  const label = `${picked[0]?.toUpperCase() ?? ''}${picked.slice(1)}`;
+  return { letter: label[0] ?? '', label };
 }

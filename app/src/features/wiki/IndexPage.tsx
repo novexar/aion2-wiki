@@ -9,7 +9,14 @@ import { Breadcrumb } from './Breadcrumb';
 import { PageLoading } from '../../components/PageLoading';
 import type { ArticleMeta } from '../../lib/types';
 import { loadAllMeta, nav } from './data';
-import { groupArticles, INDEX_VIEWS, isIndexView, tagCounts, type IndexView } from './index-groups';
+import {
+  aliasPreview,
+  groupArticles,
+  INDEX_VIEWS,
+  isIndexView,
+  tagCounts,
+  type IndexView,
+} from './index-groups';
 
 const MIN_TAG_COUNT = 3;
 
@@ -88,7 +95,7 @@ export default function IndexPage() {
         <div
           role="tablist"
           aria-label="索引の種類"
-          className="inline-flex rounded border border-line bg-surface p-0.5"
+          className="inline-flex h-8 self-start overflow-hidden rounded border border-line-input text-[13px]"
         >
           {INDEX_VIEWS.map((v, i) => (
             <button
@@ -101,8 +108,8 @@ export default function IndexPage() {
               tabIndex={view === v.value ? 0 : -1}
               onClick={() => update({ view: v.value, tag: null })}
               onKeyDown={(e) => onTabKeyDown(e, i)}
-              className={`rounded px-3 py-1.5 text-sm transition-colors ${
-                view === v.value ? 'bg-canvas font-medium text-fg' : 'text-fg-muted hover:text-fg'
+              className={`border-l border-line-input px-4 transition-colors first:border-l-0 ${
+                view === v.value ? 'bg-muted font-medium text-fg' : 'text-fg-muted hover:text-fg'
               }`}
             >
               {v.label}
@@ -115,7 +122,7 @@ export default function IndexPage() {
             type="search"
             value={filter}
             onChange={(e) => update({ q: e.target.value })}
-            placeholder="タイトルで絞り込み"
+            placeholder="絞り込み"
             className="h-9 w-full rounded border border-line-input bg-canvas px-3 text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-fg-subtle focus:outline-none"
           />
         </label>
@@ -199,18 +206,20 @@ export default function IndexPage() {
                       label === a.title
                         ? a.aliases
                         : [a.title, ...a.aliases.filter((x) => x !== label)];
+                    const { shown, rest } = aliasPreview(names);
                     return (
                       <li key={`${g.key}-${a.id}`} className={LIST_ITEM}>
                         <Link
                           to={articlePath(a.category, a.id)}
-                          className="group flex items-baseline gap-2 px-1 py-1.5 hover:bg-surface"
+                          className="group flex h-8 items-center gap-2 px-1 hover:bg-surface"
                         >
-                          <span className="min-w-0 flex-1">
+                          <span className="min-w-0 flex-1 truncate">
                             <span className="text-sm text-fg group-hover:underline">{label}</span>
-                            {names.length > 0 && (
+                            {shown.length > 0 && (
                               <span className="text-xs text-fg-muted">
                                 {' — '}
-                                {names.join('、')}
+                                {shown.join('、')}
+                                {rest > 0 && ` 他 ${rest}`}
                               </span>
                             )}
                             {a.confidence === 'community' && (
