@@ -228,7 +228,6 @@ export interface HashLink {
 export function checkHashLinks(
   hashLinks: readonly HashLink[],
   articles: readonly Article[],
-  warn: (message: string) => void,
 ): ContentError[] {
   const byId = new Map(articles.map((a) => [a.id, a]));
   const errors: ContentError[] = [];
@@ -243,7 +242,9 @@ export function checkHashLinks(
         ]),
       );
     } else {
-      warn(`${file}: [[${slug}#${hash}]] の見出しが ${slug} に存在しません`);
+      errors.push(
+        new ContentError(file, [`[[${slug}#${hash}]] の見出しが ${slug} に存在しません`]),
+      );
     }
   }
   return errors;
@@ -271,26 +272,30 @@ async function renderArticle(
   warn: (message: string) => void,
   hashLinks: HashLink[],
   gitDates: ReadonlyMap<string, string>,
+  fail: (file: string, reason: string) => void,
 ): Promise<{ article: Article; chunks: Chunk[] }> {
   const { fm, file } = item;
   const longTitle = titleLengthWarning(file.relPath, fm.title);
   if (longTitle) warn(longTitle);
-  if (fm.reading && !/^[ぁ-ゖァ-ヺ]/.test(fm.reading))
-    warn(`${file.relPath}: reading が仮名始まりではありません（五十音索引の「その他」になります）`);
+  if (fm.reading && !/^[ぁ-ゖァ-ヶ]/.test(fm.reading))
+    fail(file.relPath, 'reading が仮名始まりではありません（五十音索引に入れられません）');
+  // 漢字・長音符始まりのタイトルは仮名の読みが無いと「英数字」に入ってしまう
+  if (!fm.reading && /^[\u3005\u3400-\u9fff\uf900-\ufaffー]/.test(fm.title.trim()))
+    fail(file.relPath, 'タイトルが漢字・長音符始まりです。reading（仮名の読み）を指定してください');
   if (fm.order === undefined)
     warn(`${file.relPath}: order が未設定です（末尾 ${ORDER_MISSING} として扱います）`);
   const { body, relatedIds } = extractRelatedSection(item.body);
   const { html, headings } = await renderMarkdown(body, {
     resolve: (slug) => targets.get(slug),
     sourceIds: new Set(fm.sources.map((s) => s.id)),
-    onMissingLink: (slug) => warn(`${file.relPath}: リンク先 [[${slug}]] が存在しません`),
+    onMissingLink: (slug) => fail(file.relPath, `リンク先 [[${slug}]] が存在しません`),
     onHashLink: (slug, hash) => hashLinks.push({ file: file.relPath, slug, hash }),
-    onMissingSource: (id) => warn(`${file.relPath}: 本文の [${id}] が sources にありません`),
+    onMissingSource: (id) => fail(file.relPath, `本文の [${id}] が sources にありません`),
   });
   const related = [...new Set([...fm.related, ...relatedIds])].filter((id) => {
     if (id === fm.id) return false;
     if (targets.has(id)) return true;
-    warn(`${file.relPath}: related の "${id}" が存在しません（無視します）`);
+    fail(file.relPath, `related の "${id}" が存在しません`);
     return false;
   });
   const gitDate = gitDates.get(file.relPath.replace(/^content\//, ''));
@@ -413,13 +418,18 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
   const rendered: Article[] = [];
   const chunksById = new Map<string, Chunk[]>();
   const hashLinks: HashLink[] = [];
-  const gitDates = options.useGitDates === false ? new Map() : readGitDates(options.contentDir);
+  const gitDates =
+    options.useGitDates === false ? new Map() : readGitDates(options.contentDir, warn);
+  const problems: ContentError[] = [];
+  const fail = (file: string, reason: string): void => {
+    problems.push(new ContentError(file, [reason]));
+  };
   for (const item of loaded) {
-    const { article, chunks } = await renderArticle(item, targets, warn, hashLinks, gitDates);
+    const { article, chunks } = await renderArticle(item, targets, warn, hashLinks, gitDates, fail);
     rendered.push(article);
     chunksById.set(article.id, chunks);
   }
-  const hashErrors = checkHashLinks(hashLinks, rendered, warn);
+  const hashErrors = [...problems, ...checkHashLinks(hashLinks, rendered)];
   if (hashErrors.length > 0) throw new ContentBuildError(hashErrors);
   const articles = withSortedRelated(rendered);
   const allChunks = [...chunksById.values()].flat();

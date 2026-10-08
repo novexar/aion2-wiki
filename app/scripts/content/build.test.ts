@@ -97,6 +97,27 @@ describe('buildContent', () => {
     expect(result.warnings[0]).toContain('見つかりません');
   });
 
+  it('fails on a missing related id, an unresolved wikilink or a missing source ref', async () => {
+    await put('basics/a.md', articleMarkdown({ id: 'a', extra: 'related: [ghost]\n' }));
+    await expect(run()).rejects.toThrow(/related の "ghost"/);
+    await put('basics/a.md', articleMarkdown({ id: 'a', body: '[[nothing]] 根拠：[S01]' }));
+    await expect(run()).rejects.toThrow(/リンク先 \[\[nothing\]\]/);
+    await put('basics/a.md', articleMarkdown({ id: 'a', body: '本文 [S09]' }));
+    await expect(run()).rejects.toThrow(/\[S09\] が sources にありません/);
+  });
+
+  it('requires a kana reading for kanji-leading titles', async () => {
+    await put('basics/a.md', articleMarkdown({ id: 'a', title: '漢字', omit: ['reading'] }));
+    await expect(run()).rejects.toThrow(/reading/);
+    await put(
+      'basics/a.md',
+      articleMarkdown({ id: 'a', title: '漢字', overrides: { reading: 'Kanji' } }),
+    );
+    await expect(run()).rejects.toThrow(/仮名始まり/);
+    await put('basics/a.md', articleMarkdown({ id: 'a', title: 'PvP', omit: ['reading'] }));
+    await expect(run()).resolves.toBeDefined();
+  });
+
   it('skips _-prefixed directories unless samples are included', async () => {
     await put('_sample/sample-a.md', articleMarkdown({ id: 'sample-a', category: 'guide' }));
     await put('basics/real.md', articleMarkdown({ id: 'real' }));
@@ -115,7 +136,7 @@ describe('buildContent', () => {
         category: 'economy',
         title: 'ギーナ',
         overrides: { aliases: '[Kinah]', updated: '2026-10-07' },
-        extra: 'related: [odyle, ghost]\n',
+        extra: 'related: [odyle]\n',
         body: '基本通貨。[[odyle]] でも稼げる。根拠：[S01]\n\n## 入手方法\n\n日課で手に入る。',
       }),
     );
@@ -131,8 +152,6 @@ describe('buildContent', () => {
 
     const result = await run();
     expect(result.articles).toBe(2);
-    expect(result.warnings.join()).toContain('"ghost" が存在しません');
-
     expect(result.warnings.join()).toContain('order が未設定です');
     const kinah = await readOut<Article>('pages/kinah.json');
     expect(kinah.related).toEqual(['odyle']);
@@ -269,20 +288,18 @@ describe('checkHashLinks', () => {
   const link = (hash: string) => [{ file: 'content/a.md', slug: 'kinah', hash }];
 
   it('accepts a heading id', () => {
-    const warnings: string[] = [];
-    expect(checkHashLinks(link('earn'), [target], (m) => warnings.push(m))).toEqual([]);
-    expect(warnings).toEqual([]);
+    expect(checkHashLinks(link('earn'), [target])).toEqual([]);
   });
 
   it('errors when the hash is heading text only, pointing at the id to use', () => {
-    const errors = checkHashLinks(link('稼ぎ方'), [target], () => undefined);
+    const errors = checkHashLinks(link('稼ぎ方'), [target]);
     expect(errors).toHaveLength(1);
     expect(errors[0]?.message).toContain('[[kinah#earn]]');
   });
 
-  it('only warns when the heading does not exist', () => {
-    const warnings: string[] = [];
-    expect(checkHashLinks(link('nothing'), [target], (m) => warnings.push(m))).toEqual([]);
-    expect(warnings).toHaveLength(1);
+  it('errors when the heading does not exist', () => {
+    const errors = checkHashLinks(link('nothing'), [target]);
+    expect(errors).toHaveLength(1);
+    expect(errors[0]?.message).toContain('存在しません');
   });
 });
