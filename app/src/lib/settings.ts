@@ -18,22 +18,33 @@ function useLocalString(key: string): string | null {
   return useSyncExternalStore(subscribe, getSnapshot, () => null);
 }
 
-export function getApiKey(): string | null {
-  const key = readString('local', STORAGE_KEYS.apiKey);
+/** セッション保存（タブを閉じると消える）を優先し、なければ永続保存を読む */
+function readApiKey(): string | null {
+  const key =
+    readString('session', STORAGE_KEYS.apiKey) ?? readString('local', STORAGE_KEYS.apiKey);
   return key && key.trim() ? key : null;
 }
 
-export function saveApiKey(value: string): boolean {
-  return writeString('local', STORAGE_KEYS.apiKey, value.trim());
+export function getApiKey(): string | null {
+  return readApiKey();
+}
+
+/** sessionOnly が true なら sessionStorage にだけ保存し、永続保存のキーは消す */
+export function saveApiKey(value: string, options: { sessionOnly?: boolean } = {}): boolean {
+  const kind = options.sessionOnly ? 'session' : 'local';
+  const other = options.sessionOnly ? 'local' : 'session';
+  if (!writeString(kind, STORAGE_KEYS.apiKey, value.trim())) return false;
+  removeKey(other, STORAGE_KEYS.apiKey);
+  return true;
 }
 
 export function clearApiKey(): void {
   removeKey('local', STORAGE_KEYS.apiKey);
+  removeKey('session', STORAGE_KEYS.apiKey);
 }
 
 export function useApiKey(): string | null {
-  const value = useLocalString(STORAGE_KEYS.apiKey);
-  return value && value.trim() ? value : null;
+  return useSyncExternalStore(subscribe, readApiKey, () => null);
 }
 
 export function getModel(): string {

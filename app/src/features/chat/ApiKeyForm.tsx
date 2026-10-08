@@ -1,7 +1,7 @@
 import { Eye, EyeOff, KeyRound } from 'lucide-react';
 import { useId, useState, type FormEvent } from 'react';
 import { Button } from '../../components/Button';
-import { API_KEY_URL } from '../../lib/gemini-config';
+import { API_KEY_URL, REFERRER_HINT } from '../../lib/gemini-config';
 import { saveApiKey } from '../../lib/settings';
 
 interface ApiKeyFormProps {
@@ -22,6 +22,7 @@ export function ApiKeyForm({
 }: ApiKeyFormProps) {
   const [value, setValue] = useState('');
   const [visible, setVisible] = useState(false);
+  const [sessionOnly, setSessionOnly] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputId = useId();
   const helpId = useId();
@@ -37,7 +38,7 @@ export function ApiKeyForm({
       setError('API キーの形式が正しくありません。');
       return;
     }
-    if (!saveApiKey(key)) {
+    if (!saveApiKey(key, { sessionOnly })) {
       setError('このブラウザには保存できません（プライベートモードなど）。');
       return;
     }
@@ -141,6 +142,19 @@ export function ApiKeyForm({
       )}
       <div id={helpId} className="space-y-1.5 text-[13px] leading-relaxed text-fg-muted">
         <p>キーはこのブラウザにだけ保存され、Google API の呼び出しにのみ使われます。</p>
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={sessionOnly}
+            onChange={(e) => setSessionOnly(e.target.checked)}
+            className="size-4 accent-(--fg)"
+          />
+          このタブを閉じたらキーを消す
+        </label>
+        <p>
+          Google AI Studio で、キーの利用元を {REFERRER_HINT} に、利用できる API を Generative
+          Language API だけに制限できます。
+        </p>
         <p>
           キーの発行:{' '}
           <a

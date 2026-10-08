@@ -30,7 +30,7 @@ const MESSAGES: Record<ChatErrorKind, string> = {
 
 function statusOf(error: unknown): number | undefined {
   if (typeof error === 'object' && error !== null && 'status' in error) {
-    const status = (error as { status: unknown }).status;
+    const status: unknown = Reflect.get(error, 'status');
     if (typeof status === 'number') return status;
   }
   return undefined;
@@ -93,6 +93,14 @@ export const MAX_OUTPUT_TOKENS = 512;
 /** 思考を無効化して初動を速くする。非対応モデルで拒否された時は外して再試行する */
 export const THINKING_CONFIG = { thinkingBudget: 0 } as const;
 
+/** 思考設定を拒否したモデル。次回から最初に外して往復を省く */
+const thinkingRejected = new Set<string>();
+
+/** 思考を無効にできないモデルは思考トークンが出力上限を食うため、上限を広げる */
+export const FALLBACK_MAX_OUTPUT_TOKENS = 2048;
+
+export const TRUNCATED_NOTE = '\n\n（回答が長いため、途中で打ち切られました）';
+
 function rejectsThinking(error: unknown): boolean {
   return statusOf(error) === 400 && /thinking/i.test(messageOf(error));
 }
@@ -111,23 +119,33 @@ export async function streamGemini(options: StreamOptions): Promise<string> {
       config: {
         systemInstruction: options.systemInstruction,
         temperature: 0.3,
-        maxOutputTokens: MAX_OUTPUT_TOKENS,
+        maxOutputTokens: withThinking ? MAX_OUTPUT_TOKENS : FALLBACK_MAX_OUTPUT_TOKENS,
         ...(withThinking ? { thinkingConfig: THINKING_CONFIG } : {}),
         abortSignal: options.signal,
       },
     });
-  const stream = await request(true).catch((error: unknown) => {
-    if (!rejectsThinking(error)) throw error;
-    return request(false);
-  });
+  const stream = thinkingRejected.has(options.model)
+    ? await request(false)
+    : await request(true).catch((error: unknown) => {
+        if (!rejectsThinking(error)) throw error;
+        thinkingRejected.add(options.model);
+        return request(false);
+      });
   let full = '';
+  let truncated = false;
   for await (const chunk of stream) {
     if (options.signal?.aborted) break;
+    if (chunk.candidates?.[0]?.finishReason === 'MAX_TOKENS') truncated = true;
     const text = chunk.text ?? '';
     if (!text) continue;
     full += text;
     options.onText(full);
   }
   if (options.signal?.aborted) throw new DOMException('Aborted', 'AbortError');
-  return full;
+  return truncated ? full + TRUNCATED_NOTE : full;
+}
+
+/** テスト用: 思考拒否の記憶を消す */
+export function resetThinkingRejections(): void {
+  thinkingRejected.clear();
 }

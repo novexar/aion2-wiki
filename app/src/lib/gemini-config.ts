@@ -15,3 +15,6 @@ export const MODEL_NOTES: Readonly<Record<string, string>> = {
 };
 
 export const API_KEY_URL = 'https://aistudio.google.com/apikey';
+
+/** 公開 URL。Google AI Studio でキーの利用元(HTTP リファラー)を制限するときの値 */
+export const REFERRER_HINT = 'https://novexar.github.io/aion2-wiki/*';

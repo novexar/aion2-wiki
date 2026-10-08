@@ -12,7 +12,8 @@ vi.mock('@google/genai', () => ({
   },
 }));
 
-const { streamGemini, toChatError } = await import('./gemini');
+const { streamGemini, toChatError, resetThinkingRejections, TRUNCATED_NOTE } =
+  await import('./gemini');
 
 async function* chunks(texts: (string | undefined)[]) {
   for (const text of texts) yield { text };
@@ -20,6 +21,7 @@ async function* chunks(texts: (string | undefined)[]) {
 
 afterEach(() => {
   vi.clearAllMocks();
+  resetThinkingRejections();
 });
 
 describe('streamGemini', () => {
@@ -75,7 +77,42 @@ describe('streamGemini', () => {
     });
     expect(result).toBe('ok');
     expect(generateContentStream.mock.calls[1]?.[0].config).not.toHaveProperty('thinkingConfig');
-    expect(generateContentStream.mock.calls[1]?.[0].config.maxOutputTokens).toBe(512);
+    expect(generateContentStream.mock.calls[1]?.[0].config.maxOutputTokens).toBe(2048);
+  });
+
+  it('remembers a model that rejected thinking and skips the failing round trip', async () => {
+    generateContentStream
+      .mockRejectedValueOnce(Object.assign(new Error('Thinking is not supported'), { status: 400 }))
+      .mockResolvedValue(chunks(['ok']));
+    const run = () =>
+      streamGemini({
+        apiKey: 'k',
+        model: 'no-think',
+        systemInstruction: 'S',
+        contents: [],
+        onText: vi.fn(),
+      });
+    await run();
+    expect(generateContentStream).toHaveBeenCalledTimes(2);
+    generateContentStream.mockResolvedValue(chunks(['ok']));
+    await run();
+    expect(generateContentStream).toHaveBeenCalledTimes(3);
+    expect(generateContentStream.mock.calls[2]?.[0].config).not.toHaveProperty('thinkingConfig');
+  });
+
+  it('flags an answer cut off by MAX_TOKENS', async () => {
+    async function* gen() {
+      yield { text: '長い回答', candidates: [{ finishReason: 'MAX_TOKENS' }] };
+    }
+    generateContentStream.mockResolvedValue(gen());
+    const result = await streamGemini({
+      apiKey: 'k',
+      model: 'm',
+      systemInstruction: '',
+      contents: [],
+      onText: () => undefined,
+    });
+    expect(result).toBe(`長い回答${TRUNCATED_NOTE}`);
   });
 
   it('throws AbortError when aborted', async () => {
