@@ -133,13 +133,17 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
       event.preventDefault();
       const item = items[activeIndex];
       if (item) go(item.to);
-    } else if (event.key === 'Escape') {
-      event.preventDefault();
-      onClose();
     }
   };
 
-  const trapTab = (event: React.KeyboardEvent<HTMLElement>): void => {
+  /** ダイアログ全体のキー処理: Esc はどこにフォーカスがあっても閉じ、Tab は内側に閉じ込める */
+  const onDialogKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
+    if (event.key === 'Escape') {
+      if (event.nativeEvent.isComposing) return;
+      event.preventDefault();
+      onClose();
+      return;
+    }
     if (event.key !== 'Tab') return;
     const focusables = dialogRef.current?.querySelectorAll<HTMLElement>('input, button');
     if (!focusables || focusables.length === 0) return;
@@ -172,7 +176,7 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
       />
       <motion.div
         ref={dialogRef}
-        onKeyDown={trapTab}
+        onKeyDown={onDialogKeyDown}
         role="dialog"
         aria-modal="true"
         aria-label="サイト内検索"

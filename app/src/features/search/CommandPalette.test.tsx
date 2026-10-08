@@ -100,6 +100,13 @@ describe('CommandPalette', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
+  it('closes on Escape even when focus is not in the input', async () => {
+    const { user, onClose } = setup();
+    screen.getByRole('button', { name: /閉じる|Esc/ }).focus();
+    await user.keyboard('{Escape}');
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
   it('navigates when an option is clicked', async () => {
     localStorage.setItem('aion2wiki:recent-articles', JSON.stringify(['odyle-energy', 'kinah']));
     const { user } = setup();

@@ -1,6 +1,6 @@
 import { ChevronRight, Search } from 'lucide-react';
 import { formatDate } from '../lib/format';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { ConfidenceBadge } from '../components/ConfidenceBadge';
 import { Kbd } from '../components/Kbd';
@@ -254,7 +254,15 @@ export default function HomePage() {
   const showRecent = hasDistinctUpdates(nav.articles);
   const stagger = useHomeStagger();
   // 残り日数・今週の範囲はビルド時ではなく閲覧時の日時で数える
-  const [now] = useState(() => new Date());
+  const [now, setNow] = useState(() => new Date());
+  // 開きっぱなしのタブが日をまたいでも、戻ってきたときに数え直す
+  useEffect(() => {
+    const onVisible = (): void => {
+      if (document.visibilityState === 'visible') setNow(new Date());
+    };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => document.removeEventListener('visibilitychange', onVisible);
+  }, []);
 
   return (
     <>
