@@ -4,6 +4,7 @@ import MiniSearch from 'minisearch';
 import { CATEGORIES, isCategoryId } from '../../src/lib/categories';
 import { normalizeBase } from '../../src/lib/paths';
 import { pageIndexOptions } from '../../src/lib/search-options';
+import { buildSynonymDict } from '../../src/lib/synonyms';
 import type {
   Article,
   ArticleChunk,
@@ -443,6 +444,7 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
   await writeJson(path.join(options.outDir, 'meta.json'), articles.map(toMeta));
   await writeJson(path.join(options.outDir, 'search-index.json'), buildPageIndex(articles));
   await writeJson(path.join(options.outDir, 'search-text.json'), pageTexts);
+  await writeJson(path.join(options.outDir, 'synonyms.json'), buildSynonymDict(articles));
   await writeJson(path.join(options.outDir, 'nav.json'), nav);
 
   return {

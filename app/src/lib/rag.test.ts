@@ -46,6 +46,19 @@ describe('system prompt', () => {
     expect(SYSTEM_PROMPT).toContain('[記事タイトル]');
   });
 
+  it('answers within partial evidence and reserves NO_INFO for no evidence at all', () => {
+    expect(SYSTEM_PROMPT).toContain('部分的な根拠があれば、その範囲で答え');
+    expect(SYSTEM_PROMPT).toContain('Wiki には〜までしか書かれていません');
+    expect(SYSTEM_PROMPT).toContain(`根拠が全くないときだけ、推測で答えず「${NO_INFO_MESSAGE}」`);
+    expect(SYSTEM_PROMPT.split(NO_INFO_MESSAGE)).toHaveLength(2);
+  });
+
+  it('tells the model there are no excerpts when nothing was retrieved', () => {
+    const text = buildSystemInstruction([]);
+    expect(text).toContain('（該当する抜粋はありません）');
+    expect(text).toContain(NO_INFO_MESSAGE);
+  });
+
   it('embeds formatted excerpts with title and heading', () => {
     const text = buildSystemInstruction([chunk('a#0', 'a', 'ギーナ', '入手方法', '日課で入手')]);
     expect(text.startsWith(SYSTEM_PROMPT)).toBe(true);
@@ -150,10 +163,10 @@ describe('citations and references', () => {
 });
 
 describe('selectContext', () => {
-  it('uses TOP_K 5, 2 chunks per article, a 3,000-char cap and 3 exchanges', () => {
-    expect(TOP_K).toBe(5);
+  it('uses TOP_K 6, 2 chunks per article, a 3,600-char cap and 3 exchanges', () => {
+    expect(TOP_K).toBe(6);
     expect(PER_ARTICLE_LIMIT).toBe(2);
-    expect(CONTEXT_CHAR_LIMIT).toBe(3000);
+    expect(CONTEXT_CHAR_LIMIT).toBe(3600);
     expect(MAX_EXCHANGES).toBe(3);
   });
 
@@ -163,14 +176,47 @@ describe('selectContext', () => {
       ...Array.from({ length: 4 }, (_, i) => chunk(`b#${i}`, 'b', 'B')),
       ...Array.from({ length: 4 }, (_, i) => chunk(`c#${i}`, 'c', 'C')),
     ];
-    expect(selectContext(many).map((c) => c.id)).toEqual(['a#0', 'a#1', 'b#0', 'b#1', 'c#0']);
+    expect(selectContext(many).map((c) => c.id)).toEqual([
+      'a#0',
+      'a#1',
+      'b#0',
+      'b#1',
+      'c#0',
+      'c#1',
+    ]);
   });
 
   it('cuts the total body text at the character cap', () => {
     const long = (id: string, article: string) =>
       chunk(id, article, article, '', 'あ'.repeat(1800));
     const picked = selectContext([long('a#0', 'a'), long('b#0', 'b'), long('c#0', 'c')]);
-    expect(picked.map((c) => c.text.length)).toEqual([1800, 1200]);
+    expect(picked.map((c) => c.text.length)).toEqual([1800, 1800]);
+    const cut = selectContext([long('a#0', 'a'), long('b#0', 'b')], { maxChars: 2500 });
+    expect(cut.map((c) => c.text.length)).toEqual([1800, 700]);
+  });
+
+  it('places the lead chunk of the top articles right after their first matched chunk', () => {
+    const ranked = [
+      chunk('a#2', 'a', 'A'),
+      chunk('b#1', 'b', 'B'),
+      chunk('a#0', 'a', 'A'),
+      chunk('b#0', 'b', 'B'),
+    ];
+    expect(selectContext(ranked).map((c) => c.id)).toEqual(['a#2', 'a#0', 'b#1', 'b#0']);
+  });
+
+  it('does not duplicate a lead chunk that already ranks first', () => {
+    const ranked = [chunk('a#0', 'a', 'A'), chunk('a#1', 'a', 'A')];
+    expect(selectContext(ranked).map((c) => c.id)).toEqual(['a#0', 'a#1']);
+  });
+
+  it('only moves leads for the top LEAD_ARTICLES articles', () => {
+    const ranked = [
+      ...['a', 'b', 'c', 'd'].map((x) => chunk(`${x}#1`, x, x)),
+      ...['a', 'b', 'c', 'd'].map((x) => chunk(`${x}#0`, x, x)),
+    ];
+    const ids = selectContext(ranked, { topK: 7 }).map((c) => c.id);
+    expect(ids).toEqual(['a#1', 'a#0', 'b#1', 'b#0', 'c#1', 'c#0', 'd#1']);
   });
 
   it('asks for answers within 5 lines', () => {

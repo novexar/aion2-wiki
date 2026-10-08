@@ -34,6 +34,7 @@ const question = `${target.title}について教えて`;
 vi.mock('../search/index-loader', () => ({
   loadPageIndex: async () => index,
   loadPageTexts: async () => texts,
+  loadSynonyms: async () => ({}),
 }));
 
 const { retrieveChunks, prependArticleChunks } = await import('./chunk-loader');

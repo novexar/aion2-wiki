@@ -52,7 +52,7 @@ async function retrieve(
 ) {
   const chunks = await retrieveChunks({ history, question, contextArticleId, signal });
   if (signal.aborted) throw abortError();
-  // 同一記事 2 件まで・TOP_K 件・3,000 字に絞る
+  // 導入チャンクを含め、同一記事 2 件まで・TOP_K 件・3,600 字に絞る
   return selectContext(chunks);
 }
 
