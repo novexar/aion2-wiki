@@ -61,7 +61,7 @@ export function MessageContent({ text }: { readonly text: string }) {
   const blocks = useMemo(() => parseMiniMarkdown(text), [text]);
   const numbers = useMemo(() => new Map(citedArticles(text).map((a, i) => [a.id, i + 1])), [text]);
   return (
-    <div className="space-y-3 text-sm leading-[1.8] whitespace-pre-wrap">
+    <div className="space-y-3 text-sm leading-[1.7] whitespace-pre-wrap">
       {blocks.map((block, i) => {
         if (block.type === 'p') {
           return (

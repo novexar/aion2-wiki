@@ -34,7 +34,7 @@ export function ConversationList({
           return (
             <li
               key={c.id}
-              className={`flex items-center border-b border-line ${current ? 'bg-surface' : ''}`}
+              className={`group flex items-center border-b border-line ${current ? 'bg-surface' : ''}`}
             >
               <button
                 type="button"
@@ -53,7 +53,7 @@ export function ConversationList({
               <Button
                 size="sm"
                 variant="ghost"
-                className="mr-2"
+                className="mr-2 sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100"
                 onClick={() => onDelete(c.id)}
                 aria-label={`「${title}」を削除`}
               >

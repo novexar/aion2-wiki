@@ -207,10 +207,18 @@ describe('ChatPanel', () => {
     try {
       setChatPanelOpen(true);
       const { container } = renderApp();
-      const panel = screen.getByRole('complementary', { name: 'AI チャット' });
+      const panel = screen.getByRole('dialog', { name: 'AI チャット' });
+      expect(panel).toHaveAttribute('aria-modal', 'true');
       expect(panel).toHaveClass('inset-0');
       expect((container.firstElementChild as HTMLElement).style.paddingRight).toBe('');
       expect(screen.queryByRole('separator')).toBeNull();
+      // 別のモーダルが開いている間の Esc ではシートを閉じない
+      const other = document.createElement('div');
+      other.setAttribute('aria-modal', 'true');
+      document.body.append(other);
+      fireEvent.keyDown(window, { key: 'Escape' });
+      expect(getChatPanelState().open).toBe(true);
+      other.remove();
       fireEvent.keyDown(window, { key: 'Escape' });
       expect(getChatPanelState().open).toBe(false);
       expect(screen.getByRole('button', { name: 'AI チャット' })).toHaveFocus();

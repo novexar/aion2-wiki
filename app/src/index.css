@@ -581,15 +581,15 @@
   }
 }
 
-/* ---------- チャットパネル（5.2 #5）: 開 x 100%→0 320ms ease-out／閉 200ms ease-in ---------- */
+/* ---------- チャットパネル（5.2 #5）: 開 x 100%→0 240ms ease-out／閉 160ms ease-in ---------- */
 .chat-panel {
   transform: translateX(100%);
-  transition: transform var(--d-base) var(--ease-in);
+  transition: transform 160ms var(--ease-in);
 }
 
 .chat-panel[data-open] {
   transform: none;
-  transition: transform var(--d-slow) var(--ease-out);
+  transition: transform 240ms var(--ease-out);
 }
 
 @starting-style {

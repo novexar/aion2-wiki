@@ -10,6 +10,9 @@ import {
 
 export { newId } from './chat-repository';
 
+/** 根拠になる記事が見つからなかったときの回答文 */
+export const NO_ANSWER_TEXT = 'この Wiki に該当する記事がありません。';
+
 /** 画面に表示するメッセージ */
 export interface ChatMessage {
   readonly id: string;

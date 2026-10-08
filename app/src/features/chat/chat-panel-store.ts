@@ -1,8 +1,8 @@
 import { useSyncExternalStore } from 'react';
 import { readString, STORAGE_KEYS, writeString } from '../../lib/storage';
 
-/** 右パネルの幅（px）。既定 24rem、最小 20rem、最大 40rem */
-export const PANEL_DEFAULT_WIDTH = 384;
+/** 右パネルの幅（px）。既定 420px、最小 20rem、最大 40rem */
+export const PANEL_DEFAULT_WIDTH = 420;
 export const PANEL_MIN_WIDTH = 320;
 export const PANEL_MAX_WIDTH = 640;
 
@@ -33,7 +33,7 @@ function current(): ChatPanelState {
   return state;
 }
 
-function update(next: Partial<ChatPanelState>): void {
+function update(next: Partial<ChatPanelState>, persist = true): void {
   const prev = current();
   const merged = { ...prev, ...next };
   if (merged.open === prev.open && merged.width === prev.width) return;
@@ -41,7 +41,7 @@ function update(next: Partial<ChatPanelState>): void {
   if (merged.open !== prev.open) {
     writeString('local', STORAGE_KEYS.chatPanelOpen, merged.open ? '1' : '0');
   }
-  if (merged.width !== prev.width) {
+  if (merged.width !== prev.width && persist) {
     writeString('local', STORAGE_KEYS.chatPanelWidth, String(merged.width));
   }
   listeners.forEach((listener) => listener());
@@ -64,8 +64,14 @@ export function toggleChatPanel(): void {
   update({ open: !current().open });
 }
 
-export function setChatPanelWidth(width: number): void {
-  update({ width: clampWidth(width) });
+/** persist=false はドラッグ中。保存と storage イベントは commitChatPanelWidth でまとめて行う */
+export function setChatPanelWidth(width: number, persist = true): void {
+  update({ width: clampWidth(width) }, persist);
+}
+
+/** ドラッグ終了時に現在の幅を保存する */
+export function commitChatPanelWidth(): void {
+  writeString('local', STORAGE_KEYS.chatPanelWidth, String(current().width));
 }
 
 /** テスト用: 次回の読み出しで localStorage から読み直す */

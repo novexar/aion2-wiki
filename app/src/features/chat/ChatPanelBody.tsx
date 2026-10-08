@@ -1,8 +1,9 @@
 import { API_KEY_URL } from '../../lib/gemini-config';
-import { Sparkles, X } from 'lucide-react';
-import { useEffect, useId, useRef, useState } from 'react';
+import { ArrowLeft, Sparkles, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { useMatch } from 'react-router';
 import { Button } from '../../components/Button';
+import { readString, STORAGE_KEYS, writeString } from '../../lib/storage';
 import { useApiKey, useModel } from '../../lib/settings';
 import { articleById } from '../wiki/data';
 import { ApiKeyForm } from './ApiKeyForm';
@@ -29,41 +30,108 @@ interface PanelHeaderProps {
   readonly onToggleHistory: () => void;
 }
 
+const HEADER_CLASS =
+  'flex min-h-(--header-h) shrink-0 items-center gap-1 border-b border-line pt-[env(safe-area-inset-top)] pr-2 pl-2';
+
 function PanelHeader({ view, onNew, onToggleHistory }: PanelHeaderProps) {
+  const closeButton = (
+    <button
+      type="button"
+      onClick={() => setChatPanelOpen(false)}
+      className="inline-flex size-8 items-center justify-center rounded text-fg-muted hover:bg-muted hover:text-fg"
+      aria-label="パネルを閉じる"
+    >
+      <X aria-hidden="true" className="size-4" />
+    </button>
+  );
+  if (view === 'history') {
+    return (
+      <div className={HEADER_CLASS}>
+        <Button size="sm" variant="ghost" onClick={onToggleHistory}>
+          <ArrowLeft aria-hidden="true" className="size-4" />
+          チャット
+        </Button>
+        <h2 className="mr-auto text-sm font-bold text-fg">履歴</h2>
+        <Button size="sm" variant="ghost" onClick={onNew}>
+          新しい会話
+        </Button>
+        {closeButton}
+      </div>
+    );
+  }
   return (
-    <div className="flex h-(--header-h) shrink-0 items-center gap-1 border-b border-line pr-2 pl-4">
-      <h2 className="mr-auto inline-flex items-center gap-1.5 text-sm font-bold text-fg">
-        <Sparkles aria-hidden="true" className="size-4" />
+    <div className={HEADER_CLASS}>
+      <Button
+        size="md"
+        variant="ghost"
+        className="h-9 lg:hidden"
+        onClick={() => setChatPanelOpen(false)}
+      >
+        閉じる
+      </Button>
+      <h2 className="mr-auto inline-flex items-center gap-1.5 pl-2 text-sm font-bold text-fg lg:pl-2">
+        <Sparkles aria-hidden="true" className="size-4 max-lg:hidden" />
         AI チャット
       </h2>
       <Button size="sm" variant="ghost" onClick={onNew}>
         新しい会話
       </Button>
-      <Button size="sm" variant="ghost" onClick={onToggleHistory} aria-pressed={view === 'history'}>
+      <Button size="sm" variant="ghost" onClick={onToggleHistory}>
         履歴
       </Button>
-      <button
-        type="button"
-        onClick={() => setChatPanelOpen(false)}
-        className="inline-flex size-8 items-center justify-center rounded text-fg-muted hover:bg-muted hover:text-fg"
-        aria-label="閉じる"
-      >
-        <X aria-hidden="true" className="size-4" />
-      </button>
+      {closeButton}
     </div>
   );
 }
 
-function Notices({ chat }: { readonly chat: UseChatResult }) {
-  if (chat.persistent !== false && !chat.overQuota && !chat.historyError) return null;
-  const text =
-    chat.historyError ??
-    (chat.persistent === false ? '履歴はこのタブを閉じると消えます' : '履歴が 5MB を超えています');
-  return (
-    <p role="status" className="shrink-0 border-b border-line px-4 py-2 text-xs text-warn">
-      {text}
-    </p>
-  );
+interface NoticesProps {
+  readonly chat: UseChatResult;
+  readonly onOpenHistory: () => void;
+}
+
+/** 初回だけ出す「履歴はタブを閉じると消えます」（閉じられる）を管理する */
+function useMemoryNotice(show: boolean): [boolean, () => void] {
+  const [seen] = useState(() => readString('local', STORAGE_KEYS.chatMemoryNoticeSeen) === '1');
+  const [dismissed, setDismissed] = useState(false);
+  useEffect(() => {
+    if (show && !seen) writeString('local', STORAGE_KEYS.chatMemoryNoticeSeen, '1');
+  }, [show, seen]);
+  return [show && !seen && !dismissed, () => setDismissed(true)];
+}
+
+const NOTICE_CLASS =
+  'flex shrink-0 items-center gap-2 border-b border-line px-4 py-2 text-xs text-warn';
+
+function Notices({ chat, onOpenHistory }: NoticesProps) {
+  const [showMemory, dismissMemory] = useMemoryNotice(chat.persistent === false);
+  if (chat.historyError) {
+    return (
+      <p role="status" className={NOTICE_CLASS}>
+        {chat.historyError}
+      </p>
+    );
+  }
+  if (showMemory) {
+    return (
+      <p role="status" className={NOTICE_CLASS}>
+        <span className="mr-auto">履歴はこのタブを閉じると消えます</span>
+        <button type="button" onClick={dismissMemory} className="underline underline-offset-4">
+          閉じる
+        </button>
+      </p>
+    );
+  }
+  if (chat.overQuota) {
+    return (
+      <p role="status" className={NOTICE_CLASS}>
+        <span>履歴が 5MB を超えました。古い会話を削除してください</span>
+        <button type="button" onClick={onOpenHistory} className="underline underline-offset-4">
+          履歴
+        </button>
+      </p>
+    );
+  }
+  return null;
 }
 
 /** 会話の一覧（内側でスクロール。末尾付近にいるときだけ新しい発言に追従する） */
@@ -139,8 +207,15 @@ function MessageLog({
               <p>キーはこのブラウザにだけ保存されます。</p>
             </div>
           ))}
-        {chat.messages.map((m) => (
-          <MessageView key={m.id} message={m} model={chat.model} />
+        {chat.messages.map((m, i) => (
+          <MessageView
+            key={m.id}
+            message={m}
+            model={chat.model}
+            question={
+              chat.messages[i - 1]?.role === 'user' ? chat.messages[i - 1]?.text : undefined
+            }
+          />
         ))}
       </div>
     </div>
@@ -154,7 +229,6 @@ export default function ChatPanelBody() {
   const articleId = useCurrentArticleId();
   const [includeArticle, setIncludeArticle] = useState(true);
   const [view, setView] = useState<View>('chat');
-  const checkboxId = useId();
   const chat = useChat({
     apiKey,
     model,
@@ -168,9 +242,12 @@ export default function ChatPanelBody() {
     if (apiKey) prefetchChat();
   }, [apiKey]);
 
+  const focusTimer = useRef(0);
+  useEffect(() => () => window.clearTimeout(focusTimer.current), []);
   const showChat = (): void => {
     setView('chat');
-    window.setTimeout(focusChatInput, 0);
+    window.clearTimeout(focusTimer.current);
+    focusTimer.current = window.setTimeout(focusChatInput, 0);
   };
 
   return (
@@ -183,7 +260,7 @@ export default function ChatPanelBody() {
         }}
         onToggleHistory={() => (view === 'history' ? showChat() : setView('history'))}
       />
-      <Notices chat={chat} />
+      <Notices chat={chat} onOpenHistory={() => setView('history')} />
       {view === 'history' ? (
         <ConversationList
           conversations={chat.conversations}
@@ -199,20 +276,11 @@ export default function ChatPanelBody() {
         <>
           <MessageLog chat={chat} canSend={Boolean(apiKey)} />
           <div className="shrink-0 border-t border-line px-3 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-            {articleId && (
-              <div className="mb-2 flex items-center gap-2 px-1 text-[13px] text-fg-muted">
-                <input
-                  id={checkboxId}
-                  type="checkbox"
-                  checked={includeArticle}
-                  onChange={(e) => setIncludeArticle(e.target.checked)}
-                  className="size-4 accent-(--fg)"
-                />
-                <label htmlFor={checkboxId}>この記事を文脈に含める</label>
-              </div>
-            )}
             {apiKey ? (
               <Composer
+                context={
+                  articleId ? { checked: includeArticle, onChange: setIncludeArticle } : undefined
+                }
                 disabled={false}
                 isStreaming={chat.isStreaming}
                 onSend={(q) => void chat.send(q)}

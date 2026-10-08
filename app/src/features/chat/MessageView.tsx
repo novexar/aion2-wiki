@@ -1,34 +1,67 @@
 import { motion } from 'motion/react';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { Link } from 'react-router';
-import { articlePath } from '../../lib/paths';
-import type { ChatMessage } from './chat-history';
+import { DURATION } from '../../lib/motion-tokens';
+import { articlePath, searchPath } from '../../lib/paths';
+import { NO_ANSWER_TEXT, type ChatMessage } from './chat-history';
 import { citedArticles } from './cited-articles';
 import { MessageContent } from './MessageContent';
 
-/** 1 件のメッセージ（質問は太字、回答は Markdown + 出典） */
+const GHOST_LINK = 'text-fg-muted underline underline-offset-4 hover:text-fg';
+
+/** 回答の本文をクリップボードへ（右上、hover / focus で表示。タッチ端末は常時） */
+function CopyButton({ text }: { readonly text: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = (): void => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopied(true);
+        window.setTimeout(() => setCopied(false), 1500);
+      })
+      .catch((error: unknown) => console.error('コピーできませんでした', error));
+  };
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className="absolute top-0 right-0 rounded px-2 py-1 text-[13px] text-fg-subtle opacity-0 group-focus-within:opacity-100 group-hover:opacity-100 hover:bg-muted hover:text-fg focus-visible:opacity-100 [@media(hover:none)]:opacity-100"
+    >
+      {copied ? 'コピー済み' : 'コピー'}
+    </button>
+  );
+}
+
+/** 1 件のメッセージ（質問は面、回答は Markdown + 出典） */
 export const MessageView = memo(function MessageView({
   message,
   model,
+  question,
 }: {
   readonly message: ChatMessage;
   /** 生成中の表示に添えるモデル名 */
   readonly model?: string;
+  /** この回答への質問（回答なしのときの検索リンクに使う） */
+  readonly question?: string;
 }) {
   const cited = useMemo(() => citedArticles(message.text), [message.text]);
   if (message.role === 'user') {
     return (
-      <p className="text-sm leading-relaxed font-bold whitespace-pre-wrap text-fg">
+      <p className="rounded-[6px] bg-surface px-3 py-2 text-sm leading-[1.7] whitespace-pre-wrap text-fg">
         {message.text}
       </p>
     );
   }
+  const canCopy =
+    message.status === 'done' && message.text !== '' && message.text !== NO_ANSWER_TEXT;
   return (
     <motion.div
+      className="group relative"
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.18 }}
+      transition={{ duration: DURATION.base }}
     >
+      {canCopy && <CopyButton text={message.text} />}
       {message.text ? (
         <MessageContent text={message.text} />
       ) : message.status === 'streaming' ? (
@@ -43,6 +76,16 @@ export const MessageView = memo(function MessageView({
             : '検索中'}
         </p>
       ) : null}
+      {message.text === NO_ANSWER_TEXT && question && (
+        <p className="mt-2 flex gap-4 text-[13px]">
+          <Link to={searchPath(question)} className={GHOST_LINK}>
+            検索で探す →
+          </Link>
+          <Link to="/index" className={GHOST_LINK}>
+            索引
+          </Link>
+        </p>
+      )}
       {message.status === 'error' && message.error && (
         <p
           role="alert"

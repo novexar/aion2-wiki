@@ -11,6 +11,7 @@ export const STORAGE_KEYS = {
   chatPanelWidth: 'aion2wiki:chat-panel-width',
   recentArticles: 'aion2wiki:recent-articles',
   homeStaggerPlayed: 'aion2wiki:home-stagger-played',
+  chatMemoryNoticeSeen: 'aion2wiki:chat-memory-notice-seen',
 } as const;
 
 /** 同一タブ内での変更通知用イベント名 */
