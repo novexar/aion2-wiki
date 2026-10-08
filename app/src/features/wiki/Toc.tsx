@@ -1,5 +1,7 @@
 import { ChevronDown } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useEffect, useRef, type MouseEvent } from 'react';
+import { DURATION, EASE } from '../../lib/motion-tokens';
 import type { Heading } from '../../lib/types';
 import { useShellColumns } from '../../lib/shell-layout';
 import { REDUCED_MOTION_QUERY } from '../../lib/useMediaQuery';
@@ -50,9 +52,22 @@ function scrollToTop(event: MouseEvent<HTMLAnchorElement>): void {
 }
 
 function itemClass(isActive: boolean, isParent: boolean): string {
-  if (isActive) return 'border-accent font-bold text-fg';
-  if (isParent) return 'border-transparent text-fg';
-  return 'border-transparent text-fg-muted hover:text-fg';
+  if (isActive) return 'font-bold text-fg';
+  if (isParent) return 'text-fg';
+  return 'text-fg-muted hover:text-fg';
+}
+
+/** 現在位置の金線。layoutId で見出し間を滑らせる（200ms ease-out、reduced motion では即時） */
+function TocMarker() {
+  return (
+    <motion.span
+      layoutId="toc-marker"
+      aria-hidden="true"
+      data-toc-marker=""
+      className="absolute inset-y-0 -left-px w-0.5 bg-accent"
+      transition={{ duration: DURATION.base, ease: EASE.out }}
+    />
+  );
 }
 
 function TocList({ headings, activeId }: TocProps) {
@@ -62,13 +77,14 @@ function TocList({ headings, activeId }: TocProps) {
       {headings.map((h) => {
         const isActive = h.id === activeId;
         return (
-          <li key={h.id}>
+          <li key={h.id} className="relative">
+            {isActive && <TocMarker />}
             <a
               href={`#${encodeURIComponent(h.id)}`}
               onClick={(e) => scrollToHeading(e, h.id)}
               aria-current={isActive ? 'location' : undefined}
               data-toc-id={h.id}
-              className={`-ml-px block border-l-2 py-1 pr-1 leading-snug ${h.depth === 3 ? 'pl-6' : 'pl-3'} ${itemClass(isActive, h.id === parentId)}`}
+              className={`-ml-px block border-l-2 border-transparent py-1 pr-1 leading-snug ${h.depth === 3 ? 'pl-6' : 'pl-3'} ${itemClass(isActive, h.id === parentId)}`}
             >
               {h.text}
             </a>
@@ -107,9 +123,9 @@ export function Toc({ headings, activeId }: TocProps) {
     >
       <p className="mb-2 text-xs font-bold text-fg">目次</p>
       {/* relative: 子の offsetTop をこの箱基準にする */}
-      <div ref={ref} className="scroll-thin relative min-h-0 overflow-y-auto">
+      <motion.div ref={ref} layoutScroll className="scroll-thin relative min-h-0 overflow-y-auto">
         <TocList headings={headings} activeId={activeId} />
-      </div>
+      </motion.div>
       <a
         href="#main"
         onClick={scrollToTop}
