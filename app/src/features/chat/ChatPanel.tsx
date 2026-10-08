@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState, type RefObject } from 'react';
+import { PANEL_MS } from '../../lib/motion-tokens';
 import { trapTab } from '../../lib/focus-trap';
 import { usePresence } from '../../lib/use-presence';
 import { useMediaQuery, WIDE_QUERY } from '../../lib/useMediaQuery';
@@ -26,8 +27,11 @@ function useFocusOnToggle(open: boolean): void {
   }, [open]);
 }
 
-/** 閉じるスライド（160ms）の後に hidden にする */
-const CLOSE_FALLBACK_MS = 160 + 80;
+/** transitionend が来ない環境のための余裕（ミリ秒） */
+const CLOSE_GRACE_MS = 80;
+
+/** 閉じるスライドの後に hidden にする */
+const CLOSE_FALLBACK_MS = PANEL_MS.close + CLOSE_GRACE_MS;
 
 /** 他のモーダル（検索パレット・ドロワー）が開いているか */
 function otherModalOpen(): boolean {
@@ -57,7 +61,7 @@ function useSheetBehavior(active: boolean, panelRef: RefObject<HTMLElement | nul
 }
 
 /**
- * 右側のチャットパネル。開くと右から 240ms ease-out、閉じると 160ms ease-in でスライドする。lg 以上は右端の固定幅カラム（本文はその分だけ左に縮む）、
+ * 右側のチャットパネル。開くと右から ease-out（PANEL_MS.open）、閉じると ease-in（PANEL_MS.close） でスライドする。lg 以上は右端の固定幅カラム（本文はその分だけ左に縮む）、
  * lg 未満は全画面シート。閉じても会話を保つため、一度開いたら DOM に残して hidden にする
  */
 export function ChatPanel() {

@@ -337,8 +337,8 @@ function buildPageIndex(articles: readonly Article[]): unknown {
   return index.toJSON();
 }
 
-/** 記事ごとの本文先頭 800 文字。検索の本文一致（部分一致）とスニペットに使う（インデックスには含めない） */
-export const SEARCH_TEXT_LIMIT = 800;
+/** 記事ごとの本文先頭 2000 文字。検索の本文一致（部分一致）とスニペットに使う（インデックスには含めない） */
+export const SEARCH_TEXT_LIMIT = 2000;
 
 function buildPageTexts(
   articles: readonly Article[],

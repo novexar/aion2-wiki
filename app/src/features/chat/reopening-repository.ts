@@ -21,6 +21,8 @@ function isInvalidState(error: unknown): boolean {
  */
 export class ReopeningRepository implements ChatRepository {
   private stale = false;
+  /** 開き直し中の Promise（同時に呼ばれても reopen は 1 回だけ） */
+  private refreshing: Promise<void> | null = null;
 
   constructor(
     private inner: ChatRepository,
@@ -36,18 +38,28 @@ export class ReopeningRepository implements ChatRepository {
     this.stale = true;
   }
 
-  private async refresh(): Promise<void> {
-    this.inner = await this.reopen();
+  private refresh(): Promise<void> {
+    this.refreshing ??= this.reopenOnce().finally(() => {
+      this.refreshing = null;
+    });
+    return this.refreshing;
+  }
+
+  private async reopenOnce(): Promise<void> {
+    // await の前に下ろす（開き直し中の markLost() を消さない）
     this.stale = false;
+    this.inner = await this.reopen();
   }
 
   private async run<T>(operation: (repo: ChatRepository) => Promise<T>): Promise<T> {
-    if (this.stale) await this.refresh();
+    if (this.stale || this.refreshing) await this.refresh();
+    const used = this.inner;
     try {
-      return await operation(this.inner);
+      return await operation(used);
     } catch (error: unknown) {
       if (!isInvalidState(error)) throw error;
-      await this.refresh();
+      // 古い接続の失敗で、すでに別の操作が開き直し済みなら再度開き直さない
+      if (this.inner === used) await this.refresh();
       return operation(this.inner);
     }
   }

@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { DURATION, EASE, MAX_DURATION_MS } from './motion-tokens';
+import { DURATION, EASE, MAX_DURATION_MS, PANEL_MS } from './motion-tokens';
 
 const css = readFileSync(resolve(process.cwd(), 'src/index.css'), 'utf8');
 
@@ -10,6 +10,11 @@ describe('motion tokens', () => {
     expect(css).toContain(`--d-fast: ${DURATION.fast * 1000}ms`);
     expect(css).toContain(`--d-base: ${DURATION.base * 1000}ms`);
     expect(css).toContain(`--d-slow: ${DURATION.slow * 1000}ms`);
+  });
+
+  it('CSS の .chat-panel と TS の PANEL_MS が一致する', () => {
+    expect(css).toContain(`transition: transform ${PANEL_MS.close}ms var(--ease-in)`);
+    expect(css).toContain(`transition: transform ${PANEL_MS.open}ms var(--ease-out)`);
   });
 
   it('CSS の --ease-* と TS の EASE が一致する', () => {

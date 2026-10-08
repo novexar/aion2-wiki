@@ -76,7 +76,7 @@ export function ConversationList({
               <Button
                 size="sm"
                 variant="ghost"
-                className="mr-2 sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100"
+                className="mr-2 sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100 [@media(hover:none)]:opacity-100"
                 onClick={() => {
                   pendingFocus.current = index;
                   onDelete(c.id);

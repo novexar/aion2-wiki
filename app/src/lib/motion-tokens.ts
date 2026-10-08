@@ -15,5 +15,8 @@ export const EASE: { readonly std: Bezier; readonly out: Bezier; readonly in: Be
   in: [0.4, 0, 1, 1],
 };
 
+/** チャットパネルのスライド（ミリ秒）。index.css の .chat-panel と同じ値 */
+export const PANEL_MS = { open: 240, close: 160 } as const;
+
 /** どのアニメーションもこれを超えない（5.5 の 3） */
 export const MAX_DURATION_MS = 320;
