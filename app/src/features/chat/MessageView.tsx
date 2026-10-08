@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { memo, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { DURATION } from '../../lib/motion-tokens';
 import { articlePath, searchPath } from '../../lib/paths';
@@ -9,17 +9,24 @@ import { MessageContent } from './MessageContent';
 
 const GHOST_LINK = 'text-fg-muted underline underline-offset-4 hover:text-fg';
 
+const COPY_LABEL = { idle: 'コピー', done: 'コピー済み', failed: 'コピー失敗' } as const;
+
 /** 回答の本文をクリップボードへ（右上、hover / focus で表示。タッチ端末は常時） */
 function CopyButton({ text }: { readonly text: string }) {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<'idle' | 'done' | 'failed'>('idle');
+  const timer = useRef<number | undefined>(undefined);
+  // アンマウント時にタイマーを止める
+  useEffect(() => () => window.clearTimeout(timer.current), []);
+  const flash = (next: 'done' | 'failed'): void => {
+    window.clearTimeout(timer.current);
+    setCopied(next);
+    timer.current = window.setTimeout(() => setCopied('idle'), 1500);
+  };
   const copy = (): void => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        setCopied(true);
-        window.setTimeout(() => setCopied(false), 1500);
-      })
-      .catch((error: unknown) => console.error('コピーできませんでした', error));
+    navigator.clipboard.writeText(text).then(
+      () => flash('done'),
+      () => flash('failed'),
+    );
   };
   return (
     <button
@@ -27,7 +34,7 @@ function CopyButton({ text }: { readonly text: string }) {
       onClick={copy}
       className="absolute top-0 right-0 rounded px-2 py-1 text-[13px] text-fg-subtle opacity-0 group-focus-within:opacity-100 group-hover:opacity-100 hover:bg-muted hover:text-fg focus-visible:opacity-100 [@media(hover:none)]:opacity-100"
     >
-      {copied ? 'コピー済み' : 'コピー'}
+      {COPY_LABEL[copied]}
     </button>
   );
 }
