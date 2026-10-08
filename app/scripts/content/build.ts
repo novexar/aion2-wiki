@@ -148,6 +148,7 @@ export function toMeta(src: ArticleMeta): ArticleMeta {
     aliases: src.aliases,
     ...(src.reading ? { reading: src.reading } : {}),
     order: src.order,
+    ...(src.event ? { event: src.event } : {}),
   };
 }
 
@@ -175,6 +176,7 @@ export function toNavArticle(src: ArticleMeta): NavArticle {
     updated: src.updated,
     ...(src.updatedAt ? { updatedAt: src.updatedAt } : {}),
     order: src.order,
+    ...(src.event ? { event: src.event } : {}),
   };
 }
 

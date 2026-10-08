@@ -26,6 +26,15 @@ const sourceSchema = z.object({
   }),
 });
 
+const eventSchema = z
+  .object({ starts: dateField.optional(), ends: dateField.optional() })
+  .refine((e) => e.starts !== undefined || e.ends !== undefined, {
+    message: 'event には starts か ends を指定してください',
+  })
+  .refine((e) => !e.starts || !e.ends || e.starts <= e.ends, {
+    message: 'event.starts は event.ends 以前にしてください',
+  });
+
 const stringList = z.array(z.union([z.string(), z.number()]).transform(String));
 
 export const frontmatterSchema = z
@@ -55,6 +64,8 @@ export const frontmatterSchema = z
     reading: z.string().trim().min(1).optional(),
     /** カテゴリ内の閲覧順（小さい順）。未設定は ORDER_MISSING として末尾 */
     order: z.number().int('order は整数にしてください').nonnegative().optional(),
+    /** 任意: 開催期間（ニュース記事）。ホームの「今週の予定」に出す */
+    event: eventSchema.optional(),
   })
   .superRefine((data, ctx) => {
     const ids = data.sources.map((s) => s.id);

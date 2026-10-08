@@ -1,5 +1,5 @@
 import navJson from '../../generated/nav.json';
-import { CATEGORIES, DAILY_LINKS } from '../../lib/categories';
+import { CATEGORIES, DAILY_LINKS, FEATURED_LINKS } from '../../lib/categories';
 import type { Article, ArticleMeta, NavArticle, NavData, NavJson } from '../../lib/types';
 
 const raw = navJson as unknown as NavJson;
@@ -54,4 +54,9 @@ export function loadAllMeta(): Promise<readonly ArticleMeta[]> {
 /** ホームの「日課・週課」: DAILY_LINKS の順に解決した記事 */
 export function dailyArticles(): NavArticle[] {
   return resolveIds(DAILY_LINKS);
+}
+
+/** ホームの「はじめての人へ」・パレットの空状態: FEATURED_LINKS の順に解決した記事 */
+export function featuredArticles(): NavArticle[] {
+  return resolveIds(FEATURED_LINKS);
 }

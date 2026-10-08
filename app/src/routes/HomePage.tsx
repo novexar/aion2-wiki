@@ -1,14 +1,21 @@
 import { ChevronRight, Search } from 'lucide-react';
 import { formatDate } from '../lib/format';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Link } from 'react-router';
 import { ConfidenceBadge } from '../components/ConfidenceBadge';
 import { Kbd } from '../components/Kbd';
 import { WikiShell } from '../features/wiki/WikiShell';
 import { useDocumentMeta } from '../components/useDocumentMeta';
 import { useSearchPalette } from '../features/search/search-context';
-import { articleById, dailyArticles, nav } from '../features/wiki/data';
-import { categoryLabel, CATEGORIES } from '../lib/categories';
+import { articleById, dailyArticles, featuredArticles, nav } from '../features/wiki/data';
+import { categoryLabel, CATEGORIES, SEASON_END } from '../lib/categories';
+import {
+  daysUntil,
+  eventRangeLabel,
+  hasDistinctUpdates,
+  jstDateKey,
+  upcomingEvents,
+} from '../lib/home-sections';
 import { staggerDelayMs, useHomeStagger } from '../lib/home-stagger';
 import { PAGE_CONTAINER } from '../lib/layout';
 import { articlePath, categoryPath } from '../lib/paths';
@@ -89,6 +96,87 @@ function CategoryRow({
   );
 }
 
+function FeaturedLinks({ articles }: { readonly articles: readonly NavArticle[] }) {
+  return (
+    <section className="mt-8 sm:mt-12" aria-labelledby="featured-title">
+      <h2 id="featured-title" className={SECTION_TITLE}>
+        はじめての人へ
+      </h2>
+      <ul className="sm:grid sm:grid-cols-2 sm:gap-x-10">
+        {articles.map((a) => (
+          <li key={a.id} className="border-b border-line">
+            <Link
+              to={articlePath(a.category, a.id)}
+              className="group grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 py-2 hover:bg-surface"
+            >
+              <span className="min-w-0 truncate text-sm text-fg group-hover:underline">
+                {a.title}
+              </span>
+              <span className="text-xs text-fg-subtle">{categoryLabel(a.category)}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+const WEEK_ROW =
+  'group grid grid-cols-[6.5rem_minmax(0,1fr)] items-baseline gap-x-4 py-2 hover:bg-surface';
+
+function SeasonRow({ days, to }: { readonly days: number; readonly to: string | undefined }) {
+  const content = (
+    <>
+      <span className="text-[13px] text-fg-muted tabular-nums">
+        {eventRangeLabel({ ends: SEASON_END.at.slice(0, 10) })}
+      </span>
+      <span className="min-w-0 truncate text-sm text-fg group-hover:underline">
+        {SEASON_END.label}終了まで <span className="tabular-nums">{days}</span> 日
+      </span>
+    </>
+  );
+  return to ? (
+    <Link to={to} className={WEEK_ROW}>
+      {content}
+    </Link>
+  ) : (
+    <div className={WEEK_ROW}>{content}</div>
+  );
+}
+
+function ThisWeek({ now }: { readonly now: Date }) {
+  const events = upcomingEvents(nav.articles, jstDateKey(now));
+  const seasonDays = daysUntil(SEASON_END.at, now);
+  const season = articleById.get(SEASON_END.articleId);
+  if (events.length === 0 && seasonDays <= 0) return null;
+  return (
+    <section className="mt-8 sm:mt-12" aria-labelledby="week-title">
+      <h2 id="week-title" className={SECTION_TITLE}>
+        今週の予定
+      </h2>
+      <ul>
+        {events.map(({ article: a, event }) => (
+          <li key={a.id} className="border-b border-line">
+            <Link to={articlePath(a.category, a.id)} className={WEEK_ROW}>
+              <span className="text-[13px] text-fg-muted tabular-nums">
+                {eventRangeLabel(event)}
+              </span>
+              <span className="min-w-0 truncate text-sm text-fg group-hover:underline">
+                {a.title}
+              </span>
+            </Link>
+          </li>
+        ))}
+        {seasonDays > 0 && (
+          <li className="border-b border-line">
+            <SeasonRow days={seasonDays} to={season && articlePath(season.category, season.id)} />
+          </li>
+        )}
+      </ul>
+    </section>
+  );
+}
+
 function DailyLinks({ articles }: { readonly articles: readonly NavArticle[] }) {
   return (
     <section
@@ -162,18 +250,20 @@ export default function HomePage() {
   useDocumentMeta();
   const daily = dailyArticles();
   const total = nav.articles.length;
-  const hasDistinctDates = new Set(nav.articles.map((a) => a.updated)).size > 1;
+  const featured = featuredArticles();
+  const showRecent = hasDistinctUpdates(nav.articles);
   const stagger = useHomeStagger();
+  // 残り日数・今週の範囲はビルド時ではなく閲覧時の日時で数える
+  const [now] = useState(() => new Date());
 
   return (
     <>
       <section className="band">
         <div className={`${PAGE_CONTAINER} relative pt-6 pb-6 sm:pt-9 sm:pb-[42px]`}>
-          <h1 className="text-[22px] leading-[1.4] font-semibold text-white">AION2 非公式Wiki</h1>
-          <p className="mt-1 text-sm text-header-muted">
-            <span className="max-sm:hidden">AION2（グローバル版）の攻略情報。{total} 記事。</span>
-            <span className="sm:hidden">{total} 記事</span>
-          </p>
+          <h1 className="text-[22px] leading-[1.4] font-semibold text-white">
+            AION2 グローバル版 攻略 Wiki
+          </h1>
+          <p className="mt-1 text-sm text-header-muted tabular-nums">{total} 記事</p>
           <SearchBox />
         </div>
       </section>
@@ -194,8 +284,10 @@ export default function HomePage() {
           </ul>
         </section>
 
+        <ThisWeek now={now} />
+        {showRecent && <RecentUpdates articles={nav.articles.slice(0, RECENT_LIMIT)} />}
+        {featured.length > 0 && <FeaturedLinks articles={featured} />}
         {daily.length > 0 && <DailyLinks articles={daily} />}
-        {hasDistinctDates && <RecentUpdates articles={nav.articles.slice(0, RECENT_LIMIT)} />}
 
         <p className="mt-6 text-sm">
           <Link

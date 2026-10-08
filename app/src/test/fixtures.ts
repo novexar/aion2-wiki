@@ -37,6 +37,7 @@ export const META: ArticleMeta[] = [
     aliases: [],
     reading: 'えんせい',
     order: 1,
+    event: { starts: '2026-10-05', ends: '2026-10-16' },
   },
 ];
 
@@ -72,5 +73,6 @@ export function mockWikiData() {
     articleByTitle: new Map(META.map((m) => [m.title, m])),
     loadArticle: async () => null,
     dailyArticles: () => META.slice(0, 1),
+    featuredArticles: () => META.slice(0, 2),
   };
 }

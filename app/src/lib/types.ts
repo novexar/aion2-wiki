@@ -18,6 +18,12 @@ export interface Heading {
   readonly depth: 2 | 3;
 }
 
+/** ニュース記事の開催期間（YYYY-MM-DD。片方だけでもよい）。ホームの「今週の予定」に使う */
+export interface ArticleEvent {
+  readonly starts?: string;
+  readonly ends?: string;
+}
+
 /** 一覧・検索・ナビに使う軽量メタデータ */
 export interface ArticleMeta {
   readonly id: string;
@@ -33,6 +39,7 @@ export interface ArticleMeta {
   readonly reading?: string;
   /** カテゴリ内の閲覧順（小さい順） */
   readonly order: number;
+  readonly event?: ArticleEvent;
 }
 
 /** 記事ページ用のフルデータ */
@@ -47,7 +54,7 @@ export interface Article extends ArticleMeta {
 /** 初期バンドルに含めるナビ用の最小メタデータ（summary・tags・aliases は索引ページで遅延取得） */
 export type NavArticle = Pick<
   ArticleMeta,
-  'id' | 'title' | 'category' | 'confidence' | 'updated' | 'updatedAt' | 'order'
+  'id' | 'title' | 'category' | 'confidence' | 'updated' | 'updatedAt' | 'order' | 'event'
 >;
 
 export interface NavCategory {

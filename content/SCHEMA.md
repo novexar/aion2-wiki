@@ -38,6 +38,7 @@ region: global                   # 常に global。韓国版のみの仕様は�
 updated: 2026-10-08              # 調査日
 aliases: [Odyle Energy, オード気力]   # 英語名・別表記（検索用）。任意
 related: [expeditions-overview, kinah]  # 関連記事の id。任意
+event: { starts: 2026-10-05, ends: 2026-10-16 }  # 開催期間（news のみ・任意。片方だけでも可）。ホームの「今週の予定」に出る
 sources:
   - id: S01
     title: Aion 2 Maps：Expeditions and Odyle Energy

@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { mockWikiData } from '../test/fixtures';
 import HomePage from './HomePage';
 
@@ -53,7 +53,9 @@ describe('HomePage', () => {
 
   it('has no hero copy and shows a plain search box', () => {
     renderHome();
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('AION2 非公式Wiki');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      'AION2 グローバル版 攻略 Wiki',
+    );
     expect(screen.getByRole('button', { name: 'サイト内検索を開く' })).toHaveTextContent('検索');
   });
 
@@ -65,6 +67,38 @@ describe('HomePage', () => {
       'href',
       '/index',
     );
+  });
+});
+
+describe('HomePage の節', () => {
+  afterEach(() => vi.useRealTimers());
+
+  it('今週の予定に開催中の記事とシーズン終了までの日数を出す', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-10-08T12:00:00+09:00'));
+    renderHome();
+    const week = screen.getByRole('region', { name: '今週の予定' });
+    expect(within(week).getByRole('link', { name: /遠征/ })).toHaveTextContent('10/05〜10/16');
+    expect(within(week).getByText(/シーズン1終了まで/)).toHaveTextContent(
+      'シーズン1終了まで 70 日',
+    );
+  });
+
+  it('期間を過ぎた予定は出さない', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-12-20T12:00:00+09:00'));
+    renderHome();
+    expect(screen.queryByRole('region', { name: '今週の予定' })).not.toBeInTheDocument();
+  });
+
+  it('節の順序は カテゴリ → 今週の予定 → 最近の更新 → はじめての人へ → 日課・週課', () => {
+    renderHome();
+    const names = screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
+    const order = ['カテゴリ', '今週の予定', '最近の更新', 'はじめての人へ', '日課・週課'];
+    expect(names.filter((n) => order.includes(n ?? ''))).toEqual(
+      order.filter((n) => names.includes(n)),
+    );
+    expect(names).toContain('はじめての人へ');
   });
 });
 

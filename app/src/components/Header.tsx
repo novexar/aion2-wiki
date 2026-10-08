@@ -47,6 +47,8 @@ export function Header() {
   const navigate = useNavigate();
   const closeSettings = useCloseSettings();
   const settingsOpen = useMatch('/settings') !== null;
+  // ホームは帯に検索欄があるので、ヘッダーの検索ボタンは出さない（Ctrl/⌘+K は有効）
+  const onHome = useMatch('/') !== null;
   // 左サイドバー（カテゴリ）が出ていないときはメニューから辿れるようにする
   const { sidebar, squeezed } = useShellColumns();
   // パネルで狭くなりサイドバーも隠れる幅では、ナビはメニューに任せ検索欄を縮める
@@ -88,9 +90,9 @@ export function Header() {
           <button
             type="button"
             onClick={() => open()}
-            className={`group hidden h-9 items-center gap-2 rounded border border-white/22 bg-white/6 px-2.5 text-sm text-header-muted transition-colors hover:border-white/45 hover:text-white sm:flex ${
-              narrow ? 'w-44' : 'w-64 xl:w-80'
-            }`}
+            className={`group hidden h-9 items-center gap-2 rounded border border-white/22 bg-white/6 px-2.5 text-sm text-header-muted transition-colors hover:border-white/45 hover:text-white ${
+              onHome ? '' : 'sm:flex'
+            } ${narrow ? 'w-44' : 'w-64 xl:w-80'}`}
             aria-label="サイト内検索を開く"
             aria-keyshortcuts="Control+K Meta+K"
           >
@@ -107,7 +109,9 @@ export function Header() {
           <button
             type="button"
             onClick={() => open()}
-            className="inline-flex size-9 items-center justify-center rounded text-header-muted hover:bg-white/8 hover:text-white sm:hidden"
+            className={`size-9 items-center justify-center rounded text-header-muted hover:bg-white/8 hover:text-white sm:hidden ${
+              onHome ? 'hidden' : 'inline-flex'
+            }`}
             aria-label="サイト内検索を開く"
           >
             <Search aria-hidden="true" className="size-[18px]" />

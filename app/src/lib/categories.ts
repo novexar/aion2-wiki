@@ -115,3 +115,20 @@ export const DAILY_LINKS: readonly string[] = [
   'dimensional-invasion',
   'daily-dungeon',
 ];
+
+/** ホームの「はじめての人へ」とパレットの空状態に並べる記事 ID（編集者が選ぶ固定 6 本） */
+export const FEATURED_LINKS: readonly string[] = [
+  'guide-day-1',
+  'game-overview',
+  'class-tier-and-recommendation',
+  'leveling-1-to-45-overview',
+  'irreversible-choices',
+  'beginner-mistakes',
+];
+
+/** シーズン終了日時（content/news/season-1-end-notice.md の日次リセット 16:00 JST） */
+export const SEASON_END = {
+  label: 'シーズン1',
+  articleId: 'season-1-end-notice',
+  at: '2026-12-16T16:00:00+09:00',
+} as const;
