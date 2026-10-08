@@ -23,7 +23,7 @@ const NAV_ITEMS = [
 ];
 
 function navClass({ isActive }: { isActive: boolean }): string {
-  return `rounded-md px-2.5 py-1.5 text-sm transition-colors ${
+  return `rounded-md px-2.5 py-1.5 text-sm whitespace-nowrap transition-colors ${
     isActive ? 'text-fg font-medium' : 'text-fg-muted hover:text-fg hover:bg-muted'
   }`;
 }
@@ -34,7 +34,9 @@ export function Header() {
   const closeDrawer = useCallback(() => setDrawerOpen(false), []);
   const chat = useChatPanel();
   // 左サイドバー（カテゴリ）が出ていないときはメニューから辿れるようにする
-  const { sidebar } = useShellColumns();
+  const { sidebar, squeezed } = useShellColumns();
+  // パネルで狭くなりサイドバーも隠れる幅では、ナビはメニューに任せ検索欄を縮める
+  const narrow = squeezed && !sidebar;
 
   return (
     <header className="sticky top-0 z-40 h-(--header-h) border-b border-line bg-canvas">
@@ -57,7 +59,10 @@ export function Header() {
           <Menu aria-hidden="true" className="size-5" />
         </button>
         <Logo />
-        <nav aria-label="メイン" className="ml-4 hidden items-center gap-0.5 md:flex">
+        <nav
+          aria-label="メイン"
+          className={`ml-4 hidden items-center gap-0.5 ${narrow ? '' : 'md:flex'}`}
+        >
           {NAV_ITEMS.map((item) => (
             <NavLink key={item.to} to={item.to} className={navClass}>
               {item.label}
@@ -68,7 +73,9 @@ export function Header() {
           <button
             type="button"
             onClick={() => open()}
-            className="group hidden h-9 w-56 items-center gap-2 rounded border border-line-input bg-surface px-2.5 text-sm text-fg-subtle transition-colors hover:border-fg-subtle hover:text-fg-muted sm:flex lg:w-64"
+            className={`group hidden h-9 items-center gap-2 rounded border border-line-input bg-surface px-2.5 text-sm text-fg-subtle transition-colors hover:border-fg-subtle hover:text-fg-muted sm:flex ${
+              narrow ? 'w-44' : 'w-56 lg:w-64'
+            }`}
             aria-label="サイト内検索を開く"
             aria-keyshortcuts="Control+K Meta+K"
           >
@@ -95,7 +102,7 @@ export function Header() {
             aria-controls={CHAT_PANEL_ID}
             aria-keyshortcuts="Control+J"
             title={`チャット（${modKeyLabel()}+J）`}
-            className={`h-9 rounded-md px-2.5 text-sm transition-colors hover:bg-muted hover:text-fg ${
+            className={`h-9 rounded-md px-2.5 text-sm whitespace-nowrap transition-colors hover:bg-muted hover:text-fg ${
               chat.open ? 'bg-muted font-medium text-fg' : 'text-fg-muted'
             }`}
           >

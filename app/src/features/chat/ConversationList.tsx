@@ -38,14 +38,15 @@ export function ConversationList({
           const title = c.title || '無題';
           const current = c.id === activeId;
           return (
-            <li key={c.id} className="flex items-center border-b border-line">
+            <li
+              key={c.id}
+              className={`flex items-center border-b border-line ${current ? 'bg-surface' : ''}`}
+            >
               <button
                 type="button"
                 onClick={() => onSelect(c.id)}
                 aria-current={current ? 'true' : undefined}
-                className={`min-w-0 flex-1 px-4 py-2 text-left hover:bg-muted ${
-                  current ? 'bg-surface' : ''
-                }`}
+                className="min-w-0 flex-1 px-4 py-2 text-left hover:bg-muted"
               >
                 <span className="block truncate text-sm text-fg">{title}</span>
                 <time
