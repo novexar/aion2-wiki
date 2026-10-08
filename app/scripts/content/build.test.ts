@@ -8,7 +8,13 @@ import { pageIndexOptions } from '../../src/lib/search-options';
 import { searchPages } from '../../src/lib/search';
 import type { Article, ArticleChunk, ArticleMeta, NavJson } from '../../src/lib/types';
 import type { CategoryId } from '../../src/lib/categories';
-import { buildContent, buildNav, byReadingOrder, titleLengthWarning } from './build';
+import {
+  buildContent,
+  buildNav,
+  byReadingOrder,
+  checkHashLinks,
+  titleLengthWarning,
+} from './build';
 import { ContentBuildError } from './errors';
 import { articleMarkdown } from './test-fixtures';
 
@@ -252,5 +258,31 @@ describe('titleLengthWarning', () => {
   it('warns only for titles longer than 24 characters', () => {
     expect(titleLengthWarning('a.md', 'あ'.repeat(24))).toBeNull();
     expect(titleLengthWarning('a.md', 'あ'.repeat(25))).toContain('25 文字');
+  });
+});
+
+describe('checkHashLinks', () => {
+  const target = {
+    id: 'kinah',
+    headings: [{ id: 'earn', text: '稼ぎ方', level: 2 }],
+  } as unknown as Article;
+  const link = (hash: string) => [{ file: 'content/a.md', slug: 'kinah', hash }];
+
+  it('accepts a heading id', () => {
+    const warnings: string[] = [];
+    expect(checkHashLinks(link('earn'), [target], (m) => warnings.push(m))).toEqual([]);
+    expect(warnings).toEqual([]);
+  });
+
+  it('errors when the hash is heading text only, pointing at the id to use', () => {
+    const errors = checkHashLinks(link('稼ぎ方'), [target], () => undefined);
+    expect(errors).toHaveLength(1);
+    expect(errors[0]?.message).toContain('[[kinah#earn]]');
+  });
+
+  it('only warns when the heading does not exist', () => {
+    const warnings: string[] = [];
+    expect(checkHashLinks(link('nothing'), [target], (m) => warnings.push(m))).toEqual([]);
+    expect(warnings).toHaveLength(1);
   });
 });

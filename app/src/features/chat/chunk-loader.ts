@@ -70,6 +70,12 @@ export interface RetrieveOptions {
   readonly question: string;
   /** 指定があれば、その記事の先頭チャンクを結果の先頭に加える */
   readonly contextArticleId?: string | null;
+  /** 中止されたら、次の読み込みを待たずに AbortError で終わる */
+  readonly signal?: AbortSignal;
+}
+
+function throwIfAborted(signal: AbortSignal | undefined): void {
+  if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
 }
 
 /**
@@ -78,11 +84,16 @@ export interface RetrieveOptions {
  */
 export async function retrieveChunks(options: RetrieveOptions): Promise<Chunk[]> {
   const query = retrievalQuery(options.history, options.question);
+  const { signal } = options;
+  throwIfAborted(signal);
   const index = await loadPageIndex();
+  throwIfAborted(signal);
   const ids = await selectArticleIds(index, query, loadPageTexts);
+  throwIfAborted(signal);
   const [articles, own] = await Promise.all([
     loadArticles(ids),
     options.contextArticleId ? loadArticles([options.contextArticleId]) : Promise.resolve([]),
   ]);
+  throwIfAborted(signal);
   return prependArticleChunks(own[0], rankChunks(query, articles));
 }

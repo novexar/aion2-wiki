@@ -60,14 +60,24 @@ export function toStored(message: ChatMessage, createdAt?: number): NewMessage {
 /** 旧実装（sessionStorage）の履歴を 1 つの会話として取り込み、元データを消す */
 export async function migrateSessionHistory(repo: ChatRepository): Promise<void> {
   const legacy = readJson('session', STORAGE_KEYS.chat, isMessageList);
-  removeKey('session', STORAGE_KEYS.chat);
   const messages = (legacy ?? []).filter((m) => m.status !== 'streaming' && m.text.trim());
-  if (messages.length === 0) return;
+  if (messages.length === 0) {
+    removeKey('session', STORAGE_KEYS.chat);
+    return;
+  }
   const start = Date.now() - messages.length;
   const conv = await repo.create(start);
-  for (const [i, m] of messages.entries()) {
-    await repo.append(conv.id, toStored(m, start + i));
+  try {
+    for (const [i, m] of messages.entries()) {
+      await repo.append(conv.id, toStored(m, start + i));
+    }
+  } catch (error: unknown) {
+    // 取り込みに失敗したら中途半端な会話を消し、元データは残して次回やり直す
+    await repo.delete(conv.id).catch(() => undefined);
+    throw error;
   }
+  // 書き込みが全部成功してから元データを消す
+  removeKey('session', STORAGE_KEYS.chat);
 }
 
 let repoPromise: Promise<ChatRepository> | null = null;
@@ -75,7 +85,10 @@ let repoPromise: Promise<ChatRepository> | null = null;
 async function openRepository(): Promise<ChatRepository> {
   let repo: ChatRepository;
   try {
-    repo = await openIdbRepository();
+    // 接続が失われたら次回の取得で開き直す
+    repo = await openIdbRepository(() => {
+      repoPromise = null;
+    });
   } catch (error: unknown) {
     console.warn('IndexedDB を開けないため、会話履歴はメモリ上だけに保持します', error);
     repo = new MemoryRepository();

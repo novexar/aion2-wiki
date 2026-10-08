@@ -31,6 +31,8 @@ export interface UseChatResult {
   /** null は保存先を開いている途中 */
   readonly persistent: boolean | null;
   readonly overQuota: boolean;
+  /** 履歴の読み込み・削除に失敗した時の表示文言 */
+  readonly historyError: string | null;
   readonly newConversation: () => void;
   readonly selectConversation: (id: string) => Promise<void>;
   readonly deleteConversation: (id: string) => Promise<void>;
@@ -47,7 +49,7 @@ async function retrieve(
   contextArticleId: string | null | undefined,
   signal: AbortSignal,
 ) {
-  const chunks = await retrieveChunks({ history, question, contextArticleId });
+  const chunks = await retrieveChunks({ history, question, contextArticleId, signal });
   if (signal.aborted) throw abortError();
   // 同一記事 2 件まで・TOP_K 件・3,000 字に絞る
   return selectContext(chunks);
@@ -60,12 +62,21 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
   const [activeId, setActiveId] = useState<string | null>(null);
   const [repo, setRepo] = useState<ChatRepository | null>(null);
   const [overQuota, setOverQuota] = useState(false);
+  const [historyError, setHistoryError] = useState<string | null>(null);
   const controllerRef = useRef<AbortController | null>(null);
+  /** 利用者が送信・新規作成・選択をしたら、初回の履歴読み込み結果は反映しない */
+  const touchedRef = useRef(false);
+  /** selectConversation の最新リクエスト番号（古い結果を捨てる） */
+  const selectSeq = useRef(0);
 
-  const refresh = useCallback(async (target: ChatRepository) => {
-    const [list, bytes] = await Promise.all([target.list(), target.estimateBytes()]);
+  // 保存量の計測は全メッセージを読むため、開いた時と削除時だけ行う
+  const refresh = useCallback(async (target: ChatRepository, measure = false) => {
+    const [list, bytes] = await Promise.all([
+      target.list(),
+      measure ? target.estimateBytes() : Promise.resolve(null),
+    ]);
     setConversations(list);
-    setOverQuota(bytes > WARN_BYTES);
+    if (bytes !== null) setOverQuota(bytes > WARN_BYTES);
     return list;
   }, []);
 
@@ -74,12 +85,12 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
     let active = true;
     void (async () => {
       const opened = await getChatRepository();
-      const list = await refresh(opened);
+      const list = await refresh(opened, true);
       const latest = list[0];
       const stored = latest ? await opened.messages(latest.id) : [];
       if (!active) return;
       setRepo(opened);
-      if (latest) {
+      if (latest && !touchedRef.current) {
         setActiveId(latest.id);
         setMessages(stored.map(fromStored));
       }
@@ -95,13 +106,15 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
   useEffect(() => {
     if (!repo) return undefined;
     const onChange = (): void => {
-      void refresh(repo).then((list) => {
-        if (activeId && !list.some((c) => c.id === activeId)) {
-          controllerRef.current?.abort();
-          setActiveId(null);
-          setMessages([]);
-        }
-      });
+      refresh(repo, true)
+        .then((list) => {
+          if (activeId && !list.some((c) => c.id === activeId)) {
+            controllerRef.current?.abort();
+            setActiveId(null);
+            setMessages([]);
+          }
+        })
+        .catch((error: unknown) => console.error('会話履歴を読み直せませんでした', error));
     };
     window.addEventListener(HISTORY_EVENT, onChange);
     return () => window.removeEventListener(HISTORY_EVENT, onChange);
@@ -144,13 +157,17 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
 
       const sentAt = Date.now();
       let conversationId = activeId;
+      let userSaved: Promise<void> = Promise.resolve();
+      let usedChunks: Parameters<typeof pickReferences>[0] = [];
+      touchedRef.current = true;
       try {
         if (!conversationId) {
           // 保存先を開いている途中でも送れるようにここで待つ
           conversationId = (await (repo ?? (await getChatRepository())).create()).id;
           setActiveId(conversationId);
         }
-        await save(conversationId, userMsg, sentAt);
+        // 保存の完了を待たずに検索を始める（最後の保存の前に待つ）
+        userSaved = save(conversationId, userMsg, sentAt);
         const chunks = await retrieve(question, history, contextArticleId, controller.signal);
         timer.retrieved();
         if (chunks.length === 0) {
@@ -159,6 +176,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
           return;
         }
         // 回答を待たず、根拠にする記事を先に見せる
+        usedChunks = chunks;
         update({ refs: pickReferences(chunks) });
         const request = buildRagRequest(history, question, chunks);
         const full = await streamGemini({
@@ -169,19 +187,24 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
           signal: controller.signal,
           onText: (text) => {
             timer.firstToken();
-            patch(reply.id, { text });
+            update({ text });
           },
         });
         timer.done();
         update({ text: full, status: 'done', refs: pickReferences(chunks, full) });
       } catch (error: unknown) {
         const chatError = toChatError(error);
-        const partial = chatError.kind === 'aborted' && reply.text;
-        update(partial ? { status: 'done' } : { status: 'error', error: chatError.message });
+        if (chatError.kind === 'aborted' && reply.text) {
+          // 停止: ここまでの回答を残し、参照も付ける
+          update({ status: 'done', refs: pickReferences(usedChunks, reply.text) });
+        } else {
+          update({ status: 'error', error: chatError.message });
+        }
       } finally {
         controllerRef.current = null;
         setIsStreaming(false);
         // 同じミリ秒でも質問 → 回答の順に並ぶようにする
+        await userSaved;
         if (conversationId) await save(conversationId, reply, Math.max(Date.now(), sentAt + 1));
       }
     },
@@ -191,6 +214,8 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
   const stop = useCallback(() => controllerRef.current?.abort(), []);
 
   const newConversation = useCallback(() => {
+    touchedRef.current = true;
+    selectSeq.current += 1;
     controllerRef.current?.abort();
     setActiveId(null);
     setMessages([]);
@@ -199,10 +224,19 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
   const selectConversation = useCallback(
     async (id: string) => {
       if (!repo) return;
+      touchedRef.current = true;
+      const seq = ++selectSeq.current;
       controllerRef.current?.abort();
-      const stored = await repo.messages(id);
-      setActiveId(id);
-      setMessages(stored.map(fromStored));
+      try {
+        const stored = await repo.messages(id);
+        if (seq !== selectSeq.current) return;
+        setHistoryError(null);
+        setActiveId(id);
+        setMessages(stored.map(fromStored));
+      } catch (error: unknown) {
+        console.error('会話を読み込めませんでした', error);
+        if (seq === selectSeq.current) setHistoryError('会話を読み込めませんでした。');
+      }
     },
     [repo],
   );
@@ -211,8 +245,13 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
     async (id: string) => {
       if (!repo) return;
       if (id === activeId) newConversation();
-      await repo.delete(id);
-      await refresh(repo);
+      try {
+        await repo.delete(id);
+        await refresh(repo, true);
+      } catch (error: unknown) {
+        console.error('会話を削除できませんでした', error);
+        setHistoryError('会話を削除できませんでした。');
+      }
     },
     [repo, activeId, newConversation, refresh],
   );
@@ -220,8 +259,13 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
   const deleteAll = useCallback(async () => {
     if (!repo) return;
     newConversation();
-    await repo.deleteAll();
-    await refresh(repo);
+    try {
+      await repo.deleteAll();
+      await refresh(repo, true);
+    } catch (error: unknown) {
+      console.error('会話履歴を削除できませんでした', error);
+      setHistoryError('会話履歴を削除できませんでした。');
+    }
   }, [repo, newConversation, refresh]);
 
   return {
@@ -233,6 +277,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
     activeId,
     persistent: repo ? repo.persistent : null,
     overQuota,
+    historyError,
     newConversation,
     selectConversation,
     deleteConversation,

@@ -55,10 +55,13 @@ function PanelHeader({ view, onNew, onToggleHistory }: PanelHeaderProps) {
 }
 
 function Notices({ chat }: { readonly chat: UseChatResult }) {
-  if (chat.persistent !== false && !chat.overQuota) return null;
+  if (chat.persistent !== false && !chat.overQuota && !chat.historyError) return null;
+  const text =
+    chat.historyError ??
+    (chat.persistent === false ? '履歴はこのタブを閉じると消えます' : '履歴が 5MB を超えています');
   return (
     <p role="status" className="shrink-0 border-b border-line px-4 py-2 text-xs text-warn">
-      {chat.persistent === false ? '履歴はこのタブを閉じると消えます' : '履歴が 5MB を超えています'}
+      {text}
     </p>
   );
 }
@@ -74,10 +77,17 @@ function MessageLog({
   const boxRef = useRef<HTMLDivElement>(null);
   const nearBottom = useRef(true);
 
+  // トークンごとのレイアウト強制を避けるため、フレームにまとめて 1 回だけ行う
+  const frameRef = useRef(0);
   useEffect(() => {
-    const box = boxRef.current;
-    if (box && nearBottom.current) box.scrollTop = box.scrollHeight;
+    if (frameRef.current) return;
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = 0;
+      const box = boxRef.current;
+      if (box && nearBottom.current) box.scrollTop = box.scrollHeight;
+    });
   }, [chat.messages]);
+  useEffect(() => () => cancelAnimationFrame(frameRef.current), []);
 
   return (
     <div
@@ -179,8 +189,8 @@ export default function ChatPanelBody() {
           conversations={chat.conversations}
           activeId={chat.activeId}
           onSelect={(id) => {
-            void chat.selectConversation(id);
-            showChat();
+            // 読み込みが終わってから会話表示へ切り替える
+            void chat.selectConversation(id).then(showChat);
           }}
           onDelete={(id) => void chat.deleteConversation(id)}
           onDeleteAll={() => void chat.deleteAll()}
