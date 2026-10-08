@@ -167,6 +167,18 @@ describe('settings', () => {
     expect(getModel()).toBe(DEFAULT_MODEL);
   });
 
+  it('keeps a saved custom model name and falls back to the new default for an empty one', () => {
+    localStorage.setItem(STORAGE_KEYS.model, '  my-old-model ');
+    expect(getModel()).toBe('my-old-model');
+    localStorage.setItem(STORAGE_KEYS.model, '');
+    expect(getModel()).toBe(DEFAULT_MODEL);
+    localStorage.setItem(STORAGE_KEYS.model, '   ');
+    expect(getModel()).toBe(DEFAULT_MODEL);
+    saveModel('my-old-model');
+    saveModel(DEFAULT_MODEL);
+    expect(localStorage.getItem(STORAGE_KEYS.model)).toBeNull();
+  });
+
   it('stores the theme preference', () => {
     expect(getThemePreference()).toBe('system');
     saveThemePreference('dark');

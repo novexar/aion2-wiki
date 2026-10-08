@@ -93,6 +93,12 @@ describe('streamGemini', () => {
     expect(configOf(2)).toMatchObject({ thinkingConfig: { thinkingLevel: 'LOW' } });
   });
 
+  it('does not treat an unrelated 400 mentioning only "level" as a thinking rejection', async () => {
+    generateContentStream.mockRejectedValueOnce(reject400('Invalid safety level in request'));
+    await expect(run('gemini-3.8-flash')).rejects.toThrow('safety level');
+    expect(generateContentStream).toHaveBeenCalledTimes(1);
+  });
+
   it('falls back to no thinking config with 2048 tokens when every setting is rejected', async () => {
     generateContentStream
       .mockRejectedValueOnce(reject400('thinking not supported'))

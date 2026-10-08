@@ -1,4 +1,5 @@
 import type { ArticleRef, ChatTurn } from '../../lib/rag';
+import { ReopeningRepository } from './reopening-repository';
 import { readJson, removeKey, STORAGE_KEYS } from '../../lib/storage';
 import {
   MemoryRepository,
@@ -88,10 +89,11 @@ let repoPromise: Promise<ChatRepository> | null = null;
 async function openRepository(): Promise<ChatRepository> {
   let repo: ChatRepository;
   try {
-    // 接続が失われたら次回の取得で開き直す
-    repo = await openIdbRepository(() => {
-      repoPromise = null;
-    });
+    // 接続が失われても、useChat が持つ参照のまま次の操作で開き直せるようにする
+    let wrapper: ReopeningRepository | null = null;
+    const open = (): Promise<ChatRepository> => openIdbRepository(() => wrapper?.markLost());
+    wrapper = new ReopeningRepository(await open(), open);
+    repo = wrapper;
   } catch (error: unknown) {
     console.warn('IndexedDB を開けないため、会話履歴はメモリ上だけに保持します', error);
     repo = new MemoryRepository();

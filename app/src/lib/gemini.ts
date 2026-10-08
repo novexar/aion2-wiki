@@ -133,7 +133,7 @@ export const FALLBACK_MAX_OUTPUT_TOKENS = 2048;
 export const TRUNCATED_NOTE = '\n\n（回答が長いため、途中で打ち切られました）';
 
 function rejectsThinking(error: unknown): boolean {
-  return statusOf(error) === 400 && /thinking|level/i.test(messageOf(error));
+  return statusOf(error) === 400 && /thinking_level|thinkingLevel|thinking/i.test(messageOf(error));
 }
 
 /** Gemini にストリーミングで問い合わせる。SDK はこの関数の呼び出し時に初めて読み込む */
