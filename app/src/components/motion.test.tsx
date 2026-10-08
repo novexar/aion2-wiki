@@ -73,6 +73,14 @@ describe('CategoryNav の開閉', () => {
     expect(region).not.toHaveClass('nav-collapse-anim');
   });
 
+  it('行は 40px 以上（モバイル 44px）で 15px、カテゴリは semibold で行全体が開閉する', () => {
+    const button = renderNav();
+    expect(button).toHaveClass('min-h-11', 'lg:min-h-10', 'w-full', 'font-semibold', 'text-[15px]');
+    const link = screen.getAllByRole('link')[0]!;
+    expect(link).toHaveClass('min-h-11', 'lg:min-h-10', 'w-full', 'text-[15px]');
+    expect(link.className).not.toMatch(/truncate|line-clamp/);
+  });
+
   it('閉じると高さアニメーションの後に一覧を外す', () => {
     const button = renderNav();
     fireEvent.click(button);

@@ -39,7 +39,7 @@ export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
           className={`border-r border-line ${columns.squeezed ? 'block' : 'hidden lg:block'}`}
           aria-label="サイドバー"
         >
-          <div className="scroll-thin sticky top-(--header-h) max-h-[calc(100dvh-var(--header-h))] overflow-y-auto py-6 pr-3">
+          <div className="scroll-thin sticky top-(--header-h) max-h-[calc(100dvh-var(--header-h))] overflow-y-auto py-4 pr-2">
             <CategoryNav />
           </div>
         </aside>

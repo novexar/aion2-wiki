@@ -9,6 +9,18 @@ interface CategoryNavProps {
   readonly onNavigate?: () => void;
 }
 
+/** 行の共通クラス: 高さ 40px（モバイル 44px）、15px、左右 12px、行全体がクリック領域 */
+const ROW = 'flex min-h-11 w-full items-center px-3 py-1.5 text-[15px] leading-snug lg:min-h-10';
+
+/** 記事行。現在地は左 3px のアクセント線＋surface 背景、hover は背景のみ。長い題名は 2 行まで折り返す */
+function linkClass({ isActive }: { readonly isActive: boolean }): string {
+  return `${ROW} border-l-[3px] pl-[33px] ${
+    isActive
+      ? 'border-accent bg-surface font-medium text-fg'
+      : 'border-transparent text-fg-muted hover:bg-muted hover:text-fg'
+  }`;
+}
+
 function CategorySection({
   category,
   isCurrent,
@@ -35,14 +47,14 @@ function CategorySection({
         onClick={() => setToggled(!open)}
         aria-expanded={open}
         aria-controls={listId}
-        className="flex w-full items-center gap-1.5 rounded-md px-1.5 py-1.5 text-left text-[13px] font-medium text-fg-muted hover:bg-muted hover:text-fg"
+        className={`${ROW} gap-2 text-left font-semibold text-fg hover:bg-muted`}
       >
         <ChevronRight
           aria-hidden="true"
-          className={`size-3.5 shrink-0 text-fg-subtle transition-transform duration-200 ease-std ${open ? 'rotate-90' : ''}`}
+          className={`size-4 shrink-0 text-fg-subtle transition-transform duration-200 ease-std ${open ? 'rotate-90' : ''}`}
         />
-        <span className="min-w-0 flex-1 truncate">{category.label}</span>
-        <span className="text-[11px] font-normal text-fg-subtle tabular-nums">
+        <span className="min-w-0 flex-1">{category.label}</span>
+        <span className="text-[13px] font-normal text-fg-subtle tabular-nums">
           {category.articles.length}
         </span>
       </button>
@@ -56,25 +68,19 @@ function CategorySection({
           }}
         >
           <div className="min-h-0 overflow-hidden">
-            <ul id={listId} className="mt-0.5 mb-2 ml-3.5 border-l border-line pl-2">
+            <ul id={listId} className="mb-2">
               <li>
                 <NavLink
                   to={categoryPath(category.id)}
                   end
                   onClick={onNavigate}
-                  className={({ isActive }) =>
-                    `-ml-[9px] block border-l-2 py-1 pr-2 pl-3 text-[13px] leading-[1.4] ${
-                      isActive
-                        ? 'border-accent font-medium text-fg'
-                        : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'
-                    }`
-                  }
+                  className={linkClass}
                 >
                   一覧（{category.articles.length}）
                 </NavLink>
               </li>
               {category.articles.length === 0 && (
-                <li className="px-2 py-1 text-xs text-fg-subtle">準備中</li>
+                <li className="py-2 pl-10 text-[13px] text-fg-subtle">準備中</li>
               )}
               {category.articles.map((a) => (
                 <li key={a.id}>
@@ -82,13 +88,7 @@ function CategorySection({
                     to={articlePath(category.id, a.id)}
                     onClick={onNavigate}
                     aria-current={slug === a.id ? 'page' : undefined}
-                    className={({ isActive }) =>
-                      `-ml-[9px] line-clamp-2 border-l-2 py-1 pr-2 pl-3 text-[13px] leading-[1.4] transition-colors ${
-                        isActive
-                          ? 'border-accent font-medium text-fg'
-                          : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'
-                      }`
-                    }
+                    className={linkClass}
                   >
                     {a.title}
                   </NavLink>
@@ -107,7 +107,7 @@ export function CategoryNav({ onNavigate }: CategoryNavProps) {
   const { category } = useParams();
   return (
     <nav aria-label="カテゴリ">
-      <ul className="space-y-0.5">
+      <ul>
         {nav.categories.map((c) => (
           <CategorySection
             key={c.id}
