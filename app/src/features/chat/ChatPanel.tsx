@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { DURATION } from '../../lib/motion-tokens';
 import { useMediaQuery, WIDE_QUERY } from '../../lib/useMediaQuery';
 import {
   CHAT_PANEL_ID,
@@ -24,6 +25,23 @@ function useFocusOnToggle(open: boolean): void {
   }, [open]);
 }
 
+/** 閉じるスライド（200ms）の間だけ表示を保つ。transitionend が来ない環境でも時間で閉じる */
+const CLOSE_FALLBACK_MS = DURATION.base * 1000 + 80;
+
+function useClosingVisibility(open: boolean): {
+  readonly visible: boolean;
+  readonly done: () => void;
+} {
+  const [visible, setVisible] = useState(open);
+  if (open && !visible) setVisible(true);
+  useEffect(() => {
+    if (open || !visible) return undefined;
+    const timer = window.setTimeout(() => setVisible(false), CLOSE_FALLBACK_MS);
+    return () => window.clearTimeout(timer);
+  }, [open, visible]);
+  return { visible, done: () => (open ? undefined : setVisible(false)) };
+}
+
 /** モバイルの全画面シートでは背面のスクロールを止め、Esc で閉じる */
 function useSheetBehavior(active: boolean): void {
   useEffect(() => {
@@ -42,7 +60,7 @@ function useSheetBehavior(active: boolean): void {
 }
 
 /**
- * 右側のチャットパネル。lg 以上は右端の固定幅カラム（本文はその分だけ左に縮む）、
+ * 右側のチャットパネル。開くと右から 320ms ease-out、閉じると 200ms ease-in でスライドする。lg 以上は右端の固定幅カラム（本文はその分だけ左に縮む）、
  * lg 未満は全画面シート。閉じても会話を保つため、一度開いたら DOM に残して hidden にする
  */
 export function ChatPanel() {
@@ -51,6 +69,9 @@ export function ChatPanel() {
   // 本文（会話・入力欄）は初めて開いたときに読み込む
   const [loaded, setLoaded] = useState(open);
   if (open && !loaded) setLoaded(true);
+  const { visible, done } = useClosingVisibility(open);
+  // リサイズ中は transition を止める（幅の追従を遅らせない）
+  const [resizing, setResizing] = useState(false);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent): void => {
@@ -70,13 +91,18 @@ export function ChatPanel() {
       id={CHAT_PANEL_ID}
       role="complementary"
       aria-label="チャット"
-      hidden={!open}
+      hidden={!visible}
+      data-open={open || undefined}
+      data-resizing={resizing || undefined}
+      onTransitionEnd={(e) => {
+        if (e.target === e.currentTarget) done();
+      }}
       style={desktop ? { width } : undefined}
-      className={`chat-panel-in fixed flex flex-col bg-canvas ${
+      className={`chat-panel fixed flex flex-col bg-canvas ${
         desktop ? 'inset-y-0 right-0 z-40 border-l border-line' : 'inset-0 z-50'
       }`}
     >
-      {desktop && <ResizeHandle width={width} />}
+      {desktop && <ResizeHandle width={width} onResizingChange={setResizing} />}
       {loaded && (
         <Suspense fallback={<p className="px-4 py-6 text-sm text-fg-subtle">読み込み中</p>}>
           <ChatPanelBody />

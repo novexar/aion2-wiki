@@ -449,26 +449,26 @@
   }
 }
 
-/* ---------- チャットパネル ---------- */
-@keyframes chat-panel-in {
-  from {
-    opacity: 0;
-    transform: translateX(1rem);
-  }
-  to {
-    opacity: 1;
-    transform: none;
+/* ---------- チャットパネル（5.2 #5）: 開 x 100%→0 320ms ease-out／閉 200ms ease-in ---------- */
+.chat-panel {
+  transform: translateX(100%);
+  transition: transform var(--d-base) var(--ease-in);
+}
+
+.chat-panel[data-open] {
+  transform: none;
+  transition: transform var(--d-slow) var(--ease-out);
+}
+
+@starting-style {
+  .chat-panel[data-open] {
+    transform: translateX(100%);
   }
 }
 
-.chat-panel-in {
-  animation: chat-panel-in 160ms ease-out;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .chat-panel-in {
-    animation: none;
-  }
+/* リサイズ中は幅の追従を遅らせない */
+.chat-panel[data-resizing] {
+  transition: none;
 }
 
 /* ---------- テーマ: 濃紺ヘッダーとホーム帯（ui-direction.md B 案＋C 案の左右対比色） ---------- */

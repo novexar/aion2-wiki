@@ -10,16 +10,19 @@ const KEY_STEP = 16;
 
 interface ResizeHandleProps {
   readonly width: number;
+  /** ドラッグの開始・終了を通知する（パネル側で transition を止める） */
+  readonly onResizingChange?: (resizing: boolean) => void;
 }
 
 /** パネル左端のつまみ。ドラッグか ←/→ キーで幅を変える（Home で既定幅） */
-export function ResizeHandle({ width }: ResizeHandleProps) {
+export function ResizeHandle({ width, onResizingChange }: ResizeHandleProps) {
   const dragging = useRef(false);
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>): void => {
     if (event.button !== 0) return;
     event.preventDefault();
     dragging.current = true;
+    onResizingChange?.(true);
     event.currentTarget.setPointerCapture(event.pointerId);
     document.body.style.userSelect = 'none';
   };
@@ -30,6 +33,7 @@ export function ResizeHandle({ width }: ResizeHandleProps) {
   const endDrag = (event: PointerEvent<HTMLDivElement>): void => {
     if (!dragging.current) return;
     dragging.current = false;
+    onResizingChange?.(false);
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
