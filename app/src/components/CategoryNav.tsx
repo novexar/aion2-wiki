@@ -1,5 +1,5 @@
 import { ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink, useParams } from 'react-router';
 import { articlePath, categoryPath } from '../lib/paths';
 import type { NavCategory } from '../lib/types';
@@ -19,6 +19,25 @@ function linkClass({ isActive }: { readonly isActive: boolean }): string {
       ? 'border-accent bg-surface font-medium text-fg'
       : 'border-transparent text-fg-muted hover:bg-muted hover:text-fg'
   }`;
+}
+
+/** 最も近いスクロール可能な祖先（サイドバー内・ドロワー内） */
+function scrollParent(el: HTMLElement): HTMLElement | null {
+  for (let p = el.parentElement; p; p = p.parentElement) {
+    const overflowY = getComputedStyle(p).overflowY;
+    if ((overflowY === 'auto' || overflowY === 'scroll') && p.scrollHeight > p.clientHeight)
+      return p;
+  }
+  return null;
+}
+
+/** 現在の記事行を、サイドバーが未スクロールのときだけ中央へ寄せる（ページ自体はスクロールさせない） */
+function centerCurrentRow(root: HTMLElement | null): void {
+  const row = root?.querySelector<HTMLElement>('a[aria-current="page"]');
+  const scroller = row ? scrollParent(row) : null;
+  if (!row || !scroller || scroller.scrollTop !== 0) return;
+  const offset = row.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
+  scroller.scrollTop = offset - (scroller.clientHeight - row.clientHeight) / 2;
 }
 
 function CategorySection({
@@ -47,7 +66,9 @@ function CategorySection({
         onClick={() => setToggled(!open)}
         aria-expanded={open}
         aria-controls={listId}
-        className={`${ROW} gap-2 text-left font-semibold text-fg hover:bg-muted`}
+        className={`${ROW} gap-2 text-left font-semibold hover:bg-muted ${
+          isCurrent ? 'text-fg' : 'text-fg-muted'
+        }`}
       >
         <ChevronRight
           aria-hidden="true"
@@ -76,7 +97,7 @@ function CategorySection({
                   onClick={onNavigate}
                   className={linkClass}
                 >
-                  一覧（{category.articles.length}）
+                  {category.label}の記事一覧
                 </NavLink>
               </li>
               {category.articles.length === 0 && (
@@ -104,9 +125,11 @@ function CategorySection({
 
 /** カテゴリ別ナビゲーション（サイドバー・モバイルドロワーで共用） */
 export function CategoryNav({ onNavigate }: CategoryNavProps) {
-  const { category } = useParams();
+  const { category, slug } = useParams();
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => centerCurrentRow(ref.current), [slug]);
   return (
-    <nav aria-label="カテゴリ">
+    <nav aria-label="カテゴリ" ref={ref}>
       <ul>
         {nav.categories.map((c) => (
           <CategorySection

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useLocation } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { CategoryNav } from '../../components/CategoryNav';
 import { RouteFade } from '../../components/RouteFade';
 import { PAGE_CONTAINER } from '../../lib/layout';
@@ -39,8 +39,13 @@ export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
           className={`border-r border-line ${columns.squeezed ? 'block' : 'hidden lg:block'}`}
           aria-label="サイドバー"
         >
-          <div className="scroll-thin sticky top-(--header-h) max-h-[calc(100dvh-var(--header-h))] overflow-y-auto py-4 pr-2">
+          <div className="scroll-thin sticky top-(--header-h) max-h-[calc(100dvh-var(--header-h))] overflow-y-auto pt-4 pr-2 pb-16">
             <CategoryNav />
+            <p className="mt-2 border-t border-line px-3 pt-3 text-sm">
+              <Link to="/index" className="text-fg-muted hover:text-fg hover:underline">
+                索引へ
+              </Link>
+            </p>
           </div>
         </aside>
       )}

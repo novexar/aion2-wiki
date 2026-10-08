@@ -19,20 +19,77 @@ export interface CategoryInfo {
   readonly id: CategoryId;
   readonly label: string;
   readonly description: string;
+  /** ホームに出す代表記事の ID（編集者指定、最大 3 本）。未指定なら先頭 3 本 */
+  readonly lead?: readonly string[];
 }
 
 export const CATEGORIES: readonly CategoryInfo[] = [
-  { id: 'guide', label: '初心者ガイド', description: '最初の 1 週間・Lv45 まで・日課' },
-  { id: 'basics', label: '基本', description: '操作・用語・アカウント・キャラクター' },
-  { id: 'leveling', label: 'レベリング', description: 'Lv1〜45・覚醒・IL 上げ' },
-  { id: 'systems', label: 'システム', description: 'スキル・スティグマ・強化・製作' },
-  { id: 'dungeons', label: 'ダンジョン', description: '遠征・超越・悪夢・レイド・フィールドボス' },
-  { id: 'economy', label: '経済', description: 'ギーナ・取引所・メンバーシップ' },
-  { id: 'classes', label: 'クラス', description: '8 クラスの個別記事' },
-  { id: 'pvp', label: 'PvP', description: 'アビス・要塞戦・アリーナ' },
-  { id: 'tips', label: '小技', description: '時短・設定・落とし穴' },
-  { id: 'faq', label: 'FAQ', description: 'よくある質問' },
-  { id: 'news', label: 'ニュース', description: '公式告知・既知の問題・韓国版との差' },
+  {
+    id: 'guide',
+    label: '初心者ガイド',
+    description: '最初の 1 週間・Lv45 まで・日課',
+    lead: ['guide-day-1', 'guide-week-1', 'guide-daily-routine'],
+  },
+  {
+    id: 'basics',
+    label: '基本',
+    description: '操作・用語・アカウント・キャラクター',
+    lead: ['game-overview', 'glossary', 'controls-and-keybinds'],
+  },
+  {
+    id: 'leveling',
+    label: 'レベリング',
+    description: 'Lv1〜45・覚醒・IL 上げ',
+    lead: ['leveling-1-to-45-overview', 'what-to-do-at-45', 'first-week-progression-plan'],
+  },
+  {
+    id: 'systems',
+    label: 'システム',
+    description: 'スキル・スティグマ・強化・製作',
+    lead: ['enhancement', 'daevanion-boards', 'potential'],
+  },
+  {
+    id: 'dungeons',
+    label: 'ダンジョン',
+    description: '遠征・超越・悪夢・レイド・フィールドボス',
+    lead: ['dungeons-overview', 'expeditions-and-odyle', 'nightmare'],
+  },
+  {
+    id: 'economy',
+    label: '経済',
+    description: 'ギーナ・取引所・メンバーシップ',
+    lead: ['currencies-overview', 'kina-farming', 'market-and-exchange'],
+  },
+  {
+    id: 'classes',
+    label: 'クラス',
+    description: '8 クラスの個別記事',
+    lead: ['classes-overview', 'class-tier-and-recommendation', 'class-roles'],
+  },
+  {
+    id: 'pvp',
+    label: 'PvP',
+    description: 'アビス・要塞戦・アリーナ',
+    lead: ['pvp-overview', 'abyss-overview', 'arena-1v1-5v5'],
+  },
+  {
+    id: 'tips',
+    label: '小技',
+    description: '時短・設定・落とし穴',
+    lead: ['beginner-mistakes', 'day-one-checklist', 'irreversible-choices'],
+  },
+  {
+    id: 'faq',
+    label: 'FAQ',
+    description: 'よくある質問',
+    lead: ['faq-account-and-platform', 'faq-combat', 'faq-troubleshooting'],
+  },
+  {
+    id: 'news',
+    label: 'ニュース',
+    description: '公式告知・既知の問題・韓国版との差',
+    lead: ['global-launch-timeline', 'known-issues', 'global-vs-korea'],
+  },
 ];
 
 const CATEGORY_MAP: ReadonlyMap<string, CategoryInfo> = new Map(CATEGORIES.map((c) => [c.id, c]));

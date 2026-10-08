@@ -76,6 +76,16 @@ export function ApiKeyForm({
             {error}
           </p>
         )}
+        <p className="text-[13px] text-fg-muted">
+          <a
+            href={API_KEY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-strong underline underline-offset-4"
+          >
+            キーを発行（Google AI Studio） ↗
+          </a>
+        </p>
       </form>
     );
   }

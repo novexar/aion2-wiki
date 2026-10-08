@@ -23,8 +23,17 @@ const NAV_ITEMS = [
   { to: '/about', label: 'このサイトについて' },
 ];
 
-function navClass({ isActive }: { isActive: boolean }): string {
-  return `rounded-md px-2.5 py-1.5 text-sm whitespace-nowrap transition-colors ${
+type NavTone = 'header' | 'drawer';
+
+/** ヘッダー（濃色地）とドロワー（明色地）で文字色を切り替える */
+function navClass({ isActive }: { isActive: boolean }, tone: NavTone = 'header'): string {
+  const base = 'rounded-md px-2.5 py-1.5 text-sm whitespace-nowrap transition-colors';
+  if (tone === 'drawer') {
+    return `${base} flex min-h-11 items-center ${
+      isActive ? 'bg-muted font-semibold text-fg' : 'text-fg hover:bg-muted'
+    }`;
+  }
+  return `${base} ${
     isActive ? 'font-medium text-white' : 'text-header-muted hover:bg-white/8 hover:text-white'
   }`;
 }
@@ -134,7 +143,13 @@ export function Header() {
           className="mb-4 flex flex-col gap-0.5 border-b border-line pb-3"
         >
           {[{ to: '/', label: 'ホーム' }, ...NAV_ITEMS].map((item) => (
-            <NavLink key={item.to} to={item.to} end onClick={closeDrawer} className={navClass}>
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end
+              onClick={closeDrawer}
+              className={(state) => navClass(state, 'drawer')}
+            >
               {item.label}
             </NavLink>
           ))}
@@ -144,7 +159,7 @@ export function Header() {
               closeDrawer();
               setChatPanelOpen(true);
             }}
-            className={`${navClass({ isActive: false })} flex items-center gap-2 text-left`}
+            className={`${navClass({ isActive: false }, 'drawer')} gap-2 text-left`}
           >
             <Sparkles aria-hidden="true" className="size-4" />
             AI チャット

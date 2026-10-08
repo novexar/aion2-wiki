@@ -54,13 +54,17 @@ export default function IndexPage() {
 
   const meta = useAllMeta();
   const articles = useMemo(() => (typeof meta === 'string' ? [] : meta), [meta]);
+  // タグビューはタグを選ぶまで群を作らない（全タグ分の見出し壁を出さない）
+  const needsTag = view === 'tag' && !tag;
   const groups = useMemo(
-    () => groupArticles(articles, view, { filter, tag }),
-    [articles, view, filter, tag],
+    () => (needsTag ? [] : groupArticles(articles, view, { filter, tag })),
+    [articles, view, filter, tag, needsTag],
   );
   const tags = useMemo(() => tagCounts(articles), [articles]);
   const [showAllTags, setShowAllTags] = useState(false);
-  const visibleTags = tags.filter((t) => showAllTags || t.count >= MIN_TAG_COUNT || t.tag === tag);
+  const visibleTags = tags
+    .filter((t) => showAllTags || t.count >= MIN_TAG_COUNT || t.tag === tag)
+    .sort((a, b) => a.tag.localeCompare(b.tag, 'ja'));
   const hiddenTagCount = tags.length - tags.filter((t) => t.count >= MIN_TAG_COUNT).length;
   const total = groups.reduce((n, g) => n + g.entries.length, 0);
 
@@ -152,7 +156,7 @@ export default function IndexPage() {
       )}
 
       <div id="index-panel" role="tabpanel" aria-labelledby={`tab-${view}`} className="mt-8">
-        {groups.length > 1 && (
+        {view !== 'tag' && groups.length > 1 && (
           <nav aria-label="見出しへ移動" className="mb-6 flex flex-wrap gap-1">
             {groups.map((g) => (
               <a
@@ -172,6 +176,8 @@ export default function IndexPage() {
           <p role="alert" className="text-sm text-danger">
             索引を読み込めませんでした。ページを再読み込みしてください。
           </p>
+        ) : needsTag ? (
+          <p className="text-sm text-fg-muted">タグを選んでください。</p>
         ) : total === 0 ? (
           <p className="text-sm text-fg-muted">該当する記事はありません。</p>
         ) : (

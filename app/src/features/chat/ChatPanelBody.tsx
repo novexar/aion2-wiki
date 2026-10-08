@@ -1,3 +1,4 @@
+import { API_KEY_URL } from '../../lib/gemini-config';
 import { Sparkles, X } from 'lucide-react';
 import { useEffect, useId, useRef, useState } from 'react';
 import { useMatch } from 'react-router';
@@ -90,25 +91,43 @@ function MessageLog({
         {!chat.isStreaming && chat.messages.length > 0 ? '回答が完了しました' : ''}
       </p>
       <div role="log" aria-live="off" aria-label="会話" className="space-y-6 py-4">
-        {chat.messages.length === 0 && (
-          <div className="text-sm text-fg-muted">
-            <h3 className="text-fg">例</h3>
-            <ul className="mt-2 space-y-1">
-              {SUGGESTIONS.map((q) => (
-                <li key={q}>
-                  <button
-                    type="button"
-                    onClick={() => void chat.send(q)}
-                    disabled={!canSend}
-                    className="text-left underline underline-offset-4 hover:text-fg disabled:no-underline disabled:opacity-50"
-                  >
-                    {q}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {chat.messages.length === 0 &&
+          (canSend ? (
+            <div className="text-sm text-fg-muted">
+              <h3 className="text-fg">質問の例</h3>
+              <ul className="mt-2 space-y-1">
+                {SUGGESTIONS.map((q) => (
+                  <li key={q}>
+                    <button
+                      type="button"
+                      onClick={() => void chat.send(q)}
+                      className="text-left underline underline-offset-4 hover:text-fg"
+                    >
+                      {q}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="space-y-1.5 text-sm leading-relaxed text-fg-muted">
+              <p className="text-fg">
+                Wiki の記事を根拠に Gemini が答えます。回答には出典が付きます。
+              </p>
+              <p>
+                無料の Gemini API キーが必要です。
+                <a
+                  href={API_KEY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent-strong underline underline-offset-4"
+                >
+                  Google AI Studio で発行 ↗
+                </a>
+              </p>
+              <p>キーはこのブラウザにだけ保存されます。</p>
+            </div>
+          ))}
         {chat.messages.map((m) => (
           <MessageView key={m.id} message={m} />
         ))}

@@ -2,12 +2,13 @@ import { Link } from 'react-router';
 import { buttonClass } from '../components/button-class';
 import { useDocumentMeta } from '../components/useDocumentMeta';
 import { useSearchPalette } from '../features/search/search-context';
+import { WikiShell } from '../features/wiki/WikiShell';
 
 export default function NotFoundPage() {
   useDocumentMeta('ページが見つかりません');
   const { open } = useSearchPalette();
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
+    <WikiShell wide>
       <h1 className="text-[1.75rem] font-bold">このページは存在しません。</h1>
       <div className="mt-6 flex gap-2">
         <Link to="/" className={buttonClass('primary')}>
@@ -17,6 +18,6 @@ export default function NotFoundPage() {
           検索
         </button>
       </div>
-    </div>
+    </WikiShell>
   );
 }

@@ -6,8 +6,8 @@ import { Kbd } from '../components/Kbd';
 import { WikiShell } from '../features/wiki/WikiShell';
 import { useDocumentMeta } from '../components/useDocumentMeta';
 import { useSearchPalette } from '../features/search/search-context';
-import { dailyArticles, nav } from '../features/wiki/data';
-import { categoryLabel } from '../lib/categories';
+import { articleById, dailyArticles, nav } from '../features/wiki/data';
+import { categoryLabel, CATEGORIES } from '../lib/categories';
 import { staggerDelayMs, useHomeStagger } from '../lib/home-stagger';
 import { PAGE_CONTAINER } from '../lib/layout';
 import { articlePath, categoryPath } from '../lib/paths';
@@ -16,6 +16,15 @@ import type { NavArticle, NavCategory } from '../lib/types';
 
 /** ホームのカテゴリ行に並べる先頭記事の数（order 順） */
 const LEAD_ARTICLES = 3;
+
+/** 編集者指定の代表記事（categories.ts の lead）。未指定・不在のときだけ先頭から補う */
+function leadArticles(category: NavCategory): readonly NavArticle[] {
+  const picked = (CATEGORIES.find((x) => x.id === category.id)?.lead ?? [])
+    .map((id) => articleById.get(id))
+    .filter((a): a is NavArticle => a !== undefined);
+  const rest = category.articles.filter((a) => !picked.includes(a));
+  return [...picked, ...rest].slice(0, LEAD_ARTICLES);
+}
 const RECENT_LIMIT = 10;
 
 const SECTION_TITLE = 'sec-title border-b border-line pb-2 text-lg font-bold';
@@ -62,10 +71,10 @@ function CategoryRow({
         {c.articles.length}
       </span>
       <ChevronRight aria-hidden="true" className="size-4 self-center text-fg-subtle sm:hidden" />
-      <div className="min-w-0 text-[13px] max-sm:hidden">
-        <p className="text-fg-muted">{c.description}</p>
-        <p className="mt-0.5 text-fg-subtle">
-          {c.articles.slice(0, LEAD_ARTICLES).map((a, i) => (
+      <div className="min-w-0 text-[13px] max-sm:col-span-3">
+        <p className="line-clamp-1 text-fg-muted">{c.description}</p>
+        <p className="mt-0.5 text-fg-subtle max-sm:hidden">
+          {leadArticles(c).map((a, i) => (
             <Fragment key={a.id}>
               {i > 0 && ' · '}
               <Link to={articlePath(a.category, a.id)} className="text-fg hover:underline">
