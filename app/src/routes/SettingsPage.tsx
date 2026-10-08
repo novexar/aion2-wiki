@@ -1,6 +1,7 @@
 import { ChevronDown, Trash2, X } from 'lucide-react';
 import { useEffect, useId, useState, type FormEvent } from 'react';
 import { Button } from '../components/Button';
+import { WikiShell } from '../features/wiki/WikiShell';
 import { useDocumentMeta } from '../components/useDocumentMeta';
 import { ApiKeyForm } from '../features/chat/ApiKeyForm';
 import { HistorySetting } from '../features/chat/HistorySetting';
@@ -242,36 +243,38 @@ export default function SettingsPage() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [close]);
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8 sm:px-8">
-      <div className="flex items-center justify-between gap-3">
-        <h1 className="text-[1.75rem] font-bold">設定</h1>
-        <button
-          type="button"
-          onClick={close}
-          aria-label="閉じる"
-          title="閉じる"
-          className="inline-flex size-9 items-center justify-center rounded-md text-fg-muted transition-colors hover:bg-muted hover:text-fg"
-        >
-          <X aria-hidden="true" className="size-[18px]" />
-        </button>
+    <WikiShell wide>
+      <div className="max-w-2xl">
+        <div className="flex items-center justify-between gap-3">
+          <h1 className="text-[1.75rem] font-bold">設定</h1>
+          <button
+            type="button"
+            onClick={close}
+            aria-label="閉じる"
+            title="閉じる"
+            className="inline-flex size-9 items-center justify-center rounded-md text-fg-muted transition-colors hover:bg-muted hover:text-fg"
+          >
+            <X aria-hidden="true" className="size-[18px]" />
+          </button>
+        </div>
+        <div className="mt-4">
+          <Section title="テーマ">
+            <ThemeSetting />
+          </Section>
+          <Section title="陣営テーマ">
+            <FactionSetting />
+          </Section>
+          <Section title="モデル" description="チャットに使う Gemini のモデル名">
+            <ModelSetting />
+          </Section>
+          <Section title="API キー" description="このブラウザにだけ保存されます">
+            <ApiKeySetting />
+          </Section>
+          <Section title="会話履歴" description="このブラウザにだけ保存されます">
+            <HistorySetting />
+          </Section>
+        </div>
       </div>
-      <div className="mt-4">
-        <Section title="テーマ">
-          <ThemeSetting />
-        </Section>
-        <Section title="陣営テーマ">
-          <FactionSetting />
-        </Section>
-        <Section title="モデル" description="チャットに使う Gemini のモデル名">
-          <ModelSetting />
-        </Section>
-        <Section title="API キー" description="このブラウザにだけ保存されます">
-          <ApiKeySetting />
-        </Section>
-        <Section title="会話履歴" description="このブラウザにだけ保存されます">
-          <HistorySetting />
-        </Section>
-      </div>
-    </div>
+    </WikiShell>
   );
 }

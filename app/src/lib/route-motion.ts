@@ -1,14 +1,17 @@
 /**
  * ルート遷移のフェードをどこで掛けるか（ui-direction.md 5.2 #1、5.5 の 2）
  * - home: 遷移フェードを省き、カテゴリ一覧の段差表示だけにする
- * - shell: /wiki/* は WikiShell の本文カラムだけをフェードし、サイドバーは動かさない
+ * - shell: サイドバー付きのページ（/wiki/* ほか）は WikiShell の本文カラムだけをフェードし、サイドバーは動かさない
  * - page: それ以外はページ全体をフェードする
  */
 export type RouteFadeScope = 'home' | 'shell' | 'page';
 
+/** 左サイドバーを持つ（WikiShell で包む）ページ */
+const SHELL_PATHS = ['/wiki', '/index', '/search', '/settings', '/about'];
+
 export function routeFadeScope(pathname: string): RouteFadeScope {
   if (pathname === '/' || pathname === '') return 'home';
-  if (pathname.startsWith('/wiki/')) return 'shell';
+  if (SHELL_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`))) return 'shell';
   return 'page';
 }
 

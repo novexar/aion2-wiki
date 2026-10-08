@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
 import { categoryLabel } from '../../lib/categories';
-import { LIST_COLUMNS, LIST_ITEM, PAGE_CONTAINER } from '../../lib/layout';
+import { LIST_COLUMNS, LIST_ITEM } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
+import { WikiShell } from './WikiShell';
 import { Breadcrumb } from './Breadcrumb';
 import { PageLoading } from '../../components/PageLoading';
 import type { ArticleMeta } from '../../lib/types';
@@ -74,7 +75,7 @@ export default function IndexPage() {
   };
 
   return (
-    <div className={`${PAGE_CONTAINER} py-8`}>
+    <WikiShell wide>
       <Breadcrumb items={[{ label: 'ホーム', to: '/' }, { label: '索引' }]} />
       <h1 className="text-[1.75rem] font-bold">索引</h1>
       <p className="mt-2 text-fg-muted">{nav.articles.length} 記事</p>
@@ -225,6 +226,6 @@ export default function IndexPage() {
           </div>
         )}
       </div>
-    </div>
+    </WikiShell>
   );
 }

@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { Link } from 'react-router';
 import { ConfidenceBadge } from '../components/ConfidenceBadge';
 import { Kbd } from '../components/Kbd';
+import { WikiShell } from '../features/wiki/WikiShell';
 import { useDocumentMeta } from '../components/useDocumentMeta';
 import { useSearchPalette } from '../features/search/search-context';
 import { dailyArticles, nav } from '../features/wiki/data';
@@ -173,7 +174,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className={`${PAGE_CONTAINER} pt-8 pb-12 sm:pt-10`}>
+      <WikiShell wide>
         <section aria-labelledby="categories-title">
           <h2 id="categories-title" className={SECTION_TITLE}>
             カテゴリ
@@ -197,7 +198,7 @@ export default function HomePage() {
             すべての記事（索引）
           </Link>
         </p>
-      </div>
+      </WikiShell>
     </>
   );
 }

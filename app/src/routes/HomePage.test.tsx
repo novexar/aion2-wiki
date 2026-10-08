@@ -45,6 +45,12 @@ describe('HomePage', () => {
     );
   });
 
+  it('shows the sidebar category navigation next to the home content', () => {
+    renderHome();
+    expect(screen.getByRole('complementary', { name: 'サイドバー' })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'カテゴリ' })).toBeInTheDocument();
+  });
+
   it('has no hero copy and shows a plain search box', () => {
     renderHome();
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('AION2 非公式Wiki');

@@ -13,8 +13,10 @@ describe('routeFadeScope', () => {
     ['/', 'home'],
     ['/wiki/basics', 'shell'],
     ['/wiki/basics/first-steps', 'shell'],
-    ['/index', 'page'],
-    ['/search', 'page'],
+    ['/index', 'shell'],
+    ['/search', 'shell'],
+    ['/settings', 'shell'],
+    ['/about', 'shell'],
   ] as const)('%s → %s', (path, scope) => {
     expect(routeFadeScope(path)).toBe(scope);
   });

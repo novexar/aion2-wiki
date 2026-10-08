@@ -2,9 +2,10 @@ import { Search } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
-import { LIST_COLUMNS, LIST_ITEM, PAGE_CONTAINER } from '../../lib/layout';
+import { LIST_COLUMNS, LIST_ITEM } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
 import { SearchResultRow } from './SearchResultRow';
+import { WikiShell } from '../wiki/WikiShell';
 import { useSearch } from './useSearch';
 
 const PAGE_SIZE = 50;
@@ -18,7 +19,7 @@ export default function SearchPage() {
   useDocumentMeta(query ? `「${query}」の検索結果` : '検索');
 
   return (
-    <div className={`${PAGE_CONTAINER} py-8`}>
+    <WikiShell wide>
       <h1 className="text-2xl font-bold sm:text-[1.75rem]">検索</h1>
       <form
         role="search"
@@ -93,6 +94,6 @@ export default function SearchPage() {
           </button>
         )}
       </div>
-    </div>
+    </WikiShell>
   );
 }

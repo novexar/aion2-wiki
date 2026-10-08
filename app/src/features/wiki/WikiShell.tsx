@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
+import { useLocation } from 'react-router';
 import { CategoryNav } from '../../components/CategoryNav';
 import { RouteFade } from '../../components/RouteFade';
 import { PAGE_CONTAINER } from '../../lib/layout';
+import { routeFadeScope } from '../../lib/route-motion';
 import { useShellColumns, type ShellColumns } from '../../lib/shell-layout';
 
 interface WikiShellProps {
@@ -25,9 +27,11 @@ function gridClass(columns: ShellColumns, wide: boolean): string {
 /** 左サイドバー + 本文（残り幅すべて）+ 右カラム（目次）の 3 カラムレイアウト */
 export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
   const columns = useShellColumns();
+  const { pathname } = useLocation();
   const showSidebar = columns.squeezed ? columns.sidebar : true;
   const showAside = !wide && (columns.squeezed ? columns.toc : true);
   const spanTwo = wide && !columns.squeezed;
+  const mainClass = `min-w-0 py-8 ${spanTwo ? 'lg:col-span-2' : ''}`;
   return (
     <div className={`${PAGE_CONTAINER} grid ${gridClass(columns, wide)}`}>
       {showSidebar && (
@@ -40,7 +44,11 @@ export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
           </div>
         </aside>
       )}
-      <RouteFade className={`min-w-0 py-8 ${spanTwo ? 'lg:col-span-2' : ''}`}>{children}</RouteFade>
+      {routeFadeScope(pathname) === 'home' ? (
+        <div className={mainClass}>{children}</div>
+      ) : (
+        <RouteFade className={mainClass}>{children}</RouteFade>
+      )}
       {showAside && (
         // sticky は目次（nav）自身に付ける。aside は行の高さいっぱいに伸びるので末尾まで追従する
         <aside
