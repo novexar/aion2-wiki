@@ -54,10 +54,10 @@ function fontFacePlugin(): Plugin {
   };
 }
 
-/** 先読みする文字（ひらがな・カタカナ・英小文字・句読点・頻出漢字）。これらを含む分割を preload する */
 /** 先読みする太さ。400 は本文、700 は見出し（font-display: optional のため先読みしないと初回描画で代替フォントになる） */
 const PRELOAD_WEIGHTS = ['400', '700'];
 
+/** 先読みする文字（ひらがな・カタカナ・英小文字・句読点・頻出漢字）。これらを含む分割を preload する */
 const PRELOAD_PROBES = ['あ', 'ア', 'a', '、', '日', '本'].map((c) => c.codePointAt(0) ?? 0);
 
 function inUnicodeRange(range: string, codePoint: number): boolean {

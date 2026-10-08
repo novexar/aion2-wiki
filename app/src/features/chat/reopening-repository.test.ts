@@ -52,6 +52,26 @@ describe('ReopeningRepository', () => {
     expect(fresh).toHaveBeenCalledTimes(2);
   });
 
+  it('開き直し済みの接続に切り替わっていれば古い接続の失敗で再度開き直さない', async () => {
+    let failOld: () => void = () => undefined;
+    const old = fake(
+      () =>
+        new Promise<never[]>((_, reject) => {
+          failOld = () => reject(invalidState());
+        }),
+    );
+    const fresh = fake(() => Promise.resolve([]));
+    const reopen = vi.fn().mockResolvedValue(fresh);
+    const repo = new ReopeningRepository(old, reopen);
+    const pending = repo.list();
+    repo.markLost();
+    await repo.list();
+    expect(reopen).toHaveBeenCalledTimes(1);
+    failOld();
+    await expect(pending).resolves.toEqual([]);
+    expect(reopen).toHaveBeenCalledTimes(1);
+  });
+
   it('それ以外のエラーはそのまま投げる', async () => {
     const reopen = vi.fn();
     const repo = new ReopeningRepository(

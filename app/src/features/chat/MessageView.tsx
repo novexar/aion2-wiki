@@ -23,15 +23,19 @@ function CopyButton({ text }: { readonly text: string }) {
     timer.current = window.setTimeout(() => setCopied('idle'), 1500);
   };
   const copy = (): void => {
-    navigator.clipboard.writeText(text).then(
-      () => flash('done'),
-      () => flash('failed'),
-    );
+    // clipboard が無い環境（非 HTTPS）では writeText が同期的に投げるので Promise 経由で捕まえる
+    Promise.resolve()
+      .then(() => navigator.clipboard.writeText(text))
+      .then(
+        () => flash('done'),
+        () => flash('failed'),
+      );
   };
   return (
     <button
       type="button"
       onClick={copy}
+      aria-live="polite"
       className="absolute top-0 right-0 rounded px-2 py-1 text-[13px] text-fg-subtle opacity-0 group-focus-within:opacity-100 group-hover:opacity-100 hover:bg-muted hover:text-fg focus-visible:opacity-100 [@media(hover:none)]:opacity-100"
     >
       {COPY_LABEL[copied]}
