@@ -64,15 +64,28 @@ describe('expandTerms', () => {
 
 describe('generic alias stoplist', () => {
   const dict = buildSynonymDict([
-    { title: 'FAQ ダンジョン', aliases: ['オード', 'コロ', 'ぷち', 'ab', 'スキル'] },
-    { title: '合計IL', aliases: ['il', 'ゴールド'] },
+    { title: 'FAQ ダンジョン', aliases: ['オード', 'コロ', 'ぷち', 'ab', 'スキル', 'クレ'] },
+    { title: '合計IL', aliases: ['il', 'ゴールド', 'ぷち', 'ab', 'ap'] },
   ]);
 
-  it('drops short kana, short latin and explicit stop aliases', () => {
-    expect(Object.keys(dict)).toEqual(['ゴールド']);
+  it('always drops explicit stop aliases', () => {
+    expect(dict['オード']).toBeUndefined();
+    expect(dict['il']).toBeUndefined();
+    expect(dict['スキル']).toBeUndefined();
+  });
+
+  it('drops short aliases only when ambiguous', () => {
+    expect(dict['ぷち']).toBeUndefined();
+    expect(dict['ab']).toBeUndefined();
+    expect(dict['クレ']).toEqual(['FAQ ダンジョン']);
+    expect(dict['ap']).toEqual(['合計IL']);
   });
 
   it('does not expand オード in an odyle energy question', () => {
     expect(expandTerms('オードエネルギーは最大いくつまで貯まる？', dict, [])).toEqual([]);
+  });
+
+  it('expands OD to オードエネルギー via the manual dictionary', () => {
+    expect(expandTerms('ODを補充したい', {})).toContain('オードエネルギー');
   });
 });

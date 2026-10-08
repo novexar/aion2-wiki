@@ -48,6 +48,12 @@ describe('contentWords filler boundaries', () => {
     expect(contentWords('どうぐの強化')).toContain('どうぐ');
   });
 
+  it('strips fillers after a particle or chained', () => {
+    expect(contentWords('強化のやり方は')).toEqual(['強化']);
+    expect(contentWords('強化を教えてくれる')).toContain('強化');
+    expect(contentWords('くれる')).toEqual(['くれる']);
+  });
+
   it('still strips fillers at run boundaries', () => {
     expect(contentWords('金策の方法について教えて')).toEqual(['金策']);
   });
