@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ja" data-variant="a" data-theme="light" data-page="home">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AION2 Wiki 方針案 A</title>
+<meta name="description" content="A: 現行構成にライン・紺系中立色・青リンク・金マーカーだけを足す">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--canvas:#ffffff;--surface:#f7f8fb;--muted:#eef1f6;--line:#e1e5ee;--line-strong:#c9d0dd;--line-input:#7f8799;--fg:#141821;--fg-muted:#4b5262;--fg-subtle:#656d7e;--accent:#c9a227;--accent-strong:#7f640f;--aether:#3d82bf;--aether-deep:#1d5ca8;--link:#1d5ca8;--ok-fg:#166534;--info-fg:#1b4f91;--warn-fg:#92400e;--danger-fg:#b91c1c;--kr-fg:#6a3fc0;--header-bg:#0f1f3c;--header-fg:#eef2f8;--header-muted:#aab6cc;--header-h:56px;--gold:#c9a227;--gold-soft:rgb(201 162 39/.14);--aether-soft:rgb(61 130 191/.12);--kr-soft:rgb(106 63 192/.12);--radius:4px;--shadow:0 1px 2px rgb(0 0 0/.04),0 8px 24px rgb(0 0 0/.08);--ease-out:cubic-bezier(.2,.7,.2,1);--ease-std:cubic-bezier(.4,0,.2,1);--d-fast:120ms;--d-base:200ms;--d-slow:320ms}
+[data-theme=dark]{--canvas:#0a0e17;--surface:#0f141f;--muted:#161c29;--line:#232b3a;--line-strong:#35405a;--line-input:#6f7a93;--fg:#f2f4f8;--fg-muted:#a4acbb;--fg-subtle:#8a93a4;--accent:#d4af37;--accent-strong:#e2c15a;--aether:#70d2ff;--aether-deep:#8ec8ff;--link:#8ec8ff;--ok-fg:#86efac;--info-fg:#8ec8ff;--warn-fg:#fcd34d;--danger-fg:#fca5a5;--kr-fg:#b9a0f0;--header-bg:#060a14;--header-fg:#eef2f8;--header-muted:#aab6cc;--gold:#d4af37;--gold-soft:rgb(212 175 55/.16);--aether-soft:rgb(112 210 255/.1);--kr-soft:rgb(185 160 240/.12);--shadow:0 1px 2px rgb(0 0 0/.4),0 12px 32px rgb(0 0 0/.5)}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--fg);font:400 16px/1.6 'Noto Sans JP',system-ui,-apple-system,'Hiragino Sans','Yu Gothic UI',sans-serif;-webkit-font-smoothing:antialiased;min-width:320px}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 45%,transparent);text-underline-offset:.2em}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+kbd{font:11px/1 ui-monospace,Menlo,Consolas,monospace;padding:3px 5px;border:1px solid var(--line-strong);border-radius:3px;color:var(--fg-subtle);background:var(--canvas)}
+svg{flex:none}
+.wrap{max-width:1360px;margin:0 auto;padding:0 40px}
+@media(max-width:640px){.wrap{padding:0 16px}}
+/* header */
+.hdr{position:sticky;top:0;z-index:40;height:var(--header-h);background:var(--canvas);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:8px;height:100%}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;color:var(--fg-muted);transition:background-color var(--d-fast) var(--ease-std),color var(--d-fast) var(--ease-std)}
+.icon-btn:hover{background:var(--muted);color:var(--fg)}
+.menu{display:none}
+.logo{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;white-space:nowrap}
+.logo:hover{text-decoration:none}
+.logo-mark{display:none}
+.hdr-nav{display:flex;gap:2px;margin-left:16px}
+.hdr-nav a{padding:6px 10px;border-radius:6px;font-size:14px;color:var(--fg-muted);transition:background-color var(--d-fast) var(--ease-std),color var(--d-fast) var(--ease-std)}
+.hdr-nav a:hover{background:var(--muted);color:var(--fg);text-decoration:none}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:4px}
+.hdr-search{display:flex;align-items:center;gap:8px;height:36px;width:256px;padding:0 10px;border:1px solid var(--line-input);border-radius:var(--radius);background:var(--surface);color:var(--fg-subtle);font-size:14px;transition:border-color var(--d-fast),color var(--d-fast)}
+.hdr-search span{flex:1;text-align:left}
+.hdr-search:hover{border-color:var(--fg-subtle);color:var(--fg-muted)}
+.hdr-chat{padding:6px 10px;border-radius:6px;font-size:14px;color:var(--fg-muted)}
+.only-m{display:none}
+@media(max-width:900px){.menu{display:inline-flex}.hdr-nav{display:none}}
+@media(max-width:640px){.hdr-search,.hdr-chat{display:none}.only-m{display:inline-flex}}
+/* home */
+.band-in{padding-top:32px}
+.band h1{margin:0;font-size:20px;font-weight:600;line-height:1.4}
+.desc{margin:4px 0 0;font-size:14px;color:var(--fg-muted)}
+.searchbox{margin-top:16px;display:flex;align-items:center;gap:12px;height:40px;width:100%;max-width:672px;padding:0 12px;border:1px solid var(--line-input);border-radius:var(--radius);background:var(--canvas);color:var(--fg-subtle);font-size:16px;text-align:left;transition:border-color var(--d-fast),box-shadow var(--d-base) var(--ease-out)}
+.searchbox span{flex:1}
+.searchbox:hover{border-color:var(--fg-subtle);color:var(--fg-muted)}
+.searchbox kbd{display:none}@media(min-width:640px){.searchbox kbd{display:inline-block}}
+.cats{margin-top:48px}
+.sec-title{margin:0;padding-bottom:8px;border-bottom:1px solid var(--line);font-size:18px;font-weight:700}
+.cat-list{list-style:none;margin:0;padding:0;column-count:2;column-gap:40px}
+@media(max-width:900px){.cat-list{column-count:1}}
+.cat-list li{position:relative;break-inside:avoid;display:grid;grid-template-columns:112px 40px minmax(0,1fr);gap:0 12px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);animation:rise var(--d-slow) var(--ease-out) both;animation-delay:calc(var(--i)*24ms)}
+.cat-name{font-weight:700}
+.cat-n{text-align:right;font-size:13px;color:var(--fg-subtle);font-variant-numeric:tabular-nums}
+.chev{display:none;color:var(--fg-subtle);align-self:center}
+.cat-body{min-width:0;font-size:13px}
+.cat-desc{margin:0;color:var(--fg-muted)}
+.cat-leads{margin:2px 0 0;color:var(--fg-subtle)}
+.cat-leads a{color:var(--fg)}
+@media(max-width:640px){.cat-list li{grid-template-columns:minmax(0,1fr) auto auto}.cat-body{display:none}.chev{display:block}.cat-name::after{content:'';position:absolute;inset:0}}
+.daily{margin-top:48px;display:flex;align-items:baseline;gap:24px}
+.daily h2{margin:0;font-size:16px;font-weight:700;flex:none}
+.daily ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;font-size:14px}
+.daily li+li::before{content:'·';padding:0 8px;color:var(--fg-subtle)}
+@media(max-width:640px){.daily{display:block}.daily h2{padding-bottom:8px;border-bottom:1px solid var(--line);font-size:18px}.daily ul{display:block}.daily li{border-bottom:1px solid var(--line);padding:8px 0}.daily li+li::before{content:none}}
+.all{margin:32px 0 48px;font-size:14px}
+.all a{color:var(--link);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 45%,transparent);text-underline-offset:.2em}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* footer */
+.ftr{border-top:1px solid var(--line);margin-top:32px}
+.ftr-in{display:flex;justify-content:space-between;gap:16px;padding:24px 40px;font-size:13px;color:var(--fg-subtle)}
+.ftr p{margin:0}.ftr p a{margin-left:16px}
+@media(max-width:640px){.ftr-in{flex-direction:column;padding:24px 16px}}
+/* article shell */
+.shell{display:grid;grid-template-columns:256px minmax(0,1fr) 240px;gap:0 40px;padding:0 40px}
+@media(max-width:1100px){.shell{grid-template-columns:minmax(0,1fr)}.side,.toc{display:none}}
+@media(max-width:640px){.shell{padding:0 16px}}
+.side{border-right:1px solid var(--line);padding:24px 12px 24px 0}
+.side-cats{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.side-cat{display:flex;align-items:center;gap:6px;width:100%;padding:6px;border-radius:6px;font-size:13px;font-weight:500;color:var(--fg-muted);text-align:left;transition:background-color var(--d-fast),color var(--d-fast)}
+.side-cat:hover{background:var(--muted);color:var(--fg)}
+.side-cat svg{color:var(--fg-subtle);transition:transform var(--d-base) var(--ease-out)}
+.side-cat.open svg{transform:rotate(90deg)}
+.side-cat .n{margin-left:auto;font-size:11px;font-weight:400;color:var(--fg-subtle);font-variant-numeric:tabular-nums}
+.side-arts{list-style:none;margin:2px 0 8px 14px;padding:0 0 0 8px;border-left:1px solid var(--line)}
+.side-arts a{display:block;padding:5px 8px;margin-left:-9px;border-left:2px solid transparent;border-radius:0 4px 4px 0;font-size:13px;color:var(--fg-muted);transition:background-color var(--d-fast),color var(--d-fast),border-color var(--d-fast)}
+.side-arts a:hover{background:var(--muted);color:var(--fg);text-decoration:none}
+.side-arts a[aria-current]{border-left-color:var(--gold);color:var(--fg);font-weight:500}
+.body{padding:32px 0 48px}
+.crumb{display:flex;flex-wrap:wrap;gap:6px;font-size:13px;color:var(--fg-muted)}
+.crumb span{color:var(--fg-subtle)}
+.art-head{margin-top:16px}
+.art-head h1{margin:0;font-size:28px;line-height:1.35;font-weight:700}
+@media(max-width:640px){.art-head h1{font-size:24px}}
+.aliases{margin:6px 0 0;font-size:13px;color:var(--fg-muted)}
+.meta{margin:12px 0 0;display:flex;gap:12px;align-items:center;font-size:13px;color:var(--fg-muted)}
+.badge{display:inline-block;padding:1px 6px;border:1px solid;border-radius:3px;font-size:11px;line-height:1.5}
+.badge.ok{color:var(--ok-fg);border-color:color-mix(in srgb,var(--ok-fg) 45%,transparent)}
+.prose{margin-top:32px}
+.prose>:not(.table-wrap){max-width:44rem}
+.prose p{margin:0 0 1em;line-height:1.8}
+.prose a{color:var(--link);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 45%,transparent);text-underline-offset:.2em;transition:text-decoration-color var(--d-fast)}
+.prose a:hover{text-decoration-color:currentColor}
+.prose a.ext::after{content:'\2197';margin-left:.15em;font-size:.85em;text-decoration:none;display:inline-block}
+.src{font-size:12px;color:var(--fg-subtle);margin-top:-.6em}
+.src a{color:var(--link)}
+.prose h2{margin:2em 0 .8em;padding-bottom:6px;border-bottom:1px solid var(--line);font-size:20px;line-height:1.45;font-weight:700}
+.table-wrap{margin:0 0 1em;overflow-x:auto;font-size:15px}
+.prose table{border-collapse:collapse;width:100%;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
+.prose th,.prose td{padding:8px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);line-height:1.6}
+.prose thead th{background:var(--surface);font-weight:700;font-size:14px}
+.prose tbody th{font-weight:400;white-space:nowrap;color:var(--fg-muted)}
+.prose tbody tr{transition:background-color var(--d-fast)}
+.prose tbody tr:hover{background:var(--surface)}
+.callout{margin:0 0 1em;padding:.25em 0 .25em 1em;border-left:2px solid var(--line-strong)}
+.callout[data-kind=kr]{border-left-color:var(--kr-fg)}
+.callout p{margin:0}
+.related{margin:0;padding-left:1.2em;line-height:1.8}
+.related li::marker{color:var(--fg-subtle)}
+.toc{position:sticky;top:calc(var(--header-h) + 16px);align-self:start;padding:32px 0;font-size:13px}
+.toc-title{margin:0 0 8px;font-size:12px;font-weight:700}
+.toc ul{list-style:none;margin:0;padding:0;border-left:1px solid var(--line);position:relative}
+.toc a{display:block;margin-left:-1px;padding:4px 4px 4px 12px;border-left:2px solid transparent;color:var(--fg-muted);line-height:1.4;transition:color var(--d-fast),border-color var(--d-base) var(--ease-out)}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.active{border-left-color:var(--gold);color:var(--fg)}
+.toc .top{display:inline-block;margin-top:12px;font-size:12px;color:var(--fg-muted)}
+.toc-m{display:none;margin:24px 0 0;border-bottom:1px solid var(--line)}
+.toc-m summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-size:14px;font-weight:500;cursor:pointer}
+.toc-m summary svg{color:var(--fg-subtle);transition:transform var(--d-base) var(--ease-out)}
+.toc-m[open] summary svg{transform:rotate(180deg)}
+.toc-m ul{margin:0;padding:0 0 12px 1.2em;font-size:13px;line-height:1.9}
+@media(max-width:1100px){.toc-m{display:block}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* A: Aether Line — 現行構成を維持し、ヘッダー上端の 2px ライン、紺を帯びた中立色、エーテル青のリンク、金の現在位置マーカーだけを足す */
+.hdr::before{content:'';position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,var(--gold) 0%,#70d2ff 55%,transparent 100%)}
+.hdr{position:sticky}
+.logo-mark{display:inline-block;width:10px;height:10px;transform:rotate(45deg);background:linear-gradient(135deg,var(--gold),#70d2ff);border-radius:1px}
+.sec-title{border-bottom-color:var(--line-strong)}
+.band-in{padding-top:40px}
+[data-theme=dark] .hdr{background:color-mix(in srgb,var(--canvas) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+
+[data-page=home] .article,[data-page=article] .home{display:none}
+</style>
+<script>
+(()=>{const q=new URLSearchParams(location.search);const h=document.documentElement;
+h.dataset.theme=q.get('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+h.dataset.page=q.get('page')||'home';})();
+</script>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <button class="icon-btn menu" aria-label="メニューを開く"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <a class="logo" href="#"><span class="logo-mark" aria-hidden="true"></span>AION2 非公式Wiki</a>
+    <nav class="hdr-nav" aria-label="メイン"><a href="#">索引</a><a href="#">このサイトについて</a></nav>
+    <div class="hdr-right">
+      <button class="hdr-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>検索</span><kbd>Ctrl</kbd><kbd>K</kbd></button>
+      <button class="icon-btn only-m" aria-label="検索"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <a class="hdr-chat" href="#">チャット</a>
+      <button class="icon-btn" aria-label="設定"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main class="home">
+  <section class="band"><div class="wrap band-in">
+    <h1>AION2 非公式Wiki</h1>
+    <p class="desc">AION2（グローバル版）の攻略情報。235 記事、最終更新 2026-10-08。</p>
+    <button class="searchbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>検索</span><kbd>Ctrl</kbd><kbd>K</kbd></button>
+  </div></section>
+  <div class="wrap">
+    <section class="cats">
+      <h2 class="sec-title">カテゴリ</h2>
+      <ul class="cat-list"><li style="--i:0"><a class="cat-name" href="#">初心者ガイド</a><span class="cat-n">7</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">最初の 1 週間・Lv45 まで・日課</p><p class="cat-leads"><a href="#">初日ガイド</a> · <a href="#">1週目ガイド</a> · <a href="#">IL700→1400ガイド</a></p></div></li><li style="--i:1"><a class="cat-name" href="#">基本</a><span class="cat-n">35</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">操作・用語・アカウント・キャラクター</p><p class="cat-leads"><a href="#">AION2とは</a> · <a href="#">対応環境と必要スペック</a> · <a href="#">Steam版とPURPLE版</a></p></div></li><li style="--i:2"><a class="cat-name" href="#">レベリング</a><span class="cat-n">23</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">Lv1〜45・覚醒・IL 上げ</p><p class="cat-leads"><a href="#">レベル上げ1〜45</a> · <a href="#">天族ルート</a> · <a href="#">魔族ルート</a></p></div></li><li style="--i:3"><a class="cat-name" href="#">システム</a><span class="cat-n">43</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">スキル・スティグマ・強化・製作</p><p class="cat-leads"><a href="#">スキルと特化</a> · <a href="#">スティグマ</a> · <a href="#">スキルのリセット</a></p></div></li><li style="--i:4"><a class="cat-name" href="#">ダンジョン</a><span class="cat-n">34</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">遠征・超越・悪夢・レイド・フィールドボス</p><p class="cat-leads"><a href="#">ダンジョンの種類</a> · <a href="#">遠征の基本</a> · <a href="#">オードエネルギー</a></p></div></li><li style="--i:5"><a class="cat-name" href="#">経済</a><span class="cat-n">19</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">ギーナ・取引所・メンバーシップ</p><p class="cat-leads"><a href="#">通貨一覧</a> · <a href="#">ギーナと刻印ギーナ</a> · <a href="#">キューナ</a></p></div></li><li style="--i:6"><a class="cat-name" href="#">クラス</a><span class="cat-n">14</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">8 クラスの個別記事</p><p class="cat-leads"><a href="#">グラディエーター</a> · <a href="#">テンプラー</a> · <a href="#">アサシン</a></p></div></li><li style="--i:7"><a class="cat-name" href="#">PvP</a><span class="cat-n">13</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">アビス・要塞戦・アリーナ</p><p class="cat-leads"><a href="#">PvPの全体像</a> · <a href="#">アビスの概要</a> · <a href="#">アビスポイントとショップ</a></p></div></li><li style="--i:8"><a class="cat-name" href="#">小技</a><span class="cat-n">21</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">時短・設定・落とし穴</p><p class="cat-leads"><a href="#">初心者がやりがちな失敗</a> · <a href="#">取り返しのつかない要素</a> · <a href="#">初日チェックリスト</a></p></div></li><li style="--i:9"><a class="cat-name" href="#">FAQ</a><span class="cat-n">9</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">よくある質問</p><p class="cat-leads"><a href="#">FAQ アカウント</a> · <a href="#">FAQ キャラクター</a> · <a href="#">FAQ 経済</a></p></div></li><li style="--i:10"><a class="cat-name" href="#">ニュース</a><span class="cat-n">17</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><div class="cat-body"><p class="cat-desc">公式告知・既知の問題・韓国版との差</p><p class="cat-leads"><a href="#">グローバル版の日程</a> · <a href="#">公式ローンチFAQ</a> · <a href="#">既知の不具合と回避策</a></p></div></li></ul>
+    </section>
+    <section class="daily"><h2>日課・週課</h2><ul><li><a href="#">日課と週課チェック</a></li><li><a href="#">リセット時刻</a></li><li><a href="#">使命クエスト</a></li><li><a href="#">シューゴフェスタ</a></li><li><a href="#">次元侵攻</a></li><li><a href="#">デイリーダンジョン</a></li></ul></section>
+    <p class="all"><a href="#">すべての記事（索引）</a></p>
+  </div>
+</main>
+
+<main class="article">
+  <div class="wrap shell">
+    
+<aside class="side"><nav aria-label="カテゴリ"><ul class="side-cats">
+  <li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>初心者ガイド</span><span class="n">7</span></button></li>
+  <li><button class="side-cat open"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>基本</span><span class="n">35</span></button>
+    <ul class="side-arts"><li><a href="#">一覧（35）</a></li><li><a href="#" aria-current="page">AION2とは</a></li><li><a href="#">対応環境と必要スペック</a></li><li><a href="#">Steam版とPURPLE版</a></li><li><a href="#">NCアカウントとPURPLE</a></li><li><a href="#">リージョンとサーバー</a></li><li><a href="#">サーバー移動</a></li><li><a href="#">天族と魔族の違い</a></li><li><a href="#">ストーリーと世界観</a></li><li><a href="#">クラス一覧</a></li><li><a href="#">おすすめクラス</a></li><li><a href="#">キャラクター作成</a></li><li><a href="#">キャラクター削除と作り直し</a></li><li><a href="#">基本操作とキー設定</a></li><li><a href="#">画面とメニュー名</a></li><li><a href="#">おすすめ設定</a></li><li><a href="#">コントローラー対応</a></li><li><a href="#">ゲーム内マクロ</a></li><li><a href="#">戦闘の基本</a></li><li><a href="#">ステータスの意味</a></li><li><a href="#">ダメージ計算の仕組み</a></li><li><a href="#">状態異常</a></li><li><a href="#">飛行とグライド</a></li><li><a href="#">移動の基本</a></li><li><a href="#">死亡と復活</a></li><li><a href="#">パーティとマッチング</a></li><li><a href="#">役割とパーティバフ</a></li><li><a href="#">レギオン</a></li><li><a href="#">チャットとフレンド</a></li></ul></li>
+  <li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>レベリング</span><span class="n">23</span></button></li><li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>システム</span><span class="n">43</span></button></li><li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>ダンジョン</span><span class="n">34</span></button></li><li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>経済</span><span class="n">19</span></button></li><li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>クラス</span><span class="n">14</span></button></li><li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>PvP</span><span class="n">13</span></button></li><li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>小技</span><span class="n">21</span></button></li><li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>FAQ</span><span class="n">9</span></button></li><li><button class="side-cat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg><span>ニュース</span><span class="n">17</span></button></li>
+</ul></nav></aside>
+    <div class="body">
+      <nav class="crumb" aria-label="パンくず"><a href="#">ホーム</a><span>›</span><a href="#">基本</a><span>›</span><span>AION2とは</span></nav>
+      <header class="art-head">
+        <h1>AION2とは</h1>
+        <p class="aliases">AION 2、アイオン2、Aion 2 Global、グローバル版とは、エンジン、韓国版とグローバル版の経緯</p>
+        <p class="meta"><span class="badge ok">検証済み</span><span>2026-10-08 更新</span></p>
+      </header>
+      <details class="toc-m"><summary>目次<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary><ul><li><a href="#">基本情報</a></li><li><a href="#">世界観をひとことで</a></li><li><a href="#">前作 AION を知らなくても大丈夫？</a></li><li><a href="#">グローバル版の仕様（2026年10月時点）</a></li><li><a href="#">グローバル版開始までの経緯</a></li><li><a href="#">韓国版との関係</a></li></ul></details>
+      <div class="prose">
+        <p>AION2（アイオン2）は、NC（2026年3月までの社名は NCSOFT）が開発・運営する MMORPG です。2008年に韓国で始まり日本でも長く遊ばれた「AION（The Tower of Eternity）」の正統続編で、舞台は前作から200年後の世界です。韓国・台湾では2025年11月19日に先行サービスが始まり、日本を含むグローバル版は2026年10月5日（月）22:00（日本時間）に正式サービスを開始しました。基本プレイ無料で、PC（Steam / PURPLE）専用です。</p>
+        <p class="src">出典: <a href="#">[S01]</a> <a href="#">[S02]</a> <a href="#">[S03]</a></p>
+        <h2 id="h1">基本情報</h2>
+        <div class="table-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><th scope="row">タイトル</th><td>AION2（アイオン2）</td></tr><tr><th scope="row">開発・運営</th><td>NC（旧 NCSOFT）。北米・南米・欧州・オセアニアは NC America、日本は NC Japan が窓口</td></tr><tr><th scope="row">ジャンル</th><td>MMORPG（タンク・ヒーラー・DPS のロール制、5人パーティ、10人レイド）</td></tr><tr><th scope="row">エンジン</th><td>Unreal Engine 5</td></tr><tr><th scope="row">先行サービス</th><td>韓国・台湾：2025年11月19日（PC とスマートフォンのクロスプレイ）</td></tr><tr><th scope="row">グローバル版</th><td>2026年9月30日 アーリーアクセス（ファウンダーズパック購入者）、10月5日 正式サービス。PC 専用</td></tr><tr><th scope="row">料金</th><td>基本プレイ無料。任意の月額メンバーシップ（日本：2,350円／30日、米国：$14.99）、ディーヴァパス、見た目中心のショップ</td></tr><tr><th scope="row">日本公式サイト</th><td><a class="ext" href="#">https://aion2.ncsoft.jp/</a></td></tr><tr><th scope="row">公式 Discord</th><td>discord.gg/aion2official（NC 公式）。NC Japan は日本語サーバーを別途案内</td></tr></tbody></table></div>
+        <p class="src">出典: <a href="#">[S01]</a> <a href="#">[S02]</a> <a href="#">[S04]</a> <a href="#">[S05]</a></p>
+        <h2 id="h2">世界観をひとことで</h2>
+        <p>AION2 の世界「アトレイア」は前作の約36倍の広さとされ、「見えるところは全部行ける」をコンセプトに、空の飛行だけでなく水中探索もできます。アイオンの塔が崩壊し、ディーヴァ（翼を持つ半神）たちが龍族（バラウル）の圧政の下で力を失いつつある時代が舞台です。プレイヤーは <strong>天族（Elyos）</strong> か <strong>魔族（Asmodian）</strong> のどちらかに所属し、両陣営は別々のサーバーで物語を進め、アビスなどの争奪地域で敵対します。詳しくは <a href="#">ストーリーと世界観</a> と <a href="#">天族と魔族の違い</a> を参照してください。</p>
+        <p class="src">出典: <a href="#">[S03]</a> <a href="#">[S06]</a></p>
+        <h2 id="h3">前作 AION を知らなくても大丈夫？</h2>
+        <p>問題ありません。ストーリーは新規プレイヤーを前提に展開され、日本公式サイトでも世界観紹介「二つの世界の物語」が公開されています。前作経験者向けに言うと、「ほぼ制限なしの飛行」「転職なしでクラスを直接選択」「失敗しても壊れない装備強化」「PvP のオン／オフ」「ガチャなし」など、遊びやすさに関わる部分はほぼ全面的に作り直されています。</p>
+        <p class="src">出典: <a href="#">[S01]</a> <a href="#">[S06]</a></p>
+        <h2 id="h4">グローバル版の仕様（2026年10月時点）</h2>
+        <div class="table-wrap"><table><thead><tr><th>項目</th><th>グローバル版</th></tr></thead><tbody><tr><th scope="row">レベル上限</th><td>45</td></tr><tr><th scope="row">クラス</th><td>8種（グラディエーター、テンプラー、アサシン、レンジャー、ソーサラー、スピリットマスター、クレリック、チャンター）</td></tr><tr><th scope="row">最高装備等級</th><td>唯一（金）。シーズン1には英雄等級は実装しないと公式配信で明言</td></tr><tr><th scope="row">シーズン</th><td>シーズン1は2026年9月30日〜12月16日 07:00 UTC（日本時間16:00）</td></tr><tr><th scope="row">遠征（5人ダンジョン）</th><td>6種。探険／征服の2モード</td></tr><tr><th scope="row">聖域レイド（10人）</th><td>ルドラ（正式開始時に一時削除、再登場日は10月16日までに告知予定）</td></tr><tr><th scope="row">言語</th><td>UI・字幕：日本語、英語、フランス語、ドイツ語、スペイン語、ポルトガル語（ブラジル）、ロシア語、韓国語。音声：日本語、英語、韓国語</td></tr><tr><th scope="row">自動狩り</th><td>なし</td></tr><tr><th scope="row">ガチャ</th><td>なし（有料の翼・ペットは見た目のみ）</td></tr></tbody></table></div>
+        <p class="src">出典: <a href="#">[S02]</a> <a href="#">[S04]</a> <a href="#">[S05]</a></p>
+        <div class="callout" data-kind="kr"><p><strong>韓国版のみ</strong>：韓国・台湾版は2026年7月1日の大型アップデート「Chapter 1. 砂と霜の地」でレベル上限50、9クラス目「拳星（Brawler）」が追加されています。グローバル版はおよそ1年遅れの内容で始まっており、これらは未実装です。グローバル版への実装時期は未発表です。</p></div>
+        <p class="src">出典: <a href="#">[S01]</a> <a href="#">[S03]</a></p>
+        <h2 id="h5">グローバル版開始までの経緯</h2>
+        <div class="table-wrap"><table><thead><tr><th>日付</th><th>出来事</th></tr></thead><tbody><tr><th scope="row">2025-11-19</th><td>韓国・台湾でサービス開始</td></tr><tr><th scope="row">2026-04-21</th><td>グローバル版を2026年内に PC で提供すると発表</td></tr><tr><th scope="row">2026-06-05</th><td>Summer Game Fest で9月リリースを予告</td></tr><tr><th scope="row">2026-07-22</th><td>ファウンダーズパック販売開始</td></tr><tr><th scope="row">2026-08-25</th><td>gamescom で10月5日の正式開始日を発表</td></tr><tr><th scope="row">2026-09-17〜19</th><td>Launch Scale Test（誰でも参加可、Lv37 まで、データは全消去）</td></tr><tr><th scope="row">2026-09-30</th><td>アーリーアクセス開始（日本時間23:00。予定は22:00だったが1時間遅延）</td></tr><tr><th scope="row">2026-10-05</th><td>正式サービス開始（日本時間22:00）。Steam 同時接続のピークは 397,905 人</td></tr><tr><th scope="row">2026-10-07</th><td>最初の定期メンテナンス</td></tr></tbody></table></div>
+        <p class="src">出典: <a href="#">[S02]</a> <a href="#">[S04]</a></p>
+        <h2 id="h6">韓国版との関係</h2>
+        <p>グローバル版は韓国・台湾版とは別サービスで、キャラクターや進行の引き継ぎはできません。コンテンツは共通の開発チームが作り、バランス調整は地域ごとに別チームが担当すると説明されています。韓国版の攻略情報を読むときは、レベル上限・クラス数・装備等級・経済仕様が違う点に注意してください。</p>
+        <p class="src">出典: <a href="#">[S01]</a> <a href="#">[S05]</a></p>
+        <h2 id="h7">関連記事</h2>
+        <ul class="related">
+          <li><a href="#">対応環境と必要スペック</a> — 対応プラットフォームと必要スペック</li>
+          <li><a href="#">Steam版とPURPLE版</a> — Steam 版と PURPLE 版の違い</li>
+          <li><a href="#">リージョンとサーバー</a> — リージョンとサーバーの選び方</li>
+          <li><a href="#">クラス一覧</a> — 8クラスの一覧</li>
+        </ul>
+      </div>
+    </div>
+    
+<aside class="toc"><p class="toc-title">目次</p><ul><li><a href="#" class="active">基本情報</a></li><li><a href="#">世界観をひとことで</a></li><li><a href="#">前作 AION を知らなくても大丈夫？</a></li><li><a href="#">グローバル版の仕様（2026年10月時点）</a></li><li><a href="#">グローバル版開始までの経緯</a></li><li><a href="#">韓国版との関係</a></li></ul><a class="top" href="#">ページ上部へ</a></aside>
+
+  </div>
+</main>
+
+<footer class="ftr"><div class="wrap ftr-in"><p>非公式のファンサイトです。NC（NCSOFT）とは関係ありません。</p><p><a href="#">このサイトについて</a><a href="#">GitHub</a></p></div></footer>
+</body></html>
