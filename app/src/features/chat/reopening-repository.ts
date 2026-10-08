@@ -21,6 +21,8 @@ function isInvalidState(error: unknown): boolean {
  */
 export class ReopeningRepository implements ChatRepository {
   private stale = false;
+  /** 開き直し中の Promise（同時に呼ばれても reopen は 1 回だけ） */
+  private refreshing: Promise<void> | null = null;
 
   constructor(
     private inner: ChatRepository,
@@ -36,7 +38,14 @@ export class ReopeningRepository implements ChatRepository {
     this.stale = true;
   }
 
-  private async refresh(): Promise<void> {
+  private refresh(): Promise<void> {
+    this.refreshing ??= this.reopenOnce().finally(() => {
+      this.refreshing = null;
+    });
+    return this.refreshing;
+  }
+
+  private async reopenOnce(): Promise<void> {
     this.inner = await this.reopen();
     this.stale = false;
   }

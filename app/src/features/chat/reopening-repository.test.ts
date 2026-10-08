@@ -31,6 +31,27 @@ describe('ReopeningRepository', () => {
     expect(fresh).toHaveBeenCalledTimes(1);
   });
 
+  it('同時の操作が重なっても開き直しは 1 回だけ', async () => {
+    let release: (repo: ChatRepository) => void = () => undefined;
+    const reopen = vi.fn(
+      () =>
+        new Promise<ChatRepository>((resolve) => {
+          release = resolve;
+        }),
+    );
+    const fresh = vi.fn(() => Promise.resolve([]));
+    const repo = new ReopeningRepository(
+      fake(() => Promise.resolve([])),
+      reopen,
+    );
+    repo.markLost();
+    const both = Promise.all([repo.list(), repo.list()]);
+    release(fake(fresh));
+    await both;
+    expect(reopen).toHaveBeenCalledTimes(1);
+    expect(fresh).toHaveBeenCalledTimes(2);
+  });
+
   it('それ以外のエラーはそのまま投げる', async () => {
     const reopen = vi.fn();
     const repo = new ReopeningRepository(
