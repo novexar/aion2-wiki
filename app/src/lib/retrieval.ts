@@ -7,6 +7,7 @@
 import type MiniSearch from 'minisearch';
 import type { CategoryId } from './categories';
 import { PER_ARTICLE_LIMIT } from './rag';
+import { contentWords, normalizeQuery } from './query-normalize';
 import { searchWithFallback } from './search';
 import { isLatinTerm } from './search-options';
 import { normalizeText, tokenize, tokenizeQuery } from './tokenizer';
@@ -18,15 +19,12 @@ export const TOP_ARTICLES = 5;
 /** 記事検索索引で質問に近い記事 ID を上位から返す（重複なし） */
 export function topArticleIds(index: MiniSearch, query: string, limit = TOP_ARTICLES): string[] {
   const ids = new Set<string>();
-  for (const result of searchWithFallback(index, query)) {
+  for (const result of searchWithFallback(index, normalizeQuery(query))) {
     ids.add(String(result.id));
     if (ids.size >= limit) break;
   }
   return [...ids];
 }
-
-/** 質問を語の塊に分ける区切り（助詞・空白・句読点）。助詞をまたぐ bigram は作らない */
-const RUN_SEPARATOR = /[のはがをにでともへ\s、。,.?？!！]+/u;
 
 const HIRAGANA_ONLY = /^[ぁ-ゖ]+$/u;
 
@@ -35,8 +33,7 @@ const HIRAGANA_ONLY = /^[ぁ-ゖ]+$/u;
  * 塊ごとに点数を平均するので、長い語（オードエネルギー）が短い語（回復量）を押し流さない。
  */
 export function queryRuns(query: string): string[][] {
-  const runs = normalizeText(query)
-    .split(RUN_SEPARATOR)
+  const runs = contentWords(query)
     .map((run) => tokenize(run).filter((t) => !isLatinTerm(t) || t.length >= 2))
     .filter((terms) => terms.length > 0);
   // ひらがなだけの短い塊（いくら・いつ・どう。bigram 2 個以下）は質問の言い回しで、記事の語ではない
