@@ -1,6 +1,7 @@
 import { X } from 'lucide-react';
 import { useEffect, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { trapTab } from '../lib/focus-trap';
 import { usePresence } from '../lib/use-presence';
 
 /** 閉じるスライド（160ms ease-in）の後に外す */
@@ -21,6 +22,7 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
   useEffect(() => {
     if (!open) return undefined;
     const panel = panelRef.current;
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     panel?.querySelector<HTMLElement>('button, a')?.focus();
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -30,23 +32,14 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
         onClose();
         return;
       }
-      if (event.key !== 'Tab' || !panel) return;
-      const focusables = panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-      if (!first || !last) return;
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
+      trapTab(event, panel);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => {
       document.body.style.overflow = previous;
       window.removeEventListener('keydown', onKeyDown);
+      // 開いた操作の元（メニューボタン）へフォーカスを戻す
+      if (opener?.isConnected) opener.focus();
     };
   }, [open, onClose]);
 
