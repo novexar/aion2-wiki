@@ -39,10 +39,22 @@ export function loadSynonyms(): Promise<SynonymDict> {
   return synonymsPromise;
 }
 
+/** 記事 ID → 本文の Map。形式が違えば例外にし、値が文字列でないものは捨てる */
+export function parsePageTexts(value: unknown): Map<string, string> {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+    throw new Error('search-text.json の形式が正しくありません');
+  }
+  return new Map(
+    Object.entries(value).filter(
+      (entry): entry is [string, string] => typeof entry[1] === 'string',
+    ),
+  );
+}
+
 /** 記事 ID → 本文先頭 800 文字（スニペット用）。失敗時は空の Map を返す */
 export function loadPageTexts(): Promise<ReadonlyMap<string, string>> {
   pageTextsPromise ??= fetchText(textUrl)
-    .then((json) => new Map(Object.entries(JSON.parse(json) as Record<string, string>)))
+    .then((json) => parsePageTexts(JSON.parse(json) as unknown))
     .catch((error: unknown) => {
       console.error('検索用本文の読み込みに失敗しました', error);
       pageTextsPromise = null;

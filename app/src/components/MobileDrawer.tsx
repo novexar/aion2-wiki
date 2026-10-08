@@ -47,7 +47,7 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
   return createPortal(
     <div className="drawer fixed inset-0 z-50" data-open={open || undefined}>
       <div
-        className="drawer-backdrop absolute inset-0 bg-zinc-950/40 dark:bg-black/60"
+        className="drawer-backdrop absolute inset-0 bg-scrim"
         aria-hidden="true"
         onClick={onClose}
       />

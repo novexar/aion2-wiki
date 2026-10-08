@@ -15,7 +15,8 @@ export function ArticleBody({ html }: ArticleBodyProps) {
     (event: MouseEvent<HTMLDivElement>) => {
       if (event.defaultPrevented || event.button !== 0) return;
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      const anchor = (event.target as HTMLElement).closest('a');
+      if (!(event.target instanceof Element)) return;
+      const anchor = event.target.closest('a');
       if (!anchor || anchor.target === '_blank') return;
       const href = anchor.getAttribute('href');
       if (!href || href.startsWith('#')) return;

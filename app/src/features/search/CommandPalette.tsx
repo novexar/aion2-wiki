@@ -167,7 +167,7 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
       role="presentation"
     >
       <motion.div
-        className="absolute inset-0 bg-zinc-950/40 dark:bg-black/60"
+        className="absolute inset-0 bg-scrim"
         aria-hidden="true"
         onClick={onClose}
         initial={{ opacity: 0 }}
