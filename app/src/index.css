@@ -82,6 +82,22 @@
   size-adjust: 98%;
 }
 
+/* ---------- モーション（ui-direction.md 5.1） ---------- */
+@theme {
+  --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  /* transition-colors などの既定値を hover／focus 用の 120ms に揃える */
+  --default-transition-duration: 120ms;
+  --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root {
+  --d-fast: 120ms;
+  --d-base: 200ms;
+  --d-slow: 320ms;
+}
+
 @theme inline {
   --font-sans:
     'Noto Sans JP', 'Noto Sans JP Fallback', system-ui, -apple-system, 'Hiragino Sans',
@@ -142,6 +158,14 @@
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
     border-radius: 4px;
+  }
+
+  /* hover／focus の色変化を 120ms に統一（プロパティは列挙する）。個別の transition-* が優先 */
+  :where(a, button, summary, [role='button'], input, select, textarea) {
+    transition-property:
+      color, background-color, border-color, text-decoration-color, outline-color, box-shadow;
+    transition-duration: var(--d-fast);
+    transition-timing-function: var(--ease-std);
   }
 
   [id] {
@@ -209,7 +233,7 @@
   color: var(--fg-subtle);
   text-decoration: none;
   opacity: 0;
-  transition: opacity 120ms;
+  transition: opacity var(--d-fast) var(--ease-std);
 }
 
 .prose-wiki :is(h2, h3, h4):hover .heading-anchor {
@@ -221,7 +245,7 @@
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent);
   text-underline-offset: 3px;
-  transition: text-decoration-color 120ms;
+  transition: text-decoration-color var(--d-fast) var(--ease-std);
 }
 
 .prose-wiki a:hover {

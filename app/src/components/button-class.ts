@@ -17,5 +17,5 @@ const SIZES: Record<Size, string> = {
 };
 
 export function buttonClass(variant: Variant = 'secondary', size: Size = 'md'): string {
-  return `inline-flex items-center justify-center rounded border font-medium whitespace-nowrap transition-colors disabled:cursor-not-allowed ${VARIANTS[variant]} ${SIZES[size]}`;
+  return `inline-flex items-center justify-center rounded border font-medium whitespace-nowrap transition-[color,background-color,border-color,scale] active:scale-[.98] disabled:active:scale-100 motion-reduce:active:scale-100 disabled:cursor-not-allowed ${VARIANTS[variant]} ${SIZES[size]}`;
 }
