@@ -147,8 +147,8 @@ export default function HomePage() {
   return (
     <>
       <section className="band">
-        <div className={`${PAGE_CONTAINER} relative py-7 sm:py-9`}>
-          <h1 className="text-[22px] leading-snug font-semibold text-white">AION2 非公式Wiki</h1>
+        <div className={`${PAGE_CONTAINER} relative pt-6 pb-6 sm:pt-9 sm:pb-[42px]`}>
+          <h1 className="text-[22px] leading-[1.4] font-semibold text-white">AION2 非公式Wiki</h1>
           <p className="mt-1 text-sm text-header-muted">
             <span className="max-sm:hidden">
               AION2（グローバル版）の攻略情報。{total} 記事、最終更新 {lastUpdated}。

@@ -478,14 +478,14 @@
 .band::before {
   background:
     radial-gradient(ellipse 60% 120% at 15% 0%, rgb(112 210 255 / 0.22), transparent 60%),
-    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(128 80 192 / 0.22), transparent 60%),
+    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(128 80 192 / 0.32), transparent 60%),
     linear-gradient(180deg, #0a1024 0%, #0f1f3c 100%);
 }
 
 [data-theme='dark'] .band::before {
   background:
     radial-gradient(ellipse 60% 120% at 15% 0%, rgb(112 210 255 / 0.16), transparent 60%),
-    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(128 80 192 / 0.18), transparent 60%),
+    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(128 80 192 / 0.26), transparent 60%),
     linear-gradient(180deg, #060a14 0%, #0b1630 100%);
 }
 
