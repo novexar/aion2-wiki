@@ -31,15 +31,18 @@ function setup(initialQuery = '') {
 }
 
 describe('CommandPalette', () => {
-  it('shows only the pages section when nothing was opened yet', () => {
+  it('shows featured articles and the pages section when nothing was opened yet', () => {
     localStorage.removeItem('aion2wiki:recent-articles');
     setup();
     const input = screen.getByRole('combobox', { name: '記事を検索' });
     expect(input).toHaveFocus();
     const options = screen.getAllByRole('option');
-    expect(options[0]).toHaveTextContent('索引');
+    expect(options[0]).toHaveTextContent('オードエネルギー');
+    expect(options[1]).toHaveTextContent('ギーナ');
+    expect(options[2]).toHaveTextContent('索引');
     expect(options.at(-1)).toHaveTextContent('このサイトについて');
     expect(screen.queryByText('最近開いた記事')).toBeNull();
+    expect(screen.getByText('はじめての人へ')).toBeInTheDocument();
     expect(screen.getByText('ページ')).toBeInTheDocument();
   });
 
@@ -74,7 +77,7 @@ describe('CommandPalette', () => {
 
     await user.keyboard('{ArrowUp}{ArrowUp}');
     expect(screen.getAllByRole('option').at(-1)).toHaveAttribute('aria-selected', 'true');
-    expect(screen.getAllByRole('option').at(-1)).toHaveTextContent('すべての結果');
+    expect(screen.getAllByRole('option').at(-1)).toHaveTextContent('すべての結果を見る →');
 
     await user.keyboard('{Enter}');
     expect(onClose).toHaveBeenCalled();

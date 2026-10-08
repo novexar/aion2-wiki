@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, ArrowUp, CornerDownLeft, Loader2, Search } from 'lucide-react';
+import { ArrowDown, ArrowUp, CornerDownLeft, Loader2, Search } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Fragment, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { createPortal } from 'react-dom';
@@ -7,7 +7,7 @@ import { Kbd } from '../../components/Kbd';
 import { categoryLabel } from '../../lib/categories';
 import { articlePath, searchPath } from '../../lib/paths';
 import { readRecentIds } from '../../lib/recent';
-import { articleById } from '../wiki/data';
+import { articleById, featuredArticles } from '../wiki/data';
 import { SearchResultRow } from './SearchResultRow';
 import { useSearch } from './useSearch';
 
@@ -25,6 +25,9 @@ interface PaletteItem {
 }
 
 const RECENT_SECTION = '最近開いた記事';
+/** 履歴が無いときに出す編集者選定の記事（ホームの「はじめての人へ」と同じ FEATURED_LINKS） */
+const FEATURED_SECTION = 'はじめての人へ';
+const FEATURED_LIMIT = 5;
 const PAGES_SECTION = 'ページ';
 
 const QUICK_LINKS = [
@@ -52,26 +55,24 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
 
   const items = useMemo<PaletteItem[]>(() => {
     if (!trimmed) {
-      const recent = readRecentIds().flatMap((id) => {
+      const recentArticles = readRecentIds().flatMap((id) => {
         const a = articleById.get(id);
-        return a
-          ? [
-              {
-                key: `recent-${a.id}`,
-                section: RECENT_SECTION,
-                to: articlePath(a.category, a.id),
-                render: () => (
-                  <span className="flex min-w-0 items-center gap-2">
-                    <span className="truncate">{a.title}</span>
-                    <span className="shrink-0 text-xs text-fg-subtle">
-                      {categoryLabel(a.category)}
-                    </span>
-                  </span>
-                ),
-              },
-            ]
-          : [];
+        return a ? [a] : [];
       });
+      const section = recentArticles.length > 0 ? RECENT_SECTION : FEATURED_SECTION;
+      const articles =
+        recentArticles.length > 0 ? recentArticles : featuredArticles().slice(0, FEATURED_LIMIT);
+      const recent = articles.map((a) => ({
+        key: `article-${a.id}`,
+        section,
+        to: articlePath(a.category, a.id),
+        render: () => (
+          <span className="flex min-w-0 items-center gap-2">
+            <span className="truncate">{a.title}</span>
+            <span className="shrink-0 text-xs text-fg-subtle">{categoryLabel(a.category)}</span>
+          </span>
+        ),
+      }));
       const quick = QUICK_LINKS.map((l) => ({
         key: `quick-${l.to}`,
         section: PAGES_SECTION,
@@ -90,12 +91,7 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
       {
         key: 'all-results',
         to: searchPath(trimmed),
-        render: () => (
-          <span className="flex items-center gap-2 text-fg-muted">
-            <ArrowRight aria-hidden="true" className="size-4" />
-            すべての結果
-          </span>
-        ),
+        render: () => <span className="text-fg-muted">すべての結果を見る →</span>,
       },
     ];
   }, [trimmed, results]);
@@ -214,10 +210,15 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
           <button
             type="button"
             onClick={onClose}
-            className="rounded text-fg-subtle hover:text-fg"
+            className="inline-flex h-9 items-center rounded px-2 text-sm text-fg-muted hover:text-fg sm:h-auto sm:px-0 sm:text-fg-subtle"
             aria-label="閉じる"
           >
-            <Kbd>Esc</Kbd>
+            <span className="hidden sm:inline-flex">
+              <Kbd>Esc</Kbd>
+            </span>
+            <span aria-hidden="true" className="sm:hidden">
+              閉じる
+            </span>
           </button>
         </div>
 
