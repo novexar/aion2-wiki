@@ -1,17 +1,20 @@
 import { Suspense } from 'react';
-import { Link, Outlet } from 'react-router';
+import { Link, Outlet, useLocation } from 'react-router';
 import { useChatPanel } from '../features/chat/chat-panel-store';
 import { ChatPanel } from '../features/chat/ChatPanel';
 import { PAGE_CONTAINER } from '../lib/layout';
 import { useMediaQuery, WIDE_QUERY } from '../lib/useMediaQuery';
+import { routeFadeScope } from '../lib/route-motion';
 import { REPO_URL } from '../lib/site';
 import { Header } from './Header';
 import { PageLoading } from './PageLoading';
+import { RouteFade } from './RouteFade';
 import { ScrollManager } from './ScrollManager';
 
 export function Layout() {
   const panel = useChatPanel();
   const desktop = useMediaQuery(WIDE_QUERY, true);
+  const { pathname } = useLocation();
   // lg 以上でパネルを開いている間は、ページ全体をパネル幅だけ左に縮める（重ねない）
   const style = panel.open && desktop ? { paddingRight: panel.width } : undefined;
   return (
@@ -20,7 +23,13 @@ export function Layout() {
       <Header />
       <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
         <Suspense fallback={<PageLoading />}>
-          <Outlet />
+          {routeFadeScope(pathname) === 'page' ? (
+            <RouteFade>
+              <Outlet />
+            </RouteFade>
+          ) : (
+            <Outlet />
+          )}
         </Suspense>
       </main>
       <footer className="border-t border-line bg-surface">

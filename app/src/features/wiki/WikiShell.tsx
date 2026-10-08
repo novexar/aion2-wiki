@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { CategoryNav } from '../../components/CategoryNav';
+import { RouteFade } from '../../components/RouteFade';
 import { PAGE_CONTAINER } from '../../lib/layout';
 import { useShellColumns, type ShellColumns } from '../../lib/shell-layout';
 
@@ -39,7 +40,7 @@ export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
           </div>
         </aside>
       )}
-      <div className={`min-w-0 py-8 ${spanTwo ? 'lg:col-span-2' : ''}`}>{children}</div>
+      <RouteFade className={`min-w-0 py-8 ${spanTwo ? 'lg:col-span-2' : ''}`}>{children}</RouteFade>
       {showAside && (
         // sticky は目次（nav）自身に付ける。aside は行の高さいっぱいに伸びるので末尾まで追従する
         <aside

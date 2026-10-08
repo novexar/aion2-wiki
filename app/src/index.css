@@ -412,6 +412,18 @@
   scrollbar-color: var(--line-strong) transparent;
 }
 
+/* ---------- ルート遷移（5.2 #1）: 入場のみ。opacity 0→1、y 6px→0 ---------- */
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.route-enter {
+  animation: route-enter var(--d-base) var(--ease-out) backwards;
+}
+
 /* ---------- チャットパネル ---------- */
 @keyframes chat-panel-in {
   from {
