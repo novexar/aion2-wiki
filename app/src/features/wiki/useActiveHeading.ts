@@ -63,6 +63,6 @@ export function useActiveHeading(ids: readonly string[]): string | null {
     };
   }, [ids]);
 
-  // 記事が切り替わった直後は前の記事の ID を返さない
-  return active !== null && ids.includes(active) ? active : null;
+  // 記事が切り替わった直後は前の記事の ID を返さない。ページ先頭では先頭の見出しを現在位置にする
+  return active !== null && ids.includes(active) ? active : (ids[0] ?? null);
 }

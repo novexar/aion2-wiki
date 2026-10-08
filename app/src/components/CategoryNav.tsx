@@ -101,7 +101,7 @@ function CategorySection({
                 </NavLink>
               </li>
               {category.articles.length === 0 && (
-                <li className="py-2 pl-10 text-[13px] text-fg-subtle">準備中</li>
+                <li className="py-2 pl-10 text-[13px] text-fg-subtle">記事はまだありません</li>
               )}
               {category.articles.map((a) => (
                 <li key={a.id}>

@@ -4,6 +4,7 @@ import { CategoryNav } from '../../components/CategoryNav';
 import { RouteFade } from '../../components/RouteFade';
 import { PAGE_CONTAINER } from '../../lib/layout';
 import { routeFadeScope } from '../../lib/route-motion';
+import { skipToContent } from '../../lib/skip-link';
 import { useShellColumns, type ShellColumns } from '../../lib/shell-layout';
 
 interface WikiShellProps {
@@ -31,7 +32,12 @@ export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
   const showSidebar = columns.squeezed ? columns.sidebar : true;
   const showAside = !wide && (columns.squeezed ? columns.toc : true);
   const spanTwo = wide && !columns.squeezed;
-  const mainClass = `min-w-0 py-8 ${spanTwo ? 'lg:col-span-2' : ''}`;
+  const content = (
+    <div id="content" tabIndex={-1} className="focus:outline-none">
+      {children}
+    </div>
+  );
+  const mainClass = `min-w-0 pt-8 pb-16 ${spanTwo ? 'lg:col-span-2' : ''}`;
   return (
     <div className={`${PAGE_CONTAINER} grid ${gridClass(columns, wide)}`}>
       {showSidebar && (
@@ -40,6 +46,13 @@ export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
           aria-label="サイドバー"
         >
           <div className="scroll-thin sticky top-(--header-h) max-h-[calc(100dvh-var(--header-h))] overflow-y-auto pt-4 pr-2 pb-16">
+            <a
+              href="#content"
+              onClick={skipToContent}
+              className="sr-only focus:not-sr-only focus:absolute focus:top-1 focus:left-1 focus:z-10 focus:rounded focus:bg-fg focus:px-3 focus:py-2 focus:text-canvas"
+            >
+              サイドバーを飛ばす
+            </a>
             <CategoryNav />
             <p className="mt-2 border-t border-line px-3 pt-3 text-sm">
               <Link to="/index" className="text-fg-muted hover:text-fg hover:underline">
@@ -50,9 +63,9 @@ export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
         </aside>
       )}
       {routeFadeScope(pathname) === 'home' ? (
-        <div className={mainClass}>{children}</div>
+        <div className={mainClass}>{content}</div>
       ) : (
-        <RouteFade className={mainClass}>{children}</RouteFade>
+        <RouteFade className={mainClass}>{content}</RouteFade>
       )}
       {showAside && (
         // sticky は目次（nav）自身に付ける。aside は行の高さいっぱいに伸びるので末尾まで追従する

@@ -33,13 +33,14 @@ function isPlainClick(event: MouseEvent<HTMLAnchorElement>): boolean {
   return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
 }
 
-/** 見出しへスクロールし（reduced motion では即時）、URL の #hash を更新する */
+/** 見出しへスクロールし、URL の #hash を更新する */
 function scrollToHeading(event: MouseEvent<HTMLAnchorElement>, id: string): void {
   if (!isPlainClick(event)) return;
   const target = document.getElementById(id);
   if (!target) return;
   event.preventDefault();
-  target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+  // スクロールの滑らかさは CSS の scroll-behavior（reduced motion 対応済み）に任せる
+  target.scrollIntoView({ block: 'start' });
   window.history.replaceState(window.history.state, '', `#${encodeURIComponent(id)}`);
 }
 
@@ -52,9 +53,9 @@ function scrollToTop(event: MouseEvent<HTMLAnchorElement>): void {
 }
 
 function itemClass(isActive: boolean, isParent: boolean): string {
-  if (isActive) return 'font-bold text-fg';
-  if (isParent) return 'text-fg';
-  return 'text-fg-muted hover:text-fg';
+  if (isActive) return 'font-bold text-fg hover:bg-muted';
+  if (isParent) return 'text-fg hover:bg-muted';
+  return 'text-fg-muted hover:bg-muted hover:text-fg';
 }
 
 /** 現在位置の金線。layoutId で見出し間を滑らせる（200ms ease-out、reduced motion では即時） */
@@ -84,7 +85,7 @@ function TocList({ headings, activeId }: TocProps) {
               onClick={(e) => scrollToHeading(e, h.id)}
               aria-current={isActive ? 'location' : undefined}
               data-toc-id={h.id}
-              className={`-ml-px block border-l-2 border-transparent py-1 pr-1 leading-snug ${h.depth === 3 ? 'pl-6' : 'pl-3'} ${itemClass(isActive, h.id === parentId)}`}
+              className={`-mx-2 block rounded-[4px] border-l-2 border-transparent py-1 pr-2 leading-snug ${h.depth === 3 ? 'pl-[31px]' : 'pl-[19px]'} ${itemClass(isActive, h.id === parentId)}`}
             >
               {h.text}
             </a>
@@ -105,7 +106,10 @@ function useKeepActiveVisible(activeId: string | null) {
     if (!item) return;
     const top = item.offsetTop;
     if (top < box.scrollTop || top + item.offsetHeight > box.scrollTop + box.clientHeight) {
-      box.scrollTop = Math.max(0, top - box.clientHeight / 3);
+      box.scrollTo({
+        top: Math.max(0, top - box.clientHeight / 3),
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+      });
     }
   }, [activeId]);
   return ref;
@@ -121,7 +125,7 @@ export function Toc({ headings, activeId }: TocProps) {
       aria-label="目次"
       className="sticky top-[calc(var(--header-h)+1rem)] flex max-h-[calc(100dvh-var(--header-h)-2rem)] flex-col"
     >
-      <p className="mb-2 text-xs font-bold text-fg">目次</p>
+      <p className="mb-2 text-[13px] font-bold text-fg">目次</p>
       {/* relative: 子の offsetTop をこの箱基準にする */}
       <motion.div ref={ref} layoutScroll className="scroll-thin relative min-h-0 overflow-y-auto">
         <TocList headings={headings} activeId={activeId} />

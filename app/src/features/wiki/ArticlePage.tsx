@@ -13,7 +13,9 @@ import { ArticleBody } from './ArticleBody';
 import { ArticleLinkGrid } from './ArticleList';
 import { Breadcrumb } from './Breadcrumb';
 import { pushRecentId } from '../../lib/recent';
-import { articleById, loadArticle } from './data';
+import { articleById, loadArticle, nav } from './data';
+import { adjacentArticles } from './adjacent';
+import { PrevNext } from './PrevNext';
 import { SourcesList } from './SourcesList';
 import { MobileToc, Toc } from './Toc';
 import { useActiveHeading } from './useActiveHeading';
@@ -62,6 +64,33 @@ function useScrollToHash(ready: boolean): void {
   }, [ready, hash]);
 }
 
+/** 別名行。先頭に「別名: 」ラベル、表示は 2 件まで、残りは「他 n 件」で展開 */
+const ALIAS_LIMIT = 2;
+
+function Aliases({ aliases }: { readonly aliases: readonly string[] }) {
+  const [expanded, setExpanded] = useState(false);
+  if (aliases.length === 0) return null;
+  const hidden = aliases.length - ALIAS_LIMIT;
+  const shown = expanded || hidden <= 0 ? aliases : aliases.slice(0, ALIAS_LIMIT);
+  return (
+    <p className="mt-2 text-[13px] text-fg-subtle">
+      別名: {shown.join('、')}
+      {hidden > 0 && !expanded && (
+        <>
+          {'、'}
+          <button
+            type="button"
+            onClick={() => setExpanded(true)}
+            className="underline decoration-line-strong underline-offset-2 hover:text-fg"
+          >
+            他 {hidden} 件
+          </button>
+        </>
+      )}
+    </p>
+  );
+}
+
 function ArticleView({ article }: { readonly article: Article }) {
   useDocumentMeta(article.title, article.summary);
   const headingIds = useMemo(() => article.headings.map((h) => h.id), [article.headings]);
@@ -76,6 +105,9 @@ function ArticleView({ article }: { readonly article: Article }) {
     .map((id) => articleById.get(id))
     .filter((a): a is NavArticle => a !== undefined);
 
+  const siblings = nav.categories.find((c) => c.id === article.category)?.articles ?? [];
+  const { prev, next } = adjacentArticles(siblings, article.id);
+
   return (
     <WikiShell aside={<Toc headings={article.headings} activeId={activeId} />}>
       <article>
@@ -83,14 +115,11 @@ function ArticleView({ article }: { readonly article: Article }) {
           items={[
             { label: 'ホーム', to: '/' },
             { label: categoryLabel(article.category), to: categoryPath(article.category) },
-            { label: article.title },
           ]}
         />
         <header className="mb-8">
-          <h1 className="text-[1.75rem] leading-tight font-bold text-balance">{article.title}</h1>
-          {article.aliases.length > 0 && (
-            <p className="mt-2 text-[13px] text-fg-subtle">{article.aliases.join('、')}</p>
-          )}
+          <h1 className="text-[1.75rem] leading-[1.35] font-bold text-balance">{article.title}</h1>
+          <Aliases aliases={article.aliases} />
           <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-fg-muted">
             <ConfidenceBadge confidence={article.confidence} hideVerified linked />
             {checkedAt && (
@@ -104,45 +133,50 @@ function ArticleView({ article }: { readonly article: Article }) {
         <MobileToc headings={article.headings} activeId={activeId} />
         <ArticleBody html={article.html} />
         {article.tags.length > 0 && (
-          <p className="mt-10 text-[13px] text-fg-muted">
-            タグ:{' '}
-            {article.tags.map((t, i) => (
-              <span key={t}>
-                {i > 0 && '、'}
+          <ul aria-label="タグ" className="mt-10 flex flex-wrap gap-2">
+            {article.tags.map((t) => (
+              <li key={t}>
                 <Link
                   to={`/index?view=tag&tag=${encodeURIComponent(t)}`}
-                  className="text-fg hover:underline"
+                  className="block rounded-[4px] border border-line px-2 py-0.5 text-xs text-link hover:bg-muted"
                 >
-                  {t}
+                  #{t}
                 </Link>
-              </span>
+              </li>
             ))}
-          </p>
+          </ul>
         )}
-        <SourcesList sources={article.sources} />
-
-        <p className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          <a
-            href={ISSUES_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-fg hover:underline"
-          >
-            誤りを報告 ↗
-          </a>
-          <Link to="/chat" className="text-fg hover:underline">
-            AI チャットで質問する
-          </Link>
-        </p>
+        <SourcesList
+          sources={article.sources}
+          actions={
+            <span className="flex flex-wrap gap-x-4 gap-y-1">
+              <a
+                href={ISSUES_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-fg hover:underline"
+              >
+                誤りを報告 ↗
+              </a>
+              <Link to="/chat" className="hover:text-fg hover:underline">
+                AI チャットで質問する
+              </Link>
+            </span>
+          }
+        />
 
         {related.length > 0 && (
           <section aria-labelledby="related" className="mt-12">
-            <h2 id="related" className="mb-3 text-base font-semibold">
+            <h2
+              id="related"
+              className="sec-title mb-3 border-b border-line pb-[0.4em] text-xl leading-[1.4] font-bold"
+            >
               関連記事
             </h2>
             <ArticleLinkGrid articles={related} />
           </section>
         )}
+        <PrevNext prev={prev} next={next} />
       </article>
     </WikiShell>
   );

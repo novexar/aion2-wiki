@@ -102,7 +102,7 @@ describe('Toc scroll-spy rendering', () => {
 
   it('marks the active row bold with the accent bar and lightly emphasizes its parent h2', () => {
     render(<Toc headings={headings} activeId="b" />);
-    expect(screen.getByText('B')).toHaveClass('font-bold', 'pl-6');
+    expect(screen.getByText('B')).toHaveClass('font-bold', 'pl-[31px]');
     // 金線は 1 本だけで、現在の行にだけ描く（layoutId で行間を滑る）
     const markers = document.querySelectorAll('[data-toc-marker]');
     expect(markers).toHaveLength(1);

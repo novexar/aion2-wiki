@@ -410,8 +410,7 @@
 }
 
 .prose-wiki table {
-  width: auto;
-  min-width: min(100%, 76ch);
+  width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
   line-height: 1.6;

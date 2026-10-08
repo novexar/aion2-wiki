@@ -4,14 +4,27 @@ import type { Plugin } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
 import { HeadingSlugger } from './slugger';
 
-/** 表を横スクロール用のラッパーで囲む（キーボードでもスクロールできるよう tabindex を付与） */
+/** 表を横スクロール用のラッパーで囲む（キーボードでもスクロールできるよう tabindex を付与）。リージョン名は直前の見出し */
 export const rehypeWrapTables: Plugin<[], Root> = () => (tree) => {
+  let heading = '';
+  let count = 0;
   visit(tree, 'element', (node: Element, index, parent) => {
+    if (/^h[1-6]$/.test(node.tagName)) {
+      // 見出しアンカー（末尾の "#"）は名前に含めない
+      heading = hastToString(node).replace(/#$/, '').trim();
+      return;
+    }
     if (node.tagName !== 'table' || !parent || index === undefined) return;
+    count += 1;
     const wrapper: Element = {
       type: 'element',
       tagName: 'div',
-      properties: { className: ['table-wrap'], tabIndex: 0, role: 'region', ariaLabel: '表' },
+      properties: {
+        className: ['table-wrap'],
+        tabIndex: 0,
+        role: 'region',
+        ariaLabel: heading ? `${heading} の表` : `表 ${count}`,
+      },
       children: [node],
     };
     parent.children.splice(index, 1, wrapper);
@@ -62,7 +75,7 @@ const CALLOUT_KINDS: Readonly<Record<string, string>> = {
   補足: 'note',
 };
 
-/** 先頭が `**ラベル**：` の blockquote を `<aside class="callout" data-kind>` に変換する */
+/** 先頭が `**ラベル**：` の blockquote を `<div class="callout" role="note" aria-label data-kind>` に変換する */
 export const rehypeCallouts: Plugin<[], Root> = () => (tree) => {
   visit(tree, 'element', (node: Element) => {
     if (node.tagName !== 'blockquote') return;
@@ -73,8 +86,13 @@ export const rehypeCallouts: Plugin<[], Root> = () => (tree) => {
     const kind = CALLOUT_KINDS[hastToString(strong).trim()];
     const next = para.children[para.children.indexOf(strong) + 1];
     if (!kind || next?.type !== 'text' || !/^\s*[：:]/.test(next.value)) return;
-    node.tagName = 'aside';
-    node.properties = { className: ['callout'], dataKind: kind };
+    node.tagName = 'div';
+    node.properties = {
+      className: ['callout'],
+      role: 'note',
+      ariaLabel: hastToString(strong).trim(),
+      dataKind: kind,
+    };
   });
 };
 

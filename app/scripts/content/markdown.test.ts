@@ -36,8 +36,13 @@ describe('renderMarkdown', () => {
   it('renders GFM tables wrapped in a scrollable region', async () => {
     const { html } = await renderMarkdown('| a | b |\n| - | - |\n| 1 | 2 |\n', options);
     expect(html).toContain(
-      '<div class="table-wrap" tabindex="0" role="region" aria-label="表"><table>',
+      '<div class="table-wrap" tabindex="0" role="region" aria-label="表 1"><table>',
     );
+  });
+
+  it('names table regions after the preceding heading', async () => {
+    const { html } = await renderMarkdown('## 報酬\n\n| a |\n| - |\n| 1 |\n', options);
+    expect(html).toContain('aria-label="報酬 の表"');
   });
 
   it('adds rel="noopener noreferrer" to external links', async () => {
@@ -73,7 +78,9 @@ describe('renderMarkdown', () => {
 
   it('turns labelled blockquotes into callouts', async () => {
     const { html } = await renderMarkdown('> **注意**：消える\n\n> 普通の引用\n', options);
-    expect(html).toContain('<aside class="callout" data-kind="caution">');
+    expect(html).toContain(
+      '<div class="callout" role="note" aria-label="注意" data-kind="caution">',
+    );
     expect(html).toContain('<blockquote>');
   });
 

@@ -91,7 +91,7 @@ describe('Toc', () => {
     );
     expect(screen.getByRole('navigation', { name: '目次' })).toBeInTheDocument();
     expect(screen.getByText('B')).toHaveAttribute('aria-current', 'location');
-    expect(screen.getByText('B')).toHaveClass('pl-6');
+    expect(screen.getByText('B')).toHaveClass('pl-[31px]');
     expect(screen.getByText('A')).not.toHaveAttribute('aria-current');
   });
 

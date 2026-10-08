@@ -1,3 +1,4 @@
+import { skipToContent } from '../lib/skip-link';
 import { Menu, Search, Settings, Sparkles } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { NavLink, useMatch, useNavigate } from 'react-router';
@@ -55,6 +56,7 @@ export function Header() {
     <header className="sticky top-0 z-40 h-(--header-h) hdr-line border-b bg-header-bg text-header-fg">
       <a
         href="#main"
+        onClick={skipToContent}
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-fg focus:px-3 focus:py-2 focus:text-canvas"
       >
         本文へスキップ
