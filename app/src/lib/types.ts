@@ -109,4 +109,6 @@ export interface PageSearchStored {
   readonly summary: string;
   readonly confidence: Confidence;
   readonly aliases: string;
+  /** 仮名の読み（前方一致の判定用。無い記事もある） */
+  readonly reading?: string;
 }

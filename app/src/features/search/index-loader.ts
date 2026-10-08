@@ -39,7 +39,7 @@ export function loadSynonyms(): Promise<SynonymDict> {
   return synonymsPromise;
 }
 
-/** 記事 ID → 本文先頭 2,000 文字（スニペット用）。失敗時は空の Map を返す */
+/** 記事 ID → 本文先頭 800 文字（スニペット用）。失敗時は空の Map を返す */
 export function loadPageTexts(): Promise<ReadonlyMap<string, string>> {
   pageTextsPromise ??= fetchText(textUrl)
     .then((json) => new Map(Object.entries(JSON.parse(json) as Record<string, string>)))

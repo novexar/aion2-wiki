@@ -329,6 +329,7 @@ function buildPageIndex(articles: readonly Article[]): unknown {
       confidence: a.confidence,
       summary: a.summary,
       aliases: a.aliases.join(' / '),
+      reading: a.reading ?? '',
       tags: a.tags.join(' '),
       headings: a.headings.map((h) => h.text).join(' '),
     })),
@@ -336,8 +337,8 @@ function buildPageIndex(articles: readonly Article[]): unknown {
   return index.toJSON();
 }
 
-/** 記事ごとの本文先頭 2,000 文字。検索の本文一致（部分一致）とスニペットに使う（インデックスには含めない） */
-export const SEARCH_TEXT_LIMIT = 2000;
+/** 記事ごとの本文先頭 800 文字。検索の本文一致（部分一致）とスニペットに使う（インデックスには含めない） */
+export const SEARCH_TEXT_LIMIT = 800;
 
 function buildPageTexts(
   articles: readonly Article[],

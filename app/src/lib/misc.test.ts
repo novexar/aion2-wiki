@@ -47,27 +47,35 @@ describe('gojuon', () => {
   });
 
   it('finds latin labels for the A–Z index', () => {
-    expect(latinGroup({ title: 'ギーナ', aliases: ['Kinah'] })).toEqual({
+    expect(latinGroup({ title: 'ギーナ', aliases: ['Kinah'] })).toMatchObject({
       letter: 'K',
       label: 'Kinah',
     });
-    expect(latinGroup({ title: 'PvP の基礎', aliases: [] })).toEqual({
+    expect(latinGroup({ title: 'PvP の基礎', aliases: [] })).toMatchObject({
       letter: 'P',
       label: 'PvP の基礎',
     });
     expect(latinGroup({ title: 'ギーナ', aliases: [] })).toBeNull();
   });
 
+  it('A–Z は比較用に元の名前を返す', () => {
+    expect(latinGroup({ title: '増幅', aliases: ['amplification'] })?.source).toBe('amplification');
+    expect(latinGroup({ title: 'ＰｖＰ', aliases: [] })).toMatchObject({
+      label: 'PvP',
+      source: 'ＰｖＰ',
+    });
+  });
+
   it('A–Z は先頭を大文字にし、略語より長い別名を採る', () => {
-    expect(latinGroup({ title: '代替', aliases: ['alts', 'Alt characters'] })).toEqual({
+    expect(latinGroup({ title: '代替', aliases: ['alts', 'Alt characters'] })).toMatchObject({
       letter: 'A',
       label: 'Alt characters',
     });
-    expect(latinGroup({ title: '増幅', aliases: ['AMP', 'amplification'] })).toEqual({
+    expect(latinGroup({ title: '増幅', aliases: ['AMP', 'amplification'] })).toMatchObject({
       letter: 'A',
       label: 'Amplification',
     });
-    expect(latinGroup({ title: '経験値', aliases: ['EXP'] })).toEqual({
+    expect(latinGroup({ title: '経験値', aliases: ['EXP'] })).toMatchObject({
       letter: 'E',
       label: 'EXP',
     });

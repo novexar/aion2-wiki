@@ -20,6 +20,8 @@ export interface IndexEntry {
   readonly article: ArticleMeta;
   /** 表示名（A–Z では英語の別名を使う） */
   readonly label: string;
+  /** label の元になった名前（タイトルまたは別名そのまま。重複表示の判定に使う） */
+  readonly source: string;
 }
 
 export interface IndexGroup {
@@ -59,7 +61,7 @@ function groupKana(articles: readonly ArticleMeta[]): IndexGroup[] {
   const map = new Map<string, IndexEntry[]>();
   for (const a of articles) {
     const key = kanaGroup(a);
-    map.set(key, [...(map.get(key) ?? []), { article: a, label: a.title }]);
+    map.set(key, [...(map.get(key) ?? []), { article: a, label: a.title, source: a.title }]);
   }
   return order
     .filter((k) => map.has(k))
@@ -75,7 +77,10 @@ function groupLatin(articles: readonly ArticleMeta[]): IndexGroup[] {
   for (const a of articles) {
     const g = latinGroup(a);
     if (!g) continue;
-    map.set(g.letter, [...(map.get(g.letter) ?? []), { article: a, label: g.label }]);
+    map.set(g.letter, [
+      ...(map.get(g.letter) ?? []),
+      { article: a, label: g.label, source: g.source },
+    ]);
   }
   return [...map.keys()].sort().map((k) => ({
     key: k,
@@ -89,7 +94,9 @@ function groupCategory(articles: readonly ArticleMeta[]): IndexGroup[] {
     key: c.id,
     label: c.label,
     entries: sortEntries(
-      articles.filter((a) => a.category === c.id).map((a) => ({ article: a, label: a.title })),
+      articles
+        .filter((a) => a.category === c.id)
+        .map((a) => ({ article: a, label: a.title, source: a.title })),
     ),
   })).filter((g) => g.entries.length > 0);
 }
@@ -99,7 +106,7 @@ function groupTag(articles: readonly ArticleMeta[], tag: string | null): IndexGr
   for (const a of articles) {
     for (const t of a.tags) {
       if (tag && t !== tag) continue;
-      map.set(t, [...(map.get(t) ?? []), { article: a, label: a.title }]);
+      map.set(t, [...(map.get(t) ?? []), { article: a, label: a.title, source: a.title }]);
     }
   }
   return [...map.keys()]

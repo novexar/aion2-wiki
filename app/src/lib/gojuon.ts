@@ -54,19 +54,22 @@ const isAbbreviation = (text: string): boolean => text.length <= 4 && /^[A-Z0-9]
  */
 export function latinGroup(
   meta: Pick<ArticleMeta, 'title' | 'aliases'>,
-): { letter: string; label: string } | null {
+): { letter: string; label: string; source: string } | null {
   const title = meta.title.normalize('NFKC').trim();
   const aliases = meta.aliases
-    .map((a) => a.normalize('NFKC').trim())
-    .filter(startsLatin)
+    .map((a) => ({ source: a, norm: a.normalize('NFKC').trim() }))
+    .filter((a) => startsLatin(a.norm))
     .sort(
       (a, b) =>
-        Number(isAbbreviation(a)) - Number(isAbbreviation(b)) ||
-        b.length - a.length ||
-        a.localeCompare(b, 'en'),
+        Number(isAbbreviation(a.norm)) - Number(isAbbreviation(b.norm)) ||
+        b.norm.length - a.norm.length ||
+        a.norm.localeCompare(b.norm, 'en'),
     );
-  const picked = startsLatin(title) ? title : aliases[0];
+  const titleLatin = startsLatin(title);
+  const picked = titleLatin ? title : aliases[0]?.norm;
   if (!picked) return null;
+  // 表示用に整形しても、元の名前（比較用）は変えずに返す
+  const source = titleLatin ? meta.title : (aliases[0]?.source ?? picked);
   const label = `${picked[0]?.toUpperCase() ?? ''}${picked.slice(1)}`;
-  return { letter: label[0] ?? '', label };
+  return { letter: label[0] ?? '', label, source };
 }

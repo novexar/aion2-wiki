@@ -179,11 +179,11 @@ export default function IndexPage() {
                   </span>
                 </h2>
                 <ul className={LIST_COLUMNS}>
-                  {g.entries.map(({ article: a, label }) => {
+                  {g.entries.map(({ article: a, label, source }) => {
                     const names =
-                      label === a.title
+                      source === a.title
                         ? a.aliases
-                        : [a.title, ...a.aliases.filter((x) => x !== label)];
+                        : [a.title, ...a.aliases.filter((x) => x !== source)];
                     const { shown, rest } = aliasPreview(names);
                     return (
                       <li key={`${g.key}-${a.id}`} className={LIST_ITEM}>
