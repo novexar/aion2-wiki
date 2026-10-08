@@ -42,7 +42,7 @@ export function Composer({ disabled, isStreaming, onSend, onStop }: ComposerProp
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-md border border-line-input bg-canvas p-2 focus-within:border-fg-subtle"
+      className="rounded border border-line-input bg-canvas p-2 focus-within:border-fg-subtle"
     >
       <label htmlFor={CHAT_INPUT_ID} className="sr-only">
         質問を入力

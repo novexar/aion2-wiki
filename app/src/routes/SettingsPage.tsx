@@ -252,7 +252,7 @@ export default function SettingsPage() {
             onClick={close}
             aria-label="閉じる"
             title="閉じる"
-            className="inline-flex size-9 items-center justify-center rounded-md text-fg-muted transition-colors hover:bg-muted hover:text-fg"
+            className="inline-flex size-9 items-center justify-center rounded text-fg-muted transition-colors hover:bg-muted hover:text-fg"
           >
             <X aria-hidden="true" className="size-[18px]" />
           </button>

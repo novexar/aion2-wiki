@@ -4,7 +4,7 @@ export function Logo() {
   return (
     <Link
       to="/"
-      className="flex shrink-0 items-center gap-2 rounded-md text-header-fg"
+      className="flex shrink-0 items-center gap-2 rounded text-header-fg"
       aria-label="AION2 非公式Wiki ホーム"
     >
       <span aria-hidden="true" className="logo-mark" />

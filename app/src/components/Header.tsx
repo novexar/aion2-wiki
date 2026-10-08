@@ -27,7 +27,7 @@ type NavTone = 'header' | 'drawer';
 
 /** ヘッダー（濃色地）とドロワー（明色地）で文字色を切り替える */
 function navClass({ isActive }: { isActive: boolean }, tone: NavTone = 'header'): string {
-  const base = 'rounded-md px-2.5 py-1.5 text-sm whitespace-nowrap transition-colors';
+  const base = 'rounded px-2.5 py-1.5 text-sm whitespace-nowrap transition-colors';
   if (tone === 'drawer') {
     return `${base} flex min-h-11 items-center ${
       isActive ? 'bg-muted font-semibold text-fg' : 'text-fg hover:bg-muted'
@@ -55,7 +55,7 @@ export function Header() {
     <header className="sticky top-0 z-40 h-(--header-h) hdr-line border-b bg-header-bg text-header-fg">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-fg focus:px-3 focus:py-2 focus:text-canvas"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-fg focus:px-3 focus:py-2 focus:text-canvas"
       >
         本文へスキップ
       </a>
@@ -63,13 +63,13 @@ export function Header() {
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}
-          className={`size-9 items-center justify-center rounded-md text-header-muted hover:bg-white/8 hover:text-white ${
+          className={`size-9 items-center justify-center rounded text-header-muted hover:bg-white/8 hover:text-white ${
             sidebar ? 'hidden' : 'inline-flex'
           }`}
           aria-label="メニューを開く"
           aria-expanded={drawerOpen}
         >
-          <Menu aria-hidden="true" className="size-5" />
+          <Menu aria-hidden="true" className="size-[18px]" />
         </button>
         <Logo />
         <nav
@@ -87,22 +87,25 @@ export function Header() {
             type="button"
             onClick={() => open()}
             className={`group hidden h-9 items-center gap-2 rounded border border-white/22 bg-white/6 px-2.5 text-sm text-header-muted transition-colors hover:border-white/45 hover:text-white sm:flex ${
-              narrow ? 'w-44' : 'w-56 lg:w-64'
+              narrow ? 'w-44' : 'w-64 xl:w-80'
             }`}
             aria-label="サイト内検索を開く"
             aria-keyshortcuts="Control+K Meta+K"
           >
-            <Search aria-hidden="true" className="size-4" />
+            <Search aria-hidden="true" className="size-[18px]" />
             <span className="flex-1 text-left">検索</span>
-            <span className="flex gap-0.5">
+            <span className="flex items-center gap-0.5">
               <Kbd tone="header">{modKeyLabel()}</Kbd>
+              <span aria-hidden="true" className="text-[11px] text-header-muted">
+                +
+              </span>
               <Kbd tone="header">K</Kbd>
             </span>
           </button>
           <button
             type="button"
             onClick={() => open()}
-            className="inline-flex size-9 items-center justify-center rounded-md text-header-muted hover:bg-white/8 hover:text-white sm:hidden"
+            className="inline-flex size-9 items-center justify-center rounded text-header-muted hover:bg-white/8 hover:text-white sm:hidden"
             aria-label="サイト内検索を開く"
           >
             <Search aria-hidden="true" className="size-[18px]" />
@@ -116,11 +119,11 @@ export function Header() {
             aria-keyshortcuts="Control+J"
             title={`AI チャット（${modKeyLabel()}+J）`}
             aria-label="AI チャット"
-            className={`inline-flex h-9 items-center gap-1.5 rounded-md px-2.5 text-sm whitespace-nowrap transition-colors hover:bg-white/8 hover:text-white ${
+            className={`inline-flex h-9 items-center gap-1.5 rounded px-2.5 text-sm whitespace-nowrap transition-colors hover:bg-white/8 hover:text-white ${
               chat.open ? 'bg-white/10 font-medium text-white' : 'text-header-muted'
             }`}
           >
-            <Sparkles aria-hidden="true" className="size-4" />
+            <Sparkles aria-hidden="true" className="size-[18px]" />
             <span className="max-sm:hidden">AI チャット</span>
           </button>
           <button
@@ -129,7 +132,7 @@ export function Header() {
             aria-expanded={settingsOpen}
             aria-label="設定"
             title="設定"
-            className={`inline-flex size-9 items-center justify-center rounded-md transition-colors hover:bg-white/8 hover:text-white ${
+            className={`inline-flex size-9 items-center justify-center rounded transition-colors hover:bg-white/8 hover:text-white ${
               settingsOpen ? 'bg-white/10 text-white' : 'text-header-muted'
             }`}
           >
@@ -161,7 +164,7 @@ export function Header() {
             }}
             className={`${navClass({ isActive: false }, 'drawer')} gap-2 text-left`}
           >
-            <Sparkles aria-hidden="true" className="size-4" />
+            <Sparkles aria-hidden="true" className="size-[18px]" />
             AI チャット
           </button>
         </nav>

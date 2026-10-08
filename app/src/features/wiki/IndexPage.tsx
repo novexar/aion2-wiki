@@ -88,7 +88,7 @@ export default function IndexPage() {
         <div
           role="tablist"
           aria-label="索引の種類"
-          className="inline-flex rounded-lg border border-line bg-surface p-0.5"
+          className="inline-flex rounded border border-line bg-surface p-0.5"
         >
           {INDEX_VIEWS.map((v, i) => (
             <button
@@ -101,7 +101,7 @@ export default function IndexPage() {
               tabIndex={view === v.value ? 0 : -1}
               onClick={() => update({ view: v.value, tag: null })}
               onKeyDown={(e) => onTabKeyDown(e, i)}
-              className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
+              className={`rounded px-3 py-1.5 text-sm transition-colors ${
                 view === v.value ? 'bg-canvas font-medium text-fg' : 'text-fg-muted hover:text-fg'
               }`}
             >

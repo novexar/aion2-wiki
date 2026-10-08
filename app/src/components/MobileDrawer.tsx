@@ -73,10 +73,10 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex size-9 items-center justify-center rounded-md text-header-muted hover:bg-white/8 hover:text-white"
+            className="inline-flex size-9 items-center justify-center rounded text-header-muted hover:bg-white/8 hover:text-white"
             aria-label="メニューを閉じる"
           >
-            <X aria-hidden="true" className="size-5" />
+            <X aria-hidden="true" className="size-[18px]" />
           </button>
         </div>
         <div className="p-3">{children}</div>

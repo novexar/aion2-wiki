@@ -180,7 +180,7 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
         role="dialog"
         aria-modal="true"
         aria-label="サイト内検索"
-        className="relative flex max-h-[75vh] w-full max-w-xl flex-col overflow-hidden rounded-xl border border-line bg-canvas shadow-pop"
+        className="relative flex max-h-[75vh] w-full max-w-xl flex-col overflow-hidden rounded-lg border border-line bg-canvas shadow-pop"
         initial={{ opacity: 0, y: -6, scale: 0.99 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.14, ease: 'easeOut' }}
@@ -256,7 +256,7 @@ export default function CommandPalette({ initialQuery, onClose }: CommandPalette
                   aria-selected={i === activeIndex}
                   onMouseMove={() => i !== activeIndex && setActive(i)}
                   onClick={() => go(item.to)}
-                  className={`cursor-pointer rounded-md px-2.5 py-2 text-sm ${
+                  className={`cursor-pointer rounded px-2.5 py-2 text-sm ${
                     i === activeIndex ? 'bg-muted text-fg' : 'text-fg-muted'
                   }`}
                 >

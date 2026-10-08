@@ -37,7 +37,7 @@ export function MessageView({ message }: { readonly message: ChatMessage }) {
       {message.status === 'error' && message.error && (
         <p
           role="alert"
-          className="mt-2 rounded-md border border-danger-line px-3 py-2 text-sm text-danger"
+          className="mt-2 rounded border border-danger-line px-3 py-2 text-sm text-danger"
         >
           <span>
             {message.error}
