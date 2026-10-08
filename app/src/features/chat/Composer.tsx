@@ -1,10 +1,12 @@
 import { ArrowUp, Square } from 'lucide-react';
-import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
+import { useEffect, useId, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { Button } from '../../components/Button';
 import { Kbd } from '../../components/Kbd';
 import { CHAT_INPUT_ID } from './chat-panel-store';
 
 interface ComposerProps {
+  /** 記事ページでだけ渡す「この記事を文脈に含める」 */
+  readonly context?: { readonly checked: boolean; readonly onChange: (checked: boolean) => void };
   readonly disabled: boolean;
   readonly isStreaming: boolean;
   readonly onSend: (q: string) => void;
@@ -12,9 +14,10 @@ interface ComposerProps {
 }
 
 /** 入力欄。Enter で送信、Shift+Enter で改行、送信中は停止ボタン */
-export function Composer({ disabled, isStreaming, onSend, onStop }: ComposerProps) {
+export function Composer({ context, disabled, isStreaming, onSend, onStop }: ComposerProps) {
   const [value, setValue] = useState('');
   const ref = useRef<HTMLTextAreaElement>(null);
+  const checkboxId = useId();
 
   const submit = (): void => {
     if (!value.trim() || isStreaming) return;
@@ -59,6 +62,18 @@ export function Composer({ disabled, isStreaming, onSend, onStop }: ComposerProp
         className="block max-h-[200px] w-full resize-none bg-transparent px-2 py-1.5 text-sm leading-relaxed placeholder:text-fg-subtle focus:outline-none disabled:cursor-not-allowed"
       />
       <div className="flex items-center gap-2 px-1 pt-1">
+        {context && (
+          <span className="flex items-center gap-1.5 text-[13px] text-fg-muted">
+            <input
+              id={checkboxId}
+              type="checkbox"
+              checked={context.checked}
+              onChange={(e) => context.onChange(e.target.checked)}
+              className="size-4 accent-(--fg)"
+            />
+            <label htmlFor={checkboxId}>この記事を文脈に含める</label>
+          </span>
+        )}
         <span className="mr-auto hidden items-center gap-1 text-[11px] text-fg-subtle sm:flex">
           <Kbd>Enter</Kbd> 送信 / <Kbd>Shift+Enter</Kbd> 改行
         </span>

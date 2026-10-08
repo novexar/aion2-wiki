@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { streamGemini, toChatError } from '../../lib/gemini';
 import { buildRagRequest, pickReferences, selectContext } from '../../lib/rag';
 import {
@@ -6,6 +6,7 @@ import {
   getChatRepository,
   HISTORY_EVENT,
   newId,
+  NO_ANSWER_TEXT,
   toStored,
   toTurns,
   type ChatMessage,
@@ -173,7 +174,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
         timer.retrieved();
         if (chunks.length === 0) {
           // 根拠になる抜粋がなければ API を呼ばずに返す
-          update({ text: 'この Wiki に該当する記事がありません。', status: 'done', refs: [] });
+          update({ text: NO_ANSWER_TEXT, status: 'done', refs: [] });
           return;
         }
         // 回答を待たず、根拠にする記事を先に見せる
@@ -269,13 +270,19 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
     }
   }, [repo, newConversation, refresh]);
 
+  // 質問を送る前の空の会話（タイトル無し）は履歴に出さない
+  const visibleConversations = useMemo(
+    () => conversations.filter((c) => c.title !== ''),
+    [conversations],
+  );
+
   return {
     messages,
     isStreaming,
     model,
     send,
     stop,
-    conversations,
+    conversations: visibleConversations,
     activeId,
     persistent: repo ? repo.persistent : null,
     overQuota,

@@ -21,6 +21,11 @@ export function ConfirmDialog({
   const titleId = useId();
   const boxRef = useRef<HTMLDivElement>(null);
   const cancelRef = useRef<HTMLButtonElement>(null);
+  // 呼び出し側がインラインの関数を渡しても、再描画で effect（フォーカス移動）をやり直さない
+  const onCancelRef = useRef(onCancel);
+  useEffect(() => {
+    onCancelRef.current = onCancel;
+  }, [onCancel]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -29,7 +34,7 @@ export function ConfirmDialog({
     const onKeyDown = (event: KeyboardEvent): void => {
       if (event.key === 'Escape') {
         event.stopPropagation();
-        onCancel();
+        onCancelRef.current();
         return;
       }
       if (event.key !== 'Tab') return;
@@ -51,16 +56,12 @@ export function ConfirmDialog({
       window.removeEventListener('keydown', onKeyDown, true);
       previous?.focus();
     };
-  }, [open, onCancel]);
+  }, [open]);
 
   if (!open) return null;
   return createPortal(
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-      <div
-        className="absolute inset-0 bg-zinc-950/40 dark:bg-black/60"
-        aria-hidden="true"
-        onClick={onCancel}
-      />
+      <div className="absolute inset-0 bg-scrim" aria-hidden="true" onClick={onCancel} />
       <div
         ref={boxRef}
         role="alertdialog"

@@ -13,6 +13,7 @@ export function articleMarkdown(options: FixtureOptions): string {
   const fields: Record<string, string> = {
     id: options.id,
     title: options.title ?? `記事 ${options.id}`,
+    reading: 'きじ',
     category: options.category ?? 'basics',
     tags: '[タグA, タグB]',
     summary: 'テスト用の概要です。',

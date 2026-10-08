@@ -36,8 +36,10 @@ function countLabel(shown: number, total: number): string {
 
 export default function SearchPage() {
   const [params, setParams] = useSearchParams();
-  const [limit, setLimit] = useState(PAGE_SIZE);
   const query = params.get('q') ?? '';
+  // 表示件数はクエリごと。クエリが変わったら（入力・パレット・戻る）初期件数に戻す
+  const [limitState, setLimitState] = useState({ query, value: PAGE_SIZE });
+  const limit = limitState.query === query ? limitState.value : PAGE_SIZE;
   const { status, results, total, query: shownQuery } = useSearch(query, { limit });
   const trimmed = shownQuery.trim();
   useDocumentMeta(query ? `「${query}」の検索結果` : '記事を検索');
@@ -64,7 +66,6 @@ export default function SearchPage() {
           type="search"
           value={query}
           onChange={(e) => {
-            setLimit(PAGE_SIZE);
             setParams(e.target.value ? { q: e.target.value } : {}, { replace: true });
           }}
           placeholder="検索"
@@ -112,7 +113,7 @@ export default function SearchPage() {
         {total > results.length && trimmed && (
           <button
             type="button"
-            onClick={() => setLimit(limit + PAGE_SIZE)}
+            onClick={() => setLimitState({ query, value: limit + PAGE_SIZE })}
             className="mt-4 h-9 rounded border border-line-input px-4 text-sm text-fg hover:bg-muted"
           >
             さらに表示

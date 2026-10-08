@@ -56,7 +56,11 @@ export function useActiveHeading(ids: readonly string[]): string | null {
     schedule();
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
+    // 画像・フォントの読み込みなど、スクロールを伴わない高さの変化でも数え直す
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(schedule);
+    observer?.observe(document.body);
     return () => {
+      observer?.disconnect();
       if (frame) window.cancelAnimationFrame(frame);
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);

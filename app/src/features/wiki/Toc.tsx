@@ -97,7 +97,7 @@ function TocList({ headings, activeId }: TocProps) {
 }
 
 /** 現在の行が目次の表示範囲から外れたら、目次だけをスクロールして見せる */
-function useKeepActiveVisible(activeId: string | null) {
+function useKeepActiveVisible(activeId: string | null, visible: boolean) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const box = ref.current;
@@ -111,14 +111,14 @@ function useKeepActiveVisible(activeId: string | null) {
         behavior: prefersReducedMotion() ? 'auto' : 'smooth',
       });
     }
-  }, [activeId]);
+  }, [activeId, visible]);
   return ref;
 }
 
 /** 右カラムの目次（lg 以上）。sticky で本文の右に常時表示し、現在の見出しを強調する */
 export function Toc({ headings, activeId }: TocProps) {
   const wide = useShellColumns().toc;
-  const ref = useKeepActiveVisible(activeId);
+  const ref = useKeepActiveVisible(activeId, wide);
   if (headings.length < MIN_TOC_HEADINGS || !wide) return null;
   return (
     <nav
@@ -158,5 +158,20 @@ export function MobileToc({ headings, activeId }: TocProps) {
         <TocList headings={headings} activeId={activeId} />
       </nav>
     </details>
+  );
+}
+
+/** 記事末尾の「ページ上部へ」（目次カラムが無い幅で、本文から目次へ戻る代わりに使う） */
+export function BackToTop() {
+  const wide = useShellColumns().toc;
+  if (wide) return null;
+  return (
+    <a
+      href="#main"
+      onClick={scrollToTop}
+      className="mt-8 flex min-h-11 items-center justify-center border-t border-line text-[13px] text-fg-muted hover:text-fg"
+    >
+      ページ上部へ ↑
+    </a>
   );
 }

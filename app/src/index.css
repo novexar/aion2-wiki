@@ -39,10 +39,12 @@
   --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.08);
   --header-h: 3.5rem;
   --focus-ring: var(--accent-strong);
+  --scrim: rgb(9 9 11 / 0.4);
 }
 
 [data-theme='dark'] {
   --focus-ring: var(--accent);
+  --scrim: rgb(0 0 0 / 0.6);
   --canvas: #0a0e17;
   --surface: #0f141f;
   --muted: #161c29;
@@ -105,6 +107,7 @@
   --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Code', Menlo, Consolas, monospace;
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
+  --color-scrim: var(--scrim);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
@@ -581,15 +584,15 @@
   }
 }
 
-/* ---------- チャットパネル（5.2 #5）: 開 x 100%→0 320ms ease-out／閉 200ms ease-in ---------- */
+/* ---------- チャットパネル（5.2 #5）: 開 x 100%→0 240ms ease-out／閉 160ms ease-in ---------- */
 .chat-panel {
   transform: translateX(100%);
-  transition: transform var(--d-base) var(--ease-in);
+  transition: transform 160ms var(--ease-in);
 }
 
 .chat-panel[data-open] {
   transform: none;
-  transition: transform var(--d-slow) var(--ease-out);
+  transition: transform 240ms var(--ease-out);
 }
 
 @starting-style {

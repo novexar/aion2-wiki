@@ -1,9 +1,9 @@
 export type FactionTheme = 'default' | 'elyos' | 'asmodian';
 
 export const FACTION_OPTIONS: readonly { value: FactionTheme; label: string }[] = [
-  { value: 'default', label: '既定（両方）' },
-  { value: 'elyos', label: '天族' },
-  { value: 'asmodian', label: '魔族' },
+  { value: 'default', label: '天族＋魔族（既定）' },
+  { value: 'elyos', label: '天族（青）' },
+  { value: 'asmodian', label: '魔族（紫）' },
 ];
 
 export function isFactionTheme(value: string): value is FactionTheme {

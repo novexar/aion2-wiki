@@ -1,5 +1,5 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { DURATION } from '../../lib/motion-tokens';
+import { lazy, Suspense, useEffect, useRef, useState, type RefObject } from 'react';
+import { trapTab } from '../../lib/focus-trap';
 import { usePresence } from '../../lib/use-presence';
 import { useMediaQuery, WIDE_QUERY } from '../../lib/useMediaQuery';
 import {
@@ -26,28 +26,38 @@ function useFocusOnToggle(open: boolean): void {
   }, [open]);
 }
 
-/** 閉じるスライド（200ms）の後に hidden にする */
-const CLOSE_FALLBACK_MS = DURATION.base * 1000 + 80;
+/** 閉じるスライド（160ms）の後に hidden にする */
+const CLOSE_FALLBACK_MS = 160 + 80;
 
-/** モバイルの全画面シートでは背面のスクロールを止め、Esc で閉じる */
-function useSheetBehavior(active: boolean): void {
+/** 他のモーダル（検索パレット・ドロワー）が開いているか */
+function otherModalOpen(): boolean {
+  return document.querySelector(`[aria-modal="true"]:not(#${CHAT_PANEL_ID})`) !== null;
+}
+
+/** モバイルの全画面シートでは背面のスクロールを止め、Tab を内側に閉じ込め、Esc で閉じる */
+function useSheetBehavior(active: boolean, panelRef: RefObject<HTMLElement | null>): void {
   useEffect(() => {
     if (!active) return undefined;
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     const onKeyDown = (event: KeyboardEvent): void => {
-      if (event.key === 'Escape') setChatPanelOpen(false);
+      if (event.key === 'Escape') {
+        // ほかのダイアログの Esc では閉じない
+        if (!event.defaultPrevented && !otherModalOpen()) setChatPanelOpen(false);
+        return;
+      }
+      trapTab(event, panelRef.current);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => {
       document.body.style.overflow = previous;
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [active]);
+  }, [active, panelRef]);
 }
 
 /**
- * 右側のチャットパネル。開くと右から 320ms ease-out、閉じると 200ms ease-in でスライドする。lg 以上は右端の固定幅カラム（本文はその分だけ左に縮む）、
+ * 右側のチャットパネル。開くと右から 240ms ease-out、閉じると 160ms ease-in でスライドする。lg 以上は右端の固定幅カラム（本文はその分だけ左に縮む）、
  * lg 未満は全画面シート。閉じても会話を保つため、一度開いたら DOM に残して hidden にする
  */
 export function ChatPanel() {
@@ -59,6 +69,7 @@ export function ChatPanel() {
   const { visible, done } = usePresence(open, CLOSE_FALLBACK_MS);
   // リサイズ中は transition を止める（幅の追従を遅らせない）
   const [resizing, setResizing] = useState(false);
+  const panelRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent): void => {
@@ -71,11 +82,15 @@ export function ChatPanel() {
   }, []);
 
   useFocusOnToggle(open);
-  useSheetBehavior(open && !desktop);
+  const sheet = open && !desktop;
+  useSheetBehavior(sheet, panelRef);
 
   return (
     <aside
+      ref={panelRef}
       id={CHAT_PANEL_ID}
+      role={sheet ? 'dialog' : undefined}
+      aria-modal={sheet || undefined}
       aria-label="AI チャット"
       hidden={!visible}
       data-open={open || undefined}

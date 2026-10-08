@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { formatDateTime } from '../../lib/format';
 import { Button } from '../../components/Button';
 import { ConfirmDialog } from '../../components/ConfirmDialog';
@@ -21,20 +21,43 @@ export function ConversationList({
   onDeleteAll,
 }: ConversationListProps) {
   const [confirming, setConfirming] = useState(false);
+  const listRef = useRef<HTMLUListElement>(null);
+  const emptyRef = useRef<HTMLParagraphElement>(null);
+  /** 削除した行の位置（削除後に隣の行へフォーカスを移す）。-1 は「すべて削除」 */
+  const pendingFocus = useRef<number | null>(null);
+
+  // 削除で押したボタンが消えるので、フォーカスを残った行（なければ空表示）へ移す
+  useEffect(() => {
+    const index = pendingFocus.current;
+    if (index === null) return;
+    pendingFocus.current = null;
+    const rows = listRef.current?.querySelectorAll<HTMLElement>('li > button:first-child');
+    const next =
+      rows && rows.length > 0 ? rows[Math.min(Math.max(index, 0), rows.length - 1)] : null;
+    (next ?? emptyRef.current)?.focus();
+  }, [conversations]);
 
   if (conversations.length === 0) {
-    return <p className="px-4 py-6 text-sm text-fg-muted">履歴はありません。</p>;
+    return (
+      <p
+        ref={emptyRef}
+        tabIndex={-1}
+        className="px-4 py-6 text-sm text-fg-muted focus:outline-none"
+      >
+        履歴はありません。
+      </p>
+    );
   }
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <ul aria-label="履歴" className="scroll-thin min-h-0 flex-1 overflow-y-auto">
-        {conversations.map((c) => {
+      <ul ref={listRef} aria-label="履歴" className="scroll-thin min-h-0 flex-1 overflow-y-auto">
+        {conversations.map((c, index) => {
           const title = c.title || '無題';
           const current = c.id === activeId;
           return (
             <li
               key={c.id}
-              className={`flex items-center border-b border-line ${current ? 'bg-surface' : ''}`}
+              className={`group flex items-center border-b border-line ${current ? 'bg-surface' : ''}`}
             >
               <button
                 type="button"
@@ -53,8 +76,11 @@ export function ConversationList({
               <Button
                 size="sm"
                 variant="ghost"
-                className="mr-2"
-                onClick={() => onDelete(c.id)}
+                className="mr-2 sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100"
+                onClick={() => {
+                  pendingFocus.current = index;
+                  onDelete(c.id);
+                }}
                 aria-label={`「${title}」を削除`}
               >
                 削除
@@ -74,6 +100,7 @@ export function ConversationList({
         confirmLabel="削除"
         onConfirm={() => {
           setConfirming(false);
+          pendingFocus.current = -1;
           onDeleteAll();
         }}
         onCancel={() => setConfirming(false)}

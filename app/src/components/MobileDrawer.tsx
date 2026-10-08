@@ -1,6 +1,7 @@
 import { X } from 'lucide-react';
 import { useEffect, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { trapTab } from '../lib/focus-trap';
 import { usePresence } from '../lib/use-presence';
 
 /** 閉じるスライド（160ms ease-in）の後に外す */
@@ -21,6 +22,7 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
   useEffect(() => {
     if (!open) return undefined;
     const panel = panelRef.current;
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     panel?.querySelector<HTMLElement>('button, a')?.focus();
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -30,23 +32,14 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
         onClose();
         return;
       }
-      if (event.key !== 'Tab' || !panel) return;
-      const focusables = panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-      if (!first || !last) return;
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
+      trapTab(event, panel);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => {
       document.body.style.overflow = previous;
       window.removeEventListener('keydown', onKeyDown);
+      // 開いた操作の元（メニューボタン）へフォーカスを戻す
+      if (opener?.isConnected) opener.focus();
     };
   }, [open, onClose]);
 
@@ -54,7 +47,7 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
   return createPortal(
     <div className="drawer fixed inset-0 z-50" data-open={open || undefined}>
       <div
-        className="drawer-backdrop absolute inset-0 bg-zinc-950/40 dark:bg-black/60"
+        className="drawer-backdrop absolute inset-0 bg-scrim"
         aria-hidden="true"
         onClick={onClose}
       />
@@ -68,7 +61,7 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
         }}
         className="drawer-panel scroll-thin absolute inset-y-0 left-0 flex w-[min(18rem,80vw)] flex-col overflow-y-auto border-r border-line bg-canvas"
       >
-        <div className="sticky top-0 flex h-14 items-center justify-between border-b border-line bg-header-bg px-4 text-header-fg">
+        <div className="sticky top-0 flex h-14 shrink-0 items-center justify-between border-b border-line bg-header-bg px-4 text-header-fg">
           <span className="text-sm font-semibold">{title}</span>
           <button
             type="button"

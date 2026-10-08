@@ -47,27 +47,35 @@ describe('gojuon', () => {
   });
 
   it('finds latin labels for the A–Z index', () => {
-    expect(latinGroup({ title: 'ギーナ', aliases: ['Kinah'] })).toEqual({
+    expect(latinGroup({ title: 'ギーナ', aliases: ['Kinah'] })).toMatchObject({
       letter: 'K',
       label: 'Kinah',
     });
-    expect(latinGroup({ title: 'PvP の基礎', aliases: [] })).toEqual({
+    expect(latinGroup({ title: 'PvP の基礎', aliases: [] })).toMatchObject({
       letter: 'P',
       label: 'PvP の基礎',
     });
     expect(latinGroup({ title: 'ギーナ', aliases: [] })).toBeNull();
   });
 
+  it('A–Z は比較用に元の名前を返す', () => {
+    expect(latinGroup({ title: '増幅', aliases: ['amplification'] })?.source).toBe('amplification');
+    expect(latinGroup({ title: 'ＰｖＰ', aliases: [] })).toMatchObject({
+      label: 'PvP',
+      source: 'ＰｖＰ',
+    });
+  });
+
   it('A–Z は先頭を大文字にし、略語より長い別名を採る', () => {
-    expect(latinGroup({ title: '代替', aliases: ['alts', 'Alt characters'] })).toEqual({
+    expect(latinGroup({ title: '代替', aliases: ['alts', 'Alt characters'] })).toMatchObject({
       letter: 'A',
       label: 'Alt characters',
     });
-    expect(latinGroup({ title: '増幅', aliases: ['AMP', 'amplification'] })).toEqual({
+    expect(latinGroup({ title: '増幅', aliases: ['AMP', 'amplification'] })).toMatchObject({
       letter: 'A',
       label: 'Amplification',
     });
-    expect(latinGroup({ title: '経験値', aliases: ['EXP'] })).toEqual({
+    expect(latinGroup({ title: '経験値', aliases: ['EXP'] })).toMatchObject({
       letter: 'E',
       label: 'EXP',
     });
@@ -157,6 +165,18 @@ describe('settings', () => {
     expect(getModel()).toBe('gemini-custom');
     saveModel('  ');
     expect(getModel()).toBe(DEFAULT_MODEL);
+  });
+
+  it('keeps a saved custom model name and falls back to the new default for an empty one', () => {
+    localStorage.setItem(STORAGE_KEYS.model, '  my-old-model ');
+    expect(getModel()).toBe('my-old-model');
+    localStorage.setItem(STORAGE_KEYS.model, '');
+    expect(getModel()).toBe(DEFAULT_MODEL);
+    localStorage.setItem(STORAGE_KEYS.model, '   ');
+    expect(getModel()).toBe(DEFAULT_MODEL);
+    saveModel('my-old-model');
+    saveModel(DEFAULT_MODEL);
+    expect(localStorage.getItem(STORAGE_KEYS.model)).toBeNull();
   });
 
   it('stores the theme preference', () => {

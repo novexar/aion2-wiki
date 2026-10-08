@@ -48,8 +48,7 @@ describe('parseArticleFile', () => {
   it('accepts quoted string dates and optional reading', () => {
     const raw = articleMarkdown({
       id: 'a',
-      overrides: { updated: "'2026-01-02'" },
-      extra: 'reading: えー\n',
+      overrides: { updated: "'2026-01-02'", reading: 'えー' },
     });
     const { frontmatter } = parseArticleFile(raw, ctx('a'));
     expect(frontmatter.updated).toBe('2026-01-02');

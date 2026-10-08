@@ -16,7 +16,15 @@ export const baseSearchOptions: SearchOptions = {
 
 /** 本文は索引に入れない（サイズ削減）。本文一致は lib/search.ts の searchBody で行う */
 export const PAGE_FIELDS = ['title', 'aliases', 'tags', 'summary', 'headings'];
-export const PAGE_STORE_FIELDS = ['id', 'title', 'category', 'summary', 'confidence', 'aliases'];
+export const PAGE_STORE_FIELDS = [
+  'id',
+  'title',
+  'category',
+  'summary',
+  'confidence',
+  'aliases',
+  'reading',
+];
 
 export const pageIndexOptions: Options = {
   idField: 'id',

@@ -13,7 +13,7 @@ export interface PageHit {
   readonly confidence: Confidence;
   readonly aliases: string;
   readonly score: number;
-  /** 本文先頭 2,000 文字（読み込み後のみ） */
+  /** 本文先頭 800 文字（読み込み後のみ） */
   readonly text?: string;
   /** true なら索引（題名・別名・タグ・概要・見出し）に無く、本文だけで一致した */
   readonly bodyOnly?: boolean;
@@ -98,6 +98,7 @@ export function searchPrefix(index: MiniSearch, query: string): PageHit[] {
   if (!key) return [];
   const rank = (stored: PageSearchStored): number => {
     if (prefixKey(stored.title).startsWith(key)) return 0;
+    if (stored.reading && prefixKey(stored.reading).startsWith(key)) return 0;
     const aliases = (stored.aliases ?? '').split(' / ');
     return aliases.some((a) => prefixKey(a).startsWith(key)) ? 1 : -1;
   };

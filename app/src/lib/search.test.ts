@@ -183,3 +183,23 @@ describe('makeContextSnippet', () => {
     expect(segments.map((s) => s.text).join('')).toBe('項目 / 内容 / 日次リセット');
   });
 });
+
+describe('1 文字かなの前方一致は reading も見る', () => {
+  it('漢字題名の記事が読みの頭文字で見つかる', () => {
+    const index = new MiniSearch(pageIndexOptions);
+    index.add({
+      id: 'wings',
+      title: '羽',
+      category: 'systems',
+      confidence: 'verified',
+      summary: '翼の強化。',
+      aliases: '',
+      reading: 'はね',
+      tags: '',
+      headings: '',
+    });
+    expect(searchAllPages(index, 'は').map((h) => h.id)).toEqual(['wings']);
+    expect(searchAllPages(index, 'ハ').map((h) => h.id)).toEqual(['wings']);
+    expect(searchAllPages(index, 'さ')).toEqual([]);
+  });
+});
