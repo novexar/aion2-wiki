@@ -72,6 +72,7 @@ export function mockWikiData() {
     articleById: new Map(META.map((m) => [m.id, m])),
     articleByTitle: new Map(META.map((m) => [m.title, m])),
     loadArticle: async () => null,
+    loadAllMeta: async () => META,
     dailyArticles: () => META.slice(0, 1),
     featuredArticles: () => META.slice(0, 2),
   };

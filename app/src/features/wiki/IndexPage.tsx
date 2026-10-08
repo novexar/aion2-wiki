@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
+import { useMemo, useState, type KeyboardEvent } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
 import { categoryLabel } from '../../lib/categories';
@@ -7,8 +7,8 @@ import { articlePath } from '../../lib/paths';
 import { WikiShell } from './WikiShell';
 import { Breadcrumb } from './Breadcrumb';
 import { PageLoading } from '../../components/PageLoading';
-import type { ArticleMeta } from '../../lib/types';
-import { loadAllMeta, nav } from './data';
+import { nav } from './data';
+import { useAllMeta } from './useAllMeta';
 import {
   aliasPreview,
   groupArticles,
@@ -19,28 +19,6 @@ import {
 } from './index-groups';
 
 const MIN_TAG_COUNT = 3;
-
-type MetaState = readonly ArticleMeta[] | 'loading' | 'error';
-
-/** 索引用の全メタデータ（別名・タグ・読み）を遅延読込する */
-function useAllMeta(): MetaState {
-  const [state, setState] = useState<MetaState>('loading');
-  useEffect(() => {
-    let active = true;
-    loadAllMeta()
-      .then((articles) => {
-        if (active) setState(articles);
-      })
-      .catch((error: unknown) => {
-        console.error('索引データの読み込みに失敗しました', error);
-        if (active) setState('error');
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
-  return state;
-}
 
 export default function IndexPage() {
   useDocumentMeta('索引', '全記事の索引（五十音・A–Z・カテゴリ・タグ）');
