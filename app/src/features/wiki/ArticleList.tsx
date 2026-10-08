@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { ConfidenceBadge } from '../../components/ConfidenceBadge';
 import { categoryLabel } from '../../lib/categories';
-import { LIST_COLUMNS } from '../../lib/layout';
+import { LIST_COLUMNS, LIST_ITEM } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
 import type { NavArticle } from '../../lib/types';
 
@@ -37,7 +37,7 @@ export function ArticleRows({
   return (
     <ul className={`border-t border-line ${columns ? LIST_COLUMNS : ''}`}>
       {articles.map((a) => (
-        <li key={a.id} className="border-b border-line">
+        <li key={a.id} className={`border-b border-line ${LIST_ITEM}`}>
           <Link
             to={articlePath(a.category, a.id)}
             className="group flex items-baseline gap-x-4 px-1 py-2 transition-colors hover:bg-surface"

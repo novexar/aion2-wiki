@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
 import { categoryLabel } from '../../lib/categories';
-import { LIST_COLUMNS, PAGE_CONTAINER } from '../../lib/layout';
+import { LIST_COLUMNS, LIST_ITEM, PAGE_CONTAINER } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
 import { Breadcrumb } from './Breadcrumb';
 import { PageLoading } from '../../components/PageLoading';
@@ -193,7 +193,7 @@ export default function IndexPage() {
                         ? a.aliases
                         : [a.title, ...a.aliases.filter((x) => x !== label)];
                     return (
-                      <li key={`${g.key}-${a.id}`}>
+                      <li key={`${g.key}-${a.id}`} className={LIST_ITEM}>
                         <Link
                           to={articlePath(a.category, a.id)}
                           className="group flex items-baseline gap-2 px-1 py-1.5 hover:bg-surface"

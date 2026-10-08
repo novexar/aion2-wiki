@@ -5,7 +5,7 @@
  *   npx tsx scripts/build-content.ts            # 本番（content/_* を除外）
  *   INCLUDE_SAMPLES=1 npx tsx scripts/build-content.ts   # content/_sample を含める
  * 環境変数:
- *   BASE_PATH      サイトのベースパス（既定 '/AION2/'）
+ *   BASE_PATH      サイトのベースパス（既定 '/aion2-wiki/'、vite.config.ts と同じ）
  *   CONTENT_DIR    content ディレクトリ（既定 '../content'）
  */
 import path from 'node:path';
@@ -25,7 +25,7 @@ async function main(): Promise<void> {
     contentDir,
     outDir,
     includeSamples,
-    base: process.env.BASE_PATH ?? '/AION2/',
+    base: process.env.BASE_PATH ?? '/aion2-wiki/',
   });
   for (const warning of result.warnings) console.warn(`[content] 警告: ${warning}`);
   console.log(

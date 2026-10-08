@@ -13,7 +13,7 @@ export default function CategoryPage() {
   if (!info) return <NotFoundPage />;
 
   return (
-    <WikiShell>
+    <WikiShell wide>
       <div>
         <Breadcrumb items={[{ label: 'ホーム', to: '/' }, { label: info.label }]} />
         <h1 className="text-2xl font-bold sm:text-[1.75rem]">{info.label}</h1>

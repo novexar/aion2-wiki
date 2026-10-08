@@ -2,7 +2,7 @@ import { Search } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
-import { LIST_COLUMNS, PAGE_CONTAINER } from '../../lib/layout';
+import { LIST_COLUMNS, LIST_ITEM, PAGE_CONTAINER } from '../../lib/layout';
 import { articlePath } from '../../lib/paths';
 import { SearchResultRow } from './SearchResultRow';
 import { useSearch } from './useSearch';
@@ -72,7 +72,7 @@ export default function SearchPage() {
         {results.length > 0 && trimmed && (
           <ul className={`border-t border-line ${LIST_COLUMNS}`}>
             {results.map((hit) => (
-              <li key={hit.id} className="border-b border-line">
+              <li key={hit.id} className={`border-b border-line ${LIST_ITEM}`}>
                 <Link
                   to={articlePath(hit.category, hit.id)}
                   className="block px-1 py-4 hover:bg-surface"
