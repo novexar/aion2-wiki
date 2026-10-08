@@ -48,8 +48,8 @@ export function Header() {
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}
-          className={`inline-flex size-9 items-center justify-center rounded-md text-fg-muted hover:bg-muted hover:text-fg ${
-            sidebar ? 'hidden' : ''
+          className={`size-9 items-center justify-center rounded-md text-fg-muted hover:bg-muted hover:text-fg ${
+            sidebar ? 'hidden' : 'inline-flex'
           }`}
           aria-label="メニューを開く"
           aria-expanded={drawerOpen}

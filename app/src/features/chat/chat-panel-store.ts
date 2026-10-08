@@ -90,7 +90,8 @@ export function focusChatInput(): void {
   const panel = document.getElementById(CHAT_PANEL_ID);
   const target =
     document.getElementById(CHAT_INPUT_ID) ??
-    panel?.querySelector<HTMLElement>('input, textarea, button:not([disabled])');
+    panel?.querySelector<HTMLElement>('input[type="password"]') ??
+    panel?.querySelector<HTMLElement>('button:not([disabled])');
   target?.focus();
 }
 

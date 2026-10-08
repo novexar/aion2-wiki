@@ -58,12 +58,12 @@ export function Composer({ disabled, isStreaming, onSend, onStop }: ComposerProp
         placeholder="質問を入力"
         className="block max-h-[200px] w-full resize-none bg-transparent px-2 py-1.5 text-[15px] leading-relaxed placeholder:text-fg-subtle focus:outline-none disabled:cursor-not-allowed"
       />
-      <div className="flex items-center justify-between gap-2 px-1 pt-1">
-        <span className="hidden items-center gap-1 text-[11px] text-fg-subtle sm:flex">
+      <div className="flex items-center gap-2 px-1 pt-1">
+        <span className="mr-auto hidden items-center gap-1 text-[11px] text-fg-subtle sm:flex">
           <Kbd>Enter</Kbd> 送信 / <Kbd>Shift+Enter</Kbd> 改行
         </span>
         {isStreaming ? (
-          <Button size="sm" onClick={onStop} aria-label="回答の生成を停止">
+          <Button size="sm" className="ml-auto" onClick={onStop} aria-label="回答の生成を停止">
             <Square aria-hidden="true" className="size-3.5 fill-current" />
             停止
           </Button>
@@ -71,6 +71,7 @@ export function Composer({ disabled, isStreaming, onSend, onStop }: ComposerProp
           <Button
             type="submit"
             size="sm"
+            className="ml-auto"
             variant="primary"
             disabled={disabled || !value.trim()}
             aria-label="送信"

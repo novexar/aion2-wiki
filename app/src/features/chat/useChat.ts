@@ -117,10 +117,10 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
   }, [repo, refresh, activeId]);
 
   const save = useCallback(
-    async (conversationId: string, message: ChatMessage) => {
+    async (conversationId: string, message: ChatMessage, createdAt: number) => {
       try {
         const target = repo ?? (await getChatRepository());
-        await target.append(conversationId, toStored(message));
+        await target.append(conversationId, toStored(message, createdAt));
         await refresh(target);
       } catch (error: unknown) {
         console.error('会話履歴を保存できませんでした', error);
@@ -150,6 +150,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
       setMessages((prev) => [...prev, userMsg, reply]);
       setIsStreaming(true);
 
+      const sentAt = Date.now();
       let conversationId = activeId;
       try {
         if (!conversationId) {
@@ -157,7 +158,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
           conversationId = (await (repo ?? (await getChatRepository())).create()).id;
           setActiveId(conversationId);
         }
-        await save(conversationId, userMsg);
+        await save(conversationId, userMsg, sentAt);
         const chunks = await retrieve(question, history, contextArticleId, controller.signal);
         if (chunks.length === 0) {
           // 根拠になる抜粋がなければ API を呼ばずに返す
@@ -181,7 +182,8 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
       } finally {
         controllerRef.current = null;
         setIsStreaming(false);
-        if (conversationId) await save(conversationId, reply);
+        // 同じミリ秒でも質問 → 回答の順に並ぶようにする
+        if (conversationId) await save(conversationId, reply, Math.max(Date.now(), sentAt + 1));
       }
     },
     [apiKey, model, messages, patch, repo, activeId, save, contextArticleId],
