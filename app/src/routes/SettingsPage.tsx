@@ -2,8 +2,8 @@ import { Trash2 } from 'lucide-react';
 import { useId, useState, type FormEvent } from 'react';
 import { Button } from '../components/Button';
 import { useDocumentMeta } from '../components/useDocumentMeta';
-import { clearHistory } from '../features/chat/chat-history';
 import { ApiKeyForm } from '../features/chat/ApiKeyForm';
+import { HistorySetting } from '../features/chat/HistorySetting';
 import { DEFAULT_MODEL, SUGGESTED_MODELS } from '../lib/gemini-config';
 import {
   clearApiKey,
@@ -161,7 +161,6 @@ function ApiKeySetting() {
 
 export default function SettingsPage() {
   useDocumentMeta('設定');
-  const [historyCleared, setHistoryCleared] = useState(false);
   return (
     <div className="mx-auto max-w-2xl px-4 py-8 sm:px-8">
       <h1 className="text-[1.75rem] font-bold">設定</h1>
@@ -175,20 +174,8 @@ export default function SettingsPage() {
         <Section title="API キー" description="このブラウザにだけ保存されます">
           <ApiKeySetting />
         </Section>
-        <Section title="会話履歴" description="タブを閉じると消えます">
-          <Button
-            onClick={() => {
-              clearHistory();
-              setHistoryCleared(true);
-            }}
-          >
-            会話履歴を消去
-          </Button>
-          {historyCleared && (
-            <p role="status" className="mt-2 text-sm text-ok">
-              会話履歴を消去しました。
-            </p>
-          )}
+        <Section title="会話履歴" description="このブラウザにだけ保存されます">
+          <HistorySetting />
         </Section>
       </div>
     </div>

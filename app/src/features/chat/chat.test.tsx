@@ -5,14 +5,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { STORAGE_KEYS } from '../../lib/storage';
 import { mockWikiData } from '../../test/fixtures';
 import { ApiKeyForm } from './ApiKeyForm';
-import {
-  clearHistory,
-  loadHistory,
-  newId,
-  saveHistory,
-  toTurns,
-  type ChatMessage,
-} from './chat-history';
 
 vi.mock('../wiki/data', () => mockWikiData());
 const { MessageContent } = await import('./MessageContent');
@@ -42,39 +34,6 @@ describe('ApiKeyForm', () => {
     await user.click(screen.getByRole('button', { name: '保存' }));
     expect(localStorage.getItem(STORAGE_KEYS.apiKey)).toBe('AIzaSyTEST_1234567890abcdef');
     expect(onSaved).toHaveBeenCalled();
-  });
-});
-
-describe('chat history', () => {
-  const msgs: ChatMessage[] = [
-    { id: '1', role: 'user', text: 'Q', status: 'done' },
-    { id: '2', role: 'model', text: 'A', status: 'done' },
-    { id: '3', role: 'user', text: 'Q2', status: 'done' },
-    { id: '4', role: 'model', text: '', status: 'error', error: 'x' },
-    { id: '5', role: 'model', text: 'partial', status: 'streaming' },
-  ];
-
-  it('persists to sessionStorage without streaming messages', () => {
-    saveHistory(msgs);
-    expect(loadHistory().map((m) => m.id)).toEqual(['1', '2', '3', '4']);
-    clearHistory();
-    expect(loadHistory()).toEqual([]);
-  });
-
-  it('marks interrupted streaming messages as done on load and ignores corrupt data', () => {
-    sessionStorage.setItem(STORAGE_KEYS.chat, JSON.stringify([msgs[4]]));
-    expect(loadHistory()[0]?.status).toBe('done');
-    sessionStorage.setItem(STORAGE_KEYS.chat, JSON.stringify([{ id: 1 }]));
-    expect(loadHistory()).toEqual([]);
-  });
-
-  it('converts completed messages to turns', () => {
-    expect(toTurns(msgs)).toEqual([
-      { role: 'user', text: 'Q' },
-      { role: 'model', text: 'A' },
-      { role: 'user', text: 'Q2' },
-    ]);
-    expect(newId()).not.toBe(newId());
   });
 });
 

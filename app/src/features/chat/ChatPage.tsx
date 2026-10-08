@@ -191,7 +191,7 @@ export default function ChatPage() {
   );
   const apiKey = useApiKey();
   const model = useModel();
-  const { messages, isStreaming, send, stop, clear } = useChat({ apiKey, model });
+  const { messages, isStreaming, send, stop, newConversation: clear } = useChat({ apiKey, model });
   const endRef = useRef<HTMLDivElement>(null);
 
   const nearBottomRef = useRef(true);

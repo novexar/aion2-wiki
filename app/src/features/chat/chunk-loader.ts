@@ -68,3 +68,21 @@ export async function resolveChunks(refs: readonly ChunkRef[]): Promise<Chunk[]>
     return [{ ...ref, title: meta.title, category: meta.category, text }];
   });
 }
+
+/** 「この記事を文脈に含める」で先頭に加えるチャンク数の上限 */
+export const ARTICLE_CONTEXT_LIMIT = 4;
+
+/** 指定記事の先頭チャンクを検索結果の前に置く（重複は除く） */
+export function prependArticleChunks(
+  byId: ReadonlyMap<string, ChunkRef>,
+  articleId: string,
+  refs: readonly ChunkRef[],
+  limit = ARTICLE_CONTEXT_LIMIT,
+): ChunkRef[] {
+  const own = [...byId.values()]
+    .filter((ref) => ref.articleId === articleId)
+    .sort((a, b) => chunkPosition(a) - chunkPosition(b))
+    .slice(0, limit);
+  const ownIds = new Set(own.map((ref) => ref.id));
+  return [...own, ...refs.filter((ref) => !ownIds.has(ref.id))];
+}
