@@ -331,6 +331,8 @@ function buildPageTexts(
       (chunksById.get(a.id) ?? [])
         .map((c) => c.text)
         .join(' ')
+        // 表のセル区切り「 | 」はスニペットに生で出るので読点にする
+        .replace(/\s*\|\s*/g, '、')
         .slice(0, SEARCH_TEXT_LIMIT),
     ]),
   );

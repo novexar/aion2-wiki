@@ -1,7 +1,14 @@
 import MiniSearch from 'minisearch';
 import { describe, expect, it } from 'vitest';
-import { highlight, makeSnippet } from './highlight';
-import { normalizeTexts, searchBody, searchPages, searchWithFallback } from './search';
+import { highlight, makeContextSnippet, makeSnippet } from './highlight';
+import {
+  isSingleKana,
+  normalizeTexts,
+  searchAllPages,
+  searchBody,
+  searchPages,
+  searchWithFallback,
+} from './search';
 import { isLatinTerm, pageIndexOptions } from './search-options';
 
 function pageIndex(): MiniSearch {
@@ -84,6 +91,25 @@ describe('searchPages', () => {
     ]);
   });
 
+  it('1 文字の仮名は題名・別名の前方一致だけ（本文は見ない）', () => {
+    expect(isSingleKana('オ')).toBe(true);
+    expect(isSingleKana('剣')).toBe(false);
+    expect(isSingleKana('オー')).toBe(false);
+    expect(searchPages(index, 'お', 20, TEXTS).map((h) => h.id)).toEqual(['odyle']);
+    expect(searchPages(index, 'ぎ', 20, TEXTS).map((h) => h.id)).toEqual(['kinah']);
+    // 「る」は「エネルギー」の途中にあるが前方一致ではない
+    expect(searchPages(index, 'る', 20, TEXTS)).toEqual([]);
+  });
+
+  it('本文だけの一致に bodyOnly を付け、全件を返す', () => {
+    const all = searchAllPages(index, '遠征', TEXTS);
+    expect(all.map((h) => [h.id, h.bodyOnly ?? false])).toEqual([
+      ['odyle', false],
+      ['kinah', true],
+    ]);
+    expect(searchPages(index, '遠征', 1, TEXTS)).toHaveLength(1);
+  });
+
   it('falls back to OR when AND finds nothing, filtering weak matches', () => {
     // 「取引所」は一致、「魔法」は不一致 → OR でギーナのみ
     expect(searchPages(index, '取引所 魔法').map((h) => h.id)).toEqual(['kinah']);
@@ -148,5 +174,12 @@ describe('makeSnippet', () => {
     const segments = makeSnippet('x'.repeat(50), 'zz', 10);
     expect(segments[0]).toEqual({ text: 'x'.repeat(10), hit: false });
     expect(segments).toHaveLength(2);
+  });
+});
+
+describe('makeContextSnippet', () => {
+  it('表のセル区切りを「 / 」にする', () => {
+    const segments = makeContextSnippet('項目 | 内容 ｜ 日次リセット', 'リセット') ?? [];
+    expect(segments.map((s) => s.text).join('')).toBe('項目 / 内容 / 日次リセット');
   });
 });

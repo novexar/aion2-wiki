@@ -1,6 +1,6 @@
 import type MiniSearch from 'minisearch';
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
-import { normalizeTexts, searchPages, type PageHit } from '../../lib/search';
+import { normalizeTexts, searchAllPages, type PageHit } from '../../lib/search';
 import { loadPageIndex, loadPageTexts } from './index-loader';
 
 export type SearchStatus = 'loading' | 'ready' | 'error';
@@ -16,6 +16,8 @@ export interface UseSearchOptions {
 export interface UseSearchResult {
   readonly status: SearchStatus;
   readonly results: readonly PageHit[];
+  /** limit で切る前の総件数 */
+  readonly total: number;
   /** 結果が対応しているクエリ（入力中の遅延を考慮） */
   readonly query: string;
 }
@@ -49,17 +51,19 @@ export function useSearch(query: string, options: UseSearchOptions = {}): UseSea
   }, [loadIndex, loadTexts]);
 
   const normalized = useMemo(() => (texts ? normalizeTexts(texts) : undefined), [texts]);
+  const all = useMemo(
+    () => (index ? searchAllPages(index, deferredQuery, normalized) : []),
+    [index, normalized, deferredQuery],
+  );
   const results = useMemo(
     () =>
-      index
-        ? searchPages(index, deferredQuery, limit, normalized).map((hit) => {
-            const text = texts?.get(hit.id);
-            return text ? { ...hit, text } : hit;
-          })
-        : [],
-    [index, texts, normalized, deferredQuery, limit],
+      all.slice(0, limit).map((hit) => {
+        const text = texts?.get(hit.id);
+        return text ? { ...hit, text } : hit;
+      }),
+    [all, texts, limit],
   );
 
   const status: SearchStatus = failed ? 'error' : index ? 'ready' : 'loading';
-  return { status, results, query: deferredQuery };
+  return { status, results, total: all.length, query: deferredQuery };
 }

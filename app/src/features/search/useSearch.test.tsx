@@ -35,6 +35,7 @@ describe('useSearch', () => {
     const { result } = renderHook(() => useSearch('遠征', { loadIndex, limit: 1 }));
     await waitFor(() => expect(result.current.status).toBe('ready'));
     expect(result.current.results).toHaveLength(1);
+    expect(result.current.total).toBe(2);
   });
 
   it('reports errors when the index fails to load', async () => {
