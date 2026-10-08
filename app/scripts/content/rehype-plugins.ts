@@ -78,6 +78,30 @@ export const rehypeCallouts: Plugin<[], Root> = () => (tree) => {
   });
 };
 
+const TRAILING_LABEL = /\s*根拠[：:]\s*$/;
+
+/** 段落末尾の「…。根拠：[S01][S02]」を、ラベルなしの上付き出典 `<sup class="evidence">` に変える */
+function wrapTrailingEvidence(p: Element): boolean {
+  const idx = p.children.findLastIndex((c) => c.type === 'text' && TRAILING_LABEL.test(c.value));
+  const label = p.children[idx];
+  if (idx < 0 || label?.type !== 'text') return false;
+  // 段落が出典だけのとき（先頭が「根拠：」）は結合側（rehypeEvidence）に任せる
+  if (idx === 0 && label.value.replace(TRAILING_LABEL, '') === '') return false;
+  const refs = p.children.slice(idx + 1);
+  const onlyRefs = refs.every(
+    (c) =>
+      (c.type === 'text' && c.value.trim() === '') || (c.type === 'element' && c.tagName === 'a'),
+  );
+  const marks = refs.filter((c) => c.type === 'element');
+  if (!onlyRefs || marks.length === 0) return false;
+  label.value = label.value.replace(TRAILING_LABEL, '');
+  p.children = [
+    ...p.children.slice(0, idx + 1),
+    { type: 'element', tagName: 'sup', properties: { className: ['evidence'] }, children: marks },
+  ];
+  return true;
+}
+
 /**
  * `根拠：[S01]` だけの段落を、直前の段落末尾のインライン上付き出典 `<sup class="evidence">` に結合する。
  * 直前が段落でない（表・リスト・見出し直後など）場合は、ラベルなしの出典段落として残す。
@@ -85,6 +109,7 @@ export const rehypeCallouts: Plugin<[], Root> = () => (tree) => {
 export const rehypeEvidence: Plugin<[], Root> = () => (tree) => {
   visit(tree, 'element', (node: Element, index, parent) => {
     if (node.tagName !== 'p' || !parent || index === undefined) return;
+    if (wrapTrailingEvidence(node)) return;
     const first = node.children[0];
     if (first?.type !== 'text' || !/^根拠[：:]\s*/.test(first.value)) return;
     const rest = node.children.slice(1);

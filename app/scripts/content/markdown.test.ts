@@ -84,6 +84,12 @@ describe('renderMarkdown', () => {
     expect(html).not.toContain('根拠');
   });
 
+  it('turns a trailing 根拠 label inside a paragraph into superscript refs', async () => {
+    const { html } = await renderMarkdown('文です。根拠：[S01][S01]\n', options);
+    expect(html).toContain('<p>文です。<sup class="evidence"><a');
+    expect(html).not.toContain('根拠');
+  });
+
   it('keeps a standalone evidence paragraph when no paragraph precedes it', async () => {
     const { html } = await renderMarkdown('根拠：[S01]\n', options);
     expect(html).toContain('<p class="evidence"><a');
