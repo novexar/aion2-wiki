@@ -197,9 +197,9 @@
   overflow-wrap: anywhere;
 }
 
-/* テキストは 76ch まで。表・コード・図はカラム幅いっぱいまで使い、はみ出しはカラム内で横スクロール */
+/* テキストは 80ch まで。表・コード・図はカラム幅いっぱいまで使い、はみ出しはカラム内で横スクロール */
 .prose-wiki > :not(.table-wrap, pre, figure) {
-  max-width: 76ch;
+  max-width: 80ch;
 }
 
 .prose-wiki > * + * {

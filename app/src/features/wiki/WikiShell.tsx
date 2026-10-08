@@ -14,12 +14,12 @@ interface WikiShellProps {
 /** パネルが閉じているときはビューポート基準（lg/xl）、開いているときは残り幅から決めた列構成 */
 function gridClass(columns: ShellColumns, wide: boolean): string {
   if (!columns.squeezed) {
-    return 'grid-cols-1 lg:grid-cols-[16rem_minmax(0,1fr)_13rem] lg:gap-x-8 xl:grid-cols-[16rem_minmax(0,1fr)_15rem] xl:gap-x-10';
+    return 'grid-cols-1 lg:grid-cols-[18rem_minmax(0,1fr)_13rem] lg:gap-x-8 xl:grid-cols-[18rem_minmax(0,1fr)_15rem] xl:gap-x-10';
   }
   if (!columns.sidebar) return 'grid-cols-1';
   return columns.toc && !wide
-    ? 'grid-cols-[16rem_minmax(0,1fr)_13rem] gap-x-8'
-    : 'grid-cols-[16rem_minmax(0,1fr)] gap-x-8';
+    ? 'grid-cols-[18rem_minmax(0,1fr)_13rem] gap-x-8'
+    : 'grid-cols-[18rem_minmax(0,1fr)] gap-x-8';
 }
 
 /** 左サイドバー + 本文（残り幅すべて）+ 右カラム（目次）の 3 カラムレイアウト */

@@ -11,10 +11,9 @@ export interface ShellColumns {
 }
 
 const LG = 1024;
-/** PAGE_CONTAINER の max-w-[88rem] と左右 padding（sm:px-6） */
-const CONTAINER_MAX = 1408;
+/** PAGE_CONTAINER の左右 padding（sm:px-6） */
 const CONTAINER_PADDING = 48;
-const SIDEBAR = 256 + 32;
+const SIDEBAR = 288 + 32;
 const TOC = 208 + 32;
 /** これより狭くなるなら目次（さらに狭ければサイドバー）を隠す。40rem */
 export const MIN_CONTENT = 640;
@@ -23,7 +22,7 @@ export const MIN_CONTENT = 640;
 export function shellColumns(viewport: number, panel: number): ShellColumns {
   if (viewport < LG) return { sidebar: false, toc: false, squeezed: false };
   if (panel <= 0) return { sidebar: true, toc: true, squeezed: false };
-  const content = Math.min(viewport - panel, CONTAINER_MAX) - CONTAINER_PADDING - SIDEBAR;
+  const content = viewport - panel - CONTAINER_PADDING - SIDEBAR;
   const sidebar = content >= MIN_CONTENT;
   return { sidebar, toc: sidebar && content - TOC >= MIN_CONTENT, squeezed: true };
 }

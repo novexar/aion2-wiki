@@ -178,7 +178,7 @@ export default function HomePage() {
           <h2 id="categories-title" className={SECTION_TITLE}>
             カテゴリ
           </h2>
-          <ul className="lg:columns-2 lg:gap-10">
+          <ul className="lg:columns-2 lg:gap-10 2xl:columns-3">
             {nav.categories.map((c, i) => (
               <CategoryRow
                 key={c.id}
