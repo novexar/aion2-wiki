@@ -65,7 +65,7 @@ export function ArticleRows({
                 <ConfidenceBadge confidence={a.confidence} size="sm" hideVerified />
               </span>
               {withSummary && (
-                <span className="block min-h-[1lh] text-[13px] text-fg-muted line-clamp-1">
+                <span className="line-clamp-1 min-h-[1lh] text-[13px] text-fg-muted">
                   {summaries.get(a.id)}
                 </span>
               )}
