@@ -27,16 +27,26 @@ export function topArticleIds(index: MiniSearch, query: string, limit = TOP_ARTI
   return [...ids];
 }
 
+const STAR_GRADE = /★\d/gu;
 const HIRAGANA_ONLY = /^[ぁ-ゖ]+$/u;
+
+/** 質問中の「★3」など（重複なし） */
+export function starGrades(query: string): string[] {
+  return [...new Set(Array.from(normalizeText(query).matchAll(STAR_GRADE), (m) => m[0]))];
+}
 
 /**
  * 質問を語の塊（run）に分け、それぞれを bigram / 英単語にする。1 文字の英数字は除く。
  * 塊ごとに点数を平均するので、長い語（オードエネルギー）が短い語（回復量）を押し流さない。
  */
 export function queryRuns(query: string): string[][] {
-  const runs = contentWords(query)
-    .map((run) => tokenize(run).filter((t) => !isLatinTerm(t) || t.length >= 2))
-    .filter((terms) => terms.length > 0);
+  // 「★3」は 1 桁の数字だが等級を表すので 1 語として保つ（tokenize は ★ と 1 桁数字を捨てる）
+  const words = contentWords(query).map((run) =>
+    tokenize(run).filter((t) => !isLatinTerm(t) || t.length >= 2),
+  );
+  const runs = [...starGrades(query).map((star) => [star]), ...words].filter(
+    (terms) => terms.length > 0,
+  );
   // ひらがなだけの短い塊（いくら・いつ・どう。bigram 2 個以下）は質問の言い回しで、記事の語ではない
   const content = runs.filter(
     (terms) => terms.length > 2 || !terms.every((t) => HIRAGANA_ONLY.test(t)),
@@ -79,7 +89,7 @@ export const FIELD_WEIGHTS: Readonly<Record<string, number>> = {
 };
 export const BODY_WEIGHT = 1;
 /** 同義語展開で足した語の重み（元の質問語を 1 とする） */
-const EXPANDED_TERM_WEIGHT = 1;
+const EXPANDED_TERM_WEIGHT = 0.7;
 /** 見出し系の一致が無い記事（本文一致のみ）を候補に入れる最大数 */
 export const BODY_ONLY_LIMIT = 1;
 /** 本文一致のみの記事に必要な、質問語の一致割合 */
@@ -96,7 +106,7 @@ interface ArticleScore {
 }
 
 function weightedTerms(query: string, synonyms: SynonymDict): WeightedTerm[] {
-  const words = contentWords(query).map((term) => ({ term, weight: 1 }));
+  const words = [...starGrades(query), ...contentWords(query)].map((term) => ({ term, weight: 1 }));
   const expanded = expandTerms(query, synonyms).map((term) => ({
     term,
     weight: EXPANDED_TERM_WEIGHT,

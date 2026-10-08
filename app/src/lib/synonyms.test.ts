@@ -4,14 +4,14 @@ import { buildSynonymDict, expandTerms } from './synonyms';
 describe('buildSynonymDict', () => {
   const dict = buildSynonymDict([
     { title: '金策', aliases: ['ギーナ稼ぎ', 'Kina farm', '10', 'あ', '金策'] },
-    { title: 'オードエネルギー', aliases: ['OD', '使い道'] },
+    { title: 'オードエネルギー', aliases: ['ODY', '使い道'] },
     { title: '別の記事', aliases: ['使い道', 'x'.repeat(40)] },
   ]);
 
   it('maps normalized aliases to article titles', () => {
     expect(dict['ギーナ稼ぎ']).toEqual(['金策']);
     expect(dict['kina farm']).toEqual(['金策']);
-    expect(dict['od']).toEqual(['オードエネルギー']);
+    expect(dict['ody']).toEqual(['オードエネルギー']);
   });
 
   it('skips digits, too short or long aliases and the title itself', () => {
@@ -35,7 +35,7 @@ describe('buildSynonymDict', () => {
 
 describe('expandTerms', () => {
   const dict = buildSynonymDict([
-    { title: 'オードエネルギー', aliases: ['OD', '補充方法'] },
+    { title: 'オードエネルギー', aliases: ['ODY', '補充方法'] },
     { title: '金策', aliases: ['ギーナ稼ぎ'] },
   ]);
 
@@ -44,7 +44,7 @@ describe('expandTerms', () => {
   });
 
   it('matches latin aliases on word boundaries only', () => {
-    expect(expandTerms('ODを補充したい', dict, [])).toEqual(['オードエネルギー']);
+    expect(expandTerms('ODYを補充したい', dict, [])).toEqual(['オードエネルギー']);
     expect(expandTerms('god の話', dict, [])).toEqual([]);
   });
 
@@ -59,5 +59,33 @@ describe('expandTerms', () => {
 
   it('returns nothing when no synonym applies', () => {
     expect(expandTerms('ルーン', dict)).toEqual([]);
+  });
+});
+
+describe('generic alias stoplist', () => {
+  const dict = buildSynonymDict([
+    { title: 'FAQ ダンジョン', aliases: ['オード', 'コロ', 'ぷち', 'ab', 'スキル', 'クレ'] },
+    { title: '合計IL', aliases: ['il', 'ゴールド', 'ぷち', 'ab', 'ap'] },
+  ]);
+
+  it('always drops explicit stop aliases', () => {
+    expect(dict['オード']).toBeUndefined();
+    expect(dict['il']).toBeUndefined();
+    expect(dict['スキル']).toBeUndefined();
+  });
+
+  it('drops short aliases only when ambiguous', () => {
+    expect(dict['ぷち']).toBeUndefined();
+    expect(dict['ab']).toBeUndefined();
+    expect(dict['クレ']).toEqual(['FAQ ダンジョン']);
+    expect(dict['ap']).toEqual(['合計IL']);
+  });
+
+  it('does not expand オード in an odyle energy question', () => {
+    expect(expandTerms('オードエネルギーは最大いくつまで貯まる？', dict, [])).toEqual([]);
+  });
+
+  it('expands OD to オードエネルギー via the manual dictionary', () => {
+    expect(expandTerms('ODを補充したい', {})).toContain('オードエネルギー');
   });
 });

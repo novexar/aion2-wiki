@@ -289,11 +289,9 @@ export default function ChatPanelBody() {
             ) : (
               <ApiKeyForm compact />
             )}
-            {apiKey && (
-              <p className="mt-1.5 text-[13px] leading-snug text-fg-subtle">
-                AI の回答には誤りが含まれることがあります。重要な数値は記事本文で確認してください。
-              </p>
-            )}
+            <p className="mt-1.5 text-[13px] leading-snug text-fg-subtle">
+              AI の回答には誤りが含まれることがあります。重要な数値は記事本文で確認してください。
+            </p>
           </div>
         </>
       )}

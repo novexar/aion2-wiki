@@ -66,7 +66,17 @@ const FILLER_PHRASES = [
   'ます',
 ];
 
-const FILLER_PATTERN = new RegExp(FILLER_PHRASES.join('|'), 'gu');
+/** 語の境界として扱うひらがな（助詞 1 文字） */
+const PARTICLES = 'のはがをにでともへ';
+
+/**
+ * 言い回しは語の境界でだけ除く（あるじ・どうぐ の「ある」「どう」を壊さない）。
+ * 連なった言い回し（いくらかかる）は 1 かたまりとして扱い、前後がひらがな（助詞 1 文字を除く）なら除かない。
+ */
+const FILLER_PATTERN = new RegExp(
+  `(?:(?<![ぁ-ゖ])|(?<=[${PARTICLES}]))(?:${FILLER_PHRASES.join('|')})+(?:(?![ぁ-ゖ])|(?=[${PARTICLES}]))`,
+  'gu',
+);
 
 /** 語を分ける区切り（助詞 1 文字・空白・句読点・記号） */
 const SEPARATOR =

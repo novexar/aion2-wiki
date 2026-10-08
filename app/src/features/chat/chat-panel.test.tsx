@@ -149,13 +149,13 @@ describe('ChatPanel', () => {
     expect(toggle).toHaveFocus();
   });
 
-  it('hides the disclaimer line while no API key is saved', async () => {
+  it('shows the disclaimer line even while no API key is saved', async () => {
     const note =
       'AI の回答には誤りが含まれることがあります。重要な数値は記事本文で確認してください。';
     renderApp();
     fireEvent.keyDown(window, { key: 'j', ctrlKey: true });
     await screen.findByRole('complementary', { name: 'AI チャット' });
-    expect(screen.queryByText(note)).toBeNull();
+    expect(screen.getByText(note)).toBeInTheDocument();
   });
 
   it('shows the disclaimer line with a saved key', async () => {

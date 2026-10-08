@@ -20,6 +20,11 @@ function article(id: string, chunks: [string, string][]): ArticleChunks {
 }
 
 describe('queryRuns', () => {
+  it('keeps ★N as one term and still keeps +10', () => {
+    expect(queryRuns('★3のダンジョンに入るには').flat()).toContain('★3');
+    expect(queryRuns('+10 の強化').flat()).toContain('10');
+  });
+
   it('splits at particles and drops short hiragana-only filler', () => {
     expect(queryRuns('オードエネルギーの回復量は？')).toEqual([
       ['オー', 'ード', 'ドエ', 'エネ', 'ネル', 'ルギ', 'ギー'],
@@ -29,7 +34,7 @@ describe('queryRuns', () => {
   });
 
   it('drops single-character latin tokens but keeps words', () => {
-    expect(queryRuns('★2 の入場 IL')).toEqual([['入場'], ['il']]);
+    expect(queryRuns('★2 の入場 IL')).toEqual([['★2'], ['入場'], ['il']]);
   });
 
   it('falls back to the raw tokens when everything would be dropped', () => {
