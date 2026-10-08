@@ -46,6 +46,19 @@ describe('system prompt', () => {
     expect(SYSTEM_PROMPT).toContain('[記事タイトル]');
   });
 
+  it('answers within partial evidence and reserves NO_INFO for no evidence at all', () => {
+    expect(SYSTEM_PROMPT).toContain('部分的な根拠があれば、その範囲で答え');
+    expect(SYSTEM_PROMPT).toContain('Wiki には〜までしか書かれていません');
+    expect(SYSTEM_PROMPT).toContain(`根拠が全くないときだけ、推測で答えず「${NO_INFO_MESSAGE}」`);
+    expect(SYSTEM_PROMPT.split(NO_INFO_MESSAGE)).toHaveLength(2);
+  });
+
+  it('tells the model there are no excerpts when nothing was retrieved', () => {
+    const text = buildSystemInstruction([]);
+    expect(text).toContain('（該当する抜粋はありません）');
+    expect(text).toContain(NO_INFO_MESSAGE);
+  });
+
   it('embeds formatted excerpts with title and heading', () => {
     const text = buildSystemInstruction([chunk('a#0', 'a', 'ギーナ', '入手方法', '日課で入手')]);
     expect(text.startsWith(SYSTEM_PROMPT)).toBe(true);
