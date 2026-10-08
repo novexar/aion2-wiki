@@ -1,8 +1,8 @@
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { afterEach, describe, expect, it } from 'vitest';
+import { dirname, join } from 'node:path';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { readGitDates } from './git-dates';
 
 const dirs: string[] = [];
@@ -15,6 +15,7 @@ const run = (cwd: string, args: string[], env: NodeJS.ProcessEnv = {}) =>
   execFileSync('git', args, { cwd, env: { ...process.env, ...env }, stdio: 'ignore' });
 
 afterEach(() => {
+  vi.unstubAllEnvs();
   for (const dir of dirs.splice(0)) rmSync(dir, { recursive: true, force: true });
 });
 
@@ -28,7 +29,7 @@ describe('readGitDates', () => {
     writeFileSync(join(repo, 'content', 'tips', 'あ.md'), 'x');
     writeFileSync(join(repo, 'content', 'tips', 'a.md'), 'x');
     run(repo, ['add', '.']);
-    run(repo, ['commit', '-q', '-m', 'init'], {
+    run(repo, ['-c', 'commit.gpgsign=false', 'commit', '-q', '-m', 'init'], {
       GIT_COMMITTER_DATE: '2026-01-02T03:04:05+09:00',
       GIT_AUTHOR_DATE: '2026-01-02T03:04:05+09:00',
     });
@@ -42,6 +43,8 @@ describe('readGitDates', () => {
   it('git リポジトリでなければ警告して空の Map を返す', () => {
     const dir = tempDir();
     const warnings: string[] = [];
+    // 親ディレクトリのリポジトリを拾わない
+    vi.stubEnv('GIT_CEILING_DIRECTORIES', dirname(dir));
     expect(readGitDates(dir, (m) => warnings.push(m)).size).toBe(0);
     expect(warnings).toHaveLength(1);
   });
