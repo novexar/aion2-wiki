@@ -1,7 +1,9 @@
 import MiniSearch from 'minisearch';
 import indexUrl from '../../generated/search-index.json?url';
 import textUrl from '../../generated/search-text.json?url';
+import synonymsUrl from '../../generated/synonyms.json?url';
 import { pageIndexOptions } from '../../lib/search-options';
+import type { SynonymDict } from '../../lib/synonyms';
 
 let pageIndexPromise: Promise<MiniSearch> | null = null;
 let pageTextsPromise: Promise<ReadonlyMap<string, string>> | null = null;
@@ -21,6 +23,20 @@ export function loadPageIndex(): Promise<MiniSearch> {
       throw error;
     });
   return pageIndexPromise;
+}
+
+let synonymsPromise: Promise<SynonymDict> | null = null;
+
+/** 別名 → 題名の逆引き辞書（チャットの質問展開用）。失敗時は空の辞書を返す */
+export function loadSynonyms(): Promise<SynonymDict> {
+  synonymsPromise ??= fetchText(synonymsUrl)
+    .then((json) => JSON.parse(json) as SynonymDict)
+    .catch((error: unknown) => {
+      console.error('同義語辞書の読み込みに失敗しました', error);
+      synonymsPromise = null;
+      return {};
+    });
+  return synonymsPromise;
 }
 
 /** 記事 ID → 本文先頭 2,000 文字（スニペット用）。失敗時は空の Map を返す */
