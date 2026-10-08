@@ -5,23 +5,29 @@
 /* ---------- デザイントークン ---------- */
 :root {
   --canvas: #ffffff;
-  --surface: #fafafa;
-  --muted: #f4f4f5;
-  --line: #e4e4e7;
-  --line-strong: #d4d4d8;
-  --line-input: #8c8c96;
-  --fg: #18181b;
-  --fg-muted: #52525b;
-  --fg-subtle: #6b6b74;
+  --surface: #f7f8fb;
+  --muted: #eef1f6;
+  --line: #e1e5ee;
+  --line-strong: #c9d0dd;
+  --line-input: #7f8799;
+  --fg: #141821;
+  --fg-muted: #4b5262;
+  --fg-subtle: #656d7e;
   /* 単一アクセント: 深い金。塗りは --accent、文字色は可読性のため濃い --accent-strong */
   --accent: #c9a227;
   --accent-strong: #7f640f;
   --accent-soft: rgb(201 162 39 / 0.12);
   --accent-contrast: #1c1505;
+  --link: #1d5ca8;
+  --aether: #3d82bf;
+  --header-bg: #0f1f3c;
+  --header-fg: #eef2f8;
+  --header-muted: #aab6cc;
+  --kr-fg: #6a3fc0;
   --ok-fg: #166534;
   --ok-bg: #f0fdf4;
   --ok-line: #bbf7d0;
-  --info-fg: #1e40af;
+  --info-fg: #1b4f91;
   --info-bg: #eff6ff;
   --info-line: #bfdbfe;
   --warn-fg: #92400e;
@@ -32,26 +38,32 @@
   --danger-line: #fecaca;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.08);
   --header-h: 3.5rem;
+  --focus-ring: var(--accent-strong);
 }
 
 [data-theme='dark'] {
-  --canvas: #09090b;
-  --surface: #0f0f12;
-  --muted: #18181b;
-  --line: #27272a;
-  --line-strong: #3f3f46;
-  --line-input: #71717a;
-  --fg: #fafafa;
-  --fg-muted: #a1a1aa;
-  --fg-subtle: #8c8c96;
+  --focus-ring: var(--accent);
+  --canvas: #0a0e17;
+  --surface: #0f141f;
+  --muted: #161c29;
+  --line: #232b3a;
+  --line-strong: #35405a;
+  --line-input: #6f7a93;
+  --fg: #f2f4f8;
+  --fg-muted: #a4acbb;
+  --fg-subtle: #8a93a4;
   --accent: #d4af37;
   --accent-strong: #e2c15a;
   --accent-soft: rgb(212 175 55 / 0.14);
   --accent-contrast: #140f02;
+  --link: #8ec8ff;
+  --aether: #70d2ff;
+  --header-bg: #060a14;
+  --kr-fg: #b9a0f0;
   --ok-fg: #86efac;
   --ok-bg: rgb(34 197 94 / 0.1);
   --ok-line: rgb(34 197 94 / 0.3);
-  --info-fg: #93c5fd;
+  --info-fg: #8ec8ff;
   --info-bg: rgb(59 130 246 / 0.1);
   --info-line: rgb(59 130 246 / 0.3);
   --warn-fg: #fcd34d;
@@ -88,6 +100,12 @@
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
   --color-accent-contrast: var(--accent-contrast);
+  --color-link: var(--link);
+  --color-aether: var(--aether);
+  --color-header-bg: var(--header-bg);
+  --color-header-fg: var(--header-fg);
+  --color-header-muted: var(--header-muted);
+  --color-kr: var(--kr-fg);
   --color-ok: var(--ok-fg);
   --color-ok-bg: var(--ok-bg);
   --color-ok-line: var(--ok-line);
@@ -121,7 +139,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -165,6 +183,7 @@
 }
 
 .prose-wiki h2 {
+  position: relative;
   margin-top: 2.6em;
   padding-bottom: 0.4em;
   border-bottom: 1px solid var(--line);
@@ -198,9 +217,9 @@
 }
 
 .prose-wiki a {
-  color: var(--accent-strong);
+  color: var(--link);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent);
   text-underline-offset: 3px;
   transition: text-decoration-color 120ms;
 }
@@ -261,7 +280,7 @@
 }
 
 .prose-wiki .callout[data-kind='kr'] {
-  border-left-color: var(--info-fg);
+  border-left-color: var(--kr-fg);
 }
 
 .prose-wiki .callout p {
@@ -389,4 +408,96 @@
   .chat-panel-in {
     animation: none;
   }
+}
+
+/* ---------- テーマ: 濃紺ヘッダーとホーム帯（ui-direction.md B 案＋C 案の左右対比色） ---------- */
+.prose-wiki h2::after,
+.sec-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.sec-title {
+  position: relative;
+}
+
+/* ヘッダー下端の 1px グラデーション線（青→金）。装飾のみ */
+.hdr-line {
+  border-bottom-color: color-mix(in srgb, var(--header-bg) 60%, #3d82bf);
+}
+
+.hdr-line::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(112 210 255 / 0.55) 30%,
+    rgb(201 162 39 / 0.6) 70%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.logo-mark {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  border-radius: 1px;
+  background: linear-gradient(135deg, #ebe487, var(--accent));
+  box-shadow: 0 0 8px rgb(112 210 255 / 0.5);
+}
+
+/* ホーム上部の帯: 光彩は左シアン（天族）→ 右紫（魔族）。幾何モチーフは右側だけ */
+.band {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: var(--header-bg);
+  color: var(--header-fg);
+}
+
+.band::before,
+.band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.band::before {
+  background:
+    radial-gradient(ellipse 60% 120% at 15% 0%, rgb(112 210 255 / 0.22), transparent 60%),
+    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(128 80 192 / 0.22), transparent 60%),
+    linear-gradient(180deg, #0a1024 0%, #0f1f3c 100%);
+}
+
+[data-theme='dark'] .band::before {
+  background:
+    radial-gradient(ellipse 60% 120% at 15% 0%, rgb(112 210 255 / 0.16), transparent 60%),
+    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(128 80 192 / 0.18), transparent 60%),
+    linear-gradient(180deg, #060a14 0%, #0b1630 100%);
+}
+
+.band::after {
+  opacity: 0.07;
+  background-image:
+    linear-gradient(60deg, transparent 49.5%, #fff 49.5%, #fff 50.5%, transparent 50.5%),
+    linear-gradient(120deg, transparent 49.5%, #fff 49.5%, #fff 50.5%, transparent 50.5%);
+  background-size: 96px 166px;
+  mask-image: linear-gradient(90deg, transparent 35%, #000 100%);
+}
+
+.band-search:hover {
+  box-shadow: 0 0 0 4px rgb(112 210 255 / 0.15);
 }

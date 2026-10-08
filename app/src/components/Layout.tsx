@@ -23,7 +23,7 @@ export function Layout() {
           <Outlet />
         </Suspense>
       </main>
-      <footer className="border-t border-line">
+      <footer className="border-t border-line bg-surface">
         <div
           className={`${PAGE_CONTAINER} flex flex-col gap-2 py-6 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between`}
         >

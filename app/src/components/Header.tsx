@@ -25,7 +25,7 @@ const NAV_ITEMS = [
 
 function navClass({ isActive }: { isActive: boolean }): string {
   return `rounded-md px-2.5 py-1.5 text-sm whitespace-nowrap transition-colors ${
-    isActive ? 'text-fg font-medium' : 'text-fg-muted hover:text-fg hover:bg-muted'
+    isActive ? 'font-medium text-white' : 'text-header-muted hover:bg-white/8 hover:text-white'
   }`;
 }
 
@@ -43,7 +43,7 @@ export function Header() {
   const narrow = squeezed && !sidebar;
 
   return (
-    <header className="sticky top-0 z-40 h-(--header-h) border-b border-line bg-canvas">
+    <header className="sticky top-0 z-40 h-(--header-h) hdr-line border-b bg-header-bg text-header-fg">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-fg focus:px-3 focus:py-2 focus:text-canvas"
@@ -54,7 +54,7 @@ export function Header() {
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}
-          className={`size-9 items-center justify-center rounded-md text-fg-muted hover:bg-muted hover:text-fg ${
+          className={`size-9 items-center justify-center rounded-md text-header-muted hover:bg-white/8 hover:text-white ${
             sidebar ? 'hidden' : 'inline-flex'
           }`}
           aria-label="メニューを開く"
@@ -77,7 +77,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => open()}
-            className={`group hidden h-9 items-center gap-2 rounded border border-line-input bg-surface px-2.5 text-sm text-fg-subtle transition-colors hover:border-fg-subtle hover:text-fg-muted sm:flex ${
+            className={`group hidden h-9 items-center gap-2 rounded border border-white/22 bg-white/6 px-2.5 text-sm text-header-muted transition-colors hover:border-white/45 hover:text-white sm:flex ${
               narrow ? 'w-44' : 'w-56 lg:w-64'
             }`}
             aria-label="サイト内検索を開く"
@@ -86,14 +86,14 @@ export function Header() {
             <Search aria-hidden="true" className="size-4" />
             <span className="flex-1 text-left">検索</span>
             <span className="flex gap-0.5">
-              <Kbd>{modKeyLabel()}</Kbd>
-              <Kbd>K</Kbd>
+              <Kbd tone="header">{modKeyLabel()}</Kbd>
+              <Kbd tone="header">K</Kbd>
             </span>
           </button>
           <button
             type="button"
             onClick={() => open()}
-            className="inline-flex size-9 items-center justify-center rounded-md text-fg-muted hover:bg-muted hover:text-fg sm:hidden"
+            className="inline-flex size-9 items-center justify-center rounded-md text-header-muted hover:bg-white/8 hover:text-white sm:hidden"
             aria-label="サイト内検索を開く"
           >
             <Search aria-hidden="true" className="size-[18px]" />
@@ -106,8 +106,8 @@ export function Header() {
             aria-controls={CHAT_PANEL_ID}
             aria-keyshortcuts="Control+J"
             title={`チャット（${modKeyLabel()}+J）`}
-            className={`h-9 rounded-md px-2.5 text-sm whitespace-nowrap transition-colors hover:bg-muted hover:text-fg ${
-              chat.open ? 'bg-muted font-medium text-fg' : 'text-fg-muted'
+            className={`h-9 rounded-md px-2.5 text-sm whitespace-nowrap transition-colors hover:bg-white/8 hover:text-white ${
+              chat.open ? 'bg-white/10 font-medium text-white' : 'text-header-muted'
             }`}
           >
             チャット
@@ -118,8 +118,8 @@ export function Header() {
             aria-expanded={settingsOpen}
             aria-label="設定"
             title="設定"
-            className={`inline-flex size-9 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-fg ${
-              settingsOpen ? 'bg-muted text-fg' : 'text-fg-muted'
+            className={`inline-flex size-9 items-center justify-center rounded-md transition-colors hover:bg-white/8 hover:text-white ${
+              settingsOpen ? 'bg-white/10 text-white' : 'text-header-muted'
             }`}
           >
             <Settings aria-hidden="true" className="size-[18px]" />

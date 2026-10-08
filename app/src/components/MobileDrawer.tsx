@@ -60,12 +60,12 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
         aria-label={title}
         className="scroll-thin absolute inset-y-0 left-0 flex w-[min(20rem,86vw)] flex-col overflow-y-auto border-r border-line bg-canvas"
       >
-        <div className="sticky top-0 flex h-14 items-center justify-between border-b border-line bg-canvas px-4">
+        <div className="sticky top-0 flex h-14 items-center justify-between border-b border-line bg-header-bg px-4 text-header-fg">
           <span className="text-sm font-semibold">{title}</span>
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex size-9 items-center justify-center rounded-md text-fg-muted hover:bg-muted hover:text-fg"
+            className="inline-flex size-9 items-center justify-center rounded-md text-header-muted hover:bg-white/8 hover:text-white"
             aria-label="メニューを閉じる"
           >
             <X aria-hidden="true" className="size-5" />

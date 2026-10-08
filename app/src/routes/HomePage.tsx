@@ -16,7 +16,7 @@ import type { NavArticle, NavCategory } from '../lib/types';
 const LEAD_ARTICLES = 3;
 const RECENT_LIMIT = 10;
 
-const SECTION_TITLE = 'border-b border-line pb-2 text-lg font-bold';
+const SECTION_TITLE = 'sec-title border-b border-line pb-2 text-lg font-bold';
 
 function SearchBox() {
   const { open } = useSearchPalette();
@@ -24,14 +24,14 @@ function SearchBox() {
     <button
       type="button"
       onClick={() => open()}
-      className="mt-4 flex h-10 w-full max-w-[42rem] items-center gap-3 rounded border border-line-input bg-canvas px-3 text-left text-fg-subtle hover:border-fg-subtle hover:text-fg-muted"
+      className="band-search mt-4 flex h-10 w-full max-w-[42rem] items-center gap-3 rounded border border-white/28 bg-white/8 px-3 text-left text-header-muted backdrop-blur-sm hover:border-white hover:text-white"
       aria-label="サイト内検索を開く"
     >
       <Search aria-hidden="true" className="size-4" />
       <span className="flex-1 truncate">検索</span>
       <span className="hidden gap-0.5 sm:flex">
-        <Kbd>{modKeyLabel()}</Kbd>
-        <Kbd>K</Kbd>
+        <Kbd tone="header">{modKeyLabel()}</Kbd>
+        <Kbd tone="header">K</Kbd>
       </span>
     </button>
   );
@@ -145,37 +145,43 @@ export default function HomePage() {
   const hasDistinctDates = new Set(nav.articles.map((a) => a.updated)).size > 1;
 
   return (
-    <div className={`${PAGE_CONTAINER} pt-8 pb-12`}>
-      <h1 className="text-2xl font-bold sm:text-[1.75rem]">AION2 非公式Wiki</h1>
-      <p className="mt-1 text-sm text-fg-muted">
-        <span className="max-sm:hidden">
-          AION2（グローバル版）の攻略情報。{total} 記事、最終更新 {lastUpdated}。
-        </span>
-        <span className="sm:hidden">
-          {total} 記事 · {lastUpdated} 更新
-        </span>
-      </p>
-      <SearchBox />
-
-      <section className="mt-8 sm:mt-12" aria-labelledby="categories-title">
-        <h2 id="categories-title" className={SECTION_TITLE}>
-          カテゴリ
-        </h2>
-        <ul className="lg:columns-2 lg:gap-10">
-          {nav.categories.map((c) => (
-            <CategoryRow key={c.id} category={c} />
-          ))}
-        </ul>
+    <>
+      <section className="band">
+        <div className={`${PAGE_CONTAINER} relative py-7 sm:py-9`}>
+          <h1 className="text-[22px] leading-snug font-semibold text-white">AION2 非公式Wiki</h1>
+          <p className="mt-1 text-sm text-header-muted">
+            <span className="max-sm:hidden">
+              AION2（グローバル版）の攻略情報。{total} 記事、最終更新 {lastUpdated}。
+            </span>
+            <span className="sm:hidden">
+              {total} 記事 · {lastUpdated} 更新
+            </span>
+          </p>
+          <SearchBox />
+        </div>
       </section>
 
-      {daily.length > 0 && <DailyLinks articles={daily} />}
-      {hasDistinctDates && <RecentUpdates articles={nav.articles.slice(0, RECENT_LIMIT)} />}
+      <div className={`${PAGE_CONTAINER} pt-8 pb-12 sm:pt-10`}>
+        <section aria-labelledby="categories-title">
+          <h2 id="categories-title" className={SECTION_TITLE}>
+            カテゴリ
+          </h2>
+          <ul className="lg:columns-2 lg:gap-10">
+            {nav.categories.map((c) => (
+              <CategoryRow key={c.id} category={c} />
+            ))}
+          </ul>
+        </section>
 
-      <p className="mt-6 text-sm">
-        <Link to="/index" className="text-accent-strong underline underline-offset-4">
-          すべての記事（索引）
-        </Link>
-      </p>
-    </div>
+        {daily.length > 0 && <DailyLinks articles={daily} />}
+        {hasDistinctDates && <RecentUpdates articles={nav.articles.slice(0, RECENT_LIMIT)} />}
+
+        <p className="mt-6 text-sm">
+          <Link to="/index" className="text-link underline underline-offset-4">
+            すべての記事（索引）
+          </Link>
+        </p>
+      </div>
+    </>
   );
 }
