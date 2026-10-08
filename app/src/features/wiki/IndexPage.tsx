@@ -116,7 +116,7 @@ export default function IndexPage() {
             value={filter}
             onChange={(e) => update({ q: e.target.value })}
             placeholder="タイトルで絞り込み"
-            className="h-9 w-full rounded border border-line-input bg-canvas px-3 text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-accent focus:outline-none"
+            className="h-9 w-full rounded border border-line-input bg-canvas px-3 text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-fg-subtle focus:outline-none"
           />
         </label>
       </div>

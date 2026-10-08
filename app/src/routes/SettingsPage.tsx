@@ -23,7 +23,7 @@ import { useCloseSettings } from '../lib/use-close-settings';
 
 const CUSTOM_MODEL = '__custom__';
 const CONTROL_CLASS =
-  'h-10 w-full rounded border border-line-input bg-canvas px-3 text-sm hover:border-fg-subtle focus:border-accent focus:outline-none sm:max-w-sm';
+  'h-9 w-full rounded border border-line-input bg-canvas px-3 text-sm hover:border-fg-subtle focus:border-fg-subtle focus:outline-none sm:max-w-sm';
 
 function Section({
   title,
@@ -172,12 +172,9 @@ function ModelSetting() {
             </div>
           )}
         </div>
-        <Button type="submit" className="h-10">
-          保存
-        </Button>
+        <Button type="submit">保存</Button>
         <Button
           variant="ghost"
-          className="h-10"
           onClick={() => {
             saveModel(DEFAULT_MODEL);
             setDraft(DEFAULT_MODEL);

@@ -65,9 +65,9 @@ export function ApiKeyForm({
             autoComplete="off"
             spellCheck={false}
             aria-invalid={error !== null}
-            className="h-10 min-w-0 flex-1 rounded border border-line-input bg-canvas px-3 font-mono text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-accent focus:outline-none aria-[invalid=true]:border-danger"
+            className="h-10 min-w-0 flex-1 rounded border border-line-input bg-canvas px-3 font-mono text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-fg-subtle focus:outline-none aria-[invalid=true]:border-danger"
           />
-          <Button type="submit" variant="primary" className="h-10">
+          <Button type="submit" variant="primary" size="lg">
             {submitLabel}
           </Button>
         </div>
@@ -114,7 +114,7 @@ export function ApiKeyForm({
             spellCheck={false}
             aria-invalid={error !== null}
             aria-describedby={helpId}
-            className="h-10 w-full rounded border border-line-input bg-canvas pr-10 pl-9 font-mono text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-accent focus:outline-none aria-[invalid=true]:border-danger"
+            className="h-10 w-full rounded border border-line-input bg-canvas pr-10 pl-9 font-mono text-sm placeholder:text-fg-subtle hover:border-fg-subtle focus:border-fg-subtle focus:outline-none aria-[invalid=true]:border-danger"
           />
           <button
             type="button"
@@ -130,7 +130,7 @@ export function ApiKeyForm({
             )}
           </button>
         </div>
-        <Button type="submit" variant={primary ? 'primary' : 'secondary'} className="h-10">
+        <Button type="submit" variant={primary ? 'primary' : 'secondary'} size="lg">
           {submitLabel}
         </Button>
       </div>

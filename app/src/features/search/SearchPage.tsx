@@ -44,7 +44,7 @@ export default function SearchPage() {
           placeholder="検索"
           autoFocus
           autoComplete="off"
-          className="h-12 w-full rounded border border-line-input bg-canvas pr-4 pl-10 text-base placeholder:text-fg-subtle hover:border-fg-subtle focus:border-accent focus:outline-none"
+          className="h-10 w-full rounded border border-line-input bg-canvas pr-4 pl-10 text-base placeholder:text-fg-subtle hover:border-fg-subtle focus:border-fg-subtle focus:outline-none"
         />
       </form>
 

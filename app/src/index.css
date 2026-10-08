@@ -58,20 +58,20 @@
   --accent-contrast: #140f02;
   --link: #8ec8ff;
   --aether: #70d2ff;
-  --header-bg: #060a14;
+  --header-bg: #0c1428;
   --kr-fg: #b9a0f0;
   --ok-fg: #86efac;
   --ok-bg: rgb(34 197 94 / 0.1);
-  --ok-line: rgb(34 197 94 / 0.3);
+  --ok-line: color-mix(in srgb, var(--ok-fg) 45%, transparent);
   --info-fg: #8ec8ff;
   --info-bg: rgb(59 130 246 / 0.1);
-  --info-line: rgb(59 130 246 / 0.3);
+  --info-line: color-mix(in srgb, var(--info-fg) 45%, transparent);
   --warn-fg: #fcd34d;
   --warn-bg: rgb(245 158 11 / 0.1);
-  --warn-line: rgb(245 158 11 / 0.3);
+  --warn-line: color-mix(in srgb, var(--warn-fg) 45%, transparent);
   --danger-fg: #fca5a5;
   --danger-bg: rgb(239 68 68 / 0.1);
-  --danger-line: rgb(239 68 68 / 0.3);
+  --danger-line: color-mix(in srgb, var(--danger-fg) 45%, transparent);
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.5);
 }
 
@@ -442,7 +442,7 @@
   background: var(--surface);
   color: var(--fg-muted);
   font-weight: 600;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .prose-wiki tr:last-child td {
@@ -676,6 +676,16 @@
   pointer-events: none;
 }
 
+[data-theme='dark'] .hdr-line::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--hdr-line-l) / 0.9) 30%,
+    rgb(var(--hdr-line-r) / 0.9) 70%,
+    transparent
+  );
+}
+
 .logo-mark {
   display: inline-block;
   width: 10px;
@@ -683,7 +693,6 @@
   transform: rotate(45deg);
   border-radius: 1px;
   background: linear-gradient(135deg, #ebe487, var(--accent));
-  box-shadow: 0 0 8px rgb(112 210 255 / 0.5);
 }
 
 /* ホーム上部の帯: 光彩は左シアン（天族）→ 右紫（魔族）。幾何モチーフは右側だけ */
@@ -724,8 +733,4 @@
     linear-gradient(120deg, transparent 49.5%, #fff 49.5%, #fff 50.5%, transparent 50.5%);
   background-size: 96px 166px;
   mask-image: linear-gradient(90deg, transparent 35%, #000 100%);
-}
-
-.band-search:hover {
-  box-shadow: 0 0 0 4px rgb(112 210 255 / 0.15);
 }
