@@ -38,6 +38,8 @@ export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
     </div>
   );
   const mainClass = `min-w-0 pt-8 pb-16 ${spanTwo ? 'lg:col-span-2' : ''}`;
+  // 記事の読み込み中に本文が潰れてフッターが跳ねないよう、遷移する本文側だけ高さを確保する
+  const fadeClass = `${mainClass} min-h-[60vh]`;
   return (
     <div className={`${PAGE_CONTAINER} grid ${gridClass(columns, wide)}`}>
       {showSidebar && (
@@ -65,16 +67,11 @@ export function WikiShell({ children, aside, wide = false }: WikiShellProps) {
       {routeFadeScope(pathname) === 'home' ? (
         <div className={mainClass}>{content}</div>
       ) : (
-        <RouteFade className={mainClass}>{content}</RouteFade>
+        <RouteFade className={fadeClass}>{content}</RouteFade>
       )}
       {showAside && (
         // sticky は目次（nav）自身に付ける。aside は行の高さいっぱいに伸びるので末尾まで追従する
-        <aside
-          className={`py-8 ${columns.squeezed ? 'block' : 'hidden lg:block'}`}
-          aria-label="ページ内の補助情報"
-        >
-          {aside}
-        </aside>
+        <div className={`py-8 ${columns.squeezed ? 'block' : 'hidden lg:block'}`}>{aside}</div>
       )}
     </div>
   );

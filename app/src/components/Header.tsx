@@ -67,7 +67,7 @@ export function Header() {
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}
-          className={`size-9 items-center justify-center rounded text-header-muted hover:bg-white/8 hover:text-white ${
+          className={`size-9 items-center justify-center rounded text-header-muted hover:bg-white/8 hover:text-white max-sm:size-11 ${
             sidebar ? 'hidden' : 'inline-flex'
           }`}
           aria-label="メニューを開く"
@@ -109,7 +109,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => open()}
-            className={`size-9 items-center justify-center rounded text-header-muted hover:bg-white/8 hover:text-white sm:hidden ${
+            className={`size-9 items-center justify-center rounded text-header-muted hover:bg-white/8 hover:text-white max-sm:size-11 sm:hidden ${
               onHome ? 'hidden' : 'inline-flex'
             }`}
             aria-label="サイト内検索を開く"
@@ -125,7 +125,7 @@ export function Header() {
             aria-keyshortcuts="Control+J"
             title={`AI チャット（${modKeyLabel()}+J）`}
             aria-label="AI チャット"
-            className={`inline-flex h-9 items-center gap-1.5 rounded px-2.5 text-sm whitespace-nowrap transition-colors hover:bg-white/8 hover:text-white ${
+            className={`inline-flex h-9 items-center gap-1.5 rounded px-2.5 text-sm whitespace-nowrap max-sm:size-11 max-sm:justify-center max-sm:px-0 transition-colors hover:bg-white/8 hover:text-white ${
               chat.open ? 'bg-white/10 font-medium text-white' : 'text-header-muted'
             }`}
           >
@@ -135,10 +135,10 @@ export function Header() {
           <button
             type="button"
             onClick={settingsOpen ? closeSettings : () => navigate('/settings')}
-            aria-expanded={settingsOpen}
+            aria-current={settingsOpen ? 'page' : undefined}
             aria-label="設定"
             title="設定"
-            className={`inline-flex size-9 items-center justify-center rounded transition-colors hover:bg-white/8 hover:text-white ${
+            className={`inline-flex size-9 items-center justify-center rounded transition-colors hover:bg-white/8 hover:text-white max-sm:size-11 ${
               settingsOpen ? 'bg-white/10 text-white' : 'text-header-muted'
             }`}
           >

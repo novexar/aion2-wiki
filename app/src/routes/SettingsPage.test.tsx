@@ -50,16 +50,16 @@ describe('settings close', () => {
     expect(where()).toBe('/about');
   });
 
-  it('header icon toggles settings and reflects aria-expanded', async () => {
+  it('header icon toggles settings and reflects aria-current', async () => {
     renderApp(['/about']);
     const toggle = screen.getByRole('button', { name: '設定' });
-    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    expect(toggle).not.toHaveAttribute('aria-current');
     await userEvent.click(toggle);
     expect(where()).toBe('/settings');
-    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    expect(toggle).toHaveAttribute('aria-current', 'page');
     await userEvent.click(toggle);
     expect(where()).toBe('/about');
-    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    expect(toggle).not.toHaveAttribute('aria-current');
   });
 });
 

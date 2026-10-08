@@ -15,7 +15,7 @@ export function Breadcrumb({ items }: { readonly items: readonly Crumb[] }) {
           return (
             <li key={`${item.label}-${i}`} className="flex min-w-0 items-center gap-1">
               {item.to && !isLast ? (
-                <Link to={item.to} className="rounded hover:text-fg">
+                <Link to={item.to} className="rounded hover:text-fg max-sm:py-2">
                   {item.label}
                 </Link>
               ) : (

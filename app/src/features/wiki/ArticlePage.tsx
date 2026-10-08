@@ -17,7 +17,7 @@ import { articleById, loadArticle, nav } from './data';
 import { adjacentArticles } from './adjacent';
 import { PrevNext } from './PrevNext';
 import { SourcesList } from './SourcesList';
-import { MobileToc, Toc } from './Toc';
+import { BackToTop, MobileToc, Toc } from './Toc';
 import { useActiveHeading } from './useActiveHeading';
 import { WikiShell } from './WikiShell';
 
@@ -177,6 +177,7 @@ function ArticleView({ article }: { readonly article: Article }) {
           </section>
         )}
         <PrevNext prev={prev} next={next} />
+        <BackToTop />
       </article>
     </WikiShell>
   );
