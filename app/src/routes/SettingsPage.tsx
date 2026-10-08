@@ -5,7 +5,7 @@ import { WikiShell } from '../features/wiki/WikiShell';
 import { useDocumentMeta } from '../components/useDocumentMeta';
 import { ApiKeyForm } from '../features/chat/ApiKeyForm';
 import { HistorySetting } from '../features/chat/HistorySetting';
-import { DEFAULT_MODEL, SUGGESTED_MODELS } from '../lib/gemini-config';
+import { DEFAULT_MODEL, MODEL_NOTES, SUGGESTED_MODELS } from '../lib/gemini-config';
 import {
   clearApiKey,
   maskApiKey,
@@ -143,7 +143,7 @@ function ModelSetting() {
             >
               {SUGGESTED_MODELS.map((m) => (
                 <option key={m} value={m}>
-                  {m}
+                  {MODEL_NOTES[m] ? `${m}（${MODEL_NOTES[m]}）` : m}
                 </option>
               ))}
               <option value={CUSTOM_MODEL}>その他（手入力）</option>

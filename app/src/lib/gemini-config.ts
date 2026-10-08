@@ -9,4 +9,9 @@ export const SUGGESTED_MODELS: readonly string[] = [
   'gemini-flash-lite-latest',
 ];
 
+/** 設定画面の候補に添える注記 */
+export const MODEL_NOTES: Readonly<Record<string, string>> = {
+  'gemini-flash-lite-latest': '高速',
+};
+
 export const API_KEY_URL = 'https://aistudio.google.com/apikey';

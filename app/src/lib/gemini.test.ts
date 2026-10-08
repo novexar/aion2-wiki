@@ -46,6 +46,38 @@ describe('streamGemini', () => {
     });
   });
 
+  it('disables thinking and caps output tokens', async () => {
+    generateContentStream.mockResolvedValue(chunks(['a']));
+    await streamGemini({
+      apiKey: 'k',
+      model: 'm',
+      systemInstruction: 'S',
+      contents: [{ role: 'user', parts: [{ text: 'Q' }] }],
+      onText: vi.fn(),
+    });
+    const params = generateContentStream.mock.calls[0]?.[0];
+    expect(params.config).toMatchObject({
+      thinkingConfig: { thinkingBudget: 0 },
+      maxOutputTokens: 512,
+    });
+  });
+
+  it('retries without thinkingConfig when the model rejects it', async () => {
+    generateContentStream
+      .mockRejectedValueOnce(Object.assign(new Error('Thinking is not supported'), { status: 400 }))
+      .mockResolvedValueOnce(chunks(['ok']));
+    const result = await streamGemini({
+      apiKey: 'k',
+      model: 'm',
+      systemInstruction: 'S',
+      contents: [{ role: 'user', parts: [{ text: 'Q' }] }],
+      onText: vi.fn(),
+    });
+    expect(result).toBe('ok');
+    expect(generateContentStream.mock.calls[1]?.[0].config).not.toHaveProperty('thinkingConfig');
+    expect(generateContentStream.mock.calls[1]?.[0].config.maxOutputTokens).toBe(512);
+  });
+
   it('throws AbortError when aborted', async () => {
     const controller = new AbortController();
     async function* gen() {
