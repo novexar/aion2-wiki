@@ -1,10 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { Link, MemoryRouter, Route, Routes } from 'react-router';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { resetRouteEnter, routeFadeScope } from '../lib/route-motion';
 import { nav } from '../features/wiki/data';
 import { CategoryNav } from './CategoryNav';
 import { MobileDrawer } from './MobileDrawer';
+import { PageLoading } from './PageLoading';
 import { RouteFade } from './RouteFade';
 
 describe('routeFadeScope', () => {
@@ -102,5 +103,21 @@ describe('MobileDrawer のスライド', () => {
     expect(dialog.parentElement).not.toHaveAttribute('data-open');
     fireEvent.transitionEnd(dialog);
     expect(screen.queryByRole('dialog', { name: 'メニュー' })).toBeNull();
+  });
+});
+
+describe('PageLoading', () => {
+  afterEach(() => vi.useRealTimers());
+
+  it('250ms 未満では何も描かず、250ms を過ぎたらスケルトンを出す', () => {
+    vi.useFakeTimers();
+    render(<PageLoading />);
+    expect(screen.getByRole('status')).toBeEmptyDOMElement();
+    act(() => vi.advanceTimersByTime(249));
+    expect(document.querySelector('[data-skeleton]')).toBeNull();
+    act(() => vi.advanceTimersByTime(1));
+    expect(document.querySelector('[data-skeleton]')).not.toBeNull();
+    expect(screen.getByRole('status')).toHaveTextContent('読み込み中');
+    expect(document.querySelectorAll('.skeleton-bar')).toHaveLength(4);
   });
 });

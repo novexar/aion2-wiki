@@ -449,6 +449,23 @@
   }
 }
 
+/* ---------- スケルトン（5.2 #7）: 1.2s で opacity .5⇄1。無限ループはこれだけ ---------- */
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.skeleton-bar {
+  animation: skeleton-pulse 1200ms ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-bar {
+    animation: none;
+  }
+}
+
 /* ---------- モバイルドロワー（5.2 #11）: 左から x −100%→0、背景 opacity。開 200ms／閉 160ms ---------- */
 .drawer:not([data-open]) {
   pointer-events: none;
