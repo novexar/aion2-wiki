@@ -1,14 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { streamGemini, toChatError } from '../../lib/gemini';
-import {
-  buildRagRequest,
-  pickReferences,
-  retrievalQuery,
-  selectContext,
-  TOP_K,
-} from '../../lib/rag';
-import { searchChunks } from '../../lib/search';
-import type { ChunkRef } from '../../lib/types';
+import { buildRagRequest, pickReferences, selectContext } from '../../lib/rag';
 import {
   fromStored,
   getChatRepository,
@@ -19,7 +11,7 @@ import {
   type ChatMessage,
 } from './chat-history';
 import { WARN_BYTES, type ChatRepository, type Conversation } from './chat-repository';
-import { loadChunkStore, prependArticleChunks, resolveChunks } from './chunk-loader';
+import { retrieveChunks } from './chunk-loader';
 
 export interface UseChatOptions {
   readonly apiKey: string | null;
@@ -54,16 +46,7 @@ async function retrieve(
   contextArticleId: string | null | undefined,
   signal: AbortSignal,
 ) {
-  const store = await loadChunkStore();
-  if (signal.aborted) throw abortError();
-  const found: ChunkRef[] = searchChunks(
-    store.index,
-    store.byId,
-    retrievalQuery(history, question),
-    TOP_K * 3,
-  );
-  const refs = contextArticleId ? prependArticleChunks(store.byId, contextArticleId, found) : found;
-  const chunks = await resolveChunks(refs);
+  const chunks = await retrieveChunks({ history, question, contextArticleId });
   if (signal.aborted) throw abortError();
   // 同一記事 2 件まで・TOP_K 件・3,000 字に絞る
   return selectContext(chunks);

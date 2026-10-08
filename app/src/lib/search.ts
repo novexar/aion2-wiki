@@ -105,19 +105,3 @@ export function searchPages(
   if (hits.length > 0) return hits.slice(0, limit);
   return searchWithFallback(index, q).slice(0, limit).map(fromResult);
 }
-
-/** RAG 用: 上位 limit 件のチャンク（位置情報など ID を持つ値）を返す */
-export function searchChunks<T extends { readonly id: string }>(
-  index: MiniSearch,
-  chunksById: ReadonlyMap<string, T>,
-  query: string,
-  limit = 8,
-): T[] {
-  const out: T[] = [];
-  for (const result of searchWithFallback(index, query)) {
-    const chunk = chunksById.get(String(result.id));
-    if (chunk) out.push(chunk);
-    if (out.length >= limit) break;
-  }
-  return out;
-}

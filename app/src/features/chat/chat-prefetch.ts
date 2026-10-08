@@ -1,5 +1,5 @@
 import { preloadGemini } from '../../lib/gemini';
-import { loadChunkStore } from './chunk-loader';
+import { warmRetrieval } from './chunk-loader';
 
 type IdleScheduler = (callback: () => void) => void;
 
@@ -13,7 +13,7 @@ let scheduled = false;
 
 /** パネルを開いた時点で SDK と検索データを先読みする（アイドル時に 1 回だけ。失敗しても送信時に再試行される） */
 export function prefetchChat(
-  loaders: readonly (() => Promise<unknown>)[] = [preloadGemini, loadChunkStore],
+  loaders: readonly (() => Promise<unknown>)[] = [preloadGemini, warmRetrieval],
   schedule: IdleScheduler = scheduleIdle,
 ): void {
   if (scheduled) return;

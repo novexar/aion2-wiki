@@ -6,7 +6,8 @@ import { MemoryRouter, Route, Routes } from 'react-router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { shellColumns } from '../../lib/shell-layout';
 import { STORAGE_KEYS } from '../../lib/storage';
-import type { ChunkRef } from '../../lib/types';
+import type { ArticleChunks } from '../../lib/retrieval';
+import type { Chunk } from '../../lib/types';
 import { mockWikiData } from '../../test/fixtures';
 import { getChatRepository, resetChatRepository } from './chat-history';
 import {
@@ -25,30 +26,42 @@ import { prependArticleChunks } from './chunk-loader';
 vi.mock('../wiki/data', () => mockWikiData());
 vi.mock('../search/CommandPalette', () => ({ default: () => null }));
 
-const REFS: ChunkRef[] = [
-  { id: 'kinah#1', articleId: 'kinah', heading: '稼ぎ方', anchor: 'earn' },
-  { id: 'kinah#0', articleId: 'kinah', heading: '', anchor: '' },
-  { id: 'expedition#0', articleId: 'expedition', heading: '', anchor: '' },
-];
-const BY_ID = new Map(REFS.map((r) => [r.id, r]));
+const OWN: ArticleChunks = {
+  articleId: 'kinah',
+  title: 'kinah',
+  category: 'economy',
+  chunks: [
+    { heading: '', anchor: '', text: '本文:kinah#0' },
+    { heading: '稼ぎ方', anchor: 'earn', text: '本文:kinah#1' },
+    { heading: '', anchor: '', text: '本文:kinah#2' },
+  ],
+};
+const EXPEDITION: Chunk = {
+  id: 'expedition#0',
+  articleId: 'expedition',
+  category: 'economy',
+  title: 'expedition',
+  heading: '',
+  anchor: '',
+  text: '本文:expedition#0',
+};
 
 const streamGemini = vi.fn();
-const searchChunks = vi.fn((): ChunkRef[] => []);
+/** 記事検索で見つかったことにするチャンク */
+let found: Chunk[] = [];
 
 vi.mock('../../lib/gemini', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../../lib/gemini')>()),
   streamGemini: (options: unknown) => streamGemini(options),
 }));
-vi.mock('../../lib/search', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../../lib/search')>()),
-  searchChunks: () => searchChunks(),
-}));
-vi.mock('./chunk-loader', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('./chunk-loader')>()),
-  loadChunkStore: async () => ({ index: {}, byId: BY_ID }),
-  resolveChunks: async (refs: readonly ChunkRef[]) =>
-    refs.map((r) => ({ ...r, title: r.articleId, category: 'economy', text: `本文:${r.id}` })),
-}));
+vi.mock('./chunk-loader', async (importOriginal) => {
+  const original = await importOriginal<typeof import('./chunk-loader')>();
+  return {
+    ...original,
+    retrieveChunks: async (options: { contextArticleId?: string | null }) =>
+      original.prependArticleChunks(options.contextArticleId ? OWN : undefined, found),
+  };
+});
 
 const { Layout } = await import('../../components/Layout');
 const { SearchProvider } = await import('../search/SearchProvider');
@@ -59,7 +72,7 @@ beforeEach(() => {
   globalThis.indexedDB = new IDBFactory();
   resetChatRepository();
   streamGemini.mockReset();
-  searchChunks.mockReset().mockReturnValue([]);
+  found = [];
 });
 
 function renderApp(path = '/') {
@@ -224,13 +237,13 @@ describe('ChatPanel', () => {
 
 describe('article context', () => {
   it('prepends the article chunks in order without duplicates', () => {
-    const found = [REFS[2] as ChunkRef, REFS[0] as ChunkRef];
-    expect(prependArticleChunks(BY_ID, 'kinah', found).map((r) => r.id)).toEqual([
+    const hits = [EXPEDITION, { ...EXPEDITION, id: 'kinah#0', articleId: 'kinah' }];
+    expect(prependArticleChunks(OWN, hits).map((r) => r.id)).toEqual([
       'kinah#0',
       'kinah#1',
       'expedition#0',
     ]);
-    expect(prependArticleChunks(BY_ID, 'kinah', [], 1).map((r) => r.id)).toEqual(['kinah#0']);
+    expect(prependArticleChunks(OWN, [], 1).map((r) => r.id)).toEqual(['kinah#0']);
   });
 
   it('sends the current article chunks to Gemini and saves both messages', async () => {
