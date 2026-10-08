@@ -14,4 +14,7 @@ export function useMediaQuery(query: string, fallback = false): boolean {
   );
 }
 
-export const WIDE_QUERY = '(min-width: 80rem)';
+/** 右カラムの目次を出す幅（Tailwind の lg） */
+export const WIDE_QUERY = '(min-width: 64rem)';
+
+export const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';

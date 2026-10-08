@@ -87,6 +87,13 @@ describe('Toc', () => {
     const { container } = render(<Toc headings={[]} activeId={null} />);
     expect(container).toBeEmptyDOMElement();
   });
+
+  it('is hidden under two headings', () => {
+    const { container } = render(
+      <Toc headings={[{ id: 'a', text: 'A', depth: 2 }]} activeId="a" />,
+    );
+    expect(container).toBeEmptyDOMElement();
+  });
 });
 
 describe('SearchProvider', () => {
@@ -133,7 +140,10 @@ describe('SearchProvider', () => {
 });
 
 describe('Toc / MobileToc exclusivity', () => {
-  const headings = [{ id: 'a', text: 'A', depth: 2 as const }];
+  const headings = [
+    { id: 'a', text: 'A', depth: 2 as const },
+    { id: 'b', text: 'B', depth: 2 as const },
+  ];
 
   it('renders only one landmark depending on viewport width', () => {
     const original = window.matchMedia;

@@ -1,27 +1,73 @@
 import { ChevronDown } from 'lucide-react';
+import { useEffect, useRef, type MouseEvent } from 'react';
 import type { Heading } from '../../lib/types';
-import { useMediaQuery, WIDE_QUERY } from '../../lib/useMediaQuery';
+import { REDUCED_MOTION_QUERY, useMediaQuery, WIDE_QUERY } from '../../lib/useMediaQuery';
+
+/** 目次を出す最小の見出し数 */
+const MIN_TOC_HEADINGS = 2;
 
 interface TocProps {
   readonly headings: readonly Heading[];
   readonly activeId: string | null;
 }
 
+/** h3 ID → 直前の h2 ID */
+function parentMap(headings: readonly Heading[]): ReadonlyMap<string, string> {
+  const map = new Map<string, string>();
+  let h2: string | null = null;
+  for (const h of headings) {
+    if (h.depth === 2) h2 = h.id;
+    else if (h2) map.set(h.id, h2);
+  }
+  return map;
+}
+
+function prefersReducedMotion(): boolean {
+  return typeof window.matchMedia === 'function' && window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
+function isPlainClick(event: MouseEvent<HTMLAnchorElement>): boolean {
+  return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+}
+
+/** 見出しへスクロールし（reduced motion では即時）、URL の #hash を更新する */
+function scrollToHeading(event: MouseEvent<HTMLAnchorElement>, id: string): void {
+  if (!isPlainClick(event)) return;
+  const target = document.getElementById(id);
+  if (!target) return;
+  event.preventDefault();
+  target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+  window.history.replaceState(window.history.state, '', `#${encodeURIComponent(id)}`);
+}
+
+function scrollToTop(event: MouseEvent<HTMLAnchorElement>): void {
+  if (!isPlainClick(event)) return;
+  event.preventDefault();
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  const { pathname, search } = window.location;
+  window.history.replaceState(window.history.state, '', pathname + search);
+}
+
+function itemClass(isActive: boolean, isParent: boolean): string {
+  if (isActive) return 'border-accent font-bold text-fg';
+  if (isParent) return 'border-transparent text-fg';
+  return 'border-transparent text-fg-muted hover:text-fg';
+}
+
 function TocList({ headings, activeId }: TocProps) {
+  const parentId = activeId ? parentMap(headings).get(activeId) : undefined;
   return (
-    <ul className="space-y-0.5 border-l border-line text-[13px]">
+    <ul className="border-l border-line text-[13px]">
       {headings.map((h) => {
         const isActive = h.id === activeId;
         return (
           <li key={h.id}>
             <a
               href={`#${encodeURIComponent(h.id)}`}
+              onClick={(e) => scrollToHeading(e, h.id)}
               aria-current={isActive ? 'location' : undefined}
-              className={`-ml-px flex min-h-8 items-center border-l-2 py-1 leading-snug transition-colors ${h.depth === 3 ? 'pl-6' : 'pl-3'} ${
-                isActive
-                  ? 'border-accent font-medium text-fg'
-                  : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'
-              }`}
+              data-toc-id={h.id}
+              className={`-ml-px block border-l-2 py-1 pr-1 leading-snug ${h.depth === 3 ? 'pl-6' : 'pl-3'} ${itemClass(isActive, h.id === parentId)}`}
             >
               {h.text}
             </a>
@@ -32,24 +78,54 @@ function TocList({ headings, activeId }: TocProps) {
   );
 }
 
-/** 右カラムの目次（デスクトップ） */
+/** 現在の行が目次の表示範囲から外れたら、目次だけをスクロールして見せる */
+function useKeepActiveVisible(activeId: string | null) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const box = ref.current;
+    if (!box || !activeId) return;
+    const item = box.querySelector<HTMLElement>(`[data-toc-id="${CSS.escape(activeId)}"]`);
+    if (!item) return;
+    const top = item.offsetTop;
+    if (top < box.scrollTop || top + item.offsetHeight > box.scrollTop + box.clientHeight) {
+      box.scrollTop = Math.max(0, top - box.clientHeight / 3);
+    }
+  }, [activeId]);
+  return ref;
+}
+
+/** 右カラムの目次（lg 以上）。sticky で本文の右に常時表示し、現在の見出しを強調する */
 export function Toc({ headings, activeId }: TocProps) {
   const wide = useMediaQuery(WIDE_QUERY, true);
-  if (headings.length === 0 || !wide) return null;
+  const ref = useKeepActiveVisible(activeId);
+  if (headings.length < MIN_TOC_HEADINGS || !wide) return null;
   return (
-    <nav aria-label="目次">
-      <p className="mb-3 text-xs font-semibold text-fg">目次</p>
-      <TocList headings={headings} activeId={activeId} />
+    <nav
+      aria-label="目次"
+      className="sticky top-[calc(var(--header-h)+1rem)] flex max-h-[calc(100dvh-var(--header-h)-2rem)] flex-col"
+    >
+      <p className="mb-2 text-xs font-bold text-fg">目次</p>
+      {/* relative: 子の offsetTop をこの箱基準にする */}
+      <div ref={ref} className="scroll-thin relative min-h-0 overflow-y-auto">
+        <TocList headings={headings} activeId={activeId} />
+      </div>
+      <a
+        href="#main"
+        onClick={scrollToTop}
+        className="mt-3 text-xs text-fg-muted hover:text-fg hover:underline"
+      >
+        ページ上部へ
+      </a>
     </nav>
   );
 }
 
-/** 折りたたみ式の目次（80rem 未満）。Toc とはどちらか一方だけが描画される */
+/** 折りたたみ式の目次（lg 未満）。Toc とはどちらか一方だけが描画される */
 export function MobileToc({ headings, activeId }: TocProps) {
   const wide = useMediaQuery(WIDE_QUERY, true);
-  if (headings.length === 0 || wide) return null;
+  if (headings.length < MIN_TOC_HEADINGS || wide) return null;
   return (
-    <details className="group mb-8 border-b border-line xl:hidden">
+    <details className="group mb-8 border-b border-line lg:hidden">
       <summary className="flex cursor-pointer list-none items-center justify-between py-2.5 text-sm font-medium text-fg [&::-webkit-details-marker]:hidden">
         <span>目次</span>
         <ChevronDown
