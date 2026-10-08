@@ -61,7 +61,7 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
         }}
         className="drawer-panel scroll-thin absolute inset-y-0 left-0 flex w-[min(18rem,80vw)] flex-col overflow-y-auto border-r border-line bg-canvas"
       >
-        <div className="sticky top-0 flex h-14 items-center justify-between border-b border-line bg-header-bg px-4 text-header-fg">
+        <div className="sticky top-0 flex h-14 shrink-0 items-center justify-between border-b border-line bg-header-bg px-4 text-header-fg">
           <span className="text-sm font-semibold">{title}</span>
           <button
             type="button"
