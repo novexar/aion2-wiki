@@ -9,10 +9,13 @@ export default function NotFoundPage() {
   const { open } = useSearchPalette();
   return (
     <WikiShell wide>
-      <h1 className="text-[1.75rem] font-bold">このページは存在しません。</h1>
+      <h1 className="text-[1.75rem] font-bold">ページが見つかりません</h1>
+      <p className="mt-3 text-sm text-fg-muted">
+        URL が間違っているか、記事が移動した可能性があります。
+      </p>
       <div className="mt-6 flex gap-2">
         <Link to="/" className={buttonClass('primary')}>
-          ホーム
+          ホームへ
         </Link>
         <button type="button" onClick={() => open()} className={buttonClass('secondary')}>
           検索

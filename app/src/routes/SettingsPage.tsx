@@ -37,8 +37,8 @@ function Section({
   return (
     <section className="border-b border-line py-6">
       <h2 className="text-[15px] font-semibold text-fg">{title}</h2>
+      {description && <p className="mt-1 text-[13px] text-fg-subtle">{description}</p>}
       <div className="mt-3 min-w-0">{children}</div>
-      {description && <p className="mt-2 text-[13px] text-fg-subtle">{description}</p>}
     </section>
   );
 }
@@ -172,18 +172,21 @@ function ModelSetting() {
             </div>
           )}
         </div>
-        <Button type="submit">保存</Button>
-        <Button
-          variant="ghost"
-          onClick={() => {
-            saveModel(DEFAULT_MODEL);
-            setDraft(DEFAULT_MODEL);
-            setCustom(false);
-            setSaved(true);
-          }}
-        >
-          既定に戻す
-        </Button>
+        <div className="flex gap-2">
+          <Button type="submit">保存</Button>
+          <Button
+            variant="ghost"
+            className="ml-auto sm:ml-0"
+            onClick={() => {
+              saveModel(DEFAULT_MODEL);
+              setDraft(DEFAULT_MODEL);
+              setCustom(false);
+              setSaved(true);
+            }}
+          >
+            既定に戻す
+          </Button>
+        </div>
       </div>
       <p className="text-[13px] text-fg-subtle">
         既定: <code className="font-mono">{DEFAULT_MODEL}</code>
@@ -202,7 +205,7 @@ function ApiKeySetting() {
     return (
       <div className="space-y-3">
         {cleared && (
-          <p role="status" className="text-sm text-ok">
+          <p role="status" className="text-sm text-fg-muted">
             API キーを削除しました。
           </p>
         )}
@@ -264,11 +267,17 @@ export default function SettingsPage() {
           <Section title="モデル" description="AI チャットに使う Gemini のモデル名">
             <ModelSetting />
           </Section>
-          <Section title="API キー" description="このブラウザにだけ保存されます">
-            <ApiKeySetting />
-          </Section>
-          <Section title="会話履歴" description="このブラウザにだけ保存されます">
-            <HistorySetting />
+          <Section title="保存データ" description="このブラウザにだけ保存されます">
+            <div className="space-y-6">
+              <div>
+                <h3 className="mb-2 text-sm font-semibold text-fg">API キー</h3>
+                <ApiKeySetting />
+              </div>
+              <div>
+                <h3 className="mb-2 text-sm font-semibold text-fg">会話履歴</h3>
+                <HistorySetting />
+              </div>
+            </div>
           </Section>
         </div>
       </div>
