@@ -1,3 +1,6 @@
 research/cache/
 node_modules/
-.claude/
+.claude/*
+!.claude/commands/
+research/watch/last-run.log
+research/watch/last-run.json
