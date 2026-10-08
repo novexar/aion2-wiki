@@ -28,7 +28,7 @@ GitHub Pages（`https://novexar.github.io/AION2/`）で動く静的 Wiki を作�
 AION2/
   content/            Markdown（情報源）
   app/                Vite アプリ（この仕様書のある場所）
-    scripts/build-content.ts   content/ → app/src/generated/{pages.json, search-index.json, chunks.json, nav.json}
+    scripts/build-content.ts   content/ → app/src/generated/{pages.json, search-index.json, chunk-text/*.json, nav.json}
     src/
       generated/      生成物（git 管理外。CI でビルド）
       components/     UI

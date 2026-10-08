@@ -3,13 +3,12 @@ import path from 'node:path';
 import MiniSearch from 'minisearch';
 import { CATEGORIES, isCategoryId } from '../../src/lib/categories';
 import { normalizeBase } from '../../src/lib/paths';
-import { chunkIndexOptions, pageIndexOptions } from '../../src/lib/search-options';
+import { pageIndexOptions } from '../../src/lib/search-options';
 import type {
   Article,
+  ArticleChunk,
   ArticleMeta,
   Chunk,
-  ChunkRef,
-  ChunksData,
   NavArticle,
   NavJson,
 } from '../../src/lib/types';
@@ -337,17 +336,16 @@ function buildPageTexts(
   );
 }
 
-function buildChunkIndex(chunks: readonly Chunk[]): unknown {
-  const index = new MiniSearch(chunkIndexOptions);
-  index.addAll(chunks.map((c) => ({ id: c.id, title: c.title, heading: c.heading, text: c.text })));
-  return index.toJSON();
+/** chunk-text/<articleId>.json の中身。添字がチャンクの記事内位置 */
+function toArticleChunks(chunks: readonly Chunk[]): ArticleChunk[] {
+  return chunks.map(({ heading, anchor, text }) => ({ heading, anchor, text }));
 }
 
 async function writeJson(file: string, data: unknown): Promise<void> {
   await writeFile(file, `${JSON.stringify(data)}\n`, 'utf8');
 }
 
-/** content/ を読み、src/generated/ に pages / search-index / chunks / nav を出力する */
+/** content/ を読み、src/generated/ に pages / search-index / chunk-text / nav を出力する */
 export async function buildContent(options: BuildOptions): Promise<BuildResult> {
   const base = normalizeBase(options.base);
   const warnings: string[] = [];
@@ -411,14 +409,9 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
   const allChunks = [...chunksById.values()].flat();
   const pageTexts = buildPageTexts(articles, chunksById);
   const nav = buildNav(articles.map(toMeta), options.now ?? new Date());
-  const chunkRefs: ChunkRef[] = allChunks.map(({ id, articleId, heading, anchor }) => ({
-    id,
-    articleId,
-    heading,
-    anchor,
-  }));
-  const chunksData: ChunksData = { chunks: chunkRefs, index: buildChunkIndex(allChunks) };
 
+  // 旧チャット専用索引（廃止）が残っていれば消す
+  await rm(path.join(options.outDir, 'chunks.json'), { force: true });
   const pagesDir = path.join(options.outDir, 'pages');
   await rm(pagesDir, { recursive: true, force: true });
   await mkdir(pagesDir, { recursive: true });
@@ -428,17 +421,13 @@ export async function buildContent(options: BuildOptions): Promise<BuildResult> 
   await mkdir(chunkTextDir, { recursive: true });
   await Promise.all(
     [...chunksById].map(([id, chunks]) =>
-      writeJson(
-        path.join(chunkTextDir, `${id}.json`),
-        chunks.map((c) => c.text),
-      ),
+      writeJson(path.join(chunkTextDir, `${id}.json`), toArticleChunks(chunks)),
     ),
   );
   await writeJson(path.join(options.outDir, 'pages.json'), articles);
   await writeJson(path.join(options.outDir, 'meta.json'), articles.map(toMeta));
   await writeJson(path.join(options.outDir, 'search-index.json'), buildPageIndex(articles));
   await writeJson(path.join(options.outDir, 'search-text.json'), pageTexts);
-  await writeJson(path.join(options.outDir, 'chunks.json'), chunksData);
   await writeJson(path.join(options.outDir, 'nav.json'), nav);
 
   return {

@@ -30,23 +30,3 @@ export const pageIndexOptions: Options = {
     boost: { title: 4, aliases: 4, tags: 2.5, summary: 1.5, headings: 1.2 },
   },
 };
-
-export const CHUNK_FIELDS = ['title', 'heading', 'text'];
-
-/** チャンク本文は bigram のみ（unigram を足すと索引が約 1.4 倍になる）。題名・見出しは unigram も入れる */
-export function tokenizeChunkField(text: string, fieldName?: string): string[] {
-  return tokenize(text, fieldName !== 'text');
-}
-
-export const chunkIndexOptions: Options = {
-  idField: 'id',
-  fields: CHUNK_FIELDS,
-  storeFields: [],
-  tokenize: tokenizeChunkField,
-  processTerm: identity,
-  searchOptions: {
-    tokenize,
-    ...baseSearchOptions,
-    boost: { title: 2, heading: 1.5, text: 1 },
-  },
-};

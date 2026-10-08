@@ -1,15 +1,8 @@
 import MiniSearch from 'minisearch';
 import { describe, expect, it } from 'vitest';
 import { highlight, makeSnippet } from './highlight';
-import {
-  normalizeTexts,
-  searchBody,
-  searchChunks,
-  searchPages,
-  searchWithFallback,
-} from './search';
-import { chunkIndexOptions, isLatinTerm, pageIndexOptions } from './search-options';
-import type { Chunk } from './types';
+import { normalizeTexts, searchBody, searchPages, searchWithFallback } from './search';
+import { isLatinTerm, pageIndexOptions } from './search-options';
 
 function pageIndex(): MiniSearch {
   const index = new MiniSearch(pageIndexOptions);
@@ -104,37 +97,6 @@ describe('searchPages', () => {
 
   it('respects the limit', () => {
     expect(searchPages(index, '遠征', 1)).toHaveLength(1);
-  });
-});
-
-describe('searchChunks', () => {
-  it('returns chunk objects in score order up to the limit', () => {
-    const chunks: Chunk[] = [
-      {
-        id: 'k#0',
-        articleId: 'kinah',
-        category: 'economy',
-        title: 'ギーナ',
-        heading: '入手',
-        anchor: '入手',
-        text: '日課で手に入る',
-      },
-      {
-        id: 'o#0',
-        articleId: 'odyle',
-        category: 'dungeons',
-        title: 'オード',
-        heading: '',
-        anchor: '',
-        text: '遠征の報酬受取に使う',
-      },
-    ];
-    const index = new MiniSearch(chunkIndexOptions);
-    index.addAll(chunks.map(({ id, title, heading, text }) => ({ id, title, heading, text })));
-    const byId = new Map(chunks.map((c) => [c.id, c]));
-    expect(searchChunks(index, byId, '報酬', 8).map((c) => c.id)).toEqual(['o#0']);
-    expect(searchChunks(index, new Map(), '報酬', 8)).toEqual([]);
-    expect(searchChunks(index, byId, '日課 報酬', 1)).toHaveLength(1);
   });
 });
 

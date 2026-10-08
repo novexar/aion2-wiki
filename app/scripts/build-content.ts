@@ -1,5 +1,5 @@
 /**
- * content/ → src/generated/{pages.json, pages/*.json, search-index.json, chunks.json, nav.json}
+ * content/ → src/generated/{pages.json, pages/*.json, search-index.json, chunk-text/*.json, nav.json}
  *
  * 使い方:
  *   npx tsx scripts/build-content.ts            # 本番（content/_* を除外）

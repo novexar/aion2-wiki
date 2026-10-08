@@ -4,9 +4,9 @@ import os from 'node:os';
 import path from 'node:path';
 import MiniSearch from 'minisearch';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { chunkIndexOptions, pageIndexOptions } from '../../src/lib/search-options';
-import { searchChunks, searchPages } from '../../src/lib/search';
-import type { Article, ArticleMeta, ChunksData, NavJson } from '../../src/lib/types';
+import { pageIndexOptions } from '../../src/lib/search-options';
+import { searchPages } from '../../src/lib/search';
+import type { Article, ArticleChunk, ArticleMeta, NavJson } from '../../src/lib/types';
 import type { CategoryId } from '../../src/lib/categories';
 import { buildContent, buildNav, byReadingOrder, titleLengthWarning } from './build';
 import { ContentBuildError } from './errors';
@@ -153,18 +153,14 @@ describe('buildContent', () => {
       category: 'dungeons',
     });
 
-    const chunks = await readOut<ChunksData>('chunks.json');
-    const chunkIndex = MiniSearch.loadJS(
-      chunks.index as Parameters<typeof MiniSearch.loadJS>[0],
-      chunkIndexOptions,
-    );
-    const byId = new Map(chunks.chunks.map((c) => [c.id, c]));
-    const hits = searchChunks(chunkIndex, byId, '日課', 8);
-    expect(hits[0]).toMatchObject({ articleId: 'kinah', heading: '入手方法' });
-    expect(chunks.chunks[0]).not.toHaveProperty('text');
-    const kinahTexts = await readOut<string[]>('chunk-text/kinah.json');
-    expect(kinahTexts[0]).toContain('オードエネルギー でも稼げる');
-    expect(kinahTexts).toHaveLength(chunks.chunks.filter((c) => c.articleId === 'kinah').length);
+    // チャット専用の chunks.json は出力しない（記事検索索引 + chunk-text で検索する）
+    await expect(readOut('chunks.json')).rejects.toThrow();
+    const kinahChunks = await readOut<ArticleChunk[]>('chunk-text/kinah.json');
+    expect(kinahChunks.find((c) => c.heading === '入手方法')).toMatchObject({
+      anchor: expect.any(String),
+      text: expect.stringContaining('日課'),
+    });
+    expect(kinahChunks[0]?.text).toContain('オードエネルギー でも稼げる');
   });
 
   it('collects every invalid file into one error with file names', async () => {

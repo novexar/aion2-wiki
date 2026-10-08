@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { streamGemini, toChatError } from '../../lib/gemini';
-import { buildRagRequest, pickReferences, retrievalQuery, TOP_K } from '../../lib/rag';
-import { searchChunks } from '../../lib/search';
-import type { ChunkRef } from '../../lib/types';
+import { buildRagRequest, pickReferences, selectContext } from '../../lib/rag';
 import {
   fromStored,
   getChatRepository,
@@ -13,7 +11,8 @@ import {
   type ChatMessage,
 } from './chat-history';
 import { WARN_BYTES, type ChatRepository, type Conversation } from './chat-repository';
-import { loadChunkStore, prependArticleChunks, resolveChunks } from './chunk-loader';
+import { startChatTimer } from './chat-timing';
+import { retrieveChunks } from './chunk-loader';
 
 export interface UseChatOptions {
   readonly apiKey: string | null;
@@ -48,18 +47,10 @@ async function retrieve(
   contextArticleId: string | null | undefined,
   signal: AbortSignal,
 ) {
-  const store = await loadChunkStore();
+  const chunks = await retrieveChunks({ history, question, contextArticleId });
   if (signal.aborted) throw abortError();
-  const found: ChunkRef[] = searchChunks(
-    store.index,
-    store.byId,
-    retrievalQuery(history, question),
-    TOP_K,
-  );
-  const refs = contextArticleId ? prependArticleChunks(store.byId, contextArticleId, found) : found;
-  const chunks = await resolveChunks(refs);
-  if (signal.aborted) throw abortError();
-  return chunks;
+  // 同一記事 2 件まで・TOP_K 件・3,000 字に絞る
+  return selectContext(chunks);
 }
 
 export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): UseChatResult {
@@ -138,6 +129,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
       const question = rawQuestion.trim();
       if (!question || !apiKey || controllerRef.current !== null) return;
 
+      const timer = startChatTimer();
       const controller = new AbortController();
       controllerRef.current = controller;
       const history = toTurns(messages);
@@ -160,11 +152,14 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
         }
         await save(conversationId, userMsg, sentAt);
         const chunks = await retrieve(question, history, contextArticleId, controller.signal);
+        timer.retrieved();
         if (chunks.length === 0) {
           // 根拠になる抜粋がなければ API を呼ばずに返す
           update({ text: 'この Wiki に該当する記事がありません。', status: 'done', refs: [] });
           return;
         }
+        // 回答を待たず、根拠にする記事を先に見せる
+        update({ refs: pickReferences(chunks) });
         const request = buildRagRequest(history, question, chunks);
         const full = await streamGemini({
           apiKey,
@@ -172,8 +167,12 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
           systemInstruction: request.systemInstruction,
           contents: request.contents,
           signal: controller.signal,
-          onText: (text) => patch(reply.id, { text }),
+          onText: (text) => {
+            timer.firstToken();
+            patch(reply.id, { text });
+          },
         });
+        timer.done();
         update({ text: full, status: 'done', refs: pickReferences(chunks, full) });
       } catch (error: unknown) {
         const chatError = toChatError(error);

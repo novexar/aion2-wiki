@@ -62,8 +62,8 @@ app/
 - `pages/<id>.json`: 記事ごとの HTML・目次・出典（記事を開いた時に遅延読込）。`pages.json` は全記事をまとめたもの
 - `search-index.json`: 記事検索用 MiniSearch インデックス（題名・別名・タグ・概要・見出し。検索を開いた時に読込）
 - `search-text.json`: 記事ごとの本文先頭 2,000 文字。検索の本文一致（部分一致）とスニペットに使う
-- `chunks.json`: チャット用チャンクの位置（ID・記事 ID・見出し・アンカー）とインデックス
-- `chunk-text/<id>.json`: 記事ごとのチャンク本文（約 600 文字ずつ）。回答に使うチャンクの記事分だけ遅延読込
+- 旧 `chunks.json`（チャット専用索引）は廃止。チャットは `search-index.json` で記事を上位 5 件選び、その `chunk-text` だけ読む
+- `chunk-text/<id>.json`: 記事ごとのチャンク（`{ heading, anchor, text }` の配列、約 600 文字ずつ）。回答候補の記事分だけ遅延読込
 
 ## 記事を追加する
 

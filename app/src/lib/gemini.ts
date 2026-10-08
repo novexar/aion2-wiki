@@ -82,21 +82,43 @@ export interface StreamOptions {
   readonly onText: (fullText: string) => void;
 }
 
+/** SDK を先読みする（初回送信時の読み込み待ちを減らす） */
+export function preloadGemini(): Promise<unknown> {
+  return import('@google/genai');
+}
+
+/** 応答の最大トークン数（5 行以内の回答に十分な量） */
+export const MAX_OUTPUT_TOKENS = 512;
+
+/** 思考を無効化して初動を速くする。非対応モデルで拒否された時は外して再試行する */
+export const THINKING_CONFIG = { thinkingBudget: 0 } as const;
+
+function rejectsThinking(error: unknown): boolean {
+  return statusOf(error) === 400 && /thinking/i.test(messageOf(error));
+}
+
 /** Gemini にストリーミングで問い合わせる。SDK はこの関数の呼び出し時に初めて読み込む */
 export async function streamGemini(options: StreamOptions): Promise<string> {
   const { GoogleGenAI } = await import('@google/genai');
   const ai = new GoogleGenAI({ apiKey: options.apiKey });
-  const stream = await ai.models.generateContentStream({
-    model: options.model,
-    contents: options.contents.map((c) => ({
-      role: c.role,
-      parts: c.parts.map((p) => ({ text: p.text })),
-    })),
-    config: {
-      systemInstruction: options.systemInstruction,
-      temperature: 0.3,
-      abortSignal: options.signal,
-    },
+  const request = (withThinking: boolean) =>
+    ai.models.generateContentStream({
+      model: options.model,
+      contents: options.contents.map((c) => ({
+        role: c.role,
+        parts: c.parts.map((p) => ({ text: p.text })),
+      })),
+      config: {
+        systemInstruction: options.systemInstruction,
+        temperature: 0.3,
+        maxOutputTokens: MAX_OUTPUT_TOKENS,
+        ...(withThinking ? { thinkingConfig: THINKING_CONFIG } : {}),
+        abortSignal: options.signal,
+      },
+    });
+  const stream = await request(true).catch((error: unknown) => {
+    if (!rejectsThinking(error)) throw error;
+    return request(false);
   });
   let full = '';
   for await (const chunk of stream) {

@@ -80,14 +80,13 @@ export interface NavJson {
   readonly articles: readonly NavArticle[];
 }
 
-/** chunks.json に入れるチャンクの位置情報（本文は chunk-text/<articleId>.json から遅延取得） */
-export interface ChunkRef {
-  readonly id: string;
-  readonly articleId: string;
+/** chunk-text/<articleId>.json の 1 要素。配列の添字がチャンクの記事内位置（ID は `<articleId>#<添字>`） */
+export interface ArticleChunk {
   /** 見出しのパス（例: "報酬 > 週間上限"）。冒頭部分は空文字 */
   readonly heading: string;
   /** 見出しのアンカー ID（冒頭部分は空文字） */
   readonly anchor: string;
+  readonly text: string;
 }
 
 export interface Chunk {
@@ -100,12 +99,6 @@ export interface Chunk {
   /** 見出しのアンカー ID（冒頭部分は空文字） */
   readonly anchor: string;
   readonly text: string;
-}
-
-export interface ChunksData {
-  readonly chunks: readonly ChunkRef[];
-  /** MiniSearch.toJSON() の結果（MiniSearch.loadJS で復元） */
-  readonly index: unknown;
 }
 
 /** 記事検索インデックスの格納フィールド */
