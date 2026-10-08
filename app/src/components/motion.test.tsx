@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { resetRouteEnter, routeFadeScope } from '../lib/route-motion';
 import { nav } from '../features/wiki/data';
 import { CategoryNav } from './CategoryNav';
+import { MobileDrawer } from './MobileDrawer';
 import { RouteFade } from './RouteFade';
 
 describe('routeFadeScope', () => {
@@ -82,5 +83,24 @@ describe('CategoryNav の開閉', () => {
     expect(document.getElementById(`nav-${first.id}`)!.closest('.nav-collapse')).toHaveAttribute(
       'data-open',
     );
+  });
+});
+
+describe('MobileDrawer のスライド', () => {
+  const renderDrawer = (open: boolean) => (
+    <MobileDrawer open={open} onClose={() => undefined} title="メニュー">
+      <a href="/x">x</a>
+    </MobileDrawer>
+  );
+
+  it('閉じるスライドの間は残し、transitionend で外す', () => {
+    const { rerender } = render(renderDrawer(true));
+    const dialog = screen.getByRole('dialog', { name: 'メニュー' });
+    expect(dialog.parentElement).toHaveAttribute('data-open');
+    rerender(renderDrawer(false));
+    expect(dialog).toBeInTheDocument();
+    expect(dialog.parentElement).not.toHaveAttribute('data-open');
+    fireEvent.transitionEnd(dialog);
+    expect(screen.queryByRole('dialog', { name: 'メニュー' })).toBeNull();
   });
 });

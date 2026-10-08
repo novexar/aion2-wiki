@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { DURATION } from '../../lib/motion-tokens';
+import { usePresence } from '../../lib/use-presence';
 import { useMediaQuery, WIDE_QUERY } from '../../lib/useMediaQuery';
 import {
   CHAT_PANEL_ID,
@@ -25,22 +26,8 @@ function useFocusOnToggle(open: boolean): void {
   }, [open]);
 }
 
-/** 閉じるスライド（200ms）の間だけ表示を保つ。transitionend が来ない環境でも時間で閉じる */
+/** 閉じるスライド（200ms）の後に hidden にする */
 const CLOSE_FALLBACK_MS = DURATION.base * 1000 + 80;
-
-function useClosingVisibility(open: boolean): {
-  readonly visible: boolean;
-  readonly done: () => void;
-} {
-  const [visible, setVisible] = useState(open);
-  if (open && !visible) setVisible(true);
-  useEffect(() => {
-    if (open || !visible) return undefined;
-    const timer = window.setTimeout(() => setVisible(false), CLOSE_FALLBACK_MS);
-    return () => window.clearTimeout(timer);
-  }, [open, visible]);
-  return { visible, done: () => (open ? undefined : setVisible(false)) };
-}
 
 /** モバイルの全画面シートでは背面のスクロールを止め、Esc で閉じる */
 function useSheetBehavior(active: boolean): void {
@@ -69,7 +56,7 @@ export function ChatPanel() {
   // 本文（会話・入力欄）は初めて開いたときに読み込む
   const [loaded, setLoaded] = useState(open);
   if (open && !loaded) setLoaded(true);
-  const { visible, done } = useClosingVisibility(open);
+  const { visible, done } = usePresence(open, CLOSE_FALLBACK_MS);
   // リサイズ中は transition を止める（幅の追従を遅らせない）
   const [resizing, setResizing] = useState(false);
 

@@ -1,6 +1,10 @@
 import { X } from 'lucide-react';
 import { useEffect, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { usePresence } from '../lib/use-presence';
+
+/** 閉じるスライド（160ms ease-in）の後に外す */
+const CLOSE_FALLBACK_MS = 240;
 
 interface MobileDrawerProps {
   readonly open: boolean;
@@ -9,9 +13,10 @@ interface MobileDrawerProps {
   readonly children: ReactNode;
 }
 
-/** モバイル用の左ドロワー。Esc・背景クリックで閉じ、フォーカスを内側に閉じ込める */
+/** モバイル用の左ドロワー。左から 200ms ease-out で入り、160ms ease-in で出る。Esc・背景クリックで閉じ、フォーカスを内側に閉じ込める */
 export function MobileDrawer({ open, onClose, title, children }: MobileDrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const { visible, done } = usePresence(open, CLOSE_FALLBACK_MS);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -45,11 +50,11 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!visible) return null;
   return createPortal(
-    <div className="fixed inset-0 z-50">
+    <div className="drawer fixed inset-0 z-50" data-open={open || undefined}>
       <div
-        className="absolute inset-0 bg-zinc-950/40 dark:bg-black/60"
+        className="drawer-backdrop absolute inset-0 bg-zinc-950/40 dark:bg-black/60"
         aria-hidden="true"
         onClick={onClose}
       />
@@ -58,7 +63,10 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="scroll-thin absolute inset-y-0 left-0 flex w-[min(20rem,86vw)] flex-col overflow-y-auto border-r border-line bg-canvas"
+        onTransitionEnd={(e) => {
+          if (e.target === e.currentTarget) done();
+        }}
+        className="drawer-panel scroll-thin absolute inset-y-0 left-0 flex w-[min(20rem,86vw)] flex-col overflow-y-auto border-r border-line bg-canvas"
       >
         <div className="sticky top-0 flex h-14 items-center justify-between border-b border-line bg-header-bg px-4 text-header-fg">
           <span className="text-sm font-semibold">{title}</span>
