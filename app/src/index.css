@@ -424,6 +424,31 @@
   animation: route-enter var(--d-base) var(--ease-out) backwards;
 }
 
+/* ---------- サイドバーのカテゴリ開閉（5.2 #2）: 高さ 0→auto、200ms ease-std ---------- */
+.nav-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.nav-collapse[data-open] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.nav-collapse-anim {
+  transition:
+    grid-template-rows var(--d-base) var(--ease-std),
+    opacity var(--d-base) var(--ease-std);
+}
+
+@starting-style {
+  .nav-collapse-anim[data-open] {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}
+
 /* ---------- チャットパネル ---------- */
 @keyframes chat-panel-in {
   from {

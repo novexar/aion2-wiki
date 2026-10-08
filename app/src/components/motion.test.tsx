@@ -2,6 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { Link, MemoryRouter, Route, Routes } from 'react-router';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { resetRouteEnter, routeFadeScope } from '../lib/route-motion';
+import { nav } from '../features/wiki/data';
+import { CategoryNav } from './CategoryNav';
 import { RouteFade } from './RouteFade';
 
 describe('routeFadeScope', () => {
@@ -43,5 +45,42 @@ describe('RouteFade', () => {
     expect(screen.getByTestId('page')).toHaveTextContent('B');
     const second = screen.getByTestId('page').parentElement as HTMLElement;
     expect(second).toHaveClass('route-enter');
+  });
+});
+
+describe('CategoryNav の開閉', () => {
+  const first = nav.categories[0]!;
+
+  function renderNav() {
+    render(
+      <MemoryRouter initialEntries={[`/wiki/${first.id}`]}>
+        <Routes>
+          <Route path="/wiki/:category" element={<CategoryNav />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    return screen.getByRole('button', { name: new RegExp(first.label) });
+  }
+
+  it('現在のカテゴリは最初から開き、アニメーションを付けない', () => {
+    const button = renderNav();
+    const region = document.getElementById(`nav-${first.id}`)!.closest('.nav-collapse')!;
+    expect(button).toHaveAttribute('aria-expanded', 'true');
+    expect(region).not.toHaveClass('nav-collapse-anim');
+  });
+
+  it('閉じると高さアニメーションの後に一覧を外す', () => {
+    const button = renderNav();
+    fireEvent.click(button);
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+    const region = document.getElementById(`nav-${first.id}`)!.closest('.nav-collapse')!;
+    expect(region).toHaveClass('nav-collapse-anim');
+    expect(region).not.toHaveAttribute('data-open');
+    fireEvent.transitionEnd(region);
+    expect(document.getElementById(`nav-${first.id}`)).toBeNull();
+    fireEvent.click(button);
+    expect(document.getElementById(`nav-${first.id}`)!.closest('.nav-collapse')).toHaveAttribute(
+      'data-open',
+    );
   });
 });

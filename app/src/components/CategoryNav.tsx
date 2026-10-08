@@ -21,6 +21,11 @@ function CategorySection({
   // ユーザーが開閉するまでは現在のカテゴリだけを開く
   const [toggled, setToggled] = useState<boolean | null>(null);
   const open = toggled ?? isCurrent;
+  // 閉じるアニメーションの間だけ一覧を残す。アニメーションはユーザーの開閉時のみ（初回表示・遷移では即時）
+  const [rendered, setRendered] = useState(open);
+  if (open && !rendered) setRendered(true);
+  const animated = toggled !== null;
+  const show = open || (rendered && animated);
   const { slug } = useParams();
   const listId = `nav-${category.id}`;
   return (
@@ -34,53 +39,64 @@ function CategorySection({
       >
         <ChevronRight
           aria-hidden="true"
-          className={`size-3.5 shrink-0 text-fg-subtle transition-transform ${open ? 'rotate-90' : ''}`}
+          className={`size-3.5 shrink-0 text-fg-subtle transition-transform duration-200 ease-std ${open ? 'rotate-90' : ''}`}
         />
         <span className="min-w-0 flex-1 truncate">{category.label}</span>
         <span className="text-[11px] font-normal text-fg-subtle tabular-nums">
           {category.articles.length}
         </span>
       </button>
-      {open && (
-        <ul id={listId} className="mt-0.5 mb-2 ml-3.5 border-l border-line pl-2">
-          <li>
-            <NavLink
-              to={categoryPath(category.id)}
-              end
-              onClick={onNavigate}
-              className={({ isActive }) =>
-                `-ml-[9px] block border-l-2 py-1 pr-2 pl-3 text-[13px] leading-[1.4] ${
-                  isActive
-                    ? 'border-accent font-medium text-fg'
-                    : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'
-                }`
-              }
-            >
-              一覧（{category.articles.length}）
-            </NavLink>
-          </li>
-          {category.articles.length === 0 && (
-            <li className="px-2 py-1 text-xs text-fg-subtle">準備中</li>
-          )}
-          {category.articles.map((a) => (
-            <li key={a.id}>
-              <NavLink
-                to={articlePath(category.id, a.id)}
-                onClick={onNavigate}
-                aria-current={slug === a.id ? 'page' : undefined}
-                className={({ isActive }) =>
-                  `-ml-[9px] line-clamp-2 border-l-2 py-1 pr-2 pl-3 text-[13px] leading-[1.4] transition-colors ${
-                    isActive
-                      ? 'border-accent font-medium text-fg'
-                      : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'
-                  }`
-                }
-              >
-                {a.title}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+      {show && (
+        <div
+          className={`nav-collapse ${animated ? 'nav-collapse-anim' : ''}`}
+          data-open={open || undefined}
+          inert={!open}
+          onTransitionEnd={(e) => {
+            if (e.target === e.currentTarget && !open) setRendered(false);
+          }}
+        >
+          <div className="min-h-0 overflow-hidden">
+            <ul id={listId} className="mt-0.5 mb-2 ml-3.5 border-l border-line pl-2">
+              <li>
+                <NavLink
+                  to={categoryPath(category.id)}
+                  end
+                  onClick={onNavigate}
+                  className={({ isActive }) =>
+                    `-ml-[9px] block border-l-2 py-1 pr-2 pl-3 text-[13px] leading-[1.4] ${
+                      isActive
+                        ? 'border-accent font-medium text-fg'
+                        : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'
+                    }`
+                  }
+                >
+                  一覧（{category.articles.length}）
+                </NavLink>
+              </li>
+              {category.articles.length === 0 && (
+                <li className="px-2 py-1 text-xs text-fg-subtle">準備中</li>
+              )}
+              {category.articles.map((a) => (
+                <li key={a.id}>
+                  <NavLink
+                    to={articlePath(category.id, a.id)}
+                    onClick={onNavigate}
+                    aria-current={slug === a.id ? 'page' : undefined}
+                    className={({ isActive }) =>
+                      `-ml-[9px] line-clamp-2 border-l-2 py-1 pr-2 pl-3 text-[13px] leading-[1.4] transition-colors ${
+                        isActive
+                          ? 'border-accent font-medium text-fg'
+                          : 'border-transparent text-fg-muted hover:border-line-strong hover:text-fg'
+                      }`
+                    }
+                  >
+                    {a.title}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       )}
     </li>
   );
