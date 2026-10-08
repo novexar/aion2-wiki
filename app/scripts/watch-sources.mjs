@@ -16,6 +16,7 @@ const repoRoot = path.resolve(here, '..', '..');
 const contentDir = path.join(repoRoot, 'content');
 const watchDir = path.join(repoRoot, 'research', 'watch');
 const statePath = path.join(watchDir, 'state.json');
+const lastRunPath = path.join(watchDir, 'last-run.json');
 
 async function listMarkdown(dir) {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -57,10 +58,57 @@ async function loadState() {
   }
 }
 
+/** キーを再帰的に並べ替えて差分を安定させる。 */
+function sortKeys(value) {
+  if (Array.isArray(value)) return value.map(sortKeys);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.keys(value)
+        .sort()
+        .map((k) => [k, sortKeys(value[k])]),
+    );
+  }
+  return value;
+}
+
+const stringifyState = (state) => `${JSON.stringify(sortKeys(state), null, 2)}\n`;
+
+/** 直前の `npm run watch` の結果を state.json に反映する（再取得しない）。 */
+async function commitLastRun() {
+  let last;
+  try {
+    last = JSON.parse(await fs.readFile(lastRunPath, 'utf8'));
+  } catch {
+    console.error(
+      'research/watch/last-run.json がありません。先に npm run watch を実行してください。',
+    );
+    return 2;
+  }
+  await fs.writeFile(statePath, stringifyState(last.nextState));
+  console.log(`state.json を更新しました（${last.date} の検知結果）。`);
+  return 0;
+}
+
+/** 主要な信号がすべて失敗したか（ネットワーク断など）。 */
+function allSignalsFailed(signals) {
+  const results = [
+    signals.builds,
+    signals.steam,
+    signals.gtVersion,
+    signals.gtSitemap,
+    ...Object.values(signals.feeds),
+    ...Object.values(signals.sitemaps),
+  ];
+  return results.every((r) => r?.ok === false);
+}
+
 const today = () => new Date().toLocaleDateString('sv-SE'); // YYYY-MM-DD（ローカル日付）
 
 async function main() {
-  const commitState = process.argv.includes('--commit-state');
+  if (process.argv.includes('--commit-state')) {
+    process.exitCode = await commitLastRun();
+    return;
+  }
   const date = today();
   const [articles, prevState] = await Promise.all([loadArticles(), loadState()]);
   // Cloudflare 配下のサイトは Node の fetch を弾くため、curl があれば curl で取得する。
@@ -80,29 +128,28 @@ async function main() {
   const [signals, heads] = await Promise.all([fetchSignals(client), fetchHeads(client, urls)]);
   const { changes, nextState } = computeChanges(prevState, { date, ...signals, heads }, articles);
 
-  const report = renderReport(changes, {
-    date,
-    firstRun: prevState === null,
-    stateCommitted: commitState,
-  });
+  if (allSignalsFailed(signals)) {
+    console.error(
+      'すべての信号の取得に失敗しました（ネットワーク未接続？）。レポートと状態は更新しません。',
+    );
+    process.exitCode = 2;
+    return;
+  }
+
+  const report = renderReport(changes, { date, firstRun: prevState === null });
   await fs.mkdir(watchDir, { recursive: true });
   const c = changes.counts;
-  if (commitState) {
-    await fs.writeFile(statePath, `${JSON.stringify(nextState, null, 2)}\n`);
-    console.log(
-      `state.json を更新しました。直前の内容: 公式 ${c.official} / DB ${c.db} / 攻略 ${c.community} / 出典 ${c.sources}`,
-    );
-  } else {
-    const reportPath = path.join(watchDir, `report-${date}.md`);
-    await fs.writeFile(reportPath, report);
-    console.log(`レポート: ${path.relative(repoRoot, reportPath)}`);
-    console.log(
-      changes.hasChanges
-        ? `変化あり — 公式 ${c.official} / DB ${c.db} / 攻略 ${c.community} / 出典 ${c.sources}（要目視 ${c.manual}、失敗 ${c.failures}）`
-        : `変化なし（要目視 ${c.manual}、失敗 ${c.failures}）`,
-    );
-  }
-  process.exitCode = changes.hasChanges && !commitState ? 1 : 0;
+  const reportPath = path.join(watchDir, `report-${date}.md`);
+  await fs.writeFile(reportPath, report);
+  // --commit-state が再取得せずに state.json へ反映できるよう、この回の結果を保存する。
+  await fs.writeFile(lastRunPath, stringifyState({ date, nextState }));
+  console.log(`レポート: ${path.relative(repoRoot, reportPath)}`);
+  console.log(
+    changes.hasChanges
+      ? `変化あり — 公式 ${c.official} / DB ${c.db} / 攻略 ${c.community} / 出典 ${c.sources}（要目視 ${c.manual}、失敗 ${c.failures}）`
+      : `変化なし（要目視 ${c.manual}、失敗 ${c.failures}）`,
+  );
+  process.exitCode = changes.hasChanges ? 1 : 0;
 }
 
 main().catch((e) => {

@@ -146,7 +146,7 @@ function actions(changes) {
   return list.length ? list.map((a, i) => `${i + 1}. ${a}`) : ['なし（更新不要）。'];
 }
 
-export function renderReport(changes, { date, firstRun = false, stateCommitted = false } = {}) {
+export function renderReport(changes, { date, firstRun = false } = {}) {
   const c = changes.counts;
   const head = [
     `# ソース更新レポート ${date}`,
@@ -166,9 +166,7 @@ export function renderReport(changes, { date, firstRun = false, stateCommitted =
     '',
     ...actions(changes),
     '',
-    stateCommitted
-      ? '`state.json` を更新しました（このレポートの内容は処理済みとして扱われます）。'
-      : '`state.json` は更新していません。処理後、PR を取り込んでから `npm run watch -- --commit-state` を実行します。',
+    '`state.json` は更新していません。PR を取り込んだ直後に `npm run watch -- --commit-state` を実行します（この回の結果を state.json に反映します）。',
     '',
   ].join('\n');
 }

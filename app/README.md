@@ -121,6 +121,8 @@ content/dungeons/odyle-energy.md
 
 PR をオーナーが取り込んだ後に、`main` を取得して `npm run watch -- --commit-state` を実行し、`state.json` をコミットします。最初の実行（`state.json` なし）は、現在の一覧すべてを新規として報告します。
 
+`--commit-state` は再取得せず、直前の `npm run watch` が保存した `research/watch/last-run.json`（git 管理外）を `state.json` に反映します。PR の取り込み直後に実行してください。すべての信号の取得に失敗した回（ネットワーク未接続など）は終了コード 2 で、レポートも保存しません。
+
 ### リマインド（任意、Windows）
 
 週 1 回（月曜 09:00）に `npm run watch` を実行し、変化があれば Windows 通知を出すタスクを登録できます。通知とレポートの作成だけで、記事の更新はしません。PC が起動していなかった場合は、次に使えるときに実行します（`StartWhenAvailable`）。

@@ -121,7 +121,7 @@ function computeSources(prev, observed, articles, next, failures) {
     if (!cur.error && cur.status < 400 && !hasValidator(cur)) result.undetectable += 1;
     if (verdict?.kind === 'changed') result.changed.push({ url, ids, ...verdict });
     if (verdict?.kind === 'broken') result.broken.push({ url, ids, ...verdict });
-    if (!cur.error) {
+    if (!cur.error && cur.status < 400) {
       next.sources[url] = {
         status: cur.status,
         etag: cur.etag ?? null,

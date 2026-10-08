@@ -7,6 +7,9 @@ $logDir = Join-Path $repoRoot 'research\watch'
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $logFile = Join-Path $logDir 'last-run.log'
 
+# 登録済みの AppUserModelID が必要なため、PowerShell 自身の ID を使う（未登録 ID のトーストは表示されないことがある）
+$appId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+
 function Show-Notification([string]$title, [string]$message) {
   try {
     [void][Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
@@ -17,7 +20,7 @@ function Show-Notification([string]$title, [string]$message) {
     [void]$texts.Item(0).AppendChild($xml.CreateTextNode($title))
     [void]$texts.Item(1).AppendChild($xml.CreateTextNode($message))
     $toast = [Windows.UI.Notifications.ToastNotification]::new($xml)
-    $notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('AION2 Wiki watch')
+    $notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($appId)
     $notifier.Show($toast)
   } catch {
     # トースト API が使えない環境では msg にフォールバックする
@@ -30,6 +33,7 @@ $ErrorActionPreference = 'Continue'
 try {
   & npm.cmd run watch *> $logFile
   $code = $LASTEXITCODE
+  if ($null -eq $code) { $code = 2 }
 } finally {
   Pop-Location
 }
@@ -37,6 +41,7 @@ try {
 switch ($code) {
   0 { }
   1 { Show-Notification 'AION2 Wiki: 更新あり' 'research/watch のレポートを確認し、Claude Code で /update-wiki を実行してください。' }
-  default { Show-Notification 'AION2 Wiki: 検知に失敗' "終了コード $code。research/watch/last-run.log を確認してください。" }
+  2 { Show-Notification 'AION2 Wiki: 取得失敗' '検知に失敗しました（ネットワーク未接続など）。research/watch/last-run.log を確認してください。' }
+  default { Show-Notification 'AION2 Wiki: 検知エラー' "終了コード $code。research/watch/last-run.log を確認してください。" }
 }
 exit $code

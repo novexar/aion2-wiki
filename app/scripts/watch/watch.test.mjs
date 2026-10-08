@@ -15,7 +15,8 @@ import {
   parseSitemap,
   summarizeSitemap,
 } from './parsers.mjs';
-import { parseHeaderDump } from './curl-transport.mjs';
+import fs from 'node:fs';
+import { createCurlFetch, parseHeaderDump } from './curl-transport.mjs';
 import { renderReport } from './report.mjs';
 
 const RSS = `<rss><channel>
@@ -247,7 +248,12 @@ describe('computeChanges', () => {
     expect(nextState.sources['https://x.test/p1'].etag).toBe('"b"');
 
     // 次回状態を使えば同じ観測結果は「変化なし」になる
-    expect(computeChanges(nextState, obs, articles).changes.hasChanges).toBe(false);
+    // 404 は state に残さない（前回の検証子を保持）ので、復旧後の観測で比較する
+    const healed = {
+      ...obs,
+      heads: { ...obs.heads, 'https://x.test/p2': { status: 200, contentLength: '5' } },
+    };
+    expect(computeChanges(nextState, healed, articles).changes.hasChanges).toBe(false);
   });
 
   it('treats a missing state as initial and keeps previous state for failed signals', () => {
@@ -357,5 +363,48 @@ describe('curl transport', () => {
     expect(status).toBe(200);
     expect(headers.get('etag')).toBe('"abc"');
     expect(headers.get('content-length')).toBe('12');
+  });
+});
+
+describe('curl argument building (execFile stub)', () => {
+  it('maps UA / Range / HEAD to curl flags and reads the header dump', async () => {
+    let seen;
+    const execFileImpl = (cmd, args, _opts, cb) => {
+      seen = { cmd, args };
+      fs.writeFileSync(args[args.indexOf('-D') + 1], 'HTTP/2 206 \r\nETag: "e"\r\n\r\n');
+      cb(null, Buffer.from('x'));
+    };
+    const curlFetch = createCurlFetch({ timeoutMs: 15_000, execFileImpl });
+    const res = await curlFetch('https://h.test/a', {
+      method: 'HEAD',
+      headers: { 'user-agent': 'UA/1', range: 'bytes=0-0' },
+    });
+    expect(res.status).toBe(206);
+    expect(res.headers.get('etag')).toBe('"e"');
+    expect(seen.cmd).toBe('curl');
+    expect(seen.args).toEqual(expect.arrayContaining(['-A', 'UA/1', '-r', '0-0', '-I', '-L']));
+    expect(seen.args[seen.args.indexOf('--max-time') + 1]).toBe('15');
+    expect(seen.args.slice(-2)).toEqual(['--', 'https://h.test/a']);
+  });
+
+  it('maps curl exit code 28 to a timeout error', async () => {
+    const execFileImpl = (_c, _a, _o, cb) => cb(Object.assign(new Error('t'), { code: 28 }));
+    await expect(createCurlFetch({ execFileImpl })('https://h.test/a')).rejects.toMatchObject({
+      name: 'TimeoutError',
+    });
+  });
+});
+
+describe('source records on HTTP errors', () => {
+  it('keeps the previous validators when the response is >= 400', () => {
+    const arts = [{ id: 'a', sources: [{ url: 'https://x.test/p' }] }];
+    const prev = {
+      sources: {
+        'https://x.test/p': { status: 200, etag: '"1"', lastModified: null, contentLength: '5' },
+      },
+    };
+    const heads = { 'https://x.test/p': { status: 503 } };
+    const { nextState } = computeChanges(prev, { date: 'd', heads }, arts);
+    expect(nextState.sources['https://x.test/p'].etag).toBe('"1"');
   });
 });

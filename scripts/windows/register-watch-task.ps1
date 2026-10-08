@@ -13,7 +13,7 @@ $taskArgs = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$run
 $action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument $taskArgs
 $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $DayOfWeek -At $Time
 # StartWhenAvailable: 予定時刻に PC が起動していなければ、次に使えるときに実行する
-$settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Minutes 30)
+$settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -RunOnlyIfNetworkAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Minutes 30)
 # 通知を表示するため、ログオン中のユーザーとして実行する
 $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive
 

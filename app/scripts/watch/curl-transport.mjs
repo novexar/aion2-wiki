@@ -8,9 +8,9 @@ import path from 'node:path';
 
 const MAX_BODY_BYTES = 32 * 1024 * 1024;
 
-function run(args) {
+function run(args, execFileImpl = execFile) {
   return new Promise((resolve, reject) => {
-    execFile(
+    execFileImpl(
       'curl',
       args,
       { encoding: 'buffer', maxBuffer: MAX_BODY_BYTES, windowsHide: true },
@@ -57,7 +57,7 @@ function toCurlError(error, timeoutMs) {
   });
 }
 
-export function createCurlFetch({ timeoutMs = 15_000 } = {}) {
+export function createCurlFetch({ timeoutMs = 15_000, execFileImpl = execFile } = {}) {
   return async function curlFetch(url, init = {}) {
     const dir = await mkdtemp(path.join(tmpdir(), 'aion2-watch-'));
     const headerFile = path.join(dir, 'headers.txt');
@@ -80,7 +80,7 @@ export function createCurlFetch({ timeoutMs = 15_000 } = {}) {
     if (method === 'HEAD') args.push('-I');
     args.push('--', url);
     try {
-      const body = await run(args);
+      const body = await run(args, execFileImpl);
       const { status, headers } = parseHeaderDump(await readFile(headerFile, 'utf8'));
       return {
         ok: status >= 200 && status < 300,

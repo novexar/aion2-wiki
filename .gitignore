@@ -3,3 +3,4 @@ node_modules/
 .claude/*
 !.claude/commands/
 research/watch/last-run.log
+research/watch/last-run.json

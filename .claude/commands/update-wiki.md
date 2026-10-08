@@ -5,7 +5,7 @@ allowed-tools: Bash, Read, Edit, Write, Grep, Glob
 
 AION2 非公式Wiki の記事を更新します。作業は `app/` の `npm run watch` が出すレポートに基づいて進め、判断基準は `research/WATCH-RULES.md` に従います。GitHub Actions は使いません。
 
-最初に `research/WATCH-RULES.md` を読みます。今日の日付を `YYYY-MM-DD` として使います。
+今日の日付を `YYYY-MM-DD` として使います。
 
 ## 手順
 
@@ -19,7 +19,7 @@ AION2 非公式Wiki の記事を更新します。作業は `app/` の `npm run 
      - 0: 変化なし。「更新なし（YYYY-MM-DD）」とだけ報告して終了します。ブランチも PR も作りません。
      - 1: 変化あり。手順 3 へ進みます。
      - 2: スクリプトの異常終了。エラーを報告して終了します。
-   - レポートは `research/watch/report-YYYY-MM-DD.md` です。読むのはこのレポートだけです。
+   - レポートは `research/watch/report-YYYY-MM-DD.md` です。変化ありの場合に、このレポートと `research/WATCH-RULES.md` を読みます（変化なしの場合はどちらも読みません）。
 
 3. 作業ブランチ
    - `git checkout -b update/YYYY-MM-DD`
@@ -61,7 +61,7 @@ AION2 非公式Wiki の記事を更新します。作業は `app/` の `npm run 
 
 `research/watch/state.json` は、オーナーが PR を取り込んだ後に更新します。この手順の中では更新しません。取り込み前に更新すると、未処理の変化が次回のレポートから消えます。
 
-PR が取り込まれたら、`main` を取得してから次を実行し、`state.json` をコミットします。
+`npm run watch -- --commit-state` は再取得せず、直前の `npm run watch` が保存した `research/watch/last-run.json`（git 管理外）を `state.json` に反映します。このため、PR が取り込まれた直後に、同じ PC で実行します。間に別の `npm run watch` を実行すると、その回の結果が反映されます。`main` を取得してから次を実行し、`state.json` をコミットします。
 
 ```
 git checkout main && git pull --ff-only
