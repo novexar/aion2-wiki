@@ -142,12 +142,12 @@ export function MobileToc({ headings, activeId }: TocProps) {
   const wide = useShellColumns().toc;
   if (headings.length < MIN_TOC_HEADINGS || wide) return null;
   return (
-    <details className="group mb-8 border-b border-line">
+    <details className="toc-details group mb-8 border-b border-line">
       <summary className="flex cursor-pointer list-none items-center justify-between py-2.5 text-sm font-medium text-fg [&::-webkit-details-marker]:hidden">
         <span>目次</span>
         <ChevronDown
           aria-hidden="true"
-          className="size-4 text-fg-subtle transition-transform group-open:rotate-180"
+          className="size-4 text-fg-subtle transition-transform duration-200 ease-std group-open:rotate-180"
         />
       </summary>
       <nav aria-label="目次" className="pb-3">

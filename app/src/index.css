@@ -449,6 +449,24 @@
   }
 }
 
+/* ---------- 目次（モバイル details、5.2 #12）: 高さ 0→auto、200ms ease-std ---------- */
+/* interpolate-size と ::details-content の無いブラウザでは従来どおり即時に開閉する */
+.toc-details {
+  interpolate-size: allow-keywords;
+}
+
+.toc-details::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size var(--d-base) var(--ease-std),
+    content-visibility var(--d-base) var(--ease-std) allow-discrete;
+}
+
+.toc-details[open]::details-content {
+  block-size: auto;
+}
+
 /* ---------- ホームの段差表示（5.2 #10）: 初回のみ。opacity 0→1、y 6px→0 ---------- */
 @keyframes home-rise {
   from {
