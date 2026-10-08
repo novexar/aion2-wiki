@@ -41,3 +41,14 @@ describe('normalizeQuery', () => {
     expect(normalizeQuery('金策')).toBe('金策');
   });
 });
+
+describe('contentWords filler boundaries', () => {
+  it('keeps あるじ and どうぐ intact', () => {
+    expect(contentWords('あるじとは')).toContain('あるじ');
+    expect(contentWords('どうぐの強化')).toContain('どうぐ');
+  });
+
+  it('still strips fillers at run boundaries', () => {
+    expect(contentWords('金策の方法について教えて')).toEqual(['金策']);
+  });
+});

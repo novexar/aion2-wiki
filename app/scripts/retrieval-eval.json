@@ -43,5 +43,18 @@
     "q": "ログイン直後にまず何をすればいいですか",
     "expect": ["day-one-checklist", "guide-day-1", "game-overview"]
   },
-  { "q": "ギーナを節約するコツはある？", "expect": ["kina-saving-tips", "kina-farming"] }
+  { "q": "ギーナを節約するコツはある？", "expect": ["kina-saving-tips", "kina-farming"] },
+  { "q": "オードエネルギーは最大いくつまで貯まる？", "expect": ["odyle-energy"] },
+  { "q": "サブキャラを作る意味ある？", "expect": ["server-shared-limits-and-alts"] },
+  { "q": "天族と魔族どっちがいい？", "expect": ["races-elyos-asmodian"] },
+  { "q": "悪夢は1日何回？", "expect": ["nightmare"] },
+  { "q": "ベルトを金にするにはいくらかかる？", "expect": ["belt-and-amulet"] },
+  { "q": "ギルドの作り方", "expect": ["legion"] },
+  { "q": "コントローラーで遊べる？", "expect": ["controller-and-steam-deck"] },
+  { "q": "シーズンはいつ終わる？", "expect": ["season-1-end-notice", "seasons-and-chapters"] },
+  { "q": "ステータスの命中って何？", "expect": ["stats-explained"] },
+  {
+    "q": "★3のダンジョンに入るには IL いくつ必要？",
+    "expect": ["dungeons-overview", "expeditions-and-odyle"]
+  }
 ]

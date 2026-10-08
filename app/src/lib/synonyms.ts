@@ -19,9 +19,23 @@ const MAX_ALIAS_LENGTH = 10;
 /** 1 つの別名が多くの記事に付いているときは一般語なので展開しない */
 const MAX_TITLES_PER_ALIAS = 3;
 
+/** 汎用語で無関係な記事へ展開してしまう別名（正規化済み） */
+const STOP_ALIASES: ReadonlySet<string> = new Set(['il', 'スキル', 'オード', 'コロ', 'キュー']);
+const KANA_ONLY = /^[ぁ-ゖァ-ヺー]+$/u;
+const MIN_KANA_ALIAS_LENGTH = 3;
+const MAX_LATIN_STOP_LENGTH = 2;
+
+function isGenericAlias(alias: string): boolean {
+  if (STOP_ALIASES.has(alias)) return true;
+  const length = Array.from(alias).length;
+  if (KANA_ONLY.test(alias)) return length < MIN_KANA_ALIAS_LENGTH;
+  return isLatin(alias) && length <= MAX_LATIN_STOP_LENGTH;
+}
+
 function usableAlias(alias: string, title: string): boolean {
   const length = Array.from(alias).length;
   if (length < MIN_ALIAS_LENGTH || length > MAX_ALIAS_LENGTH) return false;
+  if (isGenericAlias(alias)) return false;
   if (/^[\d\s.]+$/u.test(alias)) return false;
   return alias !== normalizeText(title);
 }

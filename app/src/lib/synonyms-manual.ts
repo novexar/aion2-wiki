@@ -8,6 +8,7 @@ export interface ManualSynonym {
 }
 
 export const MANUAL_SYNONYMS: readonly ManualSynonym[] = [
+  { keys: ['od'], terms: ['オードエネルギー'] },
   { keys: ['お金', '資金', '稼ぐ', '稼ぎ', '儲け', '儲かる', '収入'], terms: ['金策', 'ギーナ'] },
   { keys: ['課金', '会員', '月額', 'サブスク'], terms: ['メンバーシップ'] },
   { keys: ['装着', '付ける', 'つける', '付けられる', '装備できる'], terms: ['装備', '枠'] },
