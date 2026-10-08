@@ -65,7 +65,7 @@ export default function SearchPage() {
         {status === 'ready' && trimmed && results.length === 0 && (
           <p className="text-sm text-fg-muted">
             「{trimmed}」に一致する記事はありません。{' '}
-            <Link to="/index" className="text-accent-strong underline underline-offset-4">
+            <Link to="/index" className="text-link underline underline-offset-4">
               索引
             </Link>
           </p>

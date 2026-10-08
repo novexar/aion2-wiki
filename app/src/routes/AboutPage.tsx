@@ -20,7 +20,7 @@ function ExtLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-0.5 text-accent-strong underline underline-offset-4"
+      className="inline-flex items-center gap-0.5 text-link underline underline-offset-4"
     >
       {children}
       <ExternalLink aria-hidden="true" className="size-3" />

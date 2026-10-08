@@ -4,6 +4,7 @@ import { ConfidenceBadge } from '../../components/ConfidenceBadge';
 import { PageLoading } from '../../components/PageLoading';
 import { useDocumentMeta } from '../../components/useDocumentMeta';
 import { categoryLabel, isCategoryId } from '../../lib/categories';
+import { formatDate } from '../../lib/format';
 import { articlePath, categoryPath } from '../../lib/paths';
 import { ISSUES_URL } from '../../lib/site';
 import type { Article, NavArticle } from '../../lib/types';
@@ -64,6 +65,10 @@ function useScrollToHash(ready: boolean): void {
 function ArticleView({ article }: { readonly article: Article }) {
   useDocumentMeta(article.title, article.summary);
   const headingIds = useMemo(() => article.headings.map((h) => h.id), [article.headings]);
+  const checkedAt = useMemo(
+    () => article.sources.reduce((max, s) => (s.date > max ? s.date : max), ''),
+    [article.sources],
+  );
   const activeId = useActiveHeading(headingIds);
   useScrollToHash(true);
 
@@ -87,10 +92,12 @@ function ArticleView({ article }: { readonly article: Article }) {
             <p className="mt-2 text-[13px] text-fg-subtle">{article.aliases.join('、')}</p>
           )}
           <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-fg-muted">
-            <ConfidenceBadge confidence={article.confidence} />
-            <span>
-              <time dateTime={article.updated}>{article.updated}</time> 更新
-            </span>
+            <ConfidenceBadge confidence={article.confidence} hideVerified linked />
+            {checkedAt && (
+              <span>
+                出典確認日 <time dateTime={checkedAt}>{formatDate(checkedAt)}</time>
+              </span>
+            )}
           </div>
         </header>
 

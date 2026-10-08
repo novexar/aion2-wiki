@@ -27,7 +27,7 @@ function InlineView({
           <Link
             to={articlePath(article.category, article.id)}
             aria-label={`出典 ${number}: ${article.title}`}
-            className="mx-0.5 text-xs text-accent-strong no-underline hover:underline"
+            className="mx-0.5 text-xs text-link no-underline hover:underline"
           >
             [{number}]
           </Link>

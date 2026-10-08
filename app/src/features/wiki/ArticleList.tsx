@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { formatDate } from '../../lib/format';
 import { ConfidenceBadge } from '../../components/ConfidenceBadge';
 import { categoryLabel } from '../../lib/categories';
 import { LIST_COLUMNS, LIST_ITEM } from '../../lib/layout';
@@ -47,7 +48,7 @@ export function ArticleRows({
                 dateTime={a.updated}
                 className="w-[5.5rem] shrink-0 text-xs text-fg-subtle tabular-nums max-sm:hidden"
               >
-                {a.updated}
+                {formatDate(a.updated)}
               </time>
             )}
             <span className="min-w-0 flex-1">

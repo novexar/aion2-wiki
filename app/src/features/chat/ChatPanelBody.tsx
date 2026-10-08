@@ -120,7 +120,7 @@ function MessageLog({
                   href={API_KEY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent-strong underline underline-offset-4"
+                  className="text-link underline underline-offset-4"
                 >
                   Google AI Studio で発行 ↗
                 </a>

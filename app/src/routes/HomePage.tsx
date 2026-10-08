@@ -1,4 +1,5 @@
 import { ChevronRight, Search } from 'lucide-react';
+import { formatDate } from '../lib/format';
 import { Fragment } from 'react';
 import { Link } from 'react-router';
 import { ConfidenceBadge } from '../components/ConfidenceBadge';
@@ -138,8 +139,7 @@ function RecentUpdates({ articles }: { readonly articles: readonly NavArticle[] 
                 dateTime={a.updated}
                 className="col-start-1 row-start-2 text-xs text-fg-subtle tabular-nums sm:row-start-1"
               >
-                <span className="max-sm:hidden">{a.updated}</span>
-                <span className="sm:hidden">{a.updated.slice(5)}</span>
+                {formatDate(a.updated)}
               </time>
               <span className="col-start-1 row-start-1 min-w-0 truncate text-sm text-fg group-hover:underline sm:col-start-2">
                 {a.title}
@@ -162,7 +162,6 @@ export default function HomePage() {
   useDocumentMeta();
   const daily = dailyArticles();
   const total = nav.articles.length;
-  const lastUpdated = nav.articles.reduce((m, a) => (a.updated > m ? a.updated : m), '');
   const hasDistinctDates = new Set(nav.articles.map((a) => a.updated)).size > 1;
   const stagger = useHomeStagger();
 
@@ -172,12 +171,8 @@ export default function HomePage() {
         <div className={`${PAGE_CONTAINER} relative pt-6 pb-6 sm:pt-9 sm:pb-[42px]`}>
           <h1 className="text-[22px] leading-[1.4] font-semibold text-white">AION2 非公式Wiki</h1>
           <p className="mt-1 text-sm text-header-muted">
-            <span className="max-sm:hidden">
-              AION2（グローバル版）の攻略情報。{total} 記事、最終更新 {lastUpdated}。
-            </span>
-            <span className="sm:hidden">
-              {total} 記事 · {lastUpdated} 更新
-            </span>
+            <span className="max-sm:hidden">AION2（グローバル版）の攻略情報。{total} 記事。</span>
+            <span className="sm:hidden">{total} 記事</span>
           </p>
           <SearchBox />
         </div>
@@ -203,7 +198,10 @@ export default function HomePage() {
         {hasDistinctDates && <RecentUpdates articles={nav.articles.slice(0, RECENT_LIMIT)} />}
 
         <p className="mt-6 text-sm">
-          <Link to="/index" className="text-link underline underline-offset-4">
+          <Link
+            to="/index"
+            className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg"
+          >
             すべての記事（索引）
           </Link>
         </p>

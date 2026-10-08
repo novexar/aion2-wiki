@@ -28,9 +28,21 @@ describe('ConfidenceBadge', () => {
     ['community', '要確認', 'text-warn'],
   ] as const)('renders %s as %s', (confidence, label, cls) => {
     render(<ConfidenceBadge confidence={confidence} />);
-    const badge = screen.getByText(label).closest('span[title]');
+    const badge = screen.getByText(label).closest('span');
     expect(badge).toHaveClass(cls);
     expect(badge).toHaveTextContent(`信頼度: ${label}`);
+  });
+
+  it('links to the confidence explanation when linked', () => {
+    render(
+      <MemoryRouter>
+        <ConfidenceBadge confidence="community" linked />
+      </MemoryRouter>,
+    );
+    expect(screen.getByRole('link', { name: /要確認/ })).toHaveAttribute(
+      'href',
+      '/about#confidence',
+    );
   });
 });
 

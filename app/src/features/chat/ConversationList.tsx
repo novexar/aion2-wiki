@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { formatDateTime } from '../../lib/format';
 import { Button } from '../../components/Button';
 import { ConfirmDialog } from '../../components/ConfirmDialog';
 import type { Conversation } from './chat-repository';
@@ -10,13 +11,6 @@ interface ConversationListProps {
   readonly onDelete: (id: string) => void;
   readonly onDeleteAll: () => void;
 }
-
-const DATE_FORMAT = new Intl.DateTimeFormat('ja-JP', {
-  month: 'numeric',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-});
 
 /** 「履歴」: 更新日時の新しい順。行クリックで切替、各行に削除 */
 export function ConversationList({
@@ -53,7 +47,7 @@ export function ConversationList({
                   dateTime={new Date(c.updatedAt).toISOString()}
                   className="block text-xs text-fg-subtle tabular-nums"
                 >
-                  {DATE_FORMAT.format(c.updatedAt)}
+                  {formatDateTime(c.updatedAt)}
                 </time>
               </button>
               <Button

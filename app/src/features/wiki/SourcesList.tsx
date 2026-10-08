@@ -1,3 +1,4 @@
+import { formatDate } from '../../lib/format';
 import type { Source, SourceKind } from '../../lib/types';
 
 const KIND_LABEL: Record<SourceKind, string> = {
@@ -36,8 +37,8 @@ export function SourcesList({ sources }: { readonly sources: readonly Source[] }
                 {s.title} ↗<span className="sr-only">（新しいタブで開く）</span>
               </a>
               <p className="text-fg-subtle">
-                {KIND_LABEL[s.kind]} · {hostname(s.url)} · <time dateTime={s.date}>{s.date}</time>{' '}
-                閲覧
+                {KIND_LABEL[s.kind]} · {hostname(s.url)} ·{' '}
+                <time dateTime={s.date}>{formatDate(s.date)}</time> 閲覧
               </p>
             </div>
           </li>

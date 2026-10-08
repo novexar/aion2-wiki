@@ -81,7 +81,7 @@ export function ApiKeyForm({
             href={API_KEY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent-strong underline underline-offset-4"
+            className="text-link underline underline-offset-4"
           >
             キーを発行（Google AI Studio） ↗
           </a>
@@ -147,7 +147,7 @@ export function ApiKeyForm({
             href={API_KEY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent-strong underline underline-offset-4"
+            className="text-link underline underline-offset-4"
           >
             Google AI Studio ↗
           </a>
