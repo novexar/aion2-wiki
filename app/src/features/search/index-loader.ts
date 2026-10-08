@@ -51,7 +51,7 @@ export function parsePageTexts(value: unknown): Map<string, string> {
   );
 }
 
-/** 記事 ID → 本文先頭 800 文字（スニペット用）。失敗時は空の Map を返す */
+/** 記事 ID → 本文先頭 2000 文字（スニペット用）。失敗時は空の Map を返す */
 export function loadPageTexts(): Promise<ReadonlyMap<string, string>> {
   pageTextsPromise ??= fetchText(textUrl)
     .then((json) => parsePageTexts(JSON.parse(json) as unknown))
