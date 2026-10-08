@@ -5,6 +5,7 @@ export const STORAGE_KEYS = {
   apiKey: 'aion2wiki:gemini-api-key',
   model: 'aion2wiki:gemini-model',
   theme: 'aion2wiki:theme',
+  faction: 'aion2wiki:faction',
   chat: 'aion2wiki:chat-history',
   chatPanelOpen: 'aion2wiki:chat-panel-open',
   chatPanelWidth: 'aion2wiki:chat-panel-width',

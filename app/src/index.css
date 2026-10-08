@@ -569,6 +569,40 @@
   position: relative;
 }
 
+/* 陣営テーマ: 帯の光彩とヘッダー下線の色だけを切り替える（既定は左シアン→右紫） */
+:root {
+  --glow-l: 112 210 255;
+  --glow-r: 128 80 192;
+  --hdr-line-l: 112 210 255;
+  --hdr-line-r: 201 162 39;
+}
+
+[data-faction='elyos'] {
+  --glow-r: 112 210 255;
+  --hdr-line-r: 112 210 255;
+}
+
+[data-faction='asmodian'] {
+  --glow-l: 128 80 192;
+  --hdr-line-l: 150 105 215;
+  --hdr-line-r: 150 105 215;
+}
+
+/* Dark ヘッダー: 92% 透過＋ blur で本文が薄く透ける。Light は不透明のまま */
+[data-theme='dark'] .hdr-line {
+  background-color: color-mix(in srgb, var(--header-bg) 92%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  [data-theme='dark'] .hdr-line {
+    background-color: var(--header-bg);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
 /* ヘッダー下端の 1px グラデーション線（青→金）。装飾のみ */
 .hdr-line {
   border-bottom-color: color-mix(in srgb, var(--header-bg) 60%, #3d82bf);
@@ -584,8 +618,8 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgb(112 210 255 / 0.55) 30%,
-    rgb(201 162 39 / 0.6) 70%,
+    rgb(var(--hdr-line-l) / 0.55) 30%,
+    rgb(var(--hdr-line-r) / 0.6) 70%,
     transparent
   );
   pointer-events: none;
@@ -620,15 +654,15 @@
 
 .band::before {
   background:
-    radial-gradient(ellipse 60% 120% at 15% 0%, rgb(112 210 255 / 0.22), transparent 60%),
-    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(128 80 192 / 0.32), transparent 60%),
+    radial-gradient(ellipse 60% 120% at 15% 0%, rgb(var(--glow-l) / 0.22), transparent 60%),
+    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(var(--glow-r) / 0.32), transparent 60%),
     linear-gradient(180deg, #0a1024 0%, #0f1f3c 100%);
 }
 
 [data-theme='dark'] .band::before {
   background:
-    radial-gradient(ellipse 60% 120% at 15% 0%, rgb(112 210 255 / 0.16), transparent 60%),
-    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(128 80 192 / 0.26), transparent 60%),
+    radial-gradient(ellipse 60% 120% at 15% 0%, rgb(var(--glow-l) / 0.16), transparent 60%),
+    radial-gradient(ellipse 50% 100% at 95% 100%, rgb(var(--glow-r) / 0.26), transparent 60%),
     linear-gradient(180deg, #060a14 0%, #0b1630 100%);
 }
 

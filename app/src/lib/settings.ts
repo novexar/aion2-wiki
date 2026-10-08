@@ -1,6 +1,7 @@
 import { useCallback, useSyncExternalStore } from 'react';
 import { DEFAULT_MODEL } from './gemini-config';
 import { readString, removeKey, STORAGE_EVENT, STORAGE_KEYS, writeString } from './storage';
+import { isFactionTheme, type FactionTheme } from './faction';
 import { isThemePreference, type ThemePreference } from './theme';
 
 function subscribe(callback: () => void): () => void {
@@ -64,6 +65,21 @@ export function saveThemePreference(value: ThemePreference): void {
 export function useThemePreference(): ThemePreference {
   const value = useLocalString(STORAGE_KEYS.theme);
   return value && isThemePreference(value) ? value : 'system';
+}
+
+export function getFactionTheme(): FactionTheme {
+  const value = readString('local', STORAGE_KEYS.faction);
+  return value && isFactionTheme(value) ? value : 'default';
+}
+
+export function saveFactionTheme(value: FactionTheme): void {
+  if (value === 'default') removeKey('local', STORAGE_KEYS.faction);
+  else writeString('local', STORAGE_KEYS.faction, value);
+}
+
+export function useFactionTheme(): FactionTheme {
+  const value = useLocalString(STORAGE_KEYS.faction);
+  return value && isFactionTheme(value) ? value : 'default';
 }
 
 /** API キーを画面表示用に伏せ字にする */

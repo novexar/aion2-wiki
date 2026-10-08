@@ -9,11 +9,14 @@ import {
   clearApiKey,
   maskApiKey,
   saveModel,
+  saveFactionTheme,
   saveThemePreference,
+  useFactionTheme,
   useApiKey,
   useModel,
   useThemePreference,
 } from '../lib/settings';
+import { FACTION_OPTIONS, isFactionTheme } from '../lib/faction';
 import { THEME_OPTIONS } from '../lib/theme';
 import { useCloseSettings } from '../lib/use-close-settings';
 
@@ -64,6 +67,36 @@ function ThemeSetting() {
           </button>
         );
       })}
+    </div>
+  );
+}
+
+function FactionSetting() {
+  const faction = useFactionTheme();
+  const id = useId();
+  return (
+    <div className="relative w-full sm:max-w-sm">
+      <label htmlFor={id} className="sr-only">
+        陣営テーマ
+      </label>
+      <select
+        id={id}
+        value={faction}
+        onChange={(e) => {
+          if (isFactionTheme(e.target.value)) saveFactionTheme(e.target.value);
+        }}
+        className={`${CONTROL_CLASS} appearance-none pr-9`}
+      >
+        {FACTION_OPTIONS.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+      <ChevronDown
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-fg-muted"
+      />
     </div>
   );
 }
@@ -225,6 +258,9 @@ export default function SettingsPage() {
       <div className="mt-4">
         <Section title="テーマ">
           <ThemeSetting />
+        </Section>
+        <Section title="陣営テーマ">
+          <FactionSetting />
         </Section>
         <Section title="モデル" description="チャットに使う Gemini のモデル名">
           <ModelSetting />

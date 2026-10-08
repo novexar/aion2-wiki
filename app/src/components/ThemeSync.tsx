@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
-import { useThemePreference } from '../lib/settings';
+import { applyFaction } from '../lib/faction';
+import { useFactionTheme, useThemePreference } from '../lib/settings';
 import { applyTheme } from '../lib/theme';
 
 /** テーマ設定とシステムのダークモード変更を <html data-theme> に反映する */
 export function ThemeSync() {
   const preference = useThemePreference();
+  const faction = useFactionTheme();
+
+  useEffect(() => {
+    applyFaction(faction);
+  }, [faction]);
 
   useEffect(() => {
     applyTheme(preference);
