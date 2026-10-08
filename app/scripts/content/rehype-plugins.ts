@@ -45,6 +45,8 @@ export const rehypeExternalLinks: Plugin<[], Root> = () => (tree) => {
 };
 
 const SAFE_URL = /^(?:https?:|mailto:|#|\/|\.{1,2}\/|[^:]*$)/i;
+/** `//host`・`\host`・`/\host` はスキーム相対 URL になり、外部へ読み込みに行くので拒否する */
+const NETWORK_PATH = /^[/\\]{2}|^\\/;
 
 /** javascript: / data: など安全でない URL スキームの href・src を除去する（XSS 対策） */
 export const rehypeStripUnsafeUrls: Plugin<[], Root> = () => (tree) => {
@@ -54,7 +56,8 @@ export const rehypeStripUnsafeUrls: Plugin<[], Root> = () => (tree) => {
       // 制御文字・空白で偽装されたスキーム（"java\tscript:"）も検出できるよう正規化してから判定する
       // eslint-disable-next-line no-control-regex
       const normalized = typeof value === 'string' ? value.replace(/[\u0000-\u0020]/g, '') : null;
-      if (normalized !== null && !SAFE_URL.test(normalized)) delete node.properties[name];
+      if (normalized === null) continue;
+      if (NETWORK_PATH.test(normalized) || !SAFE_URL.test(normalized)) delete node.properties[name];
     }
   });
 };

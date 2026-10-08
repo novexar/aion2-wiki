@@ -3,8 +3,9 @@ import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, type Plugin } from 'vite';
+import { normalizeBase } from './src/lib/paths';
 
-const base = process.env.BASE_PATH ?? '/aion2-wiki/';
+const base = normalizeBase(process.env.BASE_PATH ?? '/aion2-wiki/');
 
 /** GitHub Pages 用: SPA フォールバックの 404.html と .nojekyll を出力する */
 function githubPagesPlugin(): Plugin {

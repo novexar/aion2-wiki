@@ -71,3 +71,19 @@ describe('MessageContent', () => {
     expect(screen.queryByText(/不明な記事/)).toBeNull();
   });
 });
+
+describe('toTurns', () => {
+  it('drops a user turn whose reply failed, so user turns never repeat', async () => {
+    const { toTurns } = await import('./chat-history');
+    const turns = toTurns([
+      { id: '1', role: 'user', text: 'q1', status: 'done' },
+      { id: '2', role: 'model', text: '', status: 'error', error: 'x' },
+      { id: '3', role: 'user', text: 'q2', status: 'done' },
+      { id: '4', role: 'model', text: 'a2', status: 'done' },
+    ]);
+    expect(turns).toEqual([
+      { role: 'user', text: 'q2' },
+      { role: 'model', text: 'a2' },
+    ]);
+  });
+});

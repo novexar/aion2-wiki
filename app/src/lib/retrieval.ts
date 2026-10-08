@@ -54,6 +54,23 @@ export function queryTerms(query: string): string[] {
   return [...new Set(queryRuns(query).flat())];
 }
 
+/** search-text.json は不変なので、正規化(NFKC)の結果をクエリをまたいで再利用する */
+const normalizedTexts = new WeakMap<ReadonlyMap<string, string>, Map<string, string>>();
+
+function normalizedBody(texts: ReadonlyMap<string, string>, id: string, text: string): string {
+  let cache = normalizedTexts.get(texts);
+  if (!cache) {
+    cache = new Map();
+    normalizedTexts.set(texts, cache);
+  }
+  let value = cache.get(id);
+  if (value === undefined) {
+    value = normalizeText(text);
+    cache.set(id, value);
+  }
+  return value;
+}
+
 /** 記事検索索引で足りないとき、本文冒頭（search-text.json）に質問語が多く含まれる記事を返す */
 export function bodyArticleIds(
   texts: ReadonlyMap<string, string>,
@@ -65,7 +82,7 @@ export function bodyArticleIds(
   if (terms.length === 0) return [];
   const hits: { id: string; distinct: number; total: number }[] = [];
   for (const [id, text] of texts) {
-    const { distinct, total } = scoreText([terms], normalizeText(text));
+    const { distinct, total } = scoreText([terms], normalizedBody(texts, id, text));
     if (distinct / terms.length >= minRatio) hits.push({ id, distinct, total });
   }
   return hits

@@ -19,7 +19,12 @@ export function prefetchChat(
   if (scheduled) return;
   scheduled = true;
   schedule(() => {
-    for (const load of loaders) void load().catch(() => undefined);
+    for (const load of loaders) {
+      load().catch(() => {
+        // 失敗したら次のパネル表示で先読みをやり直せるようにする
+        scheduled = false;
+      });
+    }
   });
 }
 

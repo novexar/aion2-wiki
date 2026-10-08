@@ -115,7 +115,12 @@ export function resetChatRepository(): void {
 /** 正常に完了したメッセージだけを会話履歴として Gemini に渡す */
 export function toTurns(messages: readonly ChatMessage[]): ChatTurn[] {
   return messages
-    .filter((m) => m.status === 'done' && m.text.trim())
+    .filter((m, i) => {
+      if (m.status !== 'done' || !m.text.trim()) return false;
+      // 回答がエラーだった質問は外す（user が連続して Gemini に渡るのを避ける）
+      const next = messages[i + 1];
+      return !(m.role === 'user' && next?.role === 'model' && next.status !== 'done');
+    })
     .map((m) => ({ role: m.role, text: m.text }));
 }
 
