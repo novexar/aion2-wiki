@@ -29,7 +29,7 @@ const PAGES_SECTION = 'ページ';
 
 const QUICK_LINKS = [
   { to: '/index', label: '索引' },
-  { to: '/chat', label: 'チャット' },
+  { to: '/chat', label: 'AI チャット' },
   { to: '/about', label: 'このサイトについて' },
 ];
 

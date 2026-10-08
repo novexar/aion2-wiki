@@ -264,7 +264,7 @@ export default function SettingsPage() {
           <Section title="陣営テーマ">
             <FactionSetting />
           </Section>
-          <Section title="モデル" description="チャットに使う Gemini のモデル名">
+          <Section title="モデル" description="AI チャットに使う Gemini のモデル名">
             <ModelSetting />
           </Section>
           <Section title="API キー" description="このブラウザにだけ保存されます">

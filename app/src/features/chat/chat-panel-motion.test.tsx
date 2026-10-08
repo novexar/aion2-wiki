@@ -36,7 +36,7 @@ describe('ChatPanel のスライド', () => {
   it('リサイズ中は data-resizing を付けて transition を止める', () => {
     render(<ChatPanel />);
     act(() => setChatPanelOpen(true));
-    const handle = screen.getByRole('separator', { name: 'チャットの幅' });
+    const handle = screen.getByRole('separator', { name: 'AI チャットの幅' });
     handle.setPointerCapture = () => undefined;
     handle.hasPointerCapture = () => false;
     fireEvent.pointerDown(handle, { button: 0, pointerId: 1 });

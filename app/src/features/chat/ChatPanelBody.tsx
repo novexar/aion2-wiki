@@ -1,4 +1,4 @@
-import { X } from 'lucide-react';
+import { Sparkles, X } from 'lucide-react';
 import { useEffect, useId, useRef, useState } from 'react';
 import { useMatch } from 'react-router';
 import { Button } from '../../components/Button';
@@ -30,7 +30,10 @@ interface PanelHeaderProps {
 function PanelHeader({ view, onNew, onToggleHistory }: PanelHeaderProps) {
   return (
     <div className="flex h-(--header-h) shrink-0 items-center gap-1 border-b border-line pr-2 pl-4">
-      <h2 className="mr-auto text-sm font-bold text-fg">チャット</h2>
+      <h2 className="mr-auto inline-flex items-center gap-1.5 text-sm font-bold text-fg">
+        <Sparkles aria-hidden="true" className="size-4" />
+        AI チャット
+      </h2>
       <Button size="sm" variant="ghost" onClick={onNew}>
         新しい会話
       </Button>

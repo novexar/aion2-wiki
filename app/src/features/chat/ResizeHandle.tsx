@@ -54,7 +54,7 @@ export function ResizeHandle({ width, onResizingChange }: ResizeHandleProps) {
     <div
       role="separator"
       aria-orientation="vertical"
-      aria-label="チャットの幅"
+      aria-label="AI チャットの幅"
       aria-valuemin={PANEL_MIN_WIDTH}
       aria-valuemax={PANEL_MAX_WIDTH}
       aria-valuenow={width}

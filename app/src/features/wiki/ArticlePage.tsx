@@ -126,7 +126,7 @@ function ArticleView({ article }: { readonly article: Article }) {
             誤りを報告 ↗
           </a>
           <Link to="/chat" className="text-fg hover:underline">
-            チャットで質問する
+            AI チャットで質問する
           </Link>
         </p>
 

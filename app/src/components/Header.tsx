@@ -1,4 +1,4 @@
-import { Menu, Search, Settings } from 'lucide-react';
+import { Menu, Search, Settings, Sparkles } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { NavLink, useMatch, useNavigate } from 'react-router';
 import { useCloseSettings } from '../lib/use-close-settings';
@@ -105,12 +105,14 @@ export function Header() {
             aria-expanded={chat.open}
             aria-controls={CHAT_PANEL_ID}
             aria-keyshortcuts="Control+J"
-            title={`チャット（${modKeyLabel()}+J）`}
-            className={`h-9 rounded-md px-2.5 text-sm whitespace-nowrap transition-colors hover:bg-white/8 hover:text-white ${
+            title={`AI チャット（${modKeyLabel()}+J）`}
+            aria-label="AI チャット"
+            className={`inline-flex h-9 items-center gap-1.5 rounded-md px-2.5 text-sm whitespace-nowrap transition-colors hover:bg-white/8 hover:text-white ${
               chat.open ? 'bg-white/10 font-medium text-white' : 'text-header-muted'
             }`}
           >
-            チャット
+            <Sparkles aria-hidden="true" className="size-4" />
+            <span className="max-sm:hidden">AI チャット</span>
           </button>
           <button
             type="button"
@@ -142,9 +144,10 @@ export function Header() {
               closeDrawer();
               setChatPanelOpen(true);
             }}
-            className={`${navClass({ isActive: false })} text-left`}
+            className={`${navClass({ isActive: false })} flex items-center gap-2 text-left`}
           >
-            チャット
+            <Sparkles aria-hidden="true" className="size-4" />
+            AI チャット
           </button>
         </nav>
         <CategoryNav onNavigate={closeDrawer} />

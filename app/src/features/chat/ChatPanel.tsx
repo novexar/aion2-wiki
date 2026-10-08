@@ -77,7 +77,7 @@ export function ChatPanel() {
     <aside
       id={CHAT_PANEL_ID}
       role="complementary"
-      aria-label="チャット"
+      aria-label="AI チャット"
       hidden={!visible}
       data-open={open || undefined}
       data-resizing={resizing || undefined}

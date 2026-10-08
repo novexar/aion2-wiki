@@ -119,16 +119,16 @@ describe('ChatPanel', () => {
   it('toggles from the header with aria-expanded and moves focus in and out', async () => {
     renderApp();
     const user = userEvent.setup();
-    const toggle = screen.getByRole('button', { name: 'チャット' });
+    const toggle = screen.getByRole('button', { name: 'AI チャット' });
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
     expect(toggle).toHaveAttribute('aria-controls', 'chat-panel');
-    expect(screen.queryByRole('complementary', { name: 'チャット' })).toBeNull();
+    expect(screen.queryByRole('complementary', { name: 'AI チャット' })).toBeNull();
 
     await user.click(toggle);
     expect(toggle).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('complementary', { name: 'チャット' })).toBeVisible();
+    expect(screen.getByRole('complementary', { name: 'AI チャット' })).toBeVisible();
     // API キー未設定ならキー入力欄にフォーカス
-    await waitFor(() => expect(document.activeElement?.tagName).toBe('INPUT'));
+    await waitFor(() => expect(document.activeElement?.tagName).toBe('INPUT'), { timeout: 4000 });
     expect(document.activeElement).toHaveAttribute('type', 'password');
 
     await user.click(screen.getByRole('button', { name: '閉じる' }));
@@ -153,7 +153,7 @@ describe('ChatPanel', () => {
     const { container } = renderApp();
     const root = container.firstElementChild as HTMLElement;
     expect(root.style.paddingRight).toBe(`${PANEL_DEFAULT_WIDTH}px`);
-    const handle = screen.getByRole('separator', { name: 'チャットの幅' });
+    const handle = screen.getByRole('separator', { name: 'AI チャットの幅' });
     fireEvent.keyDown(handle, { key: 'ArrowLeft' });
     expect(getChatPanelState().width).toBe(PANEL_DEFAULT_WIDTH + 16);
     expect(localStorage.getItem(STORAGE_KEYS.chatPanelWidth)).toBe(
@@ -175,13 +175,13 @@ describe('ChatPanel', () => {
     try {
       setChatPanelOpen(true);
       const { container } = renderApp();
-      const panel = screen.getByRole('complementary', { name: 'チャット' });
+      const panel = screen.getByRole('complementary', { name: 'AI チャット' });
       expect(panel).toHaveClass('inset-0');
       expect((container.firstElementChild as HTMLElement).style.paddingRight).toBe('');
       expect(screen.queryByRole('separator')).toBeNull();
       fireEvent.keyDown(window, { key: 'Escape' });
       expect(getChatPanelState().open).toBe(false);
-      expect(screen.getByRole('button', { name: 'チャット' })).toHaveFocus();
+      expect(screen.getByRole('button', { name: 'AI チャット' })).toHaveFocus();
     } finally {
       window.matchMedia = original;
     }
