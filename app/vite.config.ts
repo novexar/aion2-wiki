@@ -54,7 +54,10 @@ function fontFacePlugin(): Plugin {
   };
 }
 
-/** 先読みする文字（ひらがな・カタカナ・英小文字・句読点・頻出漢字）。これらを含む 400 の分割を preload する */
+/** 先読みする文字（ひらがな・カタカナ・英小文字・句読点・頻出漢字）。これらを含む分割を preload する */
+/** 先読みする太さ。400 は本文、700 は見出し（font-display: optional のため先読みしないと初回描画で代替フォントになる） */
+const PRELOAD_WEIGHTS = ['400', '700'];
+
 const PRELOAD_PROBES = ['あ', 'ア', 'a', '、', '日', '本'].map((c) => c.codePointAt(0) ?? 0);
 
 function inUnicodeRange(range: string, codePoint: number): boolean {
@@ -78,7 +81,7 @@ function fontPreloadPlugin(): Plugin {
         const source = css?.type === 'asset' ? String(css.source) : '';
         const hrefs = new Set<string>();
         for (const face of source.match(/@font-face\{[^}]*\}/g) ?? []) {
-          if (!face.includes('font-weight:400')) continue;
+          if (!PRELOAD_WEIGHTS.some((w) => face.includes(`font-weight:${w}`))) continue;
           const range = /unicode-range:([^;}]*)/.exec(face)?.[1] ?? '';
           const url = /url\(([^)]+\.woff2)\)/.exec(face)?.[1];
           if (url && PRELOAD_PROBES.some((cp) => inUnicodeRange(range, cp))) hrefs.add(url);
