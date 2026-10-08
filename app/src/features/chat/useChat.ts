@@ -165,6 +165,8 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
           update({ text: 'この Wiki に該当する記事がありません。', status: 'done', refs: [] });
           return;
         }
+        // 回答を待たず、根拠にする記事を先に見せる
+        update({ refs: pickReferences(chunks) });
         const request = buildRagRequest(history, question, chunks);
         const full = await streamGemini({
           apiKey,

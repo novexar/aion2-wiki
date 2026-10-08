@@ -251,6 +251,28 @@ describe('article context', () => {
     expect(saved.map((m) => m.role)).toEqual(['user', 'model']);
   });
 
+  it('shows references before the answer starts streaming', async () => {
+    let finish: (text: string) => void = () => undefined;
+    streamGemini.mockImplementation(() => new Promise<string>((resolve) => (finish = resolve)));
+    const { result } = renderHook(() =>
+      useChat({ apiKey: 'AIzaSyTEST_1234567890abcdef', model: 'm', contextArticleId: 'kinah' }),
+    );
+    let sending: Promise<void> = Promise.resolve();
+    act(() => {
+      sending = result.current.send('上限は？');
+    });
+    await waitFor(() => expect(result.current.messages[1]?.refs?.length).toBeGreaterThan(0));
+    const pending = result.current.messages[1];
+    expect(pending?.status).toBe('streaming');
+    expect(pending?.text).toBe('');
+    expect(pending?.refs?.map((r) => r.id)).toContain('kinah');
+    await act(async () => {
+      finish('答え [kinah]');
+      await sending;
+    });
+    expect(result.current.messages[1]?.status).toBe('done');
+  });
+
   it('does not add article chunks when the checkbox is off', async () => {
     const { result } = renderHook(() =>
       useChat({ apiKey: 'AIzaSyTEST_1234567890abcdef', model: 'm', contextArticleId: null }),

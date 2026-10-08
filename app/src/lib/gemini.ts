@@ -82,6 +82,11 @@ export interface StreamOptions {
   readonly onText: (fullText: string) => void;
 }
 
+/** SDK を先読みする（初回送信時の読み込み待ちを減らす） */
+export function preloadGemini(): Promise<unknown> {
+  return import('@google/genai');
+}
+
 /** 応答の最大トークン数（5 行以内の回答に十分な量） */
 export const MAX_OUTPUT_TOKENS = 512;
 

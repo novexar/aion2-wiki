@@ -31,7 +31,7 @@ export function MessageView({ message }: { readonly message: ChatMessage }) {
             <span className="size-1.5 animate-pulse rounded-full bg-fg-subtle [animation-delay:150ms]" />
             <span className="size-1.5 animate-pulse rounded-full bg-fg-subtle [animation-delay:300ms]" />
           </span>
-          検索中
+          {message.refs && message.refs.length > 0 ? '回答を生成中' : '検索中'}
         </p>
       ) : null}
       {message.status === 'error' && message.error && (

@@ -6,6 +6,7 @@ import { Button } from '../../components/Button';
 import { useApiKey, useModel } from '../../lib/settings';
 import { articleById } from '../wiki/data';
 import { ApiKeyForm } from './ApiKeyForm';
+import { prefetchChat } from './chat-prefetch';
 import { focusChatInput, setChatPanelOpen } from './chat-panel-store';
 import { Composer } from './Composer';
 import { ConversationList } from './ConversationList';
@@ -152,6 +153,10 @@ export default function ChatPanelBody() {
 
   // 初めて開いたときは読み込み後にフォーカスする（2 回目以降は ChatPanel が行う）
   useEffect(() => focusChatInput(), []);
+  // API キーがあれば SDK と検索データをアイドル時に先読みする
+  useEffect(() => {
+    if (apiKey) prefetchChat();
+  }, [apiKey]);
 
   const showChat = (): void => {
     setView('chat');
