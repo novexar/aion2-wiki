@@ -1,7 +1,7 @@
 ---
 id: progression-path-700-to-2800
 title: IL700→2800ロードマップ
-reading: IL700から2800ろーどまっぷ
+reading: あいえる700から2800ろーどまっぷ
 category: leveling
 order: 54
 tags: [アイテムレベル, ロードマップ, 遠征, 超越, アルカナ]

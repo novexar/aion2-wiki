@@ -1,7 +1,7 @@
 ---
 id: combat-analysis-dps-meter
 title: DPSメーター
-reading: DPSめーたー
+reading: でぃーぴーえすめーたー
 category: systems
 order: 99
 tags: [戦闘分析, DPSメーター, ローテーション, 検証, Ctrl+X]

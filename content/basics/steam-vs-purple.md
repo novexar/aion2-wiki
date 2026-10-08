@@ -1,7 +1,7 @@
 ---
 id: steam-vs-purple
 title: Steam版とPURPLE版
-reading: Steamばんとぱーぷるばん
+reading: すちーむばんとぱーぷるばん
 category: basics
 order: 3
 tags: [基本情報, Steam, PURPLE, アカウント]

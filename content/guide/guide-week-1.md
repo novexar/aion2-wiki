@@ -1,7 +1,7 @@
 ---
 id: guide-week-1
 title: 1週目ガイド
-reading: 1しゅうめがいど
+reading: いっしゅうめがいど
 category: guide
 order: 226
 tags: [初週, Lv45, 覚醒, 日課, アイテムレベル]

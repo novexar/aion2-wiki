@@ -1,7 +1,7 @@
 ---
 id: faq-membership-and-pass
 title: FAQ 課金
-reading: FAQかきん
+reading: えふえーきゅーかきん
 category: faq
 order: 223
 tags: [FAQ, メンバーシップ, ディーヴァパス, 課金, キューナ]

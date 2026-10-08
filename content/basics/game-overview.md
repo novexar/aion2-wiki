@@ -1,7 +1,7 @@
 ---
 id: game-overview
 title: AION2とは
-reading: AION2とは
+reading: あいおんつーとは
 category: basics
 order: 1
 tags: [基本情報, グローバル版, リリース, NC]

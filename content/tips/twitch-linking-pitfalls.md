@@ -1,7 +1,7 @@
 ---
 id: twitch-linking-pitfalls
 title: Twitch連携の落とし穴
-reading: Twitchれんけいのおとしあな
+reading: ついっちれんけいのおとしあな
 category: tips
 order: 206
 tags: [Twitch, Drops, アカウント連携, 注意, ローンチ報酬]

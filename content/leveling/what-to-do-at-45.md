@@ -1,7 +1,7 @@
 ---
 id: what-to-do-at-45
 title: Lv45到達後にやること
-reading: Lv45とうたつごにやること
+reading: れべる45とうたつごにやること
 category: leveling
 order: 43
 tags: [Lv45, 装備レベル, 初動, ディーヴァニオン, アビス]

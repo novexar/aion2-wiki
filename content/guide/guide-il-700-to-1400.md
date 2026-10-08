@@ -1,7 +1,7 @@
 ---
 id: guide-il-700-to-1400
 title: IL700→1400ガイド
-reading: IL700から1400がいど
+reading: あいえる700から1400がいど
 category: guide
 order: 227
 tags: [アイテムレベル, 地域クエスト, 封印ダンジョン, 駐屯地, ルーン]

@@ -1,7 +1,7 @@
 ---
 id: pvp-stats-and-gear
 title: PvP用ステータスと装備
-reading: PvPようすてーたすとそうび
+reading: ぴーぶいぴーようすてーたすとそうび
 category: pvp
 order: 147
 tags: [PvP装備, PvPダメージ増加, 潜在力, 状態異常抵抗, アスフェル]

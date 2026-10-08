@@ -1,7 +1,7 @@
 ---
 id: faq-economy
 title: FAQ 経済
-reading: FAQけいざい
+reading: えふえーきゅーけいざい
 category: faq
 order: 218
 tags: [FAQ, ギーナ, キューナ, 取引所, 刻印, 受け渡し]

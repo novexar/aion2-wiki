@@ -1,7 +1,7 @@
 ---
 id: faq-account-and-platform
 title: FAQ アカウント
-reading: FAQあかうんと
+reading: えふえーきゅーあかうんと
 category: faq
 order: 216
 tags: [FAQ, アカウント, プラットフォーム, Steam, PURPLE, 言語]

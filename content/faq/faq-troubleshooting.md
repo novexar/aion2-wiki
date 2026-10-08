@@ -1,7 +1,7 @@
 ---
 id: faq-troubleshooting
 title: FAQ トラブル
-reading: FAQとらぶる
+reading: えふえーきゅーとらぶる
 category: faq
 order: 224
 tags: [FAQ, トラブル, ログイン, Twitch Drops, アカウント連携, 不具合]

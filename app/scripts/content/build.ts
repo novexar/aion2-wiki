@@ -261,6 +261,8 @@ async function renderArticle(
   const { fm, file } = item;
   const longTitle = titleLengthWarning(file.relPath, fm.title);
   if (longTitle) warn(longTitle);
+  if (fm.reading && !/^[ぁ-ゖァ-ヺ]/.test(fm.reading))
+    warn(`${file.relPath}: reading が仮名始まりではありません（五十音索引の「その他」になります）`);
   if (fm.order === undefined)
     warn(`${file.relPath}: order が未設定です（末尾 ${ORDER_MISSING} として扱います）`);
   const { body, relatedIds } = extractRelatedSection(item.body);

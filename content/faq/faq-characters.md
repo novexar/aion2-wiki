@@ -1,7 +1,7 @@
 ---
 id: faq-characters
 title: FAQ キャラクター
-reading: FAQきゃらくたー
+reading: えふえーきゅーきゃらくたー
 category: faq
 order: 217
 tags: [FAQ, キャラクター, 削除, 外見変更, スロット]

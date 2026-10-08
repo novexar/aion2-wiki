@@ -1,7 +1,7 @@
 ---
 id: faq-dungeons
 title: FAQ ダンジョン
-reading: FAQだんじょん
+reading: えふえーきゅーだんじょん
 category: faq
 order: 219
 tags: [FAQ, ダンジョン, 遠征, 超越, オードエネルギー, 貢献度]

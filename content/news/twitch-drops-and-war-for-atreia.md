@@ -1,7 +1,7 @@
 ---
 id: twitch-drops-and-war-for-atreia
 title: Twitch Drops
-reading: Twitchどろっぷす
+reading: ついっちどろっぷす
 category: news
 order: 190
 tags: [Twitch Drops, War for Atreia, 配信, 無料報酬, イベント]

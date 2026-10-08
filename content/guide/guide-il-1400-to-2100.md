@@ -1,7 +1,7 @@
 ---
 id: guide-il-1400-to-2100
 title: IL1400→2100ガイド
-reading: IL1400から2100がいど
+reading: あいえる1400から2100がいど
 category: guide
 order: 228
 tags: [アイテムレベル, 遠征, 超越, アルカナ, 製作]

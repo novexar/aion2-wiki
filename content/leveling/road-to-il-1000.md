@@ -1,7 +1,7 @@
 ---
 id: road-to-il-1000
 title: IL1000への最短
-reading: IL1000へのさいたん
+reading: あいえる1000へのさいたん
 category: leveling
 order: 55
 tags: [IL1000, アビス, 装備強化, 一度きり報酬, 初動]

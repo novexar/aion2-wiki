@@ -1,7 +1,7 @@
 ---
 id: road-to-il-1400
 title: IL1400への上げ方
-reading: IL1400へのあげかた
+reading: あいえる1400へのあげかた
 category: leveling
 order: 56
 tags: [IL1400, ドラウプニル, バクロン空中島, オードエネルギー, アビス]

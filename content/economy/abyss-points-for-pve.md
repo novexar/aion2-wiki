@@ -1,7 +1,7 @@
 ---
 id: abyss-points-for-pve
 title: PvE向けアビスポイント活用
-reading: PvEむけあびすぽいんとかつよう
+reading: ぴーぶいいーむけあびすぽいんとかつよう
 category: economy
 order: 166
 tags: [アビスポイント, PvE, スティグマの欠片, 補給依頼, アビス商店]

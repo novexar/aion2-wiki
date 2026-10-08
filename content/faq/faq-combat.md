@@ -1,7 +1,7 @@
 ---
 id: faq-combat
 title: FAQ 戦闘
-reading: FAQせんとう
+reading: えふえーきゅーせんとう
 category: faq
 order: 221
 tags: [FAQ, 戦闘, ステータス, 強打, クリティカル, ダメージ計算]

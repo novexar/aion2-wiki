@@ -1,7 +1,7 @@
 ---
 id: nc-account-and-purple-setup
 title: NCアカウントとPURPLE
-reading: NCあかうんととぱーぷる
+reading: えぬしーあかうんととぱーぷる
 category: basics
 order: 4
 tags: [基本情報, アカウント, PURPLE, 始め方]

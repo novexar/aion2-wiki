@@ -1,7 +1,7 @@
 ---
 id: faq-gear
 title: FAQ 装備
-reading: FAQそうび
+reading: えふえーきゅーそうび
 category: faq
 order: 220
 tags: [FAQ, 装備, 強化, 継承, 翼, ルーン]

@@ -1,7 +1,7 @@
 ---
 id: faq-pvp-and-social
 title: FAQ 対人と社交
-reading: FAQたいじんとしゃこう
+reading: えふえーきゅーたいじんとしゃこう
 category: faq
 order: 222
 tags: [FAQ, PvP, アビス, レギオン, チャット, 社交]

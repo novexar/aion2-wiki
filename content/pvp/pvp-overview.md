@@ -1,7 +1,7 @@
 ---
 id: pvp-overview
 title: PvPの全体像
-reading: PvPのぜんたいぞう
+reading: ぴーぶいぴーのぜんたいぞう
 category: pvp
 order: 136
 tags: [PvP, アビス, 闘技場, 戦場, 時空の亀裂, Lv45]

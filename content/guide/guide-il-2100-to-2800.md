@@ -1,7 +1,7 @@
 ---
 id: guide-il-2100-to-2800
 title: IL2100→2800ガイド
-reading: IL2100から2800がいど
+reading: あいえる2100から2800がいど
 category: guide
 order: 229
 tags: [アイテムレベル, 超越, 突破, 製作, ルドラ]
