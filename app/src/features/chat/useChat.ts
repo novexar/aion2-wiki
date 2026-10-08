@@ -24,6 +24,7 @@ export interface UseChatOptions {
 export interface UseChatResult {
   readonly messages: readonly ChatMessage[];
   readonly isStreaming: boolean;
+  readonly model: string;
   readonly send: (question: string) => Promise<void>;
   readonly stop: () => void;
   readonly conversations: readonly Conversation[];
@@ -271,6 +272,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
   return {
     messages,
     isStreaming,
+    model,
     send,
     stop,
     conversations,

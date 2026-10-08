@@ -140,7 +140,7 @@ function MessageLog({
             </div>
           ))}
         {chat.messages.map((m) => (
-          <MessageView key={m.id} message={m} />
+          <MessageView key={m.id} message={m} model={chat.model} />
         ))}
       </div>
     </div>
