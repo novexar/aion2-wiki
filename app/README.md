@@ -21,17 +21,18 @@ npm run dev           # 本番と同じく _ 始まりのディレクトリを�
 
 ### npm スクリプト
 
-| コマンド                                  | 内容                                                                         |
-| ----------------------------------------- | ---------------------------------------------------------------------------- |
-| `npm run content`                         | `content/` → `src/generated/` を生成（`_` 始まりのディレクトリは除外）       |
-| `npm run content:samples`                 | 上記に `content/_sample` などを含める（`INCLUDE_SAMPLES=1`）                 |
-| `npm run dev` / `npm run dev:samples`     | コンテンツ生成 → 開発サーバー                                                |
-| `npm run build` / `npm run build:samples` | コンテンツ生成 → `vite build`（出力: `dist/`、`404.html`・`.nojekyll` 付き） |
-| `npm run preview`                         | ビルド結果の確認（`http://localhost:4173/aion2-wiki/`）                      |
-| `npm run typecheck`                       | コンテンツ生成 → `tsc -b`                                                    |
-| `npm run lint`                            | ESLint + Prettier のチェック                                                 |
-| `npm run format`                          | Prettier で整形                                                              |
-| `npm test` / `npm run coverage`           | Vitest（カバレッジ付き）                                                     |
+| コマンド                                  | 内容                                                                             |
+| ----------------------------------------- | -------------------------------------------------------------------------------- |
+| `npm run content`                         | `content/` → `src/generated/` を生成（`_` 始まりのディレクトリは除外）           |
+| `npm run content:samples`                 | 上記に `content/_sample` などを含める（`INCLUDE_SAMPLES=1`）                     |
+| `npm run dev` / `npm run dev:samples`     | コンテンツ生成 → 開発サーバー                                                    |
+| `npm run build` / `npm run build:samples` | コンテンツ生成 → `vite build`（出力: `dist/`、`404.html`・`.nojekyll` 付き）     |
+| `npm run preview`                         | ビルド結果の確認（`http://localhost:4173/aion2-wiki/`）                          |
+| `npm run typecheck`                       | コンテンツ生成 → `tsc -b`                                                        |
+| `npm run watch`                           | 出典・公式告知の更新を検知してレポートを出力（`-- --commit-state` で状態を記録） |
+| `npm run lint`                            | ESLint + Prettier のチェック                                                     |
+| `npm run format`                          | Prettier で整形                                                                  |
+| `npm test` / `npm run coverage`           | Vitest（カバレッジ付き）                                                         |
 
 ### 環境変数
 
@@ -86,6 +87,52 @@ content/dungeons/odyle-energy.md
 
 - 任意項目 `reading`（ひらがな）を書くと、索引の五十音順に使われます。漢字だけのタイトルで `reading` がなければ「その他」に入ります。
 - `_` で始まるディレクトリ（`content/_sample` など）とファイルは本番ビルドから除外されます。
+
+## 更新運用
+
+記事の更新有無はローカル PC で確認します（GitHub Actions は使いません）。検知は LLM を使わない `npm run watch`、記事の更新は Claude Code の `/update-wiki` で行います。判断基準は [../research/WATCH-RULES.md](../research/WATCH-RULES.md) です。
+
+### /update-wiki の使い方
+
+リポジトリのルートで Claude Code を開き、`/update-wiki` を実行します（手順書: [../.claude/commands/update-wiki.md](../.claude/commands/update-wiki.md)）。
+
+1. `git pull` → `npm run watch`。変化がなければ「更新なし」と報告して終了します。
+2. 変化があれば `update/YYYY-MM-DD` ブランチを作り、レポートの「推奨アクション」の順に、影響する記事の差分だけを直します。
+3. `npm run content`、`npm run eval:retrieval`（hit@5 が 90% 未満なら報告）、lint / typecheck / test を通します。
+4. 出典の抜き取り確認（3 件）をして PR を作ります。取り込みはオーナーが行います。
+
+### レポートの読み方
+
+`npm run watch` は `research/watch/report-YYYY-MM-DD.md` を出力します。終了コードは、変化ありが 1、なしが 0、スクリプトの異常が 2 です。
+
+| 区分                          | 内容                                                                                                                                      |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| ① 公式告知の新規              | aion2builds の告知索引と Steam ニュースの新規。`content/news/` に追加する候補                                                             |
+| ② DB バージョン・新規 URL     | aion2.gaming.tools のバージョンと、sitemap の新規 URL（activities / maps / quests / items）。新トピック候補                               |
+| ③ 攻略サイトの新着            | redfreshet・aion2-times の RSS、aion2maps・aion2hub の sitemap 更新                                                                       |
+| ④ 変化した出典 URL と影響記事 | 記事の `sources[].url` の HEAD（ETag / Last-Modified / Content-Length）の変化と、その URL を出典にする記事。plaync 系は取得せず「要目視」 |
+| ⑤ 取得失敗                    | 取得できなかった信号。失敗しても他の信号は続行し、前回の状態を保持します                                                                  |
+
+末尾の「推奨アクション」が処理の順番です。取得は、ブラウザ UA・同一ホスト 1 秒間隔・1 件 15 秒でタイムアウトで行います。Cloudflare 配下のサイトが Node の fetch を拒否するため、`curl` があれば `curl` で取得します。全体で 2〜3 分かかります。
+
+### state.json の扱い
+
+`research/watch/state.json`（git 管理）は「処理済みの時点」です。`npm run watch` は読むだけで、更新しません。このため、未処理の変化は次回も報告されます。
+
+PR をオーナーが取り込んだ後に、`main` を取得して `npm run watch -- --commit-state` を実行し、`state.json` をコミットします。最初の実行（`state.json` なし）は、現在の一覧すべてを新規として報告します。
+
+### リマインド（任意、Windows）
+
+週 1 回（月曜 09:00）に `npm run watch` を実行し、変化があれば Windows 通知を出すタスクを登録できます。通知とレポートの作成だけで、記事の更新はしません。PC が起動していなかった場合は、次に使えるときに実行します（`StartWhenAvailable`）。
+
+```powershell
+# 登録（リポジトリのルートで）
+powershell -ExecutionPolicy Bypass -File scripts\windows\register-watch-task.ps1
+# 解除
+powershell -ExecutionPolicy Bypass -File scripts\windows\unregister-watch-task.ps1
+```
+
+実行ログは `research/watch/last-run.log`（git 管理外）に残ります。
 
 ## デプロイ
 

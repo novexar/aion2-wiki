@@ -20,6 +20,7 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "eval:retrieval": "tsx scripts/retrieval-eval.ts",
+    "watch": "node scripts/watch-sources.mjs",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage"
   },
