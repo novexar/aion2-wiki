@@ -26,9 +26,39 @@ export interface ArticleRef {
 }
 
 /** マルチターンで保持する往復数 */
-export const MAX_EXCHANGES = 6;
+export const MAX_EXCHANGES = 3;
 /** 取得するチャンク数 */
-export const TOP_K = 8;
+export const TOP_K = 5;
+
+/** 同じ記事から使うチャンク数の上限 */
+export const PER_ARTICLE_LIMIT = 2;
+/** プロンプトに入れる抜粋本文の合計文字数の上限 */
+export const CONTEXT_CHAR_LIMIT = 3000;
+
+/**
+ * 検索結果（関連度順）をプロンプトに入れる抜粋に絞る。
+ * 同一記事は PER_ARTICLE_LIMIT 件まで → 先頭から TOP_K 件 → 本文合計 CONTEXT_CHAR_LIMIT 字で打ち切り
+ */
+export function selectContext(
+  chunks: readonly Chunk[],
+  limits: { topK?: number; perArticle?: number; maxChars?: number } = {},
+): Chunk[] {
+  const { topK = TOP_K, perArticle = PER_ARTICLE_LIMIT, maxChars = CONTEXT_CHAR_LIMIT } = limits;
+  const counts = new Map<string, number>();
+  const picked: Chunk[] = [];
+  let used = 0;
+  for (const chunk of chunks) {
+    if (picked.length >= topK || used >= maxChars) break;
+    const count = counts.get(chunk.articleId) ?? 0;
+    if (count >= perArticle) continue;
+    counts.set(chunk.articleId, count + 1);
+    const room = maxChars - used;
+    const text = chunk.text.length > room ? chunk.text.slice(0, room) : chunk.text;
+    used += text.length;
+    picked.push(text === chunk.text ? chunk : { ...chunk, text });
+  }
+  return picked;
+}
 
 export const NO_INFO_MESSAGE = 'Wiki に情報がありません';
 

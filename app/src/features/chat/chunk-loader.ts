@@ -70,7 +70,7 @@ export async function resolveChunks(refs: readonly ChunkRef[]): Promise<Chunk[]>
 }
 
 /** 「この記事を文脈に含める」で先頭に加えるチャンク数の上限 */
-export const ARTICLE_CONTEXT_LIMIT = 4;
+export const ARTICLE_CONTEXT_LIMIT = 2;
 
 /** 指定記事の先頭チャンクを検索結果の前に置く（重複は除く） */
 export function prependArticleChunks(

@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { streamGemini, toChatError } from '../../lib/gemini';
-import { buildRagRequest, pickReferences, retrievalQuery, TOP_K } from '../../lib/rag';
+import {
+  buildRagRequest,
+  pickReferences,
+  retrievalQuery,
+  selectContext,
+  TOP_K,
+} from '../../lib/rag';
 import { searchChunks } from '../../lib/search';
 import type { ChunkRef } from '../../lib/types';
 import {
@@ -54,12 +60,13 @@ async function retrieve(
     store.index,
     store.byId,
     retrievalQuery(history, question),
-    TOP_K,
+    TOP_K * 3,
   );
   const refs = contextArticleId ? prependArticleChunks(store.byId, contextArticleId, found) : found;
   const chunks = await resolveChunks(refs);
   if (signal.aborted) throw abortError();
-  return chunks;
+  // 同一記事 2 件まで・TOP_K 件・3,000 字に絞る
+  return selectContext(chunks);
 }
 
 export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): UseChatResult {

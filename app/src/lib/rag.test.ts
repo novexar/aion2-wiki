@@ -5,7 +5,11 @@ import {
   buildSystemInstruction,
   extractCitations,
   formatContext,
+  CONTEXT_CHAR_LIMIT,
   MAX_EXCHANGES,
+  PER_ARTICLE_LIMIT,
+  selectContext,
+  TOP_K,
   NO_INFO_MESSAGE,
   pickReferences,
   retrievalQuery,
@@ -57,7 +61,7 @@ describe('trimHistory', () => {
   it(`keeps at most ${MAX_EXCHANGES} exchanges`, () => {
     const trimmed = trimHistory(turns(20));
     expect(trimmed).toHaveLength(MAX_EXCHANGES * 2);
-    expect(trimmed[0]?.text).toBe('t8');
+    expect(trimmed[0]?.text).toBe('t14');
   });
 
   it('always starts with a user turn and drops empty turns', () => {
@@ -139,5 +143,34 @@ describe('citations and references', () => {
       { id: 'a', title: 'ギーナ', category: 'economy', anchor: '入手' },
       { id: 'b', title: 'オード', category: 'economy', anchor: '' },
     ]);
+  });
+});
+
+describe('selectContext', () => {
+  it('uses TOP_K 5, 2 chunks per article, a 3,000-char cap and 3 exchanges', () => {
+    expect(TOP_K).toBe(5);
+    expect(PER_ARTICLE_LIMIT).toBe(2);
+    expect(CONTEXT_CHAR_LIMIT).toBe(3000);
+    expect(MAX_EXCHANGES).toBe(3);
+  });
+
+  it('keeps at most 2 chunks per article, then at most TOP_K overall', () => {
+    const many = [
+      ...Array.from({ length: 4 }, (_, i) => chunk(`a#${i}`, 'a', 'A')),
+      ...Array.from({ length: 4 }, (_, i) => chunk(`b#${i}`, 'b', 'B')),
+      ...Array.from({ length: 4 }, (_, i) => chunk(`c#${i}`, 'c', 'C')),
+    ];
+    expect(selectContext(many).map((c) => c.id)).toEqual(['a#0', 'a#1', 'b#0', 'b#1', 'c#0']);
+  });
+
+  it('cuts the total body text at the character cap', () => {
+    const long = (id: string, article: string) =>
+      chunk(id, article, article, '', 'あ'.repeat(1800));
+    const picked = selectContext([long('a#0', 'a'), long('b#0', 'b'), long('c#0', 'c')]);
+    expect(picked.map((c) => c.text.length)).toEqual([1800, 1200]);
+  });
+
+  it('asks for answers within 5 lines', () => {
+    expect(SYSTEM_PROMPT).toContain('5 行以内');
   });
 });
