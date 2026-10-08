@@ -67,7 +67,8 @@ const FILLER_PHRASES = [
 const FILLER_PATTERN = new RegExp(FILLER_PHRASES.join('|'), 'gu');
 
 /** 語を分ける区切り（助詞 1 文字・空白・句読点・記号） */
-const SEPARATOR = /[のはがをにでともへ\s、。,.?？!！・「」『』()（）[\]【】★☆※~〜:：;；/／\-－+＋]+/u;
+const SEPARATOR =
+  /[のはがをにでともへ\s、。,.?？!！・「」『』()（）[\]【】★☆※~〜:：;；/／\-－+＋]+/u;
 
 const KANA_ONLY = /^[ぁ-ゖァ-ヺー]$/u;
 

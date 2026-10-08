@@ -1,7 +1,12 @@
-import { rankChunks, selectArticleIds, type ArticleChunks } from '../../lib/retrieval';
+import {
+  rankChunks,
+  selectArticleIds,
+  TOP_ARTICLES,
+  type ArticleChunks,
+} from '../../lib/retrieval';
 import { retrievalQuery, type ChatTurn } from '../../lib/rag';
 import type { ArticleChunk, Chunk } from '../../lib/types';
-import { loadPageIndex, loadPageTexts } from '../search/index-loader';
+import { loadPageIndex, loadPageTexts, loadSynonyms } from '../search/index-loader';
 import { articleById } from '../wiki/data';
 
 /** 記事ごとのチャンク（chunk-text/<articleId>.json）。必要な記事の分だけ読み込む */
@@ -27,7 +32,7 @@ function loadArticleChunks(articleId: string): Promise<readonly ArticleChunk[]> 
 
 /** 検索用の索引と本文（記事検索と共通）を先に読み込んでおく */
 export function warmRetrieval(): Promise<unknown> {
-  return Promise.all([loadPageIndex(), loadPageTexts()]);
+  return Promise.all([loadPageIndex(), loadPageTexts(), loadSynonyms()]);
 }
 
 /** 「この記事を文脈に含める」で先頭に加えるチャンク数の上限 */
@@ -88,7 +93,9 @@ export async function retrieveChunks(options: RetrieveOptions): Promise<Chunk[]>
   throwIfAborted(signal);
   const index = await loadPageIndex();
   throwIfAborted(signal);
-  const ids = await selectArticleIds(index, query, loadPageTexts);
+  const synonyms = await loadSynonyms();
+  throwIfAborted(signal);
+  const ids = await selectArticleIds(index, query, loadPageTexts, TOP_ARTICLES, synonyms);
   throwIfAborted(signal);
   const [articles, own] = await Promise.all([
     loadArticles(ids),

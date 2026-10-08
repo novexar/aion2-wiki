@@ -9,6 +9,7 @@ import type { CategoryId } from './categories';
 import { PER_ARTICLE_LIMIT } from './rag';
 import { contentWords, normalizeQuery } from './query-normalize';
 import { searchWithFallback } from './search';
+import { expandTerms, type SynonymDict } from './synonyms';
 import { isLatinTerm } from './search-options';
 import { normalizeText, tokenize, tokenizeQuery } from './tokenizer';
 import type { ArticleChunk, Chunk } from './types';
@@ -68,43 +69,106 @@ function normalizedBody(texts: ReadonlyMap<string, string>, id: string, text: st
   return value;
 }
 
-/** 記事検索索引で足りないとき、本文冒頭（search-text.json）に質問語が多く含まれる記事を返す */
-export function bodyArticleIds(
-  texts: ReadonlyMap<string, string>,
-  query: string,
-  limit = TOP_ARTICLES,
-  minRatio = 0.5,
-): string[] {
-  const terms = queryTerms(query);
-  if (terms.length === 0) return [];
-  const hits: { id: string; distinct: number; total: number }[] = [];
-  for (const [id, text] of texts) {
-    const { distinct, total } = scoreText([terms], normalizedBody(texts, id, text));
-    if (distinct / terms.length >= minRatio) hits.push({ id, distinct, total });
-  }
-  return hits
-    .sort((a, b) => b.distinct - a.distinct || b.total - a.total)
-    .slice(0, limit)
-    .map((h) => h.id);
+/** 記事選択のフィールド重み。題名 > 別名 > タグ > 要約 > 見出し > 本文 */
+export const FIELD_WEIGHTS: Readonly<Record<string, number>> = {
+  title: 8,
+  aliases: 6,
+  tags: 4,
+  summary: 3,
+  headings: 2,
+};
+export const BODY_WEIGHT = 1;
+/** 同義語展開で足した語の重み（元の質問語を 1 とする） */
+const EXPANDED_TERM_WEIGHT = 0.7;
+/** 見出し系の一致が無い記事（本文一致のみ）を候補に入れる最大数 */
+export const BODY_ONLY_LIMIT = 1;
+/** 本文一致のみの記事に必要な、質問語の一致割合 */
+const BODY_ONLY_MIN_RATIO = 0.5;
+
+interface WeightedTerm {
+  readonly term: string;
+  readonly weight: number;
 }
 
-/** 索引の上位からこの件数は必ず残し、残りの枠に本文一致の記事を入れる */
-export const INDEX_KEEP = 3;
+interface ArticleScore {
+  headline: number;
+  body: number;
+}
+
+function weightedTerms(query: string, synonyms: SynonymDict): WeightedTerm[] {
+  const words = contentWords(query).map((term) => ({ term, weight: 1 }));
+  const expanded = expandTerms(query, synonyms).map((term) => ({
+    term,
+    weight: EXPANDED_TERM_WEIGHT,
+  }));
+  return [...words, ...expanded];
+}
+
+/** 語が珍しいほど大きい重み（0.1〜1）。どの記事にも出る語は軽くなる */
+function rarity(df: number, total: number): number {
+  return Math.max(0.1, Math.log((total + 1) / (df + 0.5)) / Math.log(total + 1));
+}
+
+/** 語ごとに、見出し系フィールドへ一致した記事 → そのフィールド重みの最大値 */
+function headlineMatches(index: MiniSearch, term: string): Map<string, number> {
+  const matches = new Map<string, number>();
+  for (const result of searchWithFallback(index, term)) {
+    const fields = Object.values(result.match).flat();
+    const best = Math.max(0, ...fields.map((f) => FIELD_WEIGHTS[f] ?? 0));
+    if (best > 0) matches.set(String(result.id), best);
+  }
+  return matches;
+}
 
 /**
- * チャンクを取りに行く記事を選ぶ。記事検索索引の上位 INDEX_KEEP 件 →
- * 本文冒頭（search-text.json）に質問語が多く出る記事 → 索引の残り、の順に limit 件まで。
- * 索引は題名・見出し中心で本文の語（「入場 IL」など）を持たないため、本文一致で補う。
+ * チャンクを取りに行く記事を選ぶ。質問の内容語（と同義語）ごとに、
+ * 題名×8・別名×6・タグ×4・要約×3・見出し×2・本文×1 の重みで記事を採点する。
+ * 見出し系フィールドに一語も当たらない記事は除き、本文一致のみの記事は BODY_ONLY_LIMIT 件まで。
  */
 export async function selectArticleIds(
   index: MiniSearch,
   query: string,
   getTexts: () => Promise<ReadonlyMap<string, string>>,
   limit = TOP_ARTICLES,
+  synonyms: SynonymDict = {},
 ): Promise<string[]> {
-  const indexed = topArticleIds(index, query, limit);
-  const body = bodyArticleIds(await getTexts(), query, limit);
-  return [...new Set([...indexed.slice(0, INDEX_KEEP), ...body, ...indexed])].slice(0, limit);
+  const terms = weightedTerms(query, synonyms);
+  if (terms.length === 0) return [];
+  const texts = await getTexts();
+  const scores = new Map<string, ArticleScore>();
+  const entry = (id: string): ArticleScore => {
+    const found = scores.get(id) ?? { headline: 0, body: 0 };
+    scores.set(id, found);
+    return found;
+  };
+  const bodyHits = new Map<string, number>();
+  for (const { term, weight } of terms) {
+    const headline = headlineMatches(index, term);
+    const body = [...texts].filter(([id, text]) => normalizedBody(texts, id, text).includes(term));
+    const total = Math.max(texts.size, 1);
+    for (const [id, field] of headline) {
+      entry(id).headline += field * weight * rarity(headline.size, total);
+    }
+    for (const [id] of body) {
+      entry(id).body += BODY_WEIGHT * weight * rarity(body.length, total);
+      bodyHits.set(id, (bodyHits.get(id) ?? 0) + 1);
+    }
+  }
+  const ranked = [...scores]
+    .map(([id, s]) => ({ id, ...s, total: s.headline + s.body }))
+    .sort((a, b) => b.total - a.total);
+  const picked: string[] = [];
+  let bodyOnly = 0;
+  for (const r of ranked) {
+    if (picked.length >= limit) break;
+    if (r.headline === 0) {
+      const ratio = (bodyHits.get(r.id) ?? 0) / terms.length;
+      if (bodyOnly >= BODY_ONLY_LIMIT || ratio < BODY_ONLY_MIN_RATIO) continue;
+      bodyOnly += 1;
+    }
+    picked.push(r.id);
+  }
+  return picked;
 }
 
 export interface ChunkScore {

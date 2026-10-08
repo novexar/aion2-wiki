@@ -1,7 +1,6 @@
 import MiniSearch from 'minisearch';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-  bodyArticleIds,
   queryRuns,
   rankChunks,
   scoreChunk,
@@ -88,20 +87,55 @@ describe('selectArticleIds', () => {
     expect(topArticleIds(index, '遠征')[0]).toBe('遠征');
   });
 
-  it('finds body-only matches in the page texts', () => {
-    const texts = new Map([
-      ['p', '月額の会員は価格が決まっている'],
-      ['q', '関係のない文章'],
-    ]);
-    expect(bodyArticleIds(texts, '会員価格')).toEqual(['p']);
+  const entry = (id: string, fields: Record<string, string>): Record<string, string> => ({
+    id,
+    title: id,
+    aliases: '',
+    tags: '',
+    summary: '',
+    headings: '',
+    category: 'economy',
+    confidence: 'high',
+    ...fields,
   });
 
-  it('keeps the top 3 indexed articles, then fills with body matches', async () => {
-    const texts = new Map([['body-only', '遠征の入場条件の説明']]);
-    const getTexts = vi.fn(async () => texts);
-    const ids = await selectArticleIds(index, '遠征の入場', getTexts, 5);
-    expect(ids).toContain('body-only');
-    expect(ids.length).toBeLessThanOrEqual(5);
-    expect(getTexts).toHaveBeenCalledTimes(1);
+  it('finds the article by a content word despite question phrasing', async () => {
+    const ids = await selectArticleIds(index, 'ルーンの方法について教えて', async () => new Map());
+    expect(ids).toEqual(['ルーン']);
+  });
+
+  it('ranks title matches above summary matches', async () => {
+    const weighted = new MiniSearch(pageIndexOptions);
+    weighted.addAll([
+      entry('a', { title: '別の話', summary: '金策にも少し触れる' }),
+      entry('b', { title: '金策' }),
+    ]);
+    const ids = await selectArticleIds(weighted, '金策', async () => new Map());
+    expect(ids).toEqual(['b', 'a']);
+  });
+
+  it('adds at most one body-only article and drops articles with no field match', async () => {
+    const weighted = new MiniSearch(pageIndexOptions);
+    weighted.addAll([entry('head', { title: '遠征の入場' })]);
+    const texts = new Map([
+      ['body-1', '遠征の入場条件の説明'],
+      ['body-2', '遠征の入場に必要な装備'],
+      ['unrelated', '関係のない文章'],
+    ]);
+    const ids = await selectArticleIds(weighted, '遠征の入場', async () => texts);
+    expect(ids[0]).toBe('head');
+    expect(ids.filter((id) => id.startsWith('body'))).toHaveLength(1);
+    expect(ids).not.toContain('unrelated');
+  });
+
+  it('expands synonyms to the article title', async () => {
+    const weighted = new MiniSearch(pageIndexOptions);
+    weighted.addAll([entry('kina-farming', { title: '金策' }), entry('other', { title: '強化' })]);
+    const ids = await selectArticleIds(weighted, 'お金の稼ぎ方', async () => new Map());
+    expect(ids).toEqual(['kina-farming']);
+  });
+
+  it('returns nothing for a question without content words', async () => {
+    expect(await selectArticleIds(index, '？！', async () => new Map())).toEqual([]);
   });
 });

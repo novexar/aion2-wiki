@@ -8,8 +8,14 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import MiniSearch from 'minisearch';
 import { selectContext } from '../src/lib/rag';
-import { rankChunks, selectArticleIds, type ArticleChunks } from '../src/lib/retrieval';
+import {
+  rankChunks,
+  selectArticleIds,
+  TOP_ARTICLES,
+  type ArticleChunks,
+} from '../src/lib/retrieval';
 import { pageIndexOptions } from '../src/lib/search-options';
+import type { SynonymDict } from '../src/lib/synonyms';
 import type { ArticleChunk, ArticleMeta } from '../src/lib/types';
 
 interface EvalCase {
@@ -25,6 +31,7 @@ const read = (file: string): string => readFileSync(path.join(generated, file), 
 const cases = JSON.parse(readFileSync(path.join(dir, 'retrieval-eval.json'), 'utf8')) as EvalCase[];
 const index = MiniSearch.loadJSON(read('search-index.json'), pageIndexOptions);
 const meta = new Map((JSON.parse(read('meta.json')) as ArticleMeta[]).map((m) => [m.id, m]));
+const synonyms = JSON.parse(read('synonyms.json')) as SynonymDict;
 const texts = new Map(
   Object.entries(JSON.parse(read('search-text.json')) as Record<string, string>),
 );
@@ -37,8 +44,13 @@ function loadArticle(id: string): ArticleChunks | null {
 }
 
 async function evaluate(c: EvalCase): Promise<{ hit: boolean; chunkHit: boolean; ids: string[] }> {
-  const ids = await selectArticleIds(index, c.q, async () => texts);
-  const picked = selectContext(rankChunks(c.q, ids.flatMap((id) => loadArticle(id) ?? [])));
+  const ids = await selectArticleIds(index, c.q, async () => texts, TOP_ARTICLES, synonyms);
+  const picked = selectContext(
+    rankChunks(
+      c.q,
+      ids.flatMap((id) => loadArticle(id) ?? []),
+    ),
+  );
   const hit = ids.some((id) => c.expect.includes(id));
   let offset = 0;
   let chunkHit = false;
@@ -60,7 +72,8 @@ async function main(): Promise<void> {
     const miss = r.hit ? '' : `  (期待: ${c.expect.join('|')})`;
     console.log(`${mark} ${c.q}  -> ${r.ids.join(', ')}${miss}`);
   }
-  const pct = (n: number): string => `${n}/${cases.length} (${((n / cases.length) * 100).toFixed(1)}%)`;
+  const pct = (n: number): string =>
+    `${n}/${cases.length} (${((n / cases.length) * 100).toFixed(1)}%)`;
   console.log(`\nhit@5: ${pct(hits)}\nchunk-hit: ${pct(chunkHits)}`);
 }
 void main();
