@@ -149,6 +149,25 @@ describe('ChatPanel', () => {
     expect(toggle).toHaveFocus();
   });
 
+  it('hides the disclaimer line while no API key is saved', async () => {
+    const note =
+      'AI の回答には誤りが含まれることがあります。重要な数値は記事本文で確認してください。';
+    renderApp();
+    fireEvent.keyDown(window, { key: 'j', ctrlKey: true });
+    await screen.findByRole('complementary', { name: 'AI チャット' });
+    expect(screen.queryByText(note)).toBeNull();
+  });
+
+  it('shows the disclaimer line with a saved key', async () => {
+    localStorage.setItem(STORAGE_KEYS.apiKey, 'AIzaSyTEST_1234567890abcdef');
+    renderApp();
+    fireEvent.keyDown(window, { key: 'j', ctrlKey: true });
+    const line = await screen.findByText(
+      'AI の回答には誤りが含まれることがあります。重要な数値は記事本文で確認してください。',
+    );
+    expect(line).toHaveClass('text-fg-subtle', 'text-[13px]');
+  });
+
   it('toggles with Ctrl+J and focuses the textarea when a key is saved', async () => {
     localStorage.setItem(STORAGE_KEYS.apiKey, 'AIzaSyTEST_1234567890abcdef');
     renderApp();
