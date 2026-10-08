@@ -61,3 +61,19 @@ describe('HomePage', () => {
     );
   });
 });
+
+describe('HomePage の段差表示', () => {
+  const rows = () =>
+    within(screen.getByRole('region', { name: 'カテゴリ' })).getAllByRole('listitem');
+
+  it('セッションの初回だけ再生し、遅延は 24ms 刻みで全体が 320ms 以内', () => {
+    const first = renderHome();
+    const delays = rows().map((r) => r.style.animationDelay);
+    expect(rows().every((r) => r.classList.contains('home-rise'))).toBe(true);
+    expect(delays.slice(0, 3)).toEqual(['0ms', '24ms', '48ms']);
+    expect(Math.max(...delays.map((d) => parseInt(d, 10))) + 200).toBeLessThanOrEqual(320);
+    first.unmount();
+    renderHome();
+    expect(rows().some((r) => r.classList.contains('home-rise'))).toBe(false);
+  });
+});

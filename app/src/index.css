@@ -449,6 +449,18 @@
   }
 }
 
+/* ---------- ホームの段差表示（5.2 #10）: 初回のみ。opacity 0→1、y 6px→0 ---------- */
+@keyframes home-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.home-rise {
+  animation: home-rise var(--d-base) var(--ease-out) backwards;
+}
+
 /* ---------- スケルトン（5.2 #7）: 1.2s で opacity .5⇄1。無限ループはこれだけ ---------- */
 @keyframes skeleton-pulse {
   50% {

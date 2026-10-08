@@ -8,6 +8,7 @@ export const STORAGE_KEYS = {
   chat: 'aion2wiki:chat-history',
   chatPanelOpen: 'aion2wiki:chat-panel-open',
   chatPanelWidth: 'aion2wiki:chat-panel-width',
+  homeStaggerPlayed: 'aion2wiki:home-stagger-played',
 } as const;
 
 /** 同一タブ内での変更通知用イベント名 */

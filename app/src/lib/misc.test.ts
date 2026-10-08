@@ -191,3 +191,13 @@ describe('theme', () => {
     expect(root.style.colorScheme).toBe('light');
   });
 });
+
+describe('staggerDelayMs', () => {
+  it('24ms 刻みで、遅延＋入場が 320ms を超えない', async () => {
+    const { staggerDelayMs, STAGGER_DURATION_MS, STAGGER_TOTAL_MS } =
+      await import('./home-stagger');
+    expect([0, 1, 2, 5].map(staggerDelayMs)).toEqual([0, 24, 48, 120]);
+    expect(staggerDelayMs(10)).toBe(STAGGER_TOTAL_MS - STAGGER_DURATION_MS);
+    expect(staggerDelayMs(-1)).toBe(0);
+  });
+});

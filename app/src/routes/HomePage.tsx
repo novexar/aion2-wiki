@@ -7,6 +7,7 @@ import { useDocumentMeta } from '../components/useDocumentMeta';
 import { useSearchPalette } from '../features/search/search-context';
 import { dailyArticles, nav } from '../features/wiki/data';
 import { categoryLabel } from '../lib/categories';
+import { staggerDelayMs, useHomeStagger } from '../lib/home-stagger';
 import { PAGE_CONTAINER } from '../lib/layout';
 import { articlePath, categoryPath } from '../lib/paths';
 import { modKeyLabel } from '../lib/platform';
@@ -37,9 +38,19 @@ function SearchBox() {
   );
 }
 
-function CategoryRow({ category: c }: { readonly category: NavCategory }) {
+function CategoryRow({
+  category: c,
+  riseDelay,
+}: {
+  readonly category: NavCategory;
+  /** 段差表示の遅延（ms）。undefined なら動かさない */
+  readonly riseDelay?: number;
+}) {
   return (
-    <li className="relative grid break-inside-avoid grid-cols-[minmax(0,1fr)_auto_auto] items-baseline gap-x-3 border-b border-line py-2 sm:grid-cols-[7rem_2.5rem_minmax(0,1fr)]">
+    <li
+      style={riseDelay === undefined ? undefined : { animationDelay: `${riseDelay}ms` }}
+      className={`${riseDelay === undefined ? '' : 'home-rise '}relative grid break-inside-avoid grid-cols-[minmax(0,1fr)_auto_auto] items-baseline gap-x-3 border-b border-line py-2 sm:grid-cols-[7rem_2.5rem_minmax(0,1fr)]`}
+    >
       <Link
         to={categoryPath(c.id)}
         className="font-bold text-fg hover:underline max-sm:after:absolute max-sm:after:inset-0"
@@ -143,6 +154,7 @@ export default function HomePage() {
   const total = nav.articles.length;
   const lastUpdated = nav.articles.reduce((m, a) => (a.updated > m ? a.updated : m), '');
   const hasDistinctDates = new Set(nav.articles.map((a) => a.updated)).size > 1;
+  const stagger = useHomeStagger();
 
   return (
     <>
@@ -167,8 +179,12 @@ export default function HomePage() {
             カテゴリ
           </h2>
           <ul className="lg:columns-2 lg:gap-10">
-            {nav.categories.map((c) => (
-              <CategoryRow key={c.id} category={c} />
+            {nav.categories.map((c, i) => (
+              <CategoryRow
+                key={c.id}
+                category={c}
+                riseDelay={stagger ? staggerDelayMs(i) : undefined}
+              />
             ))}
           </ul>
         </section>
