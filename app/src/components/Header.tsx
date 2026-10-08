@@ -1,6 +1,7 @@
 import { Menu, Search, Settings } from 'lucide-react';
 import { useCallback, useState } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useMatch, useNavigate } from 'react-router';
+import { useCloseSettings } from '../lib/use-close-settings';
 import {
   CHAT_PANEL_ID,
   CHAT_TOGGLE_ID,
@@ -33,6 +34,9 @@ export function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const closeDrawer = useCallback(() => setDrawerOpen(false), []);
   const chat = useChatPanel();
+  const navigate = useNavigate();
+  const closeSettings = useCloseSettings();
+  const settingsOpen = useMatch('/settings') !== null;
   // 左サイドバー（カテゴリ）が出ていないときはメニューから辿れるようにする
   const { sidebar, squeezed } = useShellColumns();
   // パネルで狭くなりサイドバーも隠れる幅では、ナビはメニューに任せ検索欄を縮める
@@ -108,18 +112,18 @@ export function Header() {
           >
             チャット
           </button>
-          <NavLink
-            to="/settings"
-            className={({ isActive }) =>
-              `inline-flex size-9 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-fg ${
-                isActive ? 'text-fg' : 'text-fg-muted'
-              }`
-            }
+          <button
+            type="button"
+            onClick={settingsOpen ? closeSettings : () => navigate('/settings')}
+            aria-expanded={settingsOpen}
             aria-label="設定"
             title="設定"
+            className={`inline-flex size-9 items-center justify-center rounded-md transition-colors hover:bg-muted hover:text-fg ${
+              settingsOpen ? 'bg-muted text-fg' : 'text-fg-muted'
+            }`}
           >
             <Settings aria-hidden="true" className="size-[18px]" />
-          </NavLink>
+          </button>
         </div>
       </div>
       <MobileDrawer open={drawerOpen} onClose={closeDrawer} title="メニュー">

@@ -1,5 +1,5 @@
-import { Trash2 } from 'lucide-react';
-import { useId, useState, type FormEvent } from 'react';
+import { ChevronDown, Trash2, X } from 'lucide-react';
+import { useEffect, useId, useState, type FormEvent } from 'react';
 import { Button } from '../components/Button';
 import { useDocumentMeta } from '../components/useDocumentMeta';
 import { ApiKeyForm } from '../features/chat/ApiKeyForm';
@@ -15,6 +15,11 @@ import {
   useThemePreference,
 } from '../lib/settings';
 import { THEME_OPTIONS } from '../lib/theme';
+import { useCloseSettings } from '../lib/use-close-settings';
+
+const CUSTOM_MODEL = '__custom__';
+const CONTROL_CLASS =
+  'h-10 w-full rounded border border-line-input bg-canvas px-3 text-sm hover:border-fg-subtle focus:border-accent focus:outline-none sm:max-w-sm';
 
 function Section({
   title,
@@ -66,9 +71,10 @@ function ThemeSetting() {
 function ModelSetting() {
   const model = useModel();
   const [draft, setDraft] = useState(model);
+  const [custom, setCustom] = useState(!SUGGESTED_MODELS.includes(model));
   const [saved, setSaved] = useState(false);
+  const selectId = useId();
   const inputId = useId();
-  const listId = useId();
 
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault();
@@ -77,29 +83,61 @@ function ModelSetting() {
     setSaved(true);
   };
 
+  const onSelect = (value: string): void => {
+    setSaved(false);
+    if (value === CUSTOM_MODEL) {
+      setCustom(true);
+      return;
+    }
+    setCustom(false);
+    setDraft(value);
+  };
+
   return (
     <form onSubmit={onSubmit} className="space-y-2">
-      <label htmlFor={inputId} className="sr-only">
-        モデル名
+      <label htmlFor={selectId} className="sr-only">
+        モデル
       </label>
       <div className="flex flex-col gap-2 sm:flex-row">
-        <input
-          id={inputId}
-          list={listId}
-          value={draft}
-          onChange={(e) => {
-            setDraft(e.target.value);
-            setSaved(false);
-          }}
-          spellCheck={false}
-          autoComplete="off"
-          className="h-10 w-full rounded border border-line-input bg-canvas px-3 font-mono text-sm hover:border-fg-subtle focus:border-accent focus:outline-none sm:max-w-sm"
-        />
-        <datalist id={listId}>
-          {SUGGESTED_MODELS.map((m) => (
-            <option key={m} value={m} />
-          ))}
-        </datalist>
+        <div className="w-full space-y-2 sm:max-w-sm">
+          <div className="relative">
+            <select
+              id={selectId}
+              value={custom ? CUSTOM_MODEL : draft}
+              onChange={(e) => onSelect(e.target.value)}
+              className={`${CONTROL_CLASS} appearance-none pr-9 font-mono sm:max-w-none`}
+            >
+              {SUGGESTED_MODELS.map((m) => (
+                <option key={m} value={m}>
+                  {m}
+                </option>
+              ))}
+              <option value={CUSTOM_MODEL}>その他（手入力）</option>
+            </select>
+            <ChevronDown
+              aria-hidden="true"
+              className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-fg-muted"
+            />
+          </div>
+          {custom && (
+            <div>
+              <label htmlFor={inputId} className="sr-only">
+                モデル名
+              </label>
+              <input
+                id={inputId}
+                value={draft}
+                onChange={(e) => {
+                  setDraft(e.target.value);
+                  setSaved(false);
+                }}
+                spellCheck={false}
+                autoComplete="off"
+                className={`${CONTROL_CLASS} font-mono`}
+              />
+            </div>
+          )}
+        </div>
         <Button type="submit" className="h-10">
           保存
         </Button>
@@ -109,6 +147,7 @@ function ModelSetting() {
           onClick={() => {
             saveModel(DEFAULT_MODEL);
             setDraft(DEFAULT_MODEL);
+            setCustom(false);
             setSaved(true);
           }}
         >
@@ -161,9 +200,28 @@ function ApiKeySetting() {
 
 export default function SettingsPage() {
   useDocumentMeta('設定');
+  const close = useCloseSettings();
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape' && !event.defaultPrevented) close();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [close]);
   return (
     <div className="mx-auto max-w-2xl px-4 py-8 sm:px-8">
-      <h1 className="text-[1.75rem] font-bold">設定</h1>
+      <div className="flex items-center justify-between gap-3">
+        <h1 className="text-[1.75rem] font-bold">設定</h1>
+        <button
+          type="button"
+          onClick={close}
+          aria-label="閉じる"
+          title="閉じる"
+          className="inline-flex size-9 items-center justify-center rounded-md text-fg-muted transition-colors hover:bg-muted hover:text-fg"
+        >
+          <X aria-hidden="true" className="size-[18px]" />
+        </button>
+      </div>
       <div className="mt-4">
         <Section title="テーマ">
           <ThemeSetting />
