@@ -78,13 +78,39 @@ export const rehypeCallouts: Plugin<[], Root> = () => (tree) => {
   });
 };
 
-/** `根拠：` で始まる段落に evidence クラスを付け、ラベルを「出典:」にする */
+/**
+ * `根拠：[S01]` だけの段落を、直前の段落末尾のインライン上付き出典 `<sup class="evidence">` に結合する。
+ * 直前が段落でない（表・リスト・見出し直後など）場合は、ラベルなしの出典段落として残す。
+ */
 export const rehypeEvidence: Plugin<[], Root> = () => (tree) => {
-  visit(tree, 'element', (node: Element) => {
-    if (node.tagName !== 'p') return;
+  visit(tree, 'element', (node: Element, index, parent) => {
+    if (node.tagName !== 'p' || !parent || index === undefined) return;
     const first = node.children[0];
     if (first?.type !== 'text' || !/^根拠[：:]\s*/.test(first.value)) return;
-    first.value = first.value.replace(/^根拠[：:]\s*/, '出典: ');
+    const rest = node.children.slice(1);
+    const refs = [
+      ...(first.value.replace(/^根拠[：:]\s*/, '')
+        ? [{ ...first, value: first.value.replace(/^根拠[：:]\s*/, '') }]
+        : []),
+      ...rest,
+    ];
+    const prev = parent.children
+      .slice(0, index)
+      .reverse()
+      .find((c) => !(c.type === 'text' && c.value.trim() === ''));
+    if (prev?.type === 'element' && prev.tagName === 'p') {
+      const marks = refs.filter((c) => !(c.type === 'text' && c.value.trim() === ''));
+      prev.children.push({
+        type: 'element',
+        tagName: 'sup',
+        properties: { className: ['evidence'] },
+        children: marks,
+      });
+      parent.children.splice(index, 1);
+      return [SKIP, index];
+    }
+    node.children = refs;
     node.properties.className = ['evidence'];
+    return undefined;
   });
 };

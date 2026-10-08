@@ -27,7 +27,7 @@ function InlineView({
           <Link
             to={articlePath(article.category, article.id)}
             aria-label={`出典 ${number}: ${article.title}`}
-            className="mx-0.5 text-[0.75em] text-accent-strong no-underline hover:underline"
+            className="mx-0.5 text-xs text-accent-strong no-underline hover:underline"
           >
             [{number}]
           </Link>
@@ -60,7 +60,7 @@ export function MessageContent({ text }: { readonly text: string }) {
   const blocks = parseMiniMarkdown(text);
   const numbers = new Map(citedArticles(text).map((a, i) => [a.id, i + 1]));
   return (
-    <div className="space-y-3 text-[15px] leading-[1.8] whitespace-pre-wrap">
+    <div className="space-y-3 text-sm leading-[1.8] whitespace-pre-wrap">
       {blocks.map((block, i) => {
         if (block.type === 'p') {
           return (

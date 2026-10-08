@@ -77,8 +77,15 @@ describe('renderMarkdown', () => {
     expect(html).toContain('<blockquote>');
   });
 
-  it('marks 根拠 paragraphs as evidence with a 出典 label', async () => {
+  it('merges evidence paragraphs into the previous paragraph as superscript refs', async () => {
+    const { html } = await renderMarkdown('本文\n\n根拠：[S01] [S01]\n', options);
+    expect(html).toContain('<p>本文<sup class="evidence"><a');
+    expect(html).not.toContain('出典:');
+    expect(html).not.toContain('根拠');
+  });
+
+  it('keeps a standalone evidence paragraph when no paragraph precedes it', async () => {
     const { html } = await renderMarkdown('根拠：[S01]\n', options);
-    expect(html).toContain('<p class="evidence">出典: <a');
+    expect(html).toContain('<p class="evidence"><a');
   });
 });

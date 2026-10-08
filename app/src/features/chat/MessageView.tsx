@@ -11,7 +11,7 @@ export function MessageView({ message }: { readonly message: ChatMessage }) {
   const cited = useMemo(() => citedArticles(message.text), [message.text]);
   if (message.role === 'user') {
     return (
-      <p className="text-[15px] leading-relaxed font-bold whitespace-pre-wrap text-fg">
+      <p className="text-sm leading-relaxed font-bold whitespace-pre-wrap text-fg">
         {message.text}
       </p>
     );

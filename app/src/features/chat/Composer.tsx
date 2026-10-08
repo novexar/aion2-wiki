@@ -56,7 +56,7 @@ export function Composer({ disabled, isStreaming, onSend, onStop }: ComposerProp
         rows={1}
         disabled={disabled}
         placeholder="質問を入力"
-        className="block max-h-[200px] w-full resize-none bg-transparent px-2 py-1.5 text-[15px] leading-relaxed placeholder:text-fg-subtle focus:outline-none disabled:cursor-not-allowed"
+        className="block max-h-[200px] w-full resize-none bg-transparent px-2 py-1.5 text-sm leading-relaxed placeholder:text-fg-subtle focus:outline-none disabled:cursor-not-allowed"
       />
       <div className="flex items-center gap-2 px-1 pt-1">
         <span className="mr-auto hidden items-center gap-1 text-[11px] text-fg-subtle sm:flex">

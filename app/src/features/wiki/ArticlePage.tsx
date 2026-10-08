@@ -82,9 +82,7 @@ function ArticleView({ article }: { readonly article: Article }) {
           ]}
         />
         <header className="mb-8">
-          <h1 className="text-[1.75rem] leading-tight font-bold text-balance sm:text-[2rem]">
-            {article.title}
-          </h1>
+          <h1 className="text-[1.75rem] leading-tight font-bold text-balance">{article.title}</h1>
           {article.aliases.length > 0 && (
             <p className="mt-2 text-[13px] text-fg-subtle">{article.aliases.join('、')}</p>
           )}
