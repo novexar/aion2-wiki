@@ -1,8 +1,16 @@
 import { Menu, Search, Settings } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { NavLink } from 'react-router';
+import {
+  CHAT_PANEL_ID,
+  CHAT_TOGGLE_ID,
+  setChatPanelOpen,
+  toggleChatPanel,
+  useChatPanel,
+} from '../features/chat/chat-panel-store';
 import { useSearchPalette } from '../features/search/search-context';
 import { PAGE_CONTAINER } from '../lib/layout';
+import { useShellColumns } from '../lib/shell-layout';
 import { modKeyLabel } from '../lib/platform';
 import { CategoryNav } from './CategoryNav';
 import { Kbd } from './Kbd';
@@ -11,7 +19,6 @@ import { MobileDrawer } from './MobileDrawer';
 
 const NAV_ITEMS = [
   { to: '/index', label: '索引' },
-  { to: '/chat', label: 'チャット' },
   { to: '/about', label: 'このサイトについて' },
 ];
 
@@ -25,6 +32,9 @@ export function Header() {
   const { open } = useSearchPalette();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const closeDrawer = useCallback(() => setDrawerOpen(false), []);
+  const chat = useChatPanel();
+  // 左サイドバー（カテゴリ）が出ていないときはメニューから辿れるようにする
+  const { sidebar } = useShellColumns();
 
   return (
     <header className="sticky top-0 z-40 h-(--header-h) border-b border-line bg-canvas">
@@ -38,7 +48,9 @@ export function Header() {
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}
-          className="inline-flex size-9 items-center justify-center rounded-md text-fg-muted hover:bg-muted hover:text-fg lg:hidden"
+          className={`inline-flex size-9 items-center justify-center rounded-md text-fg-muted hover:bg-muted hover:text-fg ${
+            sidebar ? 'hidden' : ''
+          }`}
           aria-label="メニューを開く"
           aria-expanded={drawerOpen}
         >
@@ -75,6 +87,20 @@ export function Header() {
           >
             <Search aria-hidden="true" className="size-[18px]" />
           </button>
+          <button
+            id={CHAT_TOGGLE_ID}
+            type="button"
+            onClick={toggleChatPanel}
+            aria-expanded={chat.open}
+            aria-controls={CHAT_PANEL_ID}
+            aria-keyshortcuts="Control+J"
+            title={`チャット（${modKeyLabel()}+J）`}
+            className={`h-9 rounded-md px-2.5 text-sm transition-colors hover:bg-muted hover:text-fg ${
+              chat.open ? 'bg-muted font-medium text-fg' : 'text-fg-muted'
+            }`}
+          >
+            チャット
+          </button>
           <NavLink
             to="/settings"
             className={({ isActive }) =>
@@ -99,6 +125,16 @@ export function Header() {
               {item.label}
             </NavLink>
           ))}
+          <button
+            type="button"
+            onClick={() => {
+              closeDrawer();
+              setChatPanelOpen(true);
+            }}
+            className={`${navClass({ isActive: false })} text-left`}
+          >
+            チャット
+          </button>
         </nav>
         <CategoryNav onNavigate={closeDrawer} />
       </MobileDrawer>

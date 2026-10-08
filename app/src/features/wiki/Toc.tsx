@@ -1,7 +1,8 @@
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef, type MouseEvent } from 'react';
 import type { Heading } from '../../lib/types';
-import { REDUCED_MOTION_QUERY, useMediaQuery, WIDE_QUERY } from '../../lib/useMediaQuery';
+import { useShellColumns } from '../../lib/shell-layout';
+import { REDUCED_MOTION_QUERY } from '../../lib/useMediaQuery';
 
 /** 目次を出す最小の見出し数 */
 const MIN_TOC_HEADINGS = 2;
@@ -96,7 +97,7 @@ function useKeepActiveVisible(activeId: string | null) {
 
 /** 右カラムの目次（lg 以上）。sticky で本文の右に常時表示し、現在の見出しを強調する */
 export function Toc({ headings, activeId }: TocProps) {
-  const wide = useMediaQuery(WIDE_QUERY, true);
+  const wide = useShellColumns().toc;
   const ref = useKeepActiveVisible(activeId);
   if (headings.length < MIN_TOC_HEADINGS || !wide) return null;
   return (
@@ -122,10 +123,10 @@ export function Toc({ headings, activeId }: TocProps) {
 
 /** 折りたたみ式の目次（lg 未満）。Toc とはどちらか一方だけが描画される */
 export function MobileToc({ headings, activeId }: TocProps) {
-  const wide = useMediaQuery(WIDE_QUERY, true);
+  const wide = useShellColumns().toc;
   if (headings.length < MIN_TOC_HEADINGS || wide) return null;
   return (
-    <details className="group mb-8 border-b border-line lg:hidden">
+    <details className="group mb-8 border-b border-line">
       <summary className="flex cursor-pointer list-none items-center justify-between py-2.5 text-sm font-medium text-fg [&::-webkit-details-marker]:hidden">
         <span>目次</span>
         <ChevronDown

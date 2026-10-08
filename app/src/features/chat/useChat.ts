@@ -118,10 +118,10 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
 
   const save = useCallback(
     async (conversationId: string, message: ChatMessage) => {
-      if (!repo) return;
       try {
-        await repo.append(conversationId, toStored(message));
-        await refresh(repo);
+        const target = repo ?? (await getChatRepository());
+        await target.append(conversationId, toStored(message));
+        await refresh(target);
       } catch (error: unknown) {
         console.error('会話履歴を保存できませんでした', error);
       }
@@ -136,7 +136,7 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
   const send = useCallback(
     async (rawQuestion: string) => {
       const question = rawQuestion.trim();
-      if (!question || !apiKey || !repo || controllerRef.current !== null) return;
+      if (!question || !apiKey || controllerRef.current !== null) return;
 
       const controller = new AbortController();
       controllerRef.current = controller;
@@ -153,7 +153,8 @@ export function useChat({ apiKey, model, contextArticleId }: UseChatOptions): Us
       let conversationId = activeId;
       try {
         if (!conversationId) {
-          conversationId = (await repo.create()).id;
+          // 保存先を開いている途中でも送れるようにここで待つ
+          conversationId = (await (repo ?? (await getChatRepository())).create()).id;
           setActiveId(conversationId);
         }
         await save(conversationId, userMsg);

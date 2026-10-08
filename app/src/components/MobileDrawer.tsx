@@ -47,7 +47,7 @@ export function MobileDrawer({ open, onClose, title, children }: MobileDrawerPro
 
   if (!open) return null;
   return createPortal(
-    <div className="fixed inset-0 z-50 lg:hidden">
+    <div className="fixed inset-0 z-50">
       <div
         className="absolute inset-0 bg-zinc-950/40 dark:bg-black/60"
         aria-hidden="true"

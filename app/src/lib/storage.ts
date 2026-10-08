@@ -6,6 +6,8 @@ export const STORAGE_KEYS = {
   model: 'aion2wiki:gemini-model',
   theme: 'aion2wiki:theme',
   chat: 'aion2wiki:chat-history',
+  chatPanelOpen: 'aion2wiki:chat-panel-open',
+  chatPanelWidth: 'aion2wiki:chat-panel-width',
 } as const;
 
 /** 同一タブ内での変更通知用イベント名 */
